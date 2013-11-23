@@ -8,12 +8,20 @@ namespace KlubNaCitateli
 {
     public class Database
     {
-        public MySqlConnection connection;
+
 
         public Database()
         {
-            connection = new MySqlConnection("Database=111151_books;Data Source=mysql.students.finki.ukim.mk;User Id=111151;Password=0809992450006fnk!");
-            connection.Open();
+            MySqlConnectionStringBuilder conn_string = new MySqlConnectionStringBuilder();
+            conn_string.Server = "https://cpanel.students.finki.ukim.mk:2079/index.php?token=a6b521ff97ffbd2421bdba833516bb05";
+            conn_string.UserID = "111151";
+            conn_string.Password = "0809992450006fnk!";
+            conn_string.Database = "111151_books";
+
+            using (MySqlConnection conn = new MySqlConnection(conn_string.ToString()))
+            {
+                conn.Open();
+            }
         }
 
     }
