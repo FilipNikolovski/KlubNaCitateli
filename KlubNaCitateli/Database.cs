@@ -13,7 +13,7 @@ namespace KlubNaCitateli
         public Database()
         {
 
-
+            string fico="Navistina e kreten";
             using (MySqlConnection conn = new MySqlConnection("Server=mysql.students.finki.ukim.mk;Database=111151_books;Uid=111151_Boki;Password=boki123_"))
             {
                 conn.Open();
