@@ -4,17 +4,31 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+    <title>Клуб на читатели</title>
+    <meta charset="utf-8" />
+    <link href="Styles/Site.css" rel="stylesheet" type="text/css" />
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body>
-    <form id="form1" runat="server">
-    <div>
-        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-        
-        </asp:ContentPlaceHolder>
+    <div id="header">
+        <div id="logo">
+        <!--mesto za logoto-->
+        </div>
+        <div id="navigation">
+            <!--meni-->
+        </div>
+        <div id="login">
+            <!--forma za login od desno-->
+        </div>
     </div>
-    </form>
+
+    <div id="content">
+        <asp:ContentPlaceHolder ID="mainContent" runat="server"></asp:ContentPlaceHolder>    
+    </div>
+
+    <div id="footer">
+        <!--footer-->
+    </div>
 </body>
 </html>
