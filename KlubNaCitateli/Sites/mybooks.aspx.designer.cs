@@ -11,7 +11,7 @@ namespace KlubNaCitateli.Sites
 {
 
 
-    public partial class main
+    public partial class mybooks
     {
     }
 }
