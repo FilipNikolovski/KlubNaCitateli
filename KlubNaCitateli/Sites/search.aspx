@@ -7,7 +7,6 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="mainContent" runat="server">
-    <form id="form1" runat="server">
         <div id="search">
             <asp:TextBox ID="TextBox1" runat="server" placeholder="Search.." CssClass="searchBox" ></asp:TextBox>
         </div>
@@ -115,7 +114,6 @@
                 <asp:ServiceReference Path="~/Services/SearchService.svc" />
             </Services>
         </asp:ScriptManager>
-    </form>
 
 </asp:Content>
 

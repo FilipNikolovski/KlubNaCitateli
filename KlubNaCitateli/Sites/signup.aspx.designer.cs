@@ -19,7 +19,7 @@ namespace KlubNaCitateli.Sites {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
+        //protected global::System.Web.UI.WebControls.Label Label1;
         
         /// <summary>
         /// Image1 control.
@@ -28,7 +28,7 @@ namespace KlubNaCitateli.Sites {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Image1;
+        //protected global::System.Web.UI.WebControls.Image Image1;
         
         /// <summary>
         /// Label2 control.
@@ -37,7 +37,7 @@ namespace KlubNaCitateli.Sites {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label2;
+       // protected global::System.Web.UI.WebControls.Label Label2;
         
         /// <summary>
         /// Button1 control.
@@ -46,7 +46,7 @@ namespace KlubNaCitateli.Sites {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button1;
+       // protected global::System.Web.UI.WebControls.Button Button1;
         
         /// <summary>
         /// Table1 control.
@@ -55,7 +55,7 @@ namespace KlubNaCitateli.Sites {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Table Table1;
+     //   protected global::System.Web.UI.WebControls.Table Table1;
         
         /// <summary>
         /// username control.
@@ -64,8 +64,8 @@ namespace KlubNaCitateli.Sites {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox username;
-        
+//protected global::System.Web.UI.WebControls.TextBox username;
+       // 
         /// <summary>
         /// password control.
         /// </summary>
@@ -73,7 +73,7 @@ namespace KlubNaCitateli.Sites {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox password;
+        //protected global::System.Web.UI.WebControls.TextBox password;
         
         /// <summary>
         /// repassword control.
@@ -82,7 +82,7 @@ namespace KlubNaCitateli.Sites {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox repassword;
+        //protected global::System.Web.UI.WebControls.TextBox repassword;
         
         /// <summary>
         /// name control.
@@ -91,7 +91,7 @@ namespace KlubNaCitateli.Sites {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox name;
+       // protected global::System.Web.UI.WebControls.TextBox name;
         
         /// <summary>
         /// surname control.
@@ -100,7 +100,7 @@ namespace KlubNaCitateli.Sites {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox surname;
+        //protected global::System.Web.UI.WebControls.TextBox surname;
         
         /// <summary>
         /// email control.
@@ -109,7 +109,7 @@ namespace KlubNaCitateli.Sites {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox email;
+        //protected global::System.Web.UI.WebControls.TextBox email;
         
         /// <summary>
         /// ScriptManager1 control.
@@ -118,7 +118,7 @@ namespace KlubNaCitateli.Sites {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.ScriptManager ScriptManager1;
+       // protected global::System.Web.UI.ScriptManager ScriptManager1;
         
         /// <summary>
         /// UpdatePanel2 control.
@@ -127,7 +127,7 @@ namespace KlubNaCitateli.Sites {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel2;
+        //protected global::System.Web.UI.UpdatePanel UpdatePanel2;
         
         /// <summary>
         /// Button3 control.
@@ -136,7 +136,7 @@ namespace KlubNaCitateli.Sites {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button3;
+        //protected global::System.Web.UI.WebControls.Button Button3;
         
         /// <summary>
         /// Label3 control.
@@ -145,7 +145,7 @@ namespace KlubNaCitateli.Sites {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label3;
+        //protected global::System.Web.UI.WebControls.Label Label3;
         
         /// <summary>
         /// TextBox1 control.
@@ -154,7 +154,7 @@ namespace KlubNaCitateli.Sites {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        //protected global::System.Web.UI.WebControls.TextBox TextBox1;
         
         /// <summary>
         /// UpdatePanel1 control.
@@ -163,7 +163,7 @@ namespace KlubNaCitateli.Sites {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
+        //protected global::System.Web.UI.UpdatePanel UpdatePanel1;
         
         /// <summary>
         /// Button2 control.
@@ -172,7 +172,7 @@ namespace KlubNaCitateli.Sites {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button2;
+       // protected global::System.Web.UI.WebControls.Button Button2;
         
         /// <summary>
         /// Button4 control.
@@ -181,6 +181,6 @@ namespace KlubNaCitateli.Sites {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button4;
+        //protected global::System.Web.UI.WebControls.Button Button4;
     }
 }
