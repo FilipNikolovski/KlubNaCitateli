@@ -7,23 +7,16 @@
 
 
 <asp:Content ID="Content2" ContentPlaceHolderID="mainContent" runat="server">
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <br />
-    <br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <asp:Label ID="Label1" runat="server" Text="Sign Up" CssClass="signup"></asp:Label>
-&nbsp;<br />
-    <br />
-    <br />
-    <br />
+ <asp:Label ID="Label1" runat="server" Text="Sign Up" CssClass="signup"></asp:Label>
+
     <ul>
     <li id="li1" style="text-align: center; width: 100px">
-    &nbsp;&nbsp;&nbsp;
-    Profile&nbsp;&nbsp;&nbsp;
+    
+    Profile
     </li>
     <li id="li2" style="text-align: center; width: 100px">
-    &nbsp;&nbsp;&nbsp;&nbsp;
-    About&nbsp;&nbsp;&nbsp;&nbsp;
+    
+    About
     </li>
     </ul>
     <div id="div1">
@@ -31,7 +24,7 @@
         <div id="left">
         <asp:Image ID="Image1" runat="server" CssClass="Image1" Height="115px" 
             Width="100px" />
-        &nbsp;&nbsp;&nbsp;
+        
         <br />
         <asp:Label ID="Label2" runat="server" CssClass="profilepicture" 
             Text="Profile picture"></asp:Label>
