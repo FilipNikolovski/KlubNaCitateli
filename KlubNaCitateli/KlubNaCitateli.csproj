@@ -33,7 +33,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="MySql.Data, Version=6.7.4.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
+    <Reference Include="MySql.Data, Version=6.8.3.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\MySQL\MySQL Connector Net 6.8.3\Assemblies\v4.5\MySql.Data.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Core" />
@@ -51,19 +54,22 @@
     <Reference Include="System.Web.ApplicationServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-ui-1.10.4.custom.js" />
+    <Content Include="Scripts\jquery-ui-1.10.4.custom.min.js" />
+    <Content Include="Scripts\tabs-script.js" />
     <Content Include="Sites\adminpanel.aspx" />
     <Content Include="Sites\book.aspx" />
     <Content Include="Sites\forum.aspx" />
     <Content Include="Sites\index.aspx" />
+    <Content Include="Sites\signup.aspx" />
     <Content Include="Sites\mybooks.aspx" />
     <Content Include="Sites\profile.aspx" />
     <Content Include="Sites\search.aspx" />
-    <Content Include="Sites\signup.aspx" />
+    <Content Include="Sites\login.aspx" />
     <Content Include="Styles\Site.css" />
     <Content Include="Global.asax" />
-    <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
-    <Content Include="Scripts\jquery-1.4.1.js" />
-    <Content Include="Scripts\jquery-1.4.1.min.js" />
+    <Content Include="Styles\signup.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -112,6 +118,13 @@
     <Compile Include="Sites\index.aspx.designer.cs">
       <DependentUpon>index.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Sites\signup.aspx.cs">
+      <DependentUpon>signup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Sites\signup.aspx.designer.cs">
+      <DependentUpon>signup.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Sites\mybooks.aspx.cs">
       <DependentUpon>mybooks.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -133,12 +146,12 @@
     <Compile Include="Sites\search.aspx.designer.cs">
       <DependentUpon>search.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Sites\signup.aspx.cs">
-      <DependentUpon>signup.aspx</DependentUpon>
+    <Compile Include="Sites\login.aspx.cs">
+      <DependentUpon>login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Sites\signup.aspx.designer.cs">
-      <DependentUpon>signup.aspx</DependentUpon>
+    <Compile Include="Sites\login.aspx.designer.cs">
+      <DependentUpon>login.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
