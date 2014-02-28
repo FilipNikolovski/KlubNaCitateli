@@ -3,7 +3,9 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="../Styles/Search.css" type="text/css" rel="Stylesheet" />
-    
+    <script src="../Scripts/jquery-1.10.2.js" type="text/javascript" language="javascript"></script>
+    <script src="../Scripts/jquery-ui-1.10.4.custom.min.js" type="text/javascript" language="javascript"></script>
+    <script src="../Scripts/Search.js" type="text/javascript" language="javascript"></script>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="mainContent" runat="server">

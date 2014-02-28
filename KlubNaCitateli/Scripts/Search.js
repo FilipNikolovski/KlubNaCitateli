@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
-
-    var dataIn = '{' + '"search":"' + $("#TextBox1").val() + '"}';
+    
+    var dataIn;
 
     $.ajax({
             url: "../Services/SearchService.svc/GetBooks",

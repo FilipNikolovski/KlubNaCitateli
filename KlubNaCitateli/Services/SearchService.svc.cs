@@ -16,10 +16,12 @@ namespace KlubNaCitateli.Services
     public class SearchService
     {
 
-        private Database db;
-        private Book book;
-        
+        private class BooksObj
+        {
+            public List<Book> Books;
+        }
 
+        private Database db;
         public SearchService()
         {
             db = new Database();
@@ -27,17 +29,13 @@ namespace KlubNaCitateli.Services
         }
 
         [OperationContract]
-        public string GetBooks(string search)
+        public string GetBooks(string search,string category,string language)
         {
-            /*
-            return (new Book()
-            {
-                ImageSrc = "",
-                BookName = "",
-                Author = "",
-                Date = "",
-            }).ToJSON();
-            */
+            List<Book> list = new List<Book>();
+            list = db.SelectListBooks(search, language, category);
+
+            return  (new BooksObj() { Books = list }).ToJSON();
+           
         }
 
 
