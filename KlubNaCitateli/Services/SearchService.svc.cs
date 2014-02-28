@@ -7,6 +7,7 @@ using System.ServiceModel.Activation;
 using System.ServiceModel.Web;
 using System.Text;
 using KlubNaCitateli.Services;
+using KlubNaCitateli.Classes;
 
 namespace KlubNaCitateli.Services
 {
@@ -15,26 +16,30 @@ namespace KlubNaCitateli.Services
     public class SearchService
     {
 
-        public class Book
-        {
-            public string ImageSrc;
-            public string BookName;
-            public string Author;
-            public string Date;
-        }
+        private Database db;
+        private Book book;
         
+
+        public SearchService()
+        {
+            db = new Database();
+            db.OpenConnection();
+        }
+
         [OperationContract]
         public string GetBooks(string search)
         {
+            /*
             return (new Book()
-                        {
-                            ImageSrc = "",
-                            BookName = "",
-                            Author = "",
-                            Date = "",
-                        }).ToJSON();
+            {
+                ImageSrc = "",
+                BookName = "",
+                Author = "",
+                Date = "",
+            }).ToJSON();
+            */
         }
 
-       
+
     }
 }
