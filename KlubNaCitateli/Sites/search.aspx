@@ -22,7 +22,7 @@
                     <div class="span1">
                     </div>
                     <div class="span2">
-                        <span>asdasdasd KUjeKUjeKUje KUjeKUjeKUjeKUje</span>
+                        <span>blablabla KUjeKUjeKUje KUjeKUjeKUjeKUje</span>
                     </div>
                     <div class="span3">
                     <span>KUjeKUjeKUjeKUjeKUje KUjeKUje,KUjeKUjeKUjeKUjeKUje KUjeKUje </span>
