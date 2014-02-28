@@ -1,13 +1,13 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="signup.aspx.cs" Inherits="KlubNaCitateli.Sites.signup" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-<link href="../Styles/signup.css" rel="stylesheet" type="text/css" />
+    <link href="../Styles/signup.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="<%= Page.ResolveClientUrl("../Scripts/tabs-script.js") %>"></script>
 </asp:Content>
 
 
 <asp:Content ID="Content2" ContentPlaceHolderID="mainContent" runat="server">
- <asp:Label ID="Label1" runat="server" Text="Sign Up" CssClass="signup"></asp:Label>
+    <asp:Label ID="Label1" runat="server" Text="Sign Up" CssClass="signup"></asp:Label>
 
     <ul>
     <li id="li1" style="text-align: center; width: 100px">
