@@ -6,11 +6,21 @@
 <head runat="server">
     <title>Клуб на читатели</title>
     <meta charset="utf-8" />
-    <link href="Styles/Site.css" rel="stylesheet" type="text/css" />
+    <link href="Styles/Site.css" rel="stylesheet" type="text/css" /> 
+    <script type="text/javascript" src="<%= Page.ResolveClientUrl("../Scripts/jquery-1.10.2.js") %>"></script>
+    
+    <script type="text/javascript" src="<%= Page.ResolveClientUrl("../Scripts/jquery-ui-1.10.4.custom.js") %>"></script>
+    
+    <script type="text/javascript" src="<%= Page.ResolveClientUrl("../Scripts/jquery-ui-1.10.4.custom.min.js") %>"></script>
+    
+    
     <asp:ContentPlaceHolder ID="head" runat="server">
+  
     </asp:ContentPlaceHolder>
+
 </head>
 <body>
+    <form id="form1" runat="server">
     <div id="header">
         <div id="logo">
         <!--mesto za logoto-->
@@ -20,6 +30,11 @@
         </div>
         <div id="login">
             <!--forma za login od desno-->
+            <br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Sites/login.aspx">Log In</asp:HyperLink>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/Sites/signup.aspx">Sign Up</asp:HyperLink>
         </div>
     </div>
 
@@ -30,5 +45,6 @@
     <div id="footer">
         <!--footer-->
     </div>
+    </form>
 </body>
 </html>
