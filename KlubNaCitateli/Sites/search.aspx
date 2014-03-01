@@ -3,7 +3,9 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="../Styles/Search.css" type="text/css" rel="Stylesheet" />
-    
+    <script src="../Scripts/jquery-1.10.2.js" type="text/javascript" language="javascript"></script>
+    <script src="../Scripts/jquery-ui-1.10.4.custom.min.js" type="text/javascript" language="javascript"></script>
+    <script src="../Scripts/Search.js" type="text/javascript" language="javascript"></script>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="mainContent" runat="server">
@@ -23,71 +25,6 @@
                     </div>
                     <div class="span2">
                         <span>blablabla KUjeKUjeKUje KUjeKUjeKUjeKUje</span>
-                    </div>
-                    <div class="span3">
-                    <span>KUjeKUjeKUjeKUjeKUje KUjeKUje,KUjeKUjeKUjeKUjeKUje KUjeKUje </span>
-                    </div>
-                    <div class="span4">
-                    <span>12/12/1992</span>
-                    </div>
-                </div>
-                <div class="searchItem">
-                    <div class="span1">
-                    </div>
-                    <div class="span2">
-                        <span>KUjeKUjeKUjeKUjeKUje KUjeKUjeKUje KUjeKUjeKUjeKUje</span>
-                    </div>
-                    <div class="span3">
-                    <span>KUjeKUjeKUjeKUjeKUje KUjeKUje,KUjeKUjeKUjeKUjeKUje KUjeKUje </span>
-                    </div>
-                    <div class="span4">
-                    <span>12/12/1992</span>
-                    </div>
-                </div>
-                <div class="searchItem">
-                    <div class="span1">
-                    </div>
-                    <div class="span2">
-                        <span>KUjeKUjeKUjeKUjeKUje KUjeKUjeKUje KUjeKUjeKUjeKUje</span>
-                    </div>
-                    <div class="span3">
-                    <span>KUjeKUjeKUjeKUjeKUje KUjeKUje,KUjeKUjeKUjeKUjeKUje KUjeKUje </span>
-                    </div>
-                    <div class="span4">
-                    <span>12/12/1992</span>
-                    </div>
-                </div>
-                <div class="searchItem">
-                    <div class="span1">
-                    </div>
-                    <div class="span2">
-                        <span>KUjeKUjeKUjeKUjeKUje KUjeKUjeKUje KUjeKUjeKUjeKUje</span>
-                    </div>
-                    <div class="span3">
-                    <span>KUjeKUjeKUjeKUjeKUje KUjeKUje,KUjeKUjeKUjeKUjeKUje KUjeKUje </span>
-                    </div>
-                    <div class="span4">
-                    <span>12/12/1992</span>
-                    </div>
-                </div>
-                <div class="searchItem">
-                    <div class="span1">
-                    </div>
-                    <div class="span2">
-                        <span>KUjeKUjeKUjeKUjeKUje KUjeKUjeKUje KUjeKUjeKUjeKUje</span>
-                    </div>
-                    <div class="span3">
-                    <span>KUjeKUjeKUjeKUjeKUje KUjeKUje,KUjeKUjeKUjeKUjeKUje KUjeKUje </span>
-                    </div>
-                    <div class="span4">
-                    <span>12/12/1992</span>
-                    </div>
-                </div>
-                <div class="searchItem">
-                    <div class="span1">
-                    </div>
-                    <div class="span2">
-                        <span>KUjeKUjeKUjeKUjeK KUjeKUjeKUje</span>
                     </div>
                     <div class="span3">
                     <span>KUjeKUjeKUjeKUjeKUje KUjeKUje,KUjeKUjeKUjeKUjeKUje KUjeKUje </span>

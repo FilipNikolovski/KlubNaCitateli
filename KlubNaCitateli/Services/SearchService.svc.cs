@@ -7,6 +7,9 @@ using System.ServiceModel.Activation;
 using System.ServiceModel.Web;
 using System.Text;
 
+using KlubNaCitateli.Services;
+using KlubNaCitateli.Classes;
+
 namespace KlubNaCitateli.Services
 {
     [ServiceContract(Namespace = "")]
@@ -25,7 +28,7 @@ namespace KlubNaCitateli.Services
             return;
         }
 
-        // Add more operations here and mark them with [OperationContract]
+
         private class BooksObj
         {
             public List<Book> Books;
@@ -33,6 +36,7 @@ namespace KlubNaCitateli.Services
 
         private Database db;
         public SearchService()
+
         {
             db = new Database();
         }
@@ -46,5 +50,19 @@ namespace KlubNaCitateli.Services
             return (new BooksObj() { Books = list }).ToJSON();
 
         }
+
+
+        [OperationContract]
+        public string GetBooks(string search, string language, string category)
+        {
+            List<Book> list = new List<Book>();
+            list = db.SelectListBooks(search, language, category);
+
+            return  (new BooksObj() { Books = list }).ToJSON();
+           
+        }
+
+
+
     }
 }
