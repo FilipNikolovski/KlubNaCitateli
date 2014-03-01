@@ -25,11 +25,10 @@ namespace KlubNaCitateli.Services
         public SearchService()
         {
             db = new Database();
-            db.OpenConnection();
         }
 
         [OperationContract]
-        public string GetBooks(string search,string category,string language)
+        public string GetBooks(string search, string language, string category)
         {
             List<Book> list = new List<Book>();
             list = db.SelectListBooks(search, language, category);

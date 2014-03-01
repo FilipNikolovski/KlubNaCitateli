@@ -8,48 +8,19 @@ namespace KlubNaCitateli.Classes
 {
     public class Database
     {
-        private MySqlConnection connection;
-        private string connString;
+        private string connString = "SERVER=localhost;DATABASE=ficodb;UID=root;PASSWORD=;";
 
-        public Database()
-        {
-            connString = "SERVER=localhost;DATABASE=ficodb;UID=root;PASSWORD=;";
-            connection = new MySqlConnection(connString);
-        }
 
-        public bool OpenConnection()
-        {
-            try
-            {
-                connection.Open();
-                return true;
-            }
-            catch (MySqlException ex)
-            {
-                return false;
-            }
-                
-        }
-
-        public bool CloseConnection()
-        {
-            try
-            {
-                connection.Close();
-                return true;
-            }
-            catch (MySqlException ex)
-            {
-                return false;
-            }
-        }
-
+        //Vrakja lista na knigi
         public List<Book> SelectListBooks(string search,string language, string category)
         {
             List<Book> list = new List<Book>();
 
-            if (this.OpenConnection())
+            using (MySqlConnection connection = new MySqlConnection())
             {
+                connection.ConnectionString = connString;
+                connection.Open();
+                
                 string query = "SELECT IDBook, Name, ImageSrc, Description, Date FROM Books, Categories, Tags, BelongsTo, Tagged";
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataReader dataReader = command.ExecuteReader();
@@ -57,7 +28,7 @@ namespace KlubNaCitateli.Classes
                 Dictionary<string, string> dictionary = new Dictionary<string, string>();
                 List<Dictionary<string, string>> books = new List<Dictionary<string, string>>();
                 List<Author> authors;
-                
+
                 while (dataReader.Read())
                 {
                     dictionary.Add("IDBook", dataReader["IDBook"].ToString());
@@ -87,16 +58,11 @@ namespace KlubNaCitateli.Classes
                     //Dodavanje na knigata vo listata
                     Book b = new Book(books[i]["Name"], authors, books[i]["ImageSrc"], books[i]["Description"], books[i]["Date"]);
                     list.Add(b);
-                }
+                    }
 
-                this.CloseConnection();
-                return list;
-            }
-            else
-            {
-                return list;
-            }
-
+                    connection.Close();
+                    return list;
+            }       
         }
 
 
