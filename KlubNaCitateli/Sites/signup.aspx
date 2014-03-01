@@ -38,34 +38,34 @@
             <asp:Table ID="Table1" runat="server" CssClass="table" Height="47px" 
                 style="margin-left: 24px" Width="658px">
                 <asp:TableRow runat="server">
-                    <asp:TableCell runat="server" class="table-first"><label>Username:</label></asp:TableCell>
+                    <asp:TableCell runat="server" CssClass="table-first"><label>Username:</label></asp:TableCell>
                     <asp:TableCell runat="server">
-                        <asp:TextBox ID="username" runat="server" class="table-second"></asp:TextBox></asp:TableCell>
+                        <asp:TextBox ID="username" runat="server" CssClass="table-second"></asp:TextBox></asp:TableCell>
                    
                 </asp:TableRow>
                 <asp:TableRow runat="server">
-                    <asp:TableCell runat="server" class="table-first"><label>Password:</label></asp:TableCell>
-                    <asp:TableCell runat="server"><asp:TextBox ID="password" runat="server" class="table-second"></asp:TextBox></asp:TableCell>
+                    <asp:TableCell runat="server" CssClass="table-first"><label>Password:</label></asp:TableCell>
+                    <asp:TableCell runat="server"><asp:TextBox ID="password" runat="server" CssClass="table-second"></asp:TextBox></asp:TableCell>
                     
                 </asp:TableRow>
                 <asp:TableRow runat="server">
-                    <asp:TableCell runat="server" class="table-first"><label>Retype password:</label></asp:TableCell>
-                    <asp:TableCell runat="server"><asp:TextBox ID="repassword" runat="server" class="table-second"></asp:TextBox></asp:TableCell>
+                    <asp:TableCell runat="server" CssClass="table-first"><label>Retype password:</label></asp:TableCell>
+                    <asp:TableCell runat="server"><asp:TextBox ID="repassword" runat="server" CssClass="table-second"></asp:TextBox></asp:TableCell>
                     
                 </asp:TableRow>
                 <asp:TableRow runat="server">
-                    <asp:TableCell class="table-first" runat="server"><label>Name:</label></asp:TableCell>
-                    <asp:TableCell runat="server"><asp:TextBox ID="name" runat="server" class="table-second"></asp:TextBox></asp:TableCell>
+                    <asp:TableCell CssClass="table-first" runat="server"><label>Name:</label></asp:TableCell>
+                    <asp:TableCell runat="server"><asp:TextBox ID="name" runat="server" CssClass="table-second"></asp:TextBox></asp:TableCell>
                    
                 </asp:TableRow>
                 <asp:TableRow runat="server">
-                    <asp:TableCell class="table-first" runat="server"><label>Surname:</label></asp:TableCell>
-                    <asp:TableCell runat="server"><asp:TextBox ID="surname" runat="server" class="table-second"></asp:TextBox></asp:TableCell>
+                    <asp:TableCell CssClass="table-first" runat="server"><label>Surname:</label></asp:TableCell>
+                    <asp:TableCell runat="server"><asp:TextBox ID="surname" runat="server" CssClass="table-second"></asp:TextBox></asp:TableCell>
                   
                 </asp:TableRow>
                 <asp:TableRow runat="server">
-                    <asp:TableCell class="table-first" runat="server"><label>Email:</label></asp:TableCell>
-                    <asp:TableCell runat="server"><asp:TextBox ID="email" runat="server" class="table-second"></asp:TextBox></asp:TableCell>
+                    <asp:TableCell CssClass="table-first" runat="server"><label>Email:</label></asp:TableCell>
+                    <asp:TableCell runat="server"><asp:TextBox ID="email" runat="server" CssClass="table-second"></asp:TextBox></asp:TableCell>
                     
                 </asp:TableRow>
             </asp:Table> 

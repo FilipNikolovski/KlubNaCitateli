@@ -20,7 +20,6 @@
     float:left;
     width:25%;
     height:100%;
-    background-color:Blue;
     display:inline;
 }
 
@@ -29,14 +28,28 @@
     float:left;
     width:35%;
     height:100%;
-    background-color:Green;
     display:inline;
 }
-
+.logopic
+{
+    Height:35px;
+    Width:249px;
+}
+#signLog li
+{
+    padding-top:20px;
+    margin-left:5px;
+    margin-right:10px;
+    display: inline;
+    
+}
+#signLog
+{
+    list-style-type:none;
+}
 #login 
 {
     float:right;
-    display:inline;
     width:30%;
     height:100%;
     display:inline;

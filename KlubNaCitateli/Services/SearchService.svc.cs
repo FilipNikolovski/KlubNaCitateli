@@ -6,7 +6,6 @@ using System.ServiceModel;
 using System.ServiceModel.Activation;
 using System.ServiceModel.Web;
 using System.Text;
-using KlubNaCitateli.Services;
 
 namespace KlubNaCitateli.Services
 {
@@ -14,27 +13,38 @@ namespace KlubNaCitateli.Services
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
     public class SearchService
     {
-
-        public class Book
-        {
-            public string ImageSrc;
-            public string BookName;
-            public string Author;
-            public string Date;
-        }
-        
+        // To use HTTP GET, add [WebGet] attribute. (Default ResponseFormat is WebMessageFormat.Json)
+        // To create an operation that returns XML,
+        //     add [WebGet(ResponseFormat=WebMessageFormat.Xml)],
+        //     and include the following line in the operation body:
+        //         WebOperationContext.Current.OutgoingResponse.ContentType = "text/xml";
         [OperationContract]
-        public string GetBooks(string search)
+        public void DoWork()
         {
-            return (new Book()
-                        {
-                            ImageSrc = "",
-                            BookName = "",
-                            Author = "",
-                            Date = "",
-                        }).ToJSON();
+            // Add your operation implementation here
+            return;
         }
 
-       
+        // Add more operations here and mark them with [OperationContract]
+        private class BooksObj
+        {
+            public List<Book> Books;
+        }
+
+        private Database db;
+        public SearchService()
+        {
+            db = new Database();
+        }
+
+        [OperationContract]
+        public string GetBooks(string search, string language, string category)
+        {
+            List<Book> list = new List<Book>();
+            list = db.SelectListBooks(search, language, category);
+
+            return (new BooksObj() { Books = list }).ToJSON();
+
+        }
     }
 }
