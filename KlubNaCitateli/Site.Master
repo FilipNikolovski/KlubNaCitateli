@@ -35,6 +35,7 @@
            <li>
            <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Sites/login.aspx" CssClass="links">Log In</asp:HyperLink>
             </li>
+            <li>|</li>
             <li>
             <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/Sites/signup.aspx" CssClass="links">Sign Up</asp:HyperLink>
        </li>

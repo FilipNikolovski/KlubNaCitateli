@@ -52,16 +52,7 @@ namespace KlubNaCitateli.Services
         }
 
 
-        [OperationContract]
-        public string GetBooks(string search, string language, string category)
-        {
-            List<Book> list = new List<Book>();
-            list = db.SelectListBooks(search, language, category);
-
-            return  (new BooksObj() { Books = list }).ToJSON();
-           
-        }
-
+       
 
 
     }

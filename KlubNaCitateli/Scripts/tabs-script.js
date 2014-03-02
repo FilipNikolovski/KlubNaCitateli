@@ -19,6 +19,7 @@
 
 $(document).ready(function () {
 
+
     $("#div2").hide();
     $("#li1").css("background-color", "#D3D3D3");
 

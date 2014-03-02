@@ -7,8 +7,9 @@
 
 
 <asp:Content ID="Content2" ContentPlaceHolderID="mainContent" runat="server">
-    <asp:Label ID="Label1" runat="server" Text="Sign Up" CssClass="signup"></asp:Label>
-
+  <div class="main">
+  <asp:Label ID="Label1" runat="server" Text="Sign Up" CssClass="signup"></asp:Label>
+  <div id="tabs">
     <ul>
     <li id="li1" style="text-align: center; width: 100px">
     
@@ -21,17 +22,14 @@
     </li>
     </ul>
     <div id="div1">
-        <br />
+        
         <div id="left">
         <asp:Image ID="Image1" runat="server" CssClass="Image1" Height="115px" 
             Width="100px" />
-        
-        <br />
         <asp:Label ID="Label2" runat="server" CssClass="profilepicture" 
-            Text="Profile picture"></asp:Label>
-        <br />
-        <asp:Button ID="Button1" runat="server" CssClass="browse" Text="Browse" />
-        <br />
+            Text="Choose profile picture"></asp:Label>
+            <asp:FileUpload ID="FileUpload1" runat="server" CssClass="upload" />
+       
         </div>
         <div id="right">
             
@@ -102,5 +100,6 @@
     
     </div>
         
-    <br />
+    </div>
+    </div>  
 </asp:Content>

@@ -90,6 +90,7 @@
     <Content Include="Styles\Search.css" />
     <Content Include="Styles\Site.css" />
     <Content Include="Styles\signup.css" />
+    <Content Include="Styles\login.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
