@@ -91,9 +91,10 @@
     <Content Include="Sites\profile.aspx" />
     <Content Include="Sites\search.aspx" />
     <Content Include="Sites\login.aspx" />
+    <Content Include="Styles\Search.css" />
     <Content Include="Styles\Site.css" />
-    <Content Include="Global.asax" />
     <Content Include="Styles\signup.css" />
+    <Content Include="Styles\login.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -192,6 +193,10 @@
     <Content Include="Site.Master" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="obj\Debug\build.force" />
+    <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="obj\Debug\KlubNaCitateli.csprojResolveAssemblyReference.cache" />
+    <None Include="obj\Debug\ResolveAssemblyReference.cache" />
     <None Include="Images\photothumb.db" />
     <None Include="obj\Debug\build.force" />
     <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />

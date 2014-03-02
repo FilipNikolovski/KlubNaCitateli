@@ -3,13 +3,23 @@
 .signup
 {
     font-size:140%;
-    margin-left:80px;
+    margin-left:450px;
+    font-family:Palatino Linotype;
+    text-align:center;
+    font-weight:bold;
+    
+}
+.main
+{
+    padding-top:50px;
+    font-family:Palatino Linotype;
 }
 #content ul
 {
     list-style-type:none;
     width:218px;
     margin-left: 13px;
+   
 }
 #content ul li
 {
@@ -32,6 +42,14 @@
     border-color:gray;
     border-width:2px;
     margin-right:55px;
+    padding-top:15px;
+    font-size:110%;
+   
+}
+#tabs
+{
+    padding-top:40px;
+    padding-bottom:20px;
 }
 .Image1
 {
@@ -57,13 +75,14 @@
 }
 .profilepicture
 {
-    margin-top:10px;
-    margin-left:82px;
+   
+    margin-left:61px;
     font-size:70%;
 }
-#mainContent_Table1
+.upload
 {
-   
+   margin-left:30px;
+   margin-top:10px;
 }
 #right
 {    
@@ -163,9 +182,9 @@ Label
 {
     background-image:url("../Images/img-okay.jpg");
      background-repeat:no-repeat;
-    background-position-x:42px;
+    background-position-x:44px;
      background-position-y:-2px;
-    width:72px;
+    width:74px;
     height:30px;
     text-align:left;
     border-radius:5px;
