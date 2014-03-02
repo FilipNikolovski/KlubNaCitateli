@@ -3,8 +3,12 @@
     margin: 10px auto;
     font-family: "Helvetica";
     width:1000px;
+    background-image:url("../Images/bg-body.jpg");
 }
-
+#content
+{
+    background-color:#E6E6FA;
+}
 #header 
 {
     width:100%;
@@ -35,8 +39,8 @@
     display:inline;
     width:30%;
     height:100%;
-    background-color:Red;
     display:inline;
+    color:#1E90FF;
 }
 
 #footer 

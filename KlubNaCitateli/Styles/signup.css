@@ -1,0 +1,181 @@
+﻿body {
+}
+.signup
+{
+    font-size:140%;
+    margin-left:80px;
+}
+#content ul
+{
+    list-style-type:none;
+    width:218px;
+    margin-left: 13px;
+}
+#content ul li
+{
+    text-align:center;    
+    display:inline;
+    border:solid;
+    border-color:gray;
+    border-width:1px;
+    margin-left:3px;
+    width:100px;
+    cursor:pointer;
+    padding:10px;
+    border-radius:3px;
+    
+}
+#div1, #div2
+{
+    margin-left:55px;
+    border:solid;
+    border-color:gray;
+    border-width:2px;
+    margin-right:55px;
+}
+.Image1
+{
+    margin-left:65px;
+    margin-top:20px;
+    background-image:url("../Images/user-icon.png");
+    width:100px;
+    height:115px;
+    background-position:center center;
+    border-color:gray;
+    border-width:1px;
+    border-radius:8px;
+}
+#left
+{
+    float:left;
+    width: 190px;
+}
+.browse
+{
+    margin-top:10px;
+    margin-left:83px;
+}
+.profilepicture
+{
+    margin-top:10px;
+    margin-left:82px;
+    font-size:70%;
+}
+#mainContent_Table1
+{
+   
+}
+#right
+{    
+    margin-left:250px;
+    margin-top:20px;
+}
+
+
+.table-first
+{
+    width:200px;
+    margin-top:20px;
+    margin-bottom:20px;
+}
+
+.table-second
+{
+    margin-top:20px;
+    margin-bottom:20px;
+    width:330px;
+    height:30px;
+    border-radius:5px;
+    border:solid;
+    border-width:1px;
+    border-color:gray;
+}
+
+Label
+{
+    
+    padding:5px;
+    
+}
+
+.btn
+{
+    background-image:url("../Images/right-arrow.jpg");
+     background-repeat:no-repeat;
+    background-position-x:40px;
+    width:70px;
+    height:30px;
+    text-align:left;
+    border-radius:5px;
+    margin-left:495px;
+    margin-top:10px;
+    margin-bottom:30px;
+    cursor:pointer;
+}
+
+.label3
+{
+    padding-top:20px;
+    margin-left:360px;
+    height:50px;
+    font-size:120%;
+}
+
+
+.autoCompleteSearch
+{
+    width:400px;
+    height:30px;
+    border-radius:5px;
+    margin-left:240px;
+    margin-top:20px;
+    
+}
+
+#categories-div
+{
+    margin-top:20px;
+}
+
+#backFinishButtons
+{
+    margin-top:50px;
+}
+
+
+.backBtn
+{
+    background-image:url("../Images/left-arrow.jpg");
+     background-repeat:no-repeat;
+    background-position-x:-3px;
+     background-position-y:-2px;
+    width:70px;
+    height:30px;
+    text-align:right;
+    border-radius:5px;
+    margin-left:30px;
+    margin-top:10px;
+    margin-bottom:30px;
+    cursor:pointer;
+}
+
+.finishBtn
+{
+    background-image:url("../Images/img-okay.jpg");
+     background-repeat:no-repeat;
+    background-position-x:42px;
+     background-position-y:-2px;
+    width:72px;
+    height:30px;
+    text-align:left;
+    border-radius:5px;
+    margin-left:670px;
+    margin-top:10px;
+    margin-bottom:30px;
+    cursor:pointer;
+}
+
+#UpdatePanel1
+{
+    width:100px;
+}

@@ -1,0 +1,119 @@
+﻿
+#search
+{
+    margin-top:5px;
+    float:right;
+    width:55%;
+}
+
+.searchBox 
+{
+    width:100%;
+    height:30px;
+}
+
+#filterContainer
+{
+    width:30%;
+    height:600px;
+    border: 1px solid black;
+    margin:10px;
+    padding:10px;
+}
+
+#filterList 
+{
+    display:block;
+    float:left;
+    list-style-type:none;
+    padding:0px;
+    margin:0px;
+}
+
+#sortList 
+{
+    float:left;
+    margin-top:5px;
+    padding:0px;
+    list-style-type:none;
+}
+
+#sortList li 
+{
+    display:inline;
+    margin-right:30px;
+    
+}
+
+#searchContent 
+{
+    float:right;
+    clear:both;
+    width: 60%;
+    margin-top:10px;
+}
+
+.label
+{
+    margin-left:10px;
+    width:120px;
+    text-align:center;
+    padding:4px;
+}
+
+#searchList 
+{
+    display:block;
+    float:left;
+    width: 100%;
+    height:500px;
+    border:1px solid black;
+    overflow:auto;
+    overflow-y:scroll;
+}
+
+.searchItem 
+{
+    padding-top:5px;
+    padding-left:5px;
+    width:99%;
+    height:95px;
+    border-bottom:1px solid black;
+}
+
+.span1 
+{
+    float:left;
+    width:70px;
+    height:90px;
+    margin-right:10px;
+    background-color:Blue;
+}
+
+.span2
+{
+    padding-top:10px;
+    margin-right:10px;
+    text-align:center;
+    float:left;
+    width:32%;
+}
+
+.span3
+{
+    font-size:10px;
+    padding-top:10px;
+    margin-right:10px;
+    text-align:center;
+    float:left;
+    width:30%;
+}
+
+.span4 
+{
+    font-size:14px;
+    padding-top:10px;
+    text-align:center;
+    float:left;
+    width:15%;
+}
