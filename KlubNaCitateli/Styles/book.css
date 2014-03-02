@@ -1,0 +1,27 @@
+﻿Content2 
+{
+    margin: 10px;
+}
+form
+{
+    padding: 20px;
+}
+#bookInfo 
+{
+    display: inline;
+}
+#image 
+{
+     float: left;
+     width: 17%;
+}
+#info
+{
+    float:left;
+    width: 50%;
+}
+.ul 
+{
+    list-style: none;
+}
+

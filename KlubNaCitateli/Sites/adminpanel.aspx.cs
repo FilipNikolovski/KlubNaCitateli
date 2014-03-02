@@ -9,9 +9,6 @@ namespace KlubNaCitateli.Sites
 {
     public partial class adminpanel : System.Web.UI.Page
     {
-        protected void Page_Load(object sender, EventArgs e)
-        {
 
-        }
     }
 }
