@@ -58,6 +58,33 @@
 //        protected global::System.Web.UI.WebControls.Table Table1;
         
 //        /// <summary>
+//        /// TableRow1 control.
+//        /// </summary>
+//        /// <remarks>
+//        /// Auto-generated field.
+//        /// To modify move field declaration from designer file to code-behind file.
+//        /// </remarks>
+//        protected global::System.Web.UI.WebControls.TableRow TableRow1;
+        
+//        /// <summary>
+//        /// TableCell1 control.
+//        /// </summary>
+//        /// <remarks>
+//        /// Auto-generated field.
+//        /// To modify move field declaration from designer file to code-behind file.
+//        /// </remarks>
+//        protected global::System.Web.UI.WebControls.TableCell TableCell1;
+        
+//        /// <summary>
+//        /// TableCell2 control.
+//        /// </summary>
+//        /// <remarks>
+//        /// Auto-generated field.
+//        /// To modify move field declaration from designer file to code-behind file.
+//        /// </remarks>
+//        protected global::System.Web.UI.WebControls.TableCell TableCell2;
+        
+//        /// <summary>
 //        /// username control.
 //        /// </summary>
 //        /// <remarks>
@@ -65,6 +92,33 @@
 //        /// To modify move field declaration from designer file to code-behind file.
 //        /// </remarks>
 //        protected global::System.Web.UI.WebControls.TextBox username;
+        
+//        /// <summary>
+//        /// TableRow2 control.
+//        /// </summary>
+//        /// <remarks>
+//        /// Auto-generated field.
+//        /// To modify move field declaration from designer file to code-behind file.
+//        /// </remarks>
+//        protected global::System.Web.UI.WebControls.TableRow TableRow2;
+        
+//        /// <summary>
+//        /// TableCell3 control.
+//        /// </summary>
+//        /// <remarks>
+//        /// Auto-generated field.
+//        /// To modify move field declaration from designer file to code-behind file.
+//        /// </remarks>
+//        protected global::System.Web.UI.WebControls.TableCell TableCell3;
+        
+//        /// <summary>
+//        /// TableCell4 control.
+//        /// </summary>
+//        /// <remarks>
+//        /// Auto-generated field.
+//        /// To modify move field declaration from designer file to code-behind file.
+//        /// </remarks>
+//        protected global::System.Web.UI.WebControls.TableCell TableCell4;
         
 //        /// <summary>
 //        /// password control.
@@ -76,6 +130,33 @@
 //        protected global::System.Web.UI.WebControls.TextBox password;
         
 //        /// <summary>
+//        /// TableRow3 control.
+//        /// </summary>
+//        /// <remarks>
+//        /// Auto-generated field.
+//        /// To modify move field declaration from designer file to code-behind file.
+//        /// </remarks>
+//        protected global::System.Web.UI.WebControls.TableRow TableRow3;
+        
+//        /// <summary>
+//        /// TableCell5 control.
+//        /// </summary>
+//        /// <remarks>
+//        /// Auto-generated field.
+//        /// To modify move field declaration from designer file to code-behind file.
+//        /// </remarks>
+//        protected global::System.Web.UI.WebControls.TableCell TableCell5;
+        
+//        /// <summary>
+//        /// TableCell6 control.
+//        /// </summary>
+//        /// <remarks>
+//        /// Auto-generated field.
+//        /// To modify move field declaration from designer file to code-behind file.
+//        /// </remarks>
+//        protected global::System.Web.UI.WebControls.TableCell TableCell6;
+        
+//        /// <summary>
 //        /// repassword control.
 //        /// </summary>
 //        /// <remarks>
@@ -83,6 +164,33 @@
 //        /// To modify move field declaration from designer file to code-behind file.
 //        /// </remarks>
 //        protected global::System.Web.UI.WebControls.TextBox repassword;
+        
+//        /// <summary>
+//        /// TableRow4 control.
+//        /// </summary>
+//        /// <remarks>
+//        /// Auto-generated field.
+//        /// To modify move field declaration from designer file to code-behind file.
+//        /// </remarks>
+//        protected global::System.Web.UI.WebControls.TableRow TableRow4;
+        
+//        /// <summary>
+//        /// TableCell7 control.
+//        /// </summary>
+//        /// <remarks>
+//        /// Auto-generated field.
+//        /// To modify move field declaration from designer file to code-behind file.
+//        /// </remarks>
+//        protected global::System.Web.UI.WebControls.TableCell TableCell7;
+        
+//        /// <summary>
+//        /// TableCell8 control.
+//        /// </summary>
+//        /// <remarks>
+//        /// Auto-generated field.
+//        /// To modify move field declaration from designer file to code-behind file.
+//        /// </remarks>
+//        protected global::System.Web.UI.WebControls.TableCell TableCell8;
         
 //        /// <summary>
 //        /// name control.
@@ -94,6 +202,33 @@
 //        protected global::System.Web.UI.WebControls.TextBox name;
         
 //        /// <summary>
+//        /// TableRow5 control.
+//        /// </summary>
+//        /// <remarks>
+//        /// Auto-generated field.
+//        /// To modify move field declaration from designer file to code-behind file.
+//        /// </remarks>
+//        protected global::System.Web.UI.WebControls.TableRow TableRow5;
+        
+//        /// <summary>
+//        /// TableCell9 control.
+//        /// </summary>
+//        /// <remarks>
+//        /// Auto-generated field.
+//        /// To modify move field declaration from designer file to code-behind file.
+//        /// </remarks>
+//        protected global::System.Web.UI.WebControls.TableCell TableCell9;
+        
+//        /// <summary>
+//        /// TableCell10 control.
+//        /// </summary>
+//        /// <remarks>
+//        /// Auto-generated field.
+//        /// To modify move field declaration from designer file to code-behind file.
+//        /// </remarks>
+//        protected global::System.Web.UI.WebControls.TableCell TableCell10;
+        
+//        /// <summary>
 //        /// surname control.
 //        /// </summary>
 //        /// <remarks>
@@ -101,6 +236,33 @@
 //        /// To modify move field declaration from designer file to code-behind file.
 //        /// </remarks>
 //        protected global::System.Web.UI.WebControls.TextBox surname;
+        
+//        /// <summary>
+//        /// TableRow6 control.
+//        /// </summary>
+//        /// <remarks>
+//        /// Auto-generated field.
+//        /// To modify move field declaration from designer file to code-behind file.
+//        /// </remarks>
+//        protected global::System.Web.UI.WebControls.TableRow TableRow6;
+        
+//        /// <summary>
+//        /// TableCell11 control.
+//        /// </summary>
+//        /// <remarks>
+//        /// Auto-generated field.
+//        /// To modify move field declaration from designer file to code-behind file.
+//        /// </remarks>
+//        protected global::System.Web.UI.WebControls.TableCell TableCell11;
+        
+//        /// <summary>
+//        /// TableCell12 control.
+//        /// </summary>
+//        /// <remarks>
+//        /// Auto-generated field.
+//        /// To modify move field declaration from designer file to code-behind file.
+//        /// </remarks>
+//        protected global::System.Web.UI.WebControls.TableCell TableCell12;
         
 //        /// <summary>
 //        /// email control.
@@ -155,6 +317,24 @@
 //        /// To modify move field declaration from designer file to code-behind file.
 //        /// </remarks>
 //        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        
+//        /// <summary>
+//        /// Label4 control.
+//        /// </summary>
+//        /// <remarks>
+//        /// Auto-generated field.
+//        /// To modify move field declaration from designer file to code-behind file.
+//        /// </remarks>
+//        protected global::System.Web.UI.WebControls.Label Label4;
+        
+//        /// <summary>
+//        /// TextBox2 control.
+//        /// </summary>
+//        /// <remarks>
+//        /// Auto-generated field.
+//        /// To modify move field declaration from designer file to code-behind file.
+//        /// </remarks>
+//        protected global::System.Web.UI.WebControls.TextBox TextBox2;
         
 //        /// <summary>
 //        /// UpdatePanel1 control.
