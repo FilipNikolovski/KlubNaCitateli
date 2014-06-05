@@ -9,6 +9,11 @@
     font-weight:bold;
     
 }
+.checkUsernameEmail
+{
+    margin-left:50px;
+    margin-top:10px;
+}
 .main
 {
     padding-top:50px;
@@ -90,6 +95,10 @@
     margin-top:20px;
 }
 
+.table
+{
+margin-left:50px;
+}
 
 .table-first
 {
@@ -109,7 +118,10 @@
     border-width:1px;
     border-color:gray;
 }
-
+.table-third
+{
+    width:300px;
+}
 Label
 {
     
@@ -135,7 +147,7 @@ Label
 .label3
 {
     padding-top:20px;
-    margin-left:360px;
+    margin-left:100px;
     height:50px;
     font-size:120%;
 }
@@ -144,14 +156,22 @@ Label
 .autoCompleteSearch
 {
     width:400px;
-    height:30px;
+    height:70px;
     border-radius:5px;
-    margin-left:240px;
+    margin-left:150px;
     margin-top:20px;
     
 }
+.aboutTxt
+{
+    width:400px;
+    height:70px;
+    border-radius:5px;
+    margin-left:162px;
+    margin-top:20px;
+}
 
-#categories-div
+#categories-div, #categories-divs
 {
     margin-top:20px;
 }
