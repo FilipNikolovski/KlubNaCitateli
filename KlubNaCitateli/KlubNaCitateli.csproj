@@ -13,6 +13,7 @@
     <RootNamespace>KlubNaCitateli</RootNamespace>
     <AssemblyName>KlubNaCitateli</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <UseIISExpress>false</UseIISExpress>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -82,11 +83,11 @@
     <Content Include="Sites\book.aspx" />
     <Content Include="Sites\forum.aspx" />
     <Content Include="Sites\index.aspx" />
-    <Content Include="Sites\signup.aspx" />
+    <Content Include="Sites\login.aspx" />
     <Content Include="Sites\mybooks.aspx" />
     <Content Include="Sites\profile.aspx" />
     <Content Include="Sites\search.aspx" />
-    <Content Include="Sites\login.aspx" />
+    <Content Include="Sites\signup.aspx" />
     <Content Include="Styles\Search.css" />
     <Content Include="Styles\Site.css" />
     <Content Include="Styles\signup.css" />
@@ -105,6 +106,7 @@
     <Compile Include="Classes\Author.cs" />
     <Compile Include="Classes\Book.cs" />
     <Compile Include="Classes\Database.cs" />
+    <Compile Include="Classes\User.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -148,12 +150,12 @@
     <Compile Include="Sites\index.aspx.designer.cs">
       <DependentUpon>index.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Sites\signup.aspx.cs">
-      <DependentUpon>signup.aspx</DependentUpon>
+    <Compile Include="Sites\login.aspx.cs">
+      <DependentUpon>login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Sites\signup.aspx.designer.cs">
-      <DependentUpon>signup.aspx</DependentUpon>
+    <Compile Include="Sites\login.aspx.designer.cs">
+      <DependentUpon>login.aspx</DependentUpon>
     </Compile>
     <Compile Include="Sites\mybooks.aspx.cs">
       <DependentUpon>mybooks.aspx</DependentUpon>
@@ -176,16 +178,18 @@
     <Compile Include="Sites\search.aspx.designer.cs">
       <DependentUpon>search.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Sites\login.aspx.cs">
-      <DependentUpon>login.aspx</DependentUpon>
+    <Compile Include="Sites\signup.aspx.cs">
+      <DependentUpon>signup.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Sites\login.aspx.designer.cs">
-      <DependentUpon>login.aspx</DependentUpon>
+    <Compile Include="Sites\signup.aspx.designer.cs">
+      <DependentUpon>signup.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Images\BookPicture\" />
+    <Folder Include="Images\ProfilePicture\" />
     <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>
   <ItemGroup>
