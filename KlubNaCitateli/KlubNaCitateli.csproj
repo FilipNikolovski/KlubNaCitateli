@@ -57,10 +57,6 @@
     <Reference Include="System.Web.ApplicationServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\ASPNETDB.MDF" />
-    <Content Include="App_Data\aspnetdb_log.ldf">
-      <DependentUpon>ASPNETDB.MDF</DependentUpon>
-    </Content>
     <Content Include="bin\KlubNaCitateli.dll" />
     <Content Include="bin\KlubNaCitateli.pdb" />
     <Content Include="bin\MySql.Data.dll" />
@@ -189,6 +185,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\" />
     <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>
   <ItemGroup>
