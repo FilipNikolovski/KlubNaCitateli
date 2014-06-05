@@ -3,26 +3,40 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using MySql.Data.MySqlClient;
+using System.Configuration;
 
 namespace KlubNaCitateli.Classes
 {
     public class Database
     {
-        private string connString = "SERVER=localhost;DATABASE=ficodb;UID=root;PASSWORD=;";
-
 
         //Vrakja lista na knigi
-        public List<Book> SelectListBooks(string search,string language, string category)
+        public List<Book> SelectListBooks(string search, string language, string category)
         {
             List<Book> list = new List<Book>();
 
             using (MySqlConnection connection = new MySqlConnection())
             {
-                connection.ConnectionString = connString;
+                connection.ConnectionString = @"Data source=localhost;Database=books;User=root;Password=''";
                 connection.Open();
                 
-                string query = "SELECT IDBook, Name, ImageSrc, Description, Date FROM Books, Categories, Tags, BelongsTo, Tagged";
+                string query;
+
+                if(category == "Any" && language == "Any")
+                     query = "SELECT Books.* FROM Books, Tags, Tagged WHERE Books.Name like @Search";
+                else if(language == "Any")
+                     query = "SELECT Books.* FROM Books, Categories, Tags, BelongsTo, Tagged WHERE Books.Name like @Search AND Categories.Name=@Category AND BelongsTo.IDBook=Book.IDBook AND BelongsTo.IDCategory=Categories.IDCategory";
+                else
+                    query = "SELECT Books.* FROM Books, Tags, Tagged WHERE Books.Name like @Search AND Books.Language=@Language";
+
                 MySqlCommand command = new MySqlCommand(query, connection);
+
+                command.Parameters.AddWithValue("@Search", "%" + search + "%");
+                if (category != "Any")
+                    command.Parameters.AddWithValue("@Category", category);
+                if(language != "Any")
+                    command.Parameters.AddWithValue("@Language", language);
+
                 MySqlDataReader dataReader = command.ExecuteReader();
 
                 Dictionary<string, string> dictionary = new Dictionary<string, string>();
@@ -35,7 +49,10 @@ namespace KlubNaCitateli.Classes
                     dictionary.Add("Name", dataReader["Name"].ToString());
                     dictionary.Add("ImageSrc", dataReader["ImageSrc"].ToString());
                     dictionary.Add("Description", dataReader["Description"].ToString());
-                    dictionary.Add("Date", dataReader["YearPublished"].ToString());
+                    dictionary.Add("YearPublished", dataReader["YearPublished"].ToString());
+                    dictionary.Add("DateAdded", dataReader["DateAdded"].ToString());
+                    dictionary.Add("SumRating", dataReader["SumRating"].ToString());
+                    dictionary.Add("NumVotes", dataReader["NumVotes"].ToString());
                     books.Add(dictionary);
                 }
                 dataReader.Close();
@@ -54,9 +71,9 @@ namespace KlubNaCitateli.Classes
                         authors.Add(a);
                     }
                     dataReader.Close();
-
+                    
                     //Dodavanje na knigata vo listata
-                    Book b = new Book(books[i]["Name"], authors, books[i]["ImageSrc"], books[i]["Description"], books[i]["Date"]);
+                    Book b = new Book(Int32.Parse(books[i]["IDBook"]), books[i]["Name"], authors, books[i]["ImageSrc"], books[i]["Description"], books[i]["YearPublished"],books[i]["DateAdded"], Int32.Parse(books[i]["SumRating"]), Int32.Parse(books[i]["NumVotes"]));
                     list.Add(b);
                     }
 

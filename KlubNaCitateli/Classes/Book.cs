@@ -7,19 +7,27 @@ namespace KlubNaCitateli.Classes
 {
     public class Book
     {
+        public int IDBook { get; set; }
         public string Name { get; set; }
         public string ImageSrc { get; set; }
         public string Description { get; set; }
-        public string Date { get; set; }
+        public string DateAdded { get; set; }
+        public string YearPublished { get; set; }
+        public int SumRating { get; set; }
+        public int NumVotes { get; set; }
         public List<Author> Authors;
 
 
-        public Book(string name,List<Author> authors, string imagesrc,string desc, string date)
+        public Book(int id, string name, List<Author> authors, string imagesrc, string desc, string date, string dateAdded, int sumRating, int numVotes)
         {
+            IDBook = id;
             Name = name;
             ImageSrc = imagesrc;
             Description = desc;
-            Date = date;
+            YearPublished = date;
+            DateAdded = DateAdded;
+            SumRating = sumRating;
+            NumVotes = numVotes;
 
             Authors = new List<Author>();
             for (int i = 0; i < authors.Count; i++)
