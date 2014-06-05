@@ -10,7 +10,7 @@
 namespace KlubNaCitateli.Sites {
     
     
-    public partial class signup {
+    public partial class login {
         
         /// <summary>
         /// Label1 control.
@@ -76,13 +76,22 @@ namespace KlubNaCitateli.Sites {
         protected global::System.Web.UI.WebControls.TableCell TableCell2;
         
         /// <summary>
-        /// TextBox1 control.
+        /// username control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        protected global::System.Web.UI.WebControls.TextBox username;
+        
+        /// <summary>
+        /// RequiredFieldValidator1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
         
         /// <summary>
         /// TableRow3 control.
@@ -130,13 +139,22 @@ namespace KlubNaCitateli.Sites {
         protected global::System.Web.UI.WebControls.TableCell TableCell4;
         
         /// <summary>
-        /// TextBox2 control.
+        /// password control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox2;
+        protected global::System.Web.UI.WebControls.TextBox password;
+        
+        /// <summary>
+        /// RequiredFieldValidator2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator2;
         
         /// <summary>
         /// TableRow5 control.
@@ -164,5 +182,14 @@ namespace KlubNaCitateli.Sites {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button Button1;
+        
+        /// <summary>
+        /// loginInfo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label loginInfo;
     }
 }

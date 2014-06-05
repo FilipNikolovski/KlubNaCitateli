@@ -9,6 +9,11 @@
     font-weight:bold;
     
 }
+.checkUsernameEmail
+{
+    margin-left:50px;
+    margin-top:10px;
+}
 .main
 {
     padding-top:50px;
@@ -113,7 +118,10 @@ margin-left:50px;
     border-width:1px;
     border-color:gray;
 }
-
+.table-third
+{
+    width:300px;
+}
 Label
 {
     
@@ -163,7 +171,7 @@ Label
     margin-top:20px;
 }
 
-#categories-div
+#categories-div, #categories-divs
 {
     margin-top:20px;
 }

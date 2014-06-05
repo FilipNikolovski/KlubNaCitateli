@@ -4,21 +4,21 @@ using System.Linq;
 using System.Web;
 using MySql.Data.MySqlClient;
 using System.Text.RegularExpressions;
+using System.Configuration;
 
 namespace KlubNaCitateli.Classes
 {
     public class User
     {
-        public string name;
-        public string surname;
-        public string email;
-        public string username;
-        public string password;
-        public string type;
-        public int numComments;
-        public String aboutUser;
-        private string connString = "SERVER=localhost;DATABASE=ficodb;UID=root;PASSWORD=;";
-
+        public string name { get; set; }
+        public string surname { get; set; }
+        public string email { get; set; }
+        public string username { get; set; }
+        public string password { get; set; }
+        public string type { get; set; }
+        public int numComments { get; set; }
+        public String aboutUser { get; set; }
+       
 
         public User(string name, string surname, string email, string username, string password, String aboutUser)
         {
@@ -33,33 +33,38 @@ namespace KlubNaCitateli.Classes
         }
 
 
-        public void ValidateEmail(bool checkEmail, bool checkUsername)
+        public void CheckIfUserExists(bool checkEmail, bool checkUsername)
         {
             
-            using (MySqlConnection connection = new MySqlConnection())
-            {
-                connection.ConnectionString = connString;
-                connection.Open();
-                String query = "SELECT IDUser from users where email=" + email + ";";
-                MySqlCommand command = new MySqlCommand(query, connection);
-                MySqlDataReader dataReader = command.ExecuteReader();
-                if (dataReader.HasRows)
-                {
-                    checkEmail = false;
-                }
+                    MySqlConnection connection = new MySqlConnection();
+                    connection.ConnectionString = @"Data source=localhost;Database=books;User=root;Password=''";
+                    MySqlCommand command = new MySqlCommand();
+                    command.CommandText = "SELECT IDUser from users where email=@email";
+                    command.Parameters.AddWithValue("@email", email.ToString());
+                    command.Connection = connection;
+                    connection.Open();
+                    MySqlDataReader dataReader = command.ExecuteReader();
+                    if (dataReader.HasRows)
+                    {
+                        checkEmail = false;
+                    }
+                    dataReader.Close();
+            
+                    MySqlCommand command1 = new MySqlCommand();
+                    command1.Connection = connection;
+                    command1.CommandText = "SELECT IDUser from users where username=@username";
+                    command1.Parameters.AddWithValue("@username", username.ToString());
+                   MySqlDataReader dataReader1 = command1.ExecuteReader();
+                    if (dataReader1.HasRows)
+                    {
+                        checkUsername = false;
+                    }
+                    dataReader1.Close();
+                   
+                    connection.Close();
+                
 
-                command.CommandText = "SELECT IDUser from users where username=" + username + ";";
-                dataReader = command.ExecuteReader();
-                if (dataReader.HasRows)
-                {
-                    checkUsername = false;
-                }
-                connection.Close();
-
-                if (!Regex.IsMatch(email, @"^(?("")("".+?""@)|(([0-9a-zA-Z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-zA-Z])@))(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,6}))$"))
-                {
-                    checkEmail = false;
-                }  
+               
             }
         }
 
@@ -68,4 +73,3 @@ namespace KlubNaCitateli.Classes
 
 
     }
-}
