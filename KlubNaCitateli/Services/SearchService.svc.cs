@@ -34,18 +34,13 @@ namespace KlubNaCitateli.Services
             public List<Book> Books;
         }
 
-        private Database db;
-        public SearchService()
-
-        {
-            db = new Database();
-        }
+        
 
         [OperationContract]
         public string GetBooks(string search, string language, string category)
         {
             List<Book> list = new List<Book>();
-            list = db.SelectListBooks(search, language, category);
+            list = Book.SelectListBooks(search, language, category);
 
             return (new BooksObj() { Books = list }).ToJSON();
 

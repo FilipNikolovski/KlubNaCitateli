@@ -11,7 +11,6 @@ namespace KlubNaCitateli.Sites
 {
     public partial class search : System.Web.UI.Page
     {
-        private Database db;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -20,9 +19,9 @@ namespace KlubNaCitateli.Sites
 
         protected void btnSearch_Click(object sender, EventArgs e)
         {
-            db = new Database();
+            
             List<Book> books = new List<Book>();
-            books = db.SelectListBooks(tbSearch.Text, "Any", "Any");
+            books = Book.SelectListBooks(tbSearch.Text, "Any", "Any");
 
             if (books.Count > 0)
             {
@@ -34,9 +33,9 @@ namespace KlubNaCitateli.Sites
                     sb.Append("<div class='searchItem'>");
                     sb.Append("<div class='span1'></div>");
                     sb.Append("<div class='span2'><span>");
-                    foreach (Author author in book.Authors)
+                    foreach (string author in book.Authors)
                     {
-                        sb.Append(author.Name + " " + author.Surname + " ");
+                        sb.Append(author.ToString() + " ");
                     }
                     sb.Append("</span></div>");
                     sb.Append("<div class='span3'><span>" + book.Description + "</span></div>");

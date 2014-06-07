@@ -106,9 +106,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\Author.cs" />
     <Compile Include="Classes\Book.cs" />
-    <Compile Include="Classes\Database.cs" />
     <Compile Include="Classes\User.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
