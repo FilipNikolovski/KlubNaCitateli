@@ -47,12 +47,16 @@
     list-style-type:none;
     margin-top:18px;
     float:right;
-    width:130px;
+    width:500px;
+}
+.nameSurname
+{
+width:200px;
 }
 #login 
 {
     float:right;
-    width:30%;
+    width:50%;
     height:100%;
     display:inline;
     color:#1E90FF;

@@ -37,7 +37,7 @@ namespace KlubNaCitateli.Classes
         {
             
                     MySqlConnection connection = new MySqlConnection();
-                    connection.ConnectionString = @"Data source=localhost;Database=books;User=root;Password=''";
+                    connection.ConnectionString = ConfigurationManager.ConnectionStrings["BooksConn"].ConnectionString.ToString();
                     MySqlCommand command = new MySqlCommand();
                     command.CommandText = "SELECT IDUser from users where email=@email";
                     command.Parameters.AddWithValue("@email", email.ToString());
