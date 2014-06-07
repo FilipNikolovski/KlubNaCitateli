@@ -62,6 +62,8 @@
     <Content Include="bin\KlubNaCitateli.pdb" />
     <Content Include="bin\MySql.Data.dll" />
     <Content Include="Images\bg-body.jpg" />
+    <Content Include="Images\bookclub.jpg" />
+    <Content Include="Images\bookclub.png" />
     <Content Include="Images\img-okay.jpg" />
     <Content Include="Images\left-arrow.jpg" />
     <Content Include="Images\okay.jpg" />
@@ -88,6 +90,7 @@
     <Content Include="Sites\profile.aspx" />
     <Content Include="Sites\search.aspx" />
     <Content Include="Sites\signup.aspx" />
+    <Content Include="Styles\index.css" />
     <Content Include="Styles\Search.css" />
     <Content Include="Styles\Site.css" />
     <Content Include="Styles\signup.css" />
