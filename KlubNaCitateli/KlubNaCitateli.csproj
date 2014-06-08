@@ -74,13 +74,12 @@
     <Content Include="obj\Debug\KlubNaCitateli.csproj.FileListAbsolute.txt" />
     <Content Include="obj\Debug\KlubNaCitateli.dll" />
     <Content Include="obj\Debug\KlubNaCitateli.pdb" />
-    <Content Include="Scripts\AdminPanel.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-ui-1.10.4.custom.js" />
     <Content Include="Scripts\jquery-ui-1.10.4.custom.min.js" />
     <Content Include="Scripts\Search.js" />
     <Content Include="Scripts\tabs-script.js" />
-    <Content Include="Services\SearchService.svc" />
+    <Content Include="Services\BookService.svc" />
     <Content Include="Sites\adminpanel.aspx" />
     <Content Include="Sites\book.aspx" />
     <Content Include="Sites\forum.aspx" />
@@ -112,10 +111,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\JSONHelper.cs" />
-    <Compile Include="Services\SearchService.svc.cs">
-      <DependentUpon>SearchService.svc</DependentUpon>
+    <Compile Include="Services\BookService.svc.cs">
+      <DependentUpon>BookService.svc</DependentUpon>
     </Compile>
+    <Compile Include="Services\JSONHelper.cs" />
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

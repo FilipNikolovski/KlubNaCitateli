@@ -3,27 +3,65 @@
     
     <script src="<%= Page.ResolveClientUrl("../Scripts/AdminPanel.js") %>" type="text/javascript">
     </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            function onSuccess(result) {
+                alert(result);
+            }
+
+            $("#dialog-form").dialog({
+                autoOpen: false,
+                height: 300,
+                width: 350,
+                modal: true,
+                buttons: {
+                    "Add": function () {
+
+                        var tags = $("#<%=tbTags.ClientID %>").val();
+                        var categories = "";
+                        var bookField = $("#<%=bookField.ClientID %>").val();
+
+                        $("#<%=cblCategories.ClientID %> input[type=checkbox]:checked").each(function () {
+                            var currentValue = $(this).parent().find('label').text();
+                            if (currentValue != '')
+                                categories += currentValue + ",";
+                        });
+
+                        if (categories == "") {
+                            alert("Морате да изберете категорија.");
+                        }
+                        else {
+                            var service = new KlubNaCitateli.BookService();
+                            service.DoWork(tags, categories, bookField, onSuccess);
+                        }
+                    },
+                    Cancel: function () {
+                        $(this).dialog("close");
+                    }
+                }
+            });
+        });
+    </script>
     <style>
         fieldset { padding:0; border:1; margin-top:25px; }
         input.text { margin-bottom:12px; width:95%; padding: .4em; }
     </style>
-    
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="mainContent" runat="server">
     
     <asp:Label ID="lblError" runat="server" Text="lblError" Visible="False"></asp:Label>
-
+    <asp:HiddenField ID="bookField" runat="server" />
+    
     <div id="dialog-form" title="Create new user">
-      <p class="validateTips">All form fields are required.</p>
- 
       <form action="adminpanel.aspx">
           <fieldset>
-            <label for="name">Name</label>
-            <input type="text" name="name" id="name" class="text ui-widget-content ui-corner-all" />
-            <label for="email">Email</label>
-            <input type="text" name="email" id="email" value="" class="text ui-widget-content ui-corner-all" />
-            <label for="password">Password</label>
-            <input type="password" name="password" id="password" value="" class="text ui-widget-content ui-corner-all" />
+            <label for="category">Category</label>
+             <asp:CheckBoxList ID="cblCategories" name="category" runat="server">
+             </asp:CheckBoxList>
+             <label for="tags">Tags</label>
+             <asp:TextBox ID="tbTags" name="tags" runat="server" placeholder="Tag1,Tag2,.."></asp:TextBox>
           </fieldset>
       </form>
     </div>
@@ -106,4 +144,10 @@
             <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
         </asp:GridView>
     </fieldset>
+
+    <asp:ScriptManager runat="server" ID="scriptManager">
+        <Services>
+            <asp:ServiceReference Path="../Services/BookService.svc" />
+        </Services>      
+    </asp:ScriptManager>
 </asp:Content>
