@@ -68,3 +68,11 @@ width:200px;
     height:30px;
     background-color:Yellow;
 }
+
+fieldset 
+{
+    margin: 8px;
+    border: 1px solid silver;
+    padding: 8px;    
+    border-radius: 4px;
+}

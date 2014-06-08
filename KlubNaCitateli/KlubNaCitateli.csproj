@@ -63,7 +63,6 @@
     <Content Include="bin\MySql.Data.dll" />
     <Content Include="Images\bg-body.jpg" />
     <Content Include="Images\bookclub.jpg" />
-    <Content Include="Images\bookclub.png" />
     <Content Include="Images\img-okay.jpg" />
     <Content Include="Images\left-arrow.jpg" />
     <Content Include="Images\okay.jpg" />
@@ -75,6 +74,7 @@
     <Content Include="obj\Debug\KlubNaCitateli.csproj.FileListAbsolute.txt" />
     <Content Include="obj\Debug\KlubNaCitateli.dll" />
     <Content Include="obj\Debug\KlubNaCitateli.pdb" />
+    <Content Include="Scripts\AdminPanel.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-ui-1.10.4.custom.js" />
     <Content Include="Scripts\jquery-ui-1.10.4.custom.min.js" />

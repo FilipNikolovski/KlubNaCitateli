@@ -1,14 +1,17 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Text;
 using System.Web;
+using System.Web.Script.Serialization;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Net;
-using System.Web.Script.Serialization;
-using System.Collections;
-using System.Text;
 using KlubNaCitateli.Classes;
+using MySql.Data.MySqlClient;
+using System.Configuration;
+using System.Data;
 
 namespace KlubNaCitateli.Sites
 {
@@ -18,13 +21,52 @@ namespace KlubNaCitateli.Sites
         
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            if (!IsPostBack)
+            {
+                FillCategoriesGrid();
+            }
+        }
+
+        private void FillCategoriesGrid()
+        {
+            using (MySqlConnection connection = new MySqlConnection())
+            {
+                connection.ConnectionString = ConfigurationManager.ConnectionStrings["BooksConn"].ConnectionString;
+
+                try
+                {
+                    connection.Open();
+
+                    string query = "SELECT * FROM Categories";
+
+                    MySqlCommand command = new MySqlCommand(query, connection);
+
+                    MySqlDataAdapter dataAdapter = new MySqlDataAdapter();
+                    dataAdapter.SelectCommand = command;
+
+                    DataSet ds = new DataSet();
+
+                    dataAdapter.Fill(ds, "Categories");
+
+                    gvCategories.DataSource = ds.Tables["Categories"];
+                    gvCategories.DataBind();
+
+                    ViewState["Categories"] = ds;
+                }
+                catch (Exception ex)
+                {
+                    lblError.Text = ex.Message;
+                    lblError.Visible = true;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)
         {
-            if (tbSearchBooks.Text.Trim() != "")
-            {
                 using (WebClient webClient = new WebClient())
                 {
                     string url = "";
@@ -148,13 +190,148 @@ namespace KlubNaCitateli.Sites
                         {
                             gvBooks.DataSource = bookList;
                             gvBooks.DataBind();
+
+                            ViewState["BookList"] = bookList;
                         }
                         
                     }
                    
                 }
+        }
+
+        protected void btnAddCategory_Click(object sender, EventArgs e)
+        {
+            using (MySqlConnection connection = new MySqlConnection())
+            {
+                connection.ConnectionString = ConfigurationManager.ConnectionStrings["BooksConn"].ConnectionString;
+
+                try
+                {
+                    connection.Open();
+
+                    string query = "SELECT * FROM Categories WHERE Name=?Name";
+                    
+                    MySqlCommand command = new MySqlCommand(query, connection);
+                    command.Parameters.AddWithValue("?Name", tbCategory.Text);
+
+                    MySqlDataReader reader = command.ExecuteReader();
+
+                    if (!reader.HasRows)
+                    {
+                        reader.Close();
+                        query = "INSERT INTO Categories (Name) VALUES (?Name)";
+                        command.CommandText = query;
+                        command.ExecuteNonQuery();
+                    }
+                    else
+                    {
+                        ClientScript.RegisterStartupScript(this.GetType(), "Alert", "alert('That category already exists');", true);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    lblError.Text = ex.Message;
+                    lblError.Visible = true;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+
+            FillCategoriesGrid();
+        }
+
+        protected void gvCategories_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        {
+            gvCategories.EditIndex = -1;
+
+            DataSet ds = (DataSet)ViewState["Categories"];
+
+            gvCategories.DataSource = ds.Tables["Categories"];
+            gvCategories.DataBind();
+        }
+
+        protected void gvCategories_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+            gvCategories.EditIndex = e.NewEditIndex;
+
+            DataSet ds = (DataSet)ViewState["Categories"];
+
+            gvCategories.DataSource = ds.Tables["Categories"];
+            gvCategories.DataBind();
+        }
+
+        protected void gvCategories_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            using (MySqlConnection connection = new MySqlConnection())
+            {
+                connection.ConnectionString = ConfigurationManager.ConnectionStrings["BooksConn"].ConnectionString;
+
+                try
+                {
+                    connection.Open();
+
+                    string query = "DELETE FROM Categories WHERE IDCategory=?IDCategory";
+
+                    MySqlCommand command = new MySqlCommand(query, connection);
+                    command.Parameters.AddWithValue("?IDCategory", gvCategories.DataKeys[e.RowIndex].Value);
+                    command.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    lblError.Text = ex.Message;
+                    lblError.Visible = true;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+
+            FillCategoriesGrid();
+        }
+
+        protected void gvCategories_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        {
+            using (MySqlConnection connection = new MySqlConnection())
+            {
+                connection.ConnectionString = ConfigurationManager.ConnectionStrings["BooksConn"].ConnectionString;
+
+                try
+                {
+                    connection.Open();
+
+                    GridViewRow row = (GridViewRow)gvCategories.Rows[e.RowIndex];
+                    TextBox tbName = (TextBox)row.Cells[3].Controls[0];
+
+                    string query = "UPDATE Categories SET Name=?Name WHERE IDCategory=?IDCategory";
+
+                    MySqlCommand command = new MySqlCommand(query, connection);
+                    command.Parameters.AddWithValue("?Name", tbName.Text);
+                    command.Parameters.AddWithValue("?IDCategory", gvCategories.DataKeys[e.RowIndex].Value);
+                    command.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    lblError.Text = ex.Message;
+                    lblError.Visible = true;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+
+                gvCategories.EditIndex = -1;
+                FillCategoriesGrid();
             }
         }
 
+        protected void gvBooks_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+
+
+        }
     }
 }
