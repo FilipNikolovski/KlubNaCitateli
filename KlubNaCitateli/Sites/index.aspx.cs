@@ -111,6 +111,89 @@ namespace KlubNaCitateli.Sites
             if (Session["Name"] != null)
             {
 
+                MySqlCommand command6 = new MySqlCommand();
+                command6.CommandText = "select categoryname from categories limit 3";
+                command6.Connection = connection;
+                MySqlDataReader reader6 = command6.ExecuteReader();
+                List<string> categories = new List<string>();
+                int i = 0;
+                while (reader6.Read())
+                {
+                    categories.Add(reader6.GetValue(i).ToString());
+                    i++;
+                }
+                reader6.Close();
+                firstCategoryName.Text = categories[0];
+                secondCategoryName.Text = categories[1];
+                thirdCategoryName.Text = categories[2];
+
+                MySqlCommand command7 = new MySqlCommand();
+                command7.CommandText = "Select name from books, belongsto where books.idbook=belongsto.idbook having sumrating/numvotes=(select max(sumrating/numvotes) from books) group by idbook";
+                command7.Connection = connection;
+                MySqlDataReader reader7 = command7.ExecuteReader();
+                if (reader7.Read())
+                {
+                    firstCategoryBookName.Text = reader7.GetValue(0).ToString();
+                }
+                reader7.Close();
+                MySqlCommand command8 = new MySqlCommand();
+                command8.CommandText="Select name from books, belongsto where books.idbook=belongsto.idbook having sumrating/numvotes=(select max(sumrating/numvotes) from books) group by idbook";
+                command8.Connection = connection;
+                MySqlDataReader reader8 = command8.ExecuteReader();
+                if (reader8.Read())
+                {
+                    secondCategoryBookName.Text = reader8.GetValue(0).ToString();
+                }
+                reader8.Close();
+
+                MySqlCommand command9 = new MySqlCommand();
+                command9.CommandText = "Select name from books, belongsto where books.idbook=belongsto.idbook having sumrating/numvotes=(select max(sumrating/numvotes) from books) group by idbook";
+                command9.Connection = connection;
+                MySqlDataReader reader9 = command9.ExecuteReader();
+                if (reader9.Read())
+                {
+                    thirdCategoryBookName.Text = reader9.GetValue(0).ToString();
+                }
+                reader9.Close();
+
+                MySqlCommand command10 = new MySqlCommand();
+                command10.CommandText = "Select thumbnail from books, belongsto where books.idbook=belongsto.idbook having sumrating/numvotes=(select max(sumrating/numvotes) from books) group by idbook";
+                command10.Connection = connection;
+                MySqlDataReader reader10 = command10.ExecuteReader();
+                if(reader10.Read())
+                {
+                    firstCategoryPanel.BackImageUrl=reader10.GetValue(0).ToString();
+                }
+                reader10.Close();
+                MySqlCommand command11 = new MySqlCommand();
+                command11.CommandText = "Select thumbnail from books, belongsto where books.idbook=belongsto.idbook having sumrating/numvotes=(select max(sumrating/numvotes) from books) group by idbook";
+                command11.Connection = connection;
+                MySqlDataReader reader11 = command11.ExecuteReader();
+                if (reader11.Read())
+                {
+                    secondCategoryPanel.BackImageUrl = reader11.GetValue(0).ToString();
+                }
+                reader11.Close();
+
+                MySqlCommand command12 = new MySqlCommand();
+                command12.CommandText = "Select thumbnail from books, belongsto where books.idbook=belongsto.idbook having sumrating/numvotes=(select max(sumrating/numvotes) from books) group by idbook";
+                command12.Connection = connection;
+                MySqlDataReader reader12=command12.ExecuteReader();
+                if (reader12.Read())
+                {
+                    thirdCategoryPanel.BackImageUrl = reader12.GetValue(0).ToString();
+                }
+                reader.Close();
+
+
+
+
+
+
+
+
+
+
             }
 
 
