@@ -29,7 +29,7 @@
             Width="100px" />
         <asp:Label ID="Label2" runat="server" CssClass="profilepicture" 
             Text="Choose profile picture"></asp:Label>
-            <asp:FileUpload ID="FileUpload1" runat="server" CssClass="upload" />
+            <asp:FileUpload ID="profileImage" runat="server" CssClass="upload" />
        
         </div>
         <div id="right">

@@ -327,11 +327,6 @@ namespace KlubNaCitateli.Sites
             }
         }
 
-        protected void gvBooks_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            
-
-
-        }
+      
     }
 }

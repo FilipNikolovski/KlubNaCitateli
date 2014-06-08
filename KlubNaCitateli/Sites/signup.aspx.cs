@@ -7,11 +7,13 @@ using System.Web.UI.WebControls;
 using KlubNaCitateli.Classes;
 using MySql.Data.MySqlClient;
 using System.Configuration;
+using System.IO;
 
 namespace KlubNaCitateli.Sites
 {
     public partial class signup : System.Web.UI.Page
     {
+        User user;
         protected void Page_Load(object sender, EventArgs e)
         {
             
@@ -19,7 +21,7 @@ namespace KlubNaCitateli.Sites
 
         public void finishButton_click(object sender, EventArgs e)
         {
-            User user = new User(name.Text, surname.Text, email.Text, username.Text, password.Text, TextBox2.Text);
+            user = new User(name.Text, surname.Text, email.Text, username.Text, password.Text, TextBox2.Text);
             bool checkUsername = true;
             bool checkEmail = true;
             user.CheckIfUserExists(checkEmail, checkUsername);
@@ -57,6 +59,7 @@ namespace KlubNaCitateli.Sites
                     comm.Parameters.AddWithValue("@numComments", 0);
 
                     comm.ExecuteNonQuery();
+                    
                 }
                 catch (Exception err)
                 {
@@ -66,6 +69,17 @@ namespace KlubNaCitateli.Sites
                 {
                     conn.Close();
                 }
+
+                if (profileImage.FileName != string.Empty)
+                {
+                    Console.WriteLine("beiruhire");
+                    profileImage.PostedFile.SaveAs(Server.MapPath("~/Images/ProfilePicture/") + (user.username+".jpg"));
+                }
+                
+
+
+
+
                 Response.Redirect("login.aspx");
             }
            
