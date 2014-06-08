@@ -12,6 +12,7 @@ using KlubNaCitateli.Classes;
 using MySql.Data.MySqlClient;
 using System.Configuration;
 using System.Data;
+using System.Web.Services;
 
 namespace KlubNaCitateli.Sites
 {
@@ -50,6 +51,10 @@ namespace KlubNaCitateli.Sites
 
                     gvCategories.DataSource = ds.Tables["Categories"];
                     gvCategories.DataBind();
+
+                    cblCategories.DataSource = ds.Tables["Categories"];
+                    cblCategories.DataTextField = "Name";
+                    cblCategories.DataBind();
 
                     ViewState["Categories"] = ds;
                 }
@@ -116,16 +121,26 @@ namespace KlubNaCitateli.Sites
 
                                 //Kreiranje i dodavanje na kniga vo lista----------------------------------------
                                 Book book = new Book();
-                                book.Name = volumeInfo["title"].ToString();
+
+                                if (volumeInfo.ContainsKey("title"))
+                                    book.Name = volumeInfo["title"].ToString();
+                                else
+                                    book.Name = "No title available";
+
                                 if (volumeInfo.ContainsKey("description"))
                                     book.Description = volumeInfo["description"].ToString();
                                 else
                                     book.Description = "No description available.";
+
                                 if (volumeInfo.ContainsKey("publishedDate"))
                                     book.YearPublished = volumeInfo["publishedDate"].ToString();
                                 else
                                     book.YearPublished = "-";
-                                book.Language = volumeInfo["language"].ToString();
+                                if (volumeInfo.ContainsKey("language"))
+                                    book.Language = volumeInfo["language"].ToString();
+                                else
+                                    book.Language = "No language";
+
                                 book.DateAdded = DateTime.Now.Year.ToString();
                                 book.SumRating = 0;
                                 book.NumVotes = 0;
@@ -327,6 +342,29 @@ namespace KlubNaCitateli.Sites
             }
         }
 
-      
+
+        protected void gvBooks_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            List<Book> bookList = (List<Book>)ViewState["BookList"];
+            Book book = bookList[gvBooks.SelectedIndex];
+
+            bookField.Value += book.ISBN + "[split]";
+            bookField.Value += book.Name + "[split]";
+            bookField.Value += book.Description + "[split]";
+            bookField.Value += book.ImageSrc + "[split]";
+            bookField.Value += book.ThumbnailSrc + "[split]";
+            bookField.Value += book.DateAdded + "[split]";
+            bookField.Value += book.YearPublished + "[split]";
+            bookField.Value += book.Language + "[split]";
+            foreach (string author in book.Authors)
+            {
+                bookField.Value += (author + ",");
+            }
+            
+            string script = "<script>$(document).ready(function(){$('#dialog-form').dialog('open');});</script>";
+            Page.ClientScript.RegisterStartupScript(this.GetType(), "openDialog", script);
+        }
+
+
     }
 }
