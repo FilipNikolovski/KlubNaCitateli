@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using MySql.Data.MySqlClient;
+using System.Configuration;
 
 namespace KlubNaCitateli.Classes
 {
+    [Serializable]
     public class Book
     {
+        public int IDBook { get; set; }
         public string ISBN { get; set; }
         public string Name { get; set; }
         public string ImageSrc { get; set; }
@@ -25,9 +28,10 @@ namespace KlubNaCitateli.Classes
 
         }
 
-        public Book(string id, string name, List<string> authors, string imagesrc, string desc, string date, string dateAdded, int sumRating, int numVotes)
+        public Book(int id, string isbn, string name, List<string> authors, string imagesrc, string desc, string date, string dateAdded, int sumRating, int numVotes)
         {
-            ISBN = id;
+            IDBook = id;
+            ISBN = isbn;
             Name = name;
             ImageSrc = imagesrc;
             Description = desc;
@@ -51,7 +55,7 @@ namespace KlubNaCitateli.Classes
 
             using (MySqlConnection connection = new MySqlConnection())
             {
-                connection.ConnectionString = @"Data source=localhost;Database=books;User=root;Password=''";
+                connection.ConnectionString = ConfigurationManager.ConnectionStrings["BooksConn"].ConnectionString;
                 connection.Open();
 
                 string query;
@@ -80,6 +84,7 @@ namespace KlubNaCitateli.Classes
                 while (dataReader.Read())
                 {
                     dictionary.Add("IDBook", dataReader["IDBook"].ToString());
+                    dictionary.Add("ISBN", dataReader["ISBN"].ToString());
                     dictionary.Add("Name", dataReader["Name"].ToString());
                     dictionary.Add("ImageSrc", dataReader["ImageSrc"].ToString());
                     dictionary.Add("Description", dataReader["Description"].ToString());
@@ -106,7 +111,7 @@ namespace KlubNaCitateli.Classes
                     dataReader.Close();
 
                     //Dodavanje na knigata vo listata
-                    Book b = new Book(books[i]["IDBook"], books[i]["Name"], authors, books[i]["ImageSrc"], books[i]["Description"], books[i]["YearPublished"], books[i]["DateAdded"], Int32.Parse(books[i]["SumRating"]), Int32.Parse(books[i]["NumVotes"]));
+                    Book b = new Book(Int32.Parse(books[i]["IDBook"]), books[i]["ISBN"], books[i]["Name"], authors, books[i]["ImageSrc"], books[i]["Description"], books[i]["YearPublished"], books[i]["DateAdded"], Int32.Parse(books[i]["SumRating"]), Int32.Parse(books[i]["NumVotes"]));
                     list.Add(b);
                 }
 
