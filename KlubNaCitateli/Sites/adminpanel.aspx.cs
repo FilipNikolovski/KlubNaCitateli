@@ -342,6 +342,7 @@ namespace KlubNaCitateli.Sites
             }
         }
 
+
         protected void gvBooks_SelectedIndexChanged(object sender, EventArgs e)
         {
             List<Book> bookList = (List<Book>)ViewState["BookList"];
@@ -363,6 +364,7 @@ namespace KlubNaCitateli.Sites
             string script = "<script>$(document).ready(function(){$('#dialog-form').dialog('open');});</script>";
             Page.ClientScript.RegisterStartupScript(this.GetType(), "openDialog", script);
         }
+
 
     }
 }

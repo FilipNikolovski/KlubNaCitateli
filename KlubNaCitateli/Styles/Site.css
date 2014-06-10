@@ -40,6 +40,7 @@
     margin-left:5px;
     display: inline;    
     color:Black;
+    width:auto;
 }
 
 #signLog
@@ -47,12 +48,10 @@
     list-style-type:none;
     margin-top:18px;
     float:right;
-    width:500px;
+    width:auto;
+    margin-right:10px;
 }
-.nameSurname
-{
-width:200px;
-}
+
 #login 
 {
     float:right;
@@ -60,6 +59,7 @@ width:200px;
     height:100%;
     display:inline;
     color:#1E90FF;
+    margin-top:-50px;
 }
 
 #footer 
@@ -75,4 +75,8 @@ fieldset
     border: 1px solid silver;
     padding: 8px;    
     border-radius: 4px;
+}
+.nameSurname
+{
+width:auto;
 }

@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="adminpanel.aspx.cs" Inherits="KlubNaCitateli.Sites.adminpanel" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    
+    <link href="../Styles/adminPanel.css" rel="stylesheet" type="text/css" />
     <script src="<%= Page.ResolveClientUrl("../Scripts/AdminPanel.js") %>" type="text/javascript">
     </script>
     <script type="text/javascript">
@@ -10,36 +10,40 @@
                 alert(result);
             }
 
+            $("#add").click(function () {
+                var tags = $("#<%=tbTags.ClientID %>").val();
+                var categories = "";
+                var bookField = $("#<%=bookField.ClientID %>").val();
+
+                $("#<%=cblCategories.ClientID %> input[type=checkbox]:checked").each(function () {
+                    var currentValue = $(this).parent().find('label').text();
+                    if (currentValue != '')
+                        categories += currentValue + ",";
+                });
+
+                if (categories == "" ) {
+                    alert("Морате да изберете категорија.");
+                }
+                else {
+                    var service = new KlubNaCitateli.BookService();
+                    service.DoWork(tags, categories, bookField, onSuccess);
+                    $("#<%=bookField.ClientID %>").val("");
+                }
+                $("#dialog-form").dialog("close");
+
+            });
+
+            $("#close").click(function () {
+                $("#<%=bookField.ClientID %>").val("");
+                $("#dialog-form").dialog("close");
+            });
+
             $("#dialog-form").dialog({
                 autoOpen: false,
-                height: 300,
-                width: 350,
-                modal: true,
-                buttons: {
-                    "Add": function () {
-
-                        var tags = $("#<%=tbTags.ClientID %>").val();
-                        var categories = "";
-                        var bookField = $("#<%=bookField.ClientID %>").val();
-
-                        $("#<%=cblCategories.ClientID %> input[type=checkbox]:checked").each(function () {
-                            var currentValue = $(this).parent().find('label').text();
-                            if (currentValue != '')
-                                categories += currentValue + ",";
-                        });
-
-                        if (categories == "") {
-                            alert("Морате да изберете категорија.");
-                        }
-                        else {
-                            var service = new KlubNaCitateli.BookService();
-                            service.DoWork(tags, categories, bookField, onSuccess);
-                        }
-                    },
-                    Cancel: function () {
-                        $(this).dialog("close");
-                    }
-                }
+                minHeight: "auto",
+                show: "slide",
+                width: 380,
+                modal: true
             });
         });
     </script>
@@ -54,18 +58,28 @@
     <asp:Label ID="lblError" runat="server" Text="lblError" Visible="False"></asp:Label>
     <asp:HiddenField ID="bookField" runat="server" />
     
-    <div id="dialog-form" title="Create new user">
+    <div id="dialog-form" >
+    <label id="title">Choose categories and tags</label>
       <form action="adminpanel.aspx">
-          <fieldset>
-            <label for="category">Category</label>
-             <asp:CheckBoxList ID="cblCategories" name="category" runat="server">
+          <fieldset id="fieldSet1" >
+          <legend>Categories</legend>
+            <label id="category" for="category">Choose category</label>
+             <asp:CheckBoxList ID="cblCategories" name="category" runat="server" CssClass="cblCategories">
              </asp:CheckBoxList>
-             <label for="tags">Tags</label>
-             <asp:TextBox ID="tbTags" name="tags" runat="server" placeholder="Tag1,Tag2,.."></asp:TextBox>
+             </fieldset>
+             <fieldset id="fieldSet2">
+             <legend>Tags</legend>
+             <label id="tags" for="tags">Write tags</label>
+             <asp:TextBox ID="tbTags" name="tags" runat="server" placeholder="Tag1,Tag2,.." CssClass="tbTags"></asp:TextBox>
+             <br /><label id="separateLabel">Separate the tags using comma.</label>
           </fieldset>
-      </form>
+          <br />
+          <div id="buttons">
+          <input type="button" id="add" value="Add" />
+          <input type="button" id="close" value="Cancel" />
+          </div>
+                </form>
     </div>
-
     <fieldset>
         <legend>Manage Categories</legend>
         <asp:TextBox ID="tbCategory" runat="server"></asp:TextBox>

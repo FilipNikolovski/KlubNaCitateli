@@ -17,12 +17,14 @@ namespace KlubNaCitateli
                 HyperLink2.Visible = false;
                 HyperLink1.Text = "Log out";
                 nameSurname.Text = Session["Name"].ToString() + " " + Session["Surname"].ToString();
+                
             }
             else
             {
                 HyperLink1.Text = "Log in";
                 HyperLink2.Visible = true;
                 nameSurname.Visible = false;
+                
 
             }
 

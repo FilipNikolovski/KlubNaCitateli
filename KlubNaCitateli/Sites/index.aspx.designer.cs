@@ -49,15 +49,6 @@ namespace KlubNaCitateli.Sites {
         protected global::System.Web.UI.WebControls.Panel Panel2;
         
         /// <summary>
-        /// mostWantedPanel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel mostWantedPanel;
-        
-        /// <summary>
         /// Label2 control.
         /// </summary>
         /// <remarks>
@@ -67,22 +58,13 @@ namespace KlubNaCitateli.Sites {
         protected global::System.Web.UI.WebControls.Label Label2;
         
         /// <summary>
-        /// mostWantedBookName control.
+        /// Label5 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label mostWantedBookName;
-        
-        /// <summary>
-        /// mostViewedPanel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel mostViewedPanel;
+        protected global::System.Web.UI.WebControls.Label Label5;
         
         /// <summary>
         /// Label3 control.
@@ -94,6 +76,42 @@ namespace KlubNaCitateli.Sites {
         protected global::System.Web.UI.WebControls.Label Label3;
         
         /// <summary>
+        /// Label4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label4;
+        
+        /// <summary>
+        /// mostWantedBookName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label mostWantedBookName;
+        
+        /// <summary>
+        /// mostWantedPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel mostWantedPanel;
+        
+        /// <summary>
+        /// Label6 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label6;
+        
+        /// <summary>
         /// mostViewedBookName control.
         /// </summary>
         /// <remarks>
@@ -103,22 +121,22 @@ namespace KlubNaCitateli.Sites {
         protected global::System.Web.UI.WebControls.Label mostViewedBookName;
         
         /// <summary>
-        /// bestThisMonthPanel control.
+        /// mostViewedPanel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel bestThisMonthPanel;
+        protected global::System.Web.UI.WebControls.Panel mostViewedPanel;
         
         /// <summary>
-        /// Label4 control.
+        /// Label7 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label4;
+        protected global::System.Web.UI.WebControls.Label Label7;
         
         /// <summary>
         /// bestThisMonthBookName control.
@@ -130,13 +148,13 @@ namespace KlubNaCitateli.Sites {
         protected global::System.Web.UI.WebControls.Label bestThisMonthBookName;
         
         /// <summary>
-        /// firstCategoryPanel control.
+        /// bestThisMonthPanel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel firstCategoryPanel;
+        protected global::System.Web.UI.WebControls.Panel bestThisMonthPanel;
         
         /// <summary>
         /// firstCategoryName control.
@@ -148,24 +166,6 @@ namespace KlubNaCitateli.Sites {
         protected global::System.Web.UI.WebControls.Label firstCategoryName;
         
         /// <summary>
-        /// firstCategoryBookName control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label firstCategoryBookName;
-        
-        /// <summary>
-        /// secondCategoryPanel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel secondCategoryPanel;
-        
-        /// <summary>
         /// secondCategoryName control.
         /// </summary>
         /// <remarks>
@@ -173,24 +173,6 @@ namespace KlubNaCitateli.Sites {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label secondCategoryName;
-        
-        /// <summary>
-        /// secondCategoryBookName control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label secondCategoryBookName;
-        
-        /// <summary>
-        /// thirdCategoryPanel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel thirdCategoryPanel;
         
         /// <summary>
         /// thirdCategoryName control.
@@ -202,6 +184,60 @@ namespace KlubNaCitateli.Sites {
         protected global::System.Web.UI.WebControls.Label thirdCategoryName;
         
         /// <summary>
+        /// firstCategoryBookName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label firstCategoryBookName;
+        
+        /// <summary>
+        /// firstCategoryPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel firstCategoryPanel;
+        
+        /// <summary>
+        /// Label8 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label8;
+        
+        /// <summary>
+        /// secondCategoryBookName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label secondCategoryBookName;
+        
+        /// <summary>
+        /// secondCategoryPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel secondCategoryPanel;
+        
+        /// <summary>
+        /// Label9 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label9;
+        
+        /// <summary>
         /// thirdCategoryBookName control.
         /// </summary>
         /// <remarks>
@@ -209,5 +245,14 @@ namespace KlubNaCitateli.Sites {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label thirdCategoryBookName;
+        
+        /// <summary>
+        /// thirdCategoryPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel thirdCategoryPanel;
     }
 }

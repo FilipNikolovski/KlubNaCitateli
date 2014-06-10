@@ -19,14 +19,14 @@
     padding-top:50px;
     font-family:Palatino Linotype;
 }
-#content ul
+#tabs > ul
 {
     list-style-type:none;
     width:218px;
     margin-left: 13px;
    
 }
-#content ul li
+#tabs > ul li
 {
     text-align:center;    
     display:inline;
@@ -129,6 +129,7 @@ Label
     
 }
 
+
 .btn
 {
     background-image:url("../Images/right-arrow.jpg");
@@ -151,16 +152,18 @@ Label
     height:50px;
     font-size:120%;
 }
-
+.demo
+{
+    border-radius:5px;
+   
+}
 
 .autoCompleteSearch
 {
-    width:400px;
-    height:70px;
-    border-radius:5px;
-    margin-left:150px;
+    width:402px !important;
+    height:auto;
+    margin-left:162px;
     margin-top:20px;
-    
 }
 .aboutTxt
 {
