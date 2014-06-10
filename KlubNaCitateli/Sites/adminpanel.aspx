@@ -11,9 +11,13 @@
             }
 
             $("#add").click(function () {
+
+                var bookField = $("#<%=bookField.ClientID %>").val();
+                var bookIdsField = $("#<%=bookIdsField.ClientID %>").val();
+
                 var tags = $("#<%=tbTags.ClientID %>").val();
                 var categories = "";
-                var bookField = $("#<%=bookField.ClientID %>").val();
+                var regex = "^[a-zA-Z]+(?:,[a-zA-Z]+)*$";
 
                 $("#<%=cblCategories.ClientID %> input[type=checkbox]:checked").each(function () {
                     var currentValue = $(this).parent().find('label').text();
@@ -21,16 +25,27 @@
                         categories += currentValue + ",";
                 });
 
-                if (categories == "" ) {
-                    alert("Морате да изберете категорија.");
+                if (categories == "") {
+                        alert("You must choose at least one category.");
+                    }
+                else if (tags.match(regex) == null) {
+                        alert("You must add tags.");
                 }
+
                 else {
                     var service = new KlubNaCitateli.BookService();
-                    service.DoWork(tags, categories, bookField, onSuccess);
-                    $("#<%=bookField.ClientID %>").val("");
-                }
-                $("#dialog-form").dialog("close");
 
+                    if (bookField != "") {
+                        service.DoWork(tags, categories, bookField, onSuccess);
+                        $("#<%=bookField.ClientID %>").val("");
+                        $("#dialog-form").dialog("close");
+                    }
+                    else if(bookIdsField != "") {
+                        service.AddAllBooks(tags, categories, bookIdsField, onSuccess);
+                        $("#<%=bookIdsField.ClientID %>").val("");
+                        $("#dialog-form").dialog("close");
+                    }
+                }
             });
 
             $("#close").click(function () {
@@ -47,6 +62,7 @@
             });
         });
     </script>
+
     <style>
         fieldset { padding:0; border:1; margin-top:25px; }
         input.text { margin-bottom:12px; width:95%; padding: .4em; }
@@ -57,7 +73,8 @@
     
     <asp:Label ID="lblError" runat="server" Text="lblError" Visible="False"></asp:Label>
     <asp:HiddenField ID="bookField" runat="server" />
-    
+    <asp:HiddenField ID="bookIdsField" runat="server" />
+
     <div id="dialog-form" >
     <label id="title">Choose categories and tags</label>
       <form action="adminpanel.aspx">
@@ -78,8 +95,9 @@
           <input type="button" id="add" value="Add" />
           <input type="button" id="close" value="Cancel" />
           </div>
-                </form>
+       </form>
     </div>
+
     <fieldset>
         <legend>Manage Categories</legend>
         <asp:TextBox ID="tbCategory" runat="server"></asp:TextBox>
@@ -121,7 +139,7 @@
         </fieldset>
 
         <fieldset>
-        <legend>Manage Books</legend>
+        <legend>Add Books from Google.books DB</legend>
         <asp:TextBox ID="tbSearchBooks" runat="server"></asp:TextBox>
         <asp:Button ID="btnSearch" runat="server" Text="Search" 
             onclick="btnSearch_Click" />
@@ -132,9 +150,13 @@
         <asp:ValidationSummary ID="vSummary2" runat="server" ValidationGroup="vGroup2" 
                 DisplayMode="List" ForeColor="Red" />
 
+        <asp:LinkButton ID="addAllBooks" runat="server" Visible="false" 
+                onclick="addAllBooks_Click">Add all Books</asp:LinkButton>
+
         <asp:GridView ID="gvBooks" runat="server" AutoGenerateColumns="False" 
             CellPadding="4" DataKeyNames="ISBN" ForeColor="#333333" GridLines="None" 
-                onselectedindexchanged="gvBooks_SelectedIndexChanged">
+                onselectedindexchanged="gvBooks_SelectedIndexChanged" AllowPaging="True" 
+                onpageindexchanging="gvBooks_PageIndexChanging" PageSize="5">
             <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
             <Columns>
                 <asp:BoundField DataField="ISBN" HeaderText="ISBN" />
@@ -159,6 +181,10 @@
         </asp:GridView>
     </fieldset>
 
+    <fieldset>
+        <legend>Manage Users</legend>
+
+    </fieldset>
     <asp:ScriptManager runat="server" ID="scriptManager">
         <Services>
             <asp:ServiceReference Path="../Services/BookService.svc" />

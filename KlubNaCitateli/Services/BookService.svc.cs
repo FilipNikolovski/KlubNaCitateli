@@ -36,9 +36,12 @@ namespace KlubNaCitateli.Services
                         return "Книгата не е успешно внесена!";
 
                     string[] authors = bookStrings[8].Split(new char[] { ',' });
-                    string query = "select idbook from books where name=?name";
+
+                    string query = "select idbook from books where name=?name AND isbn=?isbn";
                     MySqlCommand command = new MySqlCommand(query, connection);
                     command.Parameters.AddWithValue("?name", bookStrings[1]);
+                    command.Parameters.AddWithValue("?isbn", bookStrings[0]);
+
                     MySqlDataReader reader = command.ExecuteReader();
                     if (!reader.HasRows)
                     {
@@ -93,10 +96,11 @@ namespace KlubNaCitateli.Services
                     //-------------------------------------------------------------------------------------------------
 
                     //Vnesuvanje na ID na avtori i knigi vo WROTE tabelata---------------------------------------------
-                    query = "SELECT IDBook FROM books WHERE Name=?Name";
+                    query = "SELECT IDBook FROM books WHERE Name=?Name AND isbn=?isbn";
                     command.CommandText = query;
                     command.Parameters.Clear();
                     command.Parameters.AddWithValue("?Name", bookStrings[1]);
+                    command.Parameters.AddWithValue("?isbn", bookStrings[0]);
 
                     reader = command.ExecuteReader();
 
@@ -140,7 +144,6 @@ namespace KlubNaCitateli.Services
                         return "Категориите и таговите не се успешно внесени!";
 
                     //Vnesuvanje na ID na kategorii i knigi vo BELONGSTO tabelata--------------------------------------
-                    
                     foreach (string category in categoriesList)
                     {
                         if (category.Trim() != "")
@@ -163,11 +166,8 @@ namespace KlubNaCitateli.Services
                                 command.Parameters.AddWithValue("?IDCategory", idCategory);
                                 command.Parameters.AddWithValue("?IDBook", idBook);
                                 command.ExecuteNonQuery();
-
-
                             }
                         }
-                       
                     }
                     //-------------------------------------------------------------------------------------------------
 
@@ -225,11 +225,8 @@ namespace KlubNaCitateli.Services
                                 command.Parameters.AddWithValue("?IDTag", idTag);
                                 command.Parameters.AddWithValue("?IDBook", idBook);
                                 command.ExecuteNonQuery();
-
                             }
-                        }
-                       
-                        
+                        }       
                     }
                     //--------------------------------------------------------------------------------------------------
 
@@ -242,7 +239,127 @@ namespace KlubNaCitateli.Services
 
             return "Книгата е успешно додадена.";
         }
+        [OperationContract]
+        public string AddAllBooks(string tags, string categories, string bookIds)
+        {
+            using (MySqlConnection connection = new MySqlConnection())
+            {
+                connection.ConnectionString = ConfigurationManager.ConnectionStrings["BooksConn"].ConnectionString;
+                try
+                {
+                    connection.Open();
 
+                    string[] tagsList = tags.Split(new char[] { ',' });
+                    string[] categoriesList = categories.Split(new char[] { ',' });
+                    string[] bookIdsList = bookIds.Split(new char[] { ',' });
+
+                    string query = "";
+                    MySqlCommand command = new MySqlCommand();
+                    command.Connection = connection;
+
+                    //Vnesuvanje na TAGOVI vo tabela-------------------------------------------------------------------
+                    query = "INSERT INTO tags (Name) VALUES (?Name)";
+                    command.CommandText = query;
+                    foreach (string tag in tagsList)
+                    {
+                        if (tag.Trim() != "")
+                        {
+                            MySqlCommand cm = new MySqlCommand();
+                            cm.CommandText = "select IDTag from tags where name=?name";
+                            cm.Connection = connection;
+                            cm.Parameters.AddWithValue("?name", tag);
+                            MySqlDataReader rd = cm.ExecuteReader();
+                            if (!rd.HasRows)
+                            {
+                                rd.Close();
+                                command.Parameters.Clear();
+                                command.Parameters.AddWithValue("?Name", tag);
+                                command.ExecuteNonQuery();
+                            }
+                            else
+                                rd.Close();
+                        }
+                    }
+                    //-------------------------------------------------------------------------------------------------
+
+                    MySqlDataReader reader;
+                    foreach (string idBook in bookIdsList)
+                    {
+                        if (idBook.Trim() != "")
+                        {
+                            //Vnesuvanje na ID na tagovi i kniga vo TAGGED tabela----------------------------------------------
+                            foreach (string tag in tagsList)
+                            {
+                                if (tag.Trim() != "")
+                                {
+                                    query = "SELECT IDTag FROM tags WHERE Name=?TagName";
+                                    command.CommandText = query;
+                                    command.Parameters.Clear();
+                                    command.Parameters.AddWithValue("?TagName", tag);
+
+                                    reader = command.ExecuteReader();
+
+                                    if (reader.Read())
+                                    {
+                                        int idTag = Int32.Parse(reader["IDTag"].ToString());
+                                        reader.Close();
+                                        query = "INSERT INTO tagged (IDTag, IDBook) VALUES (?IDTag, ?IDBook)";
+                                        command.CommandText = query;
+                                        command.Parameters.Clear();
+                                        command.Parameters.AddWithValue("?IDTag", idTag);
+                                        command.Parameters.AddWithValue("?IDBook", Int32.Parse(idBook));
+                                        command.ExecuteNonQuery();
+                                    }
+                                    else
+                                        reader.Close();
+                                }
+                            }
+                            //--------------------------------------------------------------------------------------------------
+
+                            //Vnesuvanje na ID na kategorii i knigi vo BELONGSTO tabelata--------------------------------------
+                            foreach (string category in categoriesList)
+                            {
+                                if (category.Trim() != "")
+                                {
+                                    query = "SELECT IDCategory FROM categories WHERE Name=?CategoryName";
+                                    command.CommandText = query;
+                                    command.Parameters.Clear();
+                                    command.Parameters.AddWithValue("?CategoryName", category);
+
+                                    reader = command.ExecuteReader();
+                                    int idCategory = -1;
+
+                                    if (reader.Read())
+                                    {
+                                        idCategory = Int32.Parse(reader["IDCategory"].ToString());
+                                        reader.Close();
+                                        query = "INSERT INTO belongsto (IDCategory, IDBook) VALUES (?IDCategory, ?IDBook)";
+                                        command.CommandText = query;
+                                        command.Parameters.Clear();
+                                        command.Parameters.AddWithValue("?IDCategory", idCategory);
+                                        command.Parameters.AddWithValue("?IDBook", Int32.Parse(idBook));
+                                        command.ExecuteNonQuery();
+                                    }
+                                    else
+                                        reader.Close();
+                                }
+                            }
+                            //-------------------------------------------------------------------------------------------------
+                        }
+                    }
+                }
+                catch(Exception e)
+                {
+                    return "Таговите и категориите не се успешно внесени.\n Error: " + e.Message;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+
+            return "Книгите се успешно внесени.";
+        }
         
     }
 }

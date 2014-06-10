@@ -120,79 +120,78 @@ namespace KlubNaCitateli.Sites
                                 Dictionary<string, object> volumeInfo = jsonData["volumeInfo"] as Dictionary<string, object>;
 
                                 //Kreiranje i dodavanje na kniga vo lista----------------------------------------
-                                Book book = new Book();
-
-                                if (volumeInfo.ContainsKey("title"))
-                                    book.Name = volumeInfo["title"].ToString();
-                                else
-                                    book.Name = "No title available";
-
-                                if (volumeInfo.ContainsKey("description"))
-                                    book.Description = volumeInfo["description"].ToString();
-                                else
-                                    book.Description = "No description available.";
-
-                                if (volumeInfo.ContainsKey("publishedDate"))
-                                    book.YearPublished = volumeInfo["publishedDate"].ToString();
-                                else
-                                    book.YearPublished = "-";
-                                if (volumeInfo.ContainsKey("language"))
-                                    book.Language = volumeInfo["language"].ToString();
-                                else
-                                    book.Language = "No language";
-
-                                book.DateAdded = DateTime.Now.Year.ToString();
-                                book.SumRating = 0;
-                                book.NumVotes = 0;
-
-                                //Avtori
-                                if (volumeInfo.ContainsKey("authors"))
-                                {
-                                    ArrayList authors = volumeInfo["authors"] as ArrayList;
-                                    List<string> authorList = new List<string>();
-                                    for (int i = 0; i < authors.Count; i++)
-                                    {
-                                        authorList.Add(authors[i].ToString());
-                                    }
-                                    book.Authors = authorList;
-                                }
-                                else
-                                {
-                                    book.Authors = new List<string>();
-                                    book.Authors.Add("-");
-                                }
-
-
-                                //Link kon sliki
-                                Dictionary<string, object> imageLinks = volumeInfo["imageLinks"] as Dictionary<string, object>;
-                                if (imageLinks.ContainsKey("small"))
-                                    book.ImageSrc = imageLinks["small"].ToString();
-                                else if (imageLinks.ContainsKey("medium"))
-                                    book.ImageSrc = imageLinks["medium"].ToString();
-                                else if (imageLinks.ContainsKey("large"))
-                                    book.ImageSrc = imageLinks["large"].ToString();
-                                else
-                                    book.ImageSrc = "defaultImage.png";
-                                if (imageLinks.ContainsKey("thumbnail"))
-                                    book.ThumbnailSrc = imageLinks["thumbnail"].ToString();
-                                else if (imageLinks.ContainsKey("smallThumbnail"))
-                                    book.ThumbnailSrc = imageLinks["smallThumbnail"].ToString();
-                                else
-                                    book.ThumbnailSrc = "defaultThumb.png";
-
+                                
                                 //ISBN id na kniga
                                 if (volumeInfo.ContainsKey("industryIdentifiers"))
                                 {
+                                    Book book = new Book();
+
                                     ArrayList isbn = volumeInfo["industryIdentifiers"] as ArrayList;
                                     Dictionary<string, object> isbn10 = isbn[0] as Dictionary<string, object>;
                                     book.ISBN = isbn10["identifier"].ToString();
+
+                                    if (volumeInfo.ContainsKey("title"))
+                                        book.Name = volumeInfo["title"].ToString();
+                                    else
+                                        book.Name = "No title available";
+
+                                    if (volumeInfo.ContainsKey("description"))
+                                        book.Description = volumeInfo["description"].ToString();
+                                    else
+                                        book.Description = "No description available.";
+
+                                    if (volumeInfo.ContainsKey("publishedDate"))
+                                        book.YearPublished = volumeInfo["publishedDate"].ToString();
+                                    else
+                                        book.YearPublished = "-";
+                                    if (volumeInfo.ContainsKey("language"))
+                                        book.Language = volumeInfo["language"].ToString();
+                                    else
+                                        book.Language = "No language";
+
+                                    book.DateAdded = DateTime.Now.Year.ToString();
+                                    book.SumRating = 0;
+                                    book.NumVotes = 0;
+
+                                    //Avtori
+                                    if (volumeInfo.ContainsKey("authors"))
+                                    {
+                                        ArrayList authors = volumeInfo["authors"] as ArrayList;
+                                        List<string> authorList = new List<string>();
+                                        for (int i = 0; i < authors.Count; i++)
+                                        {
+                                            authorList.Add(authors[i].ToString());
+                                        }
+                                        book.Authors = authorList;
+                                    }
+                                    else
+                                    {
+                                        book.Authors = new List<string>();
+                                        book.Authors.Add("-");
+                                    }
+
+
+                                    //Link kon sliki
+                                    Dictionary<string, object> imageLinks = volumeInfo["imageLinks"] as Dictionary<string, object>;
+                                    if (imageLinks.ContainsKey("small"))
+                                        book.ImageSrc = imageLinks["small"].ToString();
+                                    else if (imageLinks.ContainsKey("medium"))
+                                        book.ImageSrc = imageLinks["medium"].ToString();
+                                    else if (imageLinks.ContainsKey("large"))
+                                        book.ImageSrc = imageLinks["large"].ToString();
+                                    else
+                                        book.ImageSrc = "defaultImage.png";
+                                    if (imageLinks.ContainsKey("thumbnail"))
+                                        book.ThumbnailSrc = imageLinks["thumbnail"].ToString();
+                                    else if (imageLinks.ContainsKey("smallThumbnail"))
+                                        book.ThumbnailSrc = imageLinks["smallThumbnail"].ToString();
+                                    else
+                                        book.ThumbnailSrc = "defaultThumb.png";
+
+                                    //-------------------------------------------------------------------------------
+                                    bookList.Add(book);
                                 }
-                                else
-                                    book.ISBN = "-";
 
-                                //-------------------------------------------------------------------------------
-
-                                bookList.Add(book);
                             }
                             catch (Exception ex)
                             {
@@ -207,6 +206,12 @@ namespace KlubNaCitateli.Sites
                             gvBooks.DataBind();
 
                             ViewState["BookList"] = bookList;
+
+                            addAllBooks.Visible = true;
+                            gvBooks.Visible = true;
+
+                            bookField.Value = "";
+                            bookIdsField.Value = "";
                         }
                         
                     }
@@ -342,9 +347,11 @@ namespace KlubNaCitateli.Sites
             }
         }
 
-
         protected void gvBooks_SelectedIndexChanged(object sender, EventArgs e)
         {
+            bookField.Value = "";
+            bookIdsField.Value = "";
+
             List<Book> bookList = (List<Book>)ViewState["BookList"];
             Book book = bookList[gvBooks.SelectedIndex];
 
@@ -365,6 +372,182 @@ namespace KlubNaCitateli.Sites
             Page.ClientScript.RegisterStartupScript(this.GetType(), "openDialog", script);
         }
 
+        protected void addAllBooks_Click(object sender, EventArgs e)
+        {
+            bookField.Value = "";
+            bookIdsField.Value = "";
+
+            using (MySqlConnection connection = new MySqlConnection())
+            {
+                connection.ConnectionString = ConfigurationManager.ConnectionStrings["BooksConn"].ConnectionString;
+
+                try
+                {
+                    connection.Open();
+
+                    List<Book> bookList = ViewState["BookList"] as List<Book>;
+
+                    if (bookList != null)
+                    {
+                        string query = "";
+                        MySqlCommand command = new MySqlCommand();
+                        MySqlDataReader reader;
+                        command.Connection = connection;
+
+                        foreach (Book book in bookList)
+                        {
+                            query = "select IDBook from books where Name=?Name AND ISBN=?ISBN";
+                            command.CommandText = query;
+                            command.Parameters.Clear();
+                            command.Parameters.AddWithValue("?Name", book.Name);
+                            command.Parameters.AddWithValue("?ISBN", book.ISBN);
+
+                            reader = command.ExecuteReader();
+
+                            if (!reader.HasRows) //Dali knigata vekje postoi
+                            {
+                                reader.Close();
+                                //Vnesuvanje na KNIGA vo baza---------------------------------------------------------------
+                                query = "INSERT INTO books (Name, Description, CoverLink, Thumbnail, YearPublished, Language, SumRating, NumVotes, DateAdded, ISBN) VALUES (?Name, ?Description, ?CoverLink, ?Thumbnail, ?YearPublished, ?Language, ?SumRating, ?NumVotes, ?DateAdded, ?ISBN)";
+                                command.CommandText = query;
+                                command.Parameters.Clear();
+                                command.Parameters.AddWithValue("?ISBN", book.ISBN);
+                                command.Parameters.AddWithValue("?Name", book.Name);
+                                command.Parameters.AddWithValue("?Description", book.Description);
+                                command.Parameters.AddWithValue("?CoverLink", book.ImageSrc);
+                                command.Parameters.AddWithValue("?Thumbnail", book.ThumbnailSrc);
+                                command.Parameters.AddWithValue("?DateAdded", book.DateAdded);
+                                command.Parameters.AddWithValue("?YearPublished", book.YearPublished);
+                                command.Parameters.AddWithValue("?Language", book.Language);
+                                command.Parameters.AddWithValue("?SumRating", 0);
+                                command.Parameters.AddWithValue("?NumVotes", 0);
+
+                                command.ExecuteNonQuery();
+                                //-----------------------------------------------------------------------------------------
+
+                                //Vnesuvanje na AVTORI vo baza-------------------------------------------------------------
+                                query = "INSERT INTO authors (Name) VALUES (?Name)";
+                                command.CommandText = query;
+                                foreach (string author in book.Authors)
+                                {
+                                    if (author.Trim() != "")
+                                    {
+                                        MySqlCommand cm = new MySqlCommand();
+                                        cm.CommandText = "select IDAuthor from authors where name=?name";
+                                        cm.Connection = connection;
+                                        cm.Parameters.AddWithValue("?name", author);
+                                        MySqlDataReader rd = cm.ExecuteReader();
+                                        if (!rd.HasRows)
+                                        {
+                                            rd.Close();
+                                            command.Parameters.Clear();
+                                            command.Parameters.AddWithValue("?Name", author);
+                                            command.ExecuteNonQuery();
+                                        }
+                                        else
+                                        {
+                                            rd.Close();
+                                        }
+                                    }
+                                }
+                                //-----------------------------------------------------------------------------------------
+
+                                //Vnesuvanje na ID na avtori i knigi vo WROTE tabelata---------------------------------------------
+                                query = "SELECT IDBook FROM books WHERE Name=?Name AND ISBN=?ISBN";
+                                command.CommandText = query;
+                                command.Parameters.Clear();
+                                command.Parameters.AddWithValue("?Name", book.Name);
+                                command.Parameters.AddWithValue("?ISBN", book.ISBN);
+
+                                reader = command.ExecuteReader();
+
+                                if (reader.Read())
+                                {
+                                    int idBook = Int32.Parse(reader["IDBook"].ToString());
+                                    reader.Close();
+
+                                    foreach (string author in book.Authors)
+                                    {
+                                        if (author.Trim() != "")
+                                        {
+                                            query = "SELECT IDAuthor FROM authors WHERE Name=?Name";
+                                            command.CommandText = query;
+                                            command.Parameters.Clear();
+                                            command.Parameters.AddWithValue("?Name", author);
+
+                                            reader = command.ExecuteReader();
+                                            
+                                            if (reader.Read())
+                                            {
+                                                int idAuthor = Int32.Parse(reader["IDAuthor"].ToString());
+                                                reader.Close();
+                                                query = "INSERT INTO wrote (IDAuthor, IDBook) VALUES (?IDAuthor, ?IDBook)";
+                                                command.CommandText = query;
+                                                command.Parameters.Clear();
+                                                command.Parameters.AddWithValue("?IDAuthor", idAuthor);
+                                                command.Parameters.AddWithValue("?IDBook", idBook);
+                                                command.ExecuteNonQuery();
+                                            }
+                                            else
+                                                reader.Close();
+                                        }
+                                    }
+                                }
+                                //-------------------------------------------------------------------------------------------------
+
+                                query = "SELECT IDBook FROM books WHERE Name=?Name AND ISBN=?ISBN";
+                                command.CommandText = query;
+                                command.Parameters.Clear();
+                                command.Parameters.AddWithValue("?Name", book.Name);
+                                command.Parameters.AddWithValue("?ISBN", book.ISBN);
+
+                                reader = command.ExecuteReader();
+                                if (reader.HasRows)
+                                {
+                                    reader.Read();
+                                    bookIdsField.Value += (reader["IDBook"].ToString() + ",");
+                                }
+                                reader.Close();
+                            }
+                            else
+                                reader.Close();
+                            
+                        }
+                    }
+                    
+                }
+                catch (Exception ex)
+                {
+                    lblError.Text = ex.Message;
+                    lblError.Visible = true;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+
+            addAllBooks.Visible = false;
+            gvBooks.Visible = false;
+            ViewState["BookList"] = null;
+
+            if (bookIdsField.Value != "")
+            {
+                string script = "<script>$(document).ready(function(){$('#dialog-form').dialog('open');});</script>";
+                Page.ClientScript.RegisterStartupScript(this.GetType(), "openDialog", script);
+            }
+            else
+                ClientScript.RegisterStartupScript(this.GetType(), "Alert", "alert('No books were added to the database.');", true);
+        }
+
+        protected void gvBooks_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            gvBooks.PageIndex = e.NewPageIndex;
+            
+            List<Book> bookList = ViewState["BookList"] as List<Book>;
+            gvBooks.DataSource = bookList;
+            gvBooks.DataBind();
+        }
 
     }
 }

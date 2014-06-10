@@ -31,6 +31,15 @@ namespace KlubNaCitateli.Sites {
         protected global::System.Web.UI.WebControls.HiddenField bookField;
         
         /// <summary>
+        /// bookIdsField control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField bookIdsField;
+        
+        /// <summary>
         /// cblCategories control.
         /// </summary>
         /// <remarks>
@@ -137,6 +146,15 @@ namespace KlubNaCitateli.Sites {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ValidationSummary vSummary2;
+        
+        /// <summary>
+        /// addAllBooks control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton addAllBooks;
         
         /// <summary>
         /// gvBooks control.
