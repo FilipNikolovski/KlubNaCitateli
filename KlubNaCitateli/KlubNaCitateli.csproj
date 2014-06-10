@@ -77,6 +77,7 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-ui-1.10.4.custom.js" />
     <Content Include="Scripts\jquery-ui-1.10.4.custom.min.js" />
+    <Content Include="Scripts\jquery.tokeninput.js" />
     <Content Include="Scripts\Search.js" />
     <Content Include="Scripts\tabs-script.js" />
     <Content Include="Services\BookService.svc" />
@@ -89,11 +90,14 @@
     <Content Include="Sites\profile.aspx" />
     <Content Include="Sites\search.aspx" />
     <Content Include="Sites\signup.aspx" />
+    <Content Include="Styles\adminPanel.css" />
     <Content Include="Styles\index.css" />
     <Content Include="Styles\Search.css" />
     <Content Include="Styles\Site.css" />
     <Content Include="Styles\signup.css" />
     <Content Include="Styles\login.css" />
+    <Content Include="Styles\token-input-facebook.css" />
+    <Content Include="Styles\token-input.css" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -213,7 +217,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>3652</DevelopmentServerPort>
+          <DevelopmentServerPort>52688</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

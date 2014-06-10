@@ -56,6 +56,28 @@ namespace KlubNaCitateli.Sites
                     }
 
                     read1.Close();
+
+                    command2.CommandText = "SELECT type from users where username=@username OR Email=@email";
+                    read1 = command2.ExecuteReader();
+                    if (read1.Read())
+                    {
+                        Session["Type"] = read1.GetValue(0).ToString();
+                    }
+                    read1.Close();
+
+
+                    Session["UsernameOrEmail"] = username.ToString();
+                    command2.CommandText = "SELECT iduser from users where username=@username OR Email=@email";
+                    read1 = command2.ExecuteReader();
+                    if (read1.Read())
+                    {
+                        Session["id"] = read1.GetValue(0).ToString();
+                    }
+                    read1.Close();
+
+
+
+
                     Response.Redirect("index.aspx");
                 }
                 else

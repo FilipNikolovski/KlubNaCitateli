@@ -36,23 +36,33 @@ namespace KlubNaCitateli.Services
                         return "Книгата не е успешно внесена!";
 
                     string[] authors = bookStrings[8].Split(new char[] { ',' });
-
-                    //Vnesuvanje na KNIGA vo baza---------------------------------------------------------------
-                    string query = "INSERT INTO books (Name, Description, CoverLink, Thumbnail, YearPublished, Language, SumRating, NumVotes, DateAdded, ISBN) VALUES (?Name, ?Description, ?CoverLink, ?Thumbnail, ?YearPublished, ?Language, ?SumRating, ?NumVotes, ?DateAdded, ?ISBN)";
-
+                    string query = "select idbook from books where name=?name";
                     MySqlCommand command = new MySqlCommand(query, connection);
-                    command.Parameters.AddWithValue("?ISBN", bookStrings[0]);
-                    command.Parameters.AddWithValue("?Name", bookStrings[1]);
-                    command.Parameters.AddWithValue("?Description", bookStrings[2]);
-                    command.Parameters.AddWithValue("?CoverLink", bookStrings[3]);
-                    command.Parameters.AddWithValue("?Thumbnail", bookStrings[4]);
-                    command.Parameters.AddWithValue("?DateAdded", bookStrings[5]);
-                    command.Parameters.AddWithValue("?YearPublished", bookStrings[6]);
-                    command.Parameters.AddWithValue("?Language", bookStrings[7]);
-                    command.Parameters.AddWithValue("?SumRating", 0);
-                    command.Parameters.AddWithValue("?NumVotes", 0);
+                    command.Parameters.AddWithValue("?name", bookStrings[1]);
+                    MySqlDataReader reader = command.ExecuteReader();
+                    if (!reader.HasRows)
+                    {
+                        reader.Close();
+                        //Vnesuvanje na KNIGA vo baza---------------------------------------------------------------
+                        query = "INSERT INTO books (Name, Description, CoverLink, Thumbnail, YearPublished, Language, SumRating, NumVotes, DateAdded, ISBN) VALUES (?Name, ?Description, ?CoverLink, ?Thumbnail, ?YearPublished, ?Language, ?SumRating, ?NumVotes, ?DateAdded, ?ISBN)";
+                        command.CommandText = query;
+                        command.Parameters.Clear();
+                        command.Parameters.AddWithValue("?ISBN", bookStrings[0]);
+                        command.Parameters.AddWithValue("?Name", bookStrings[1]);
+                        command.Parameters.AddWithValue("?Description", bookStrings[2]);
+                        command.Parameters.AddWithValue("?CoverLink", bookStrings[3]);
+                        command.Parameters.AddWithValue("?Thumbnail", bookStrings[4]);
+                        command.Parameters.AddWithValue("?DateAdded", bookStrings[5]);
+                        command.Parameters.AddWithValue("?YearPublished", bookStrings[6]);
+                        command.Parameters.AddWithValue("?Language", bookStrings[7]);
+                        command.Parameters.AddWithValue("?SumRating", 0);
+                        command.Parameters.AddWithValue("?NumVotes", 0);
 
-                    command.ExecuteNonQuery();
+                        command.ExecuteNonQuery();
+                    }
+                    else
+                        return "Книгата веќе постои!";
+                    
                     //-------------------------------------------------------------------------------------------------
 
                     //Vnesuvanje na AVTORI vo baza---------------------------------------------------------------------
@@ -62,9 +72,22 @@ namespace KlubNaCitateli.Services
                     {
                         if (author.Trim() != "")
                         {
-                            command.Parameters.Clear();
-                            command.Parameters.AddWithValue("?Name", author);
-                            command.ExecuteNonQuery();
+                            MySqlCommand cm = new MySqlCommand();
+                            cm.CommandText = "select IDAuthor from authors where name=?name";
+                            cm.Connection = connection;
+                            cm.Parameters.AddWithValue("?name", author);
+                            MySqlDataReader rd=cm.ExecuteReader();
+                            if (!rd.HasRows)
+                            {
+                                rd.Close();
+                                command.Parameters.Clear();
+                                command.Parameters.AddWithValue("?Name", author);
+                                command.ExecuteNonQuery();
+                            }
+                            else
+                            {
+                                rd.Close();
+                            }
                         }
                     }
                     //-------------------------------------------------------------------------------------------------
@@ -75,37 +98,42 @@ namespace KlubNaCitateli.Services
                     command.Parameters.Clear();
                     command.Parameters.AddWithValue("?Name", bookStrings[1]);
 
-                    MySqlDataReader reader = command.ExecuteReader();
+                    reader = command.ExecuteReader();
 
                     int idBook = -1;
                     if (reader.Read())
                     {
                         idBook = Int32.Parse(reader["IDBook"].ToString());
 
+                        reader.Close();
                         foreach (string author in authors)
                         {
-                            query = "SELECT IDAuthor FROM authors WHERE Name=?Name";
-                            command.CommandText = query;
-                            command.Parameters.Clear();
-                            command.Parameters.AddWithValue("?Name", author);
-
-                            reader = command.ExecuteReader();
-                            if (reader.Read())
+                            if (author.Trim() != "")
                             {
-                                int idAuthor = Int32.Parse(reader["IDAuthor"].ToString());
-
-                                query = "INSERT INTO wrote (IDAuthor, IDBook) VALUES (?IDAuthor, ?IDBook)";
+                                query = "SELECT IDAuthor FROM authors WHERE Name=?Name";
                                 command.CommandText = query;
                                 command.Parameters.Clear();
-                                command.Parameters.AddWithValue("?IDAuthor", idAuthor);
-                                command.Parameters.AddWithValue("?IDBook", idBook);
+                                command.Parameters.AddWithValue("?Name", author);
 
-                                command.ExecuteNonQuery();
+                                reader = command.ExecuteReader();
+                                int idAuthor = -1;
+
+                                if (reader.Read())
+                                {
+                                    idAuthor = Int32.Parse(reader["IDAuthor"].ToString());
+                                    reader.Close();
+                                    query = "INSERT INTO wrote (IDAuthor, IDBook) VALUES (?IDAuthor, ?IDBook)";
+                                    command.CommandText = query;
+                                    command.Parameters.Clear();
+                                    command.Parameters.AddWithValue("?IDAuthor", idAuthor);
+                                    command.Parameters.AddWithValue("?IDBook", idBook);
+                                    command.ExecuteNonQuery();
+                                }
+
+
                             }
-                            reader.Close();
                         }
                     }
-                    reader.Close();
                     //-------------------------------------------------------------------------------------------------
 
                     if (categoriesList.Length == 0)
@@ -115,24 +143,31 @@ namespace KlubNaCitateli.Services
                     
                     foreach (string category in categoriesList)
                     {
-                        query = "SELECT IDCategory FROM categories WHERE Name=?CategoryName";
-                        command.CommandText = query;
-                        command.Parameters.Clear();
-                        command.Parameters.AddWithValue("?CategoryName", category);
-
-                        reader = command.ExecuteReader();
-                        if (reader.Read())
+                        if (category.Trim() != "")
                         {
-                            int idCategory = Int32.Parse(reader["IDCategory"].ToString());
-
-                            query = "INSERT INTO belongsto (IDCategory, IDBook) VALUES (?IDCategory, ?IDBook)";
+                            query = "SELECT IDCategory FROM categories WHERE Name=?CategoryName";
                             command.CommandText = query;
                             command.Parameters.Clear();
-                            command.Parameters.AddWithValue("?IDCategory", idCategory);
-                            command.Parameters.AddWithValue("?IDBook", idBook);
-                            command.ExecuteNonQuery();
+                            command.Parameters.AddWithValue("?CategoryName", category);
+
+                            reader = command.ExecuteReader();
+                            int idCategory = -1;
+
+                            if (reader.Read())
+                            {
+                                idCategory = Int32.Parse(reader["IDCategory"].ToString());
+                                reader.Close();
+                                query = "INSERT INTO belongsto (IDCategory, IDBook) VALUES (?IDCategory, ?IDBook)";
+                                command.CommandText = query;
+                                command.Parameters.Clear();
+                                command.Parameters.AddWithValue("?IDCategory", idCategory);
+                                command.Parameters.AddWithValue("?IDBook", idBook);
+                                command.ExecuteNonQuery();
+
+
+                            }
                         }
-                        reader.Close();
+                       
                     }
                     //-------------------------------------------------------------------------------------------------
 
@@ -146,9 +181,23 @@ namespace KlubNaCitateli.Services
                     {
                         if (tag.Trim() != "")
                         {
-                            command.Parameters.Clear();
-                            command.Parameters.AddWithValue("?Name", tag);
-                            command.ExecuteNonQuery();
+                            MySqlCommand cm = new MySqlCommand();
+                            cm.CommandText = "select IDTag from tags where name=?name";
+                            cm.Connection = connection;
+                            cm.Parameters.AddWithValue("?name", tag);
+                            MySqlDataReader rd = cm.ExecuteReader();
+                            if (!rd.HasRows)
+                            {
+                                rd.Close();
+                                command.Parameters.Clear();
+                                command.Parameters.AddWithValue("?Name", tag);
+                                command.ExecuteNonQuery();
+                            }
+                            else
+                            {
+                                rd.Close();
+                            }
+                           
                         }
                     }
                     //-------------------------------------------------------------------------------------------------
@@ -156,24 +205,31 @@ namespace KlubNaCitateli.Services
                     //Vnesuvanje na ID na tagovi i kniga vo TAGGED tabela----------------------------------------------
                     foreach (string tag in tagsList)
                     {
-                        query = "SELECT IDTag FROM tags WHERE Name=?TagName";
-                        command.CommandText = query;
-                        command.Parameters.Clear();
-                        command.Parameters.AddWithValue("?TagName", tag);
-
-                        reader = command.ExecuteReader();
-                        if (reader.Read())
+                        if (tag.Trim() != "")
                         {
-                            int idTag = Int32.Parse(reader["IDTag"].ToString());
-                            
-                            query = "INSERT INTO tagged (IDTag, IDBook) VALUES (?IDTag, ?IDBook)";
+                            query = "SELECT IDTag FROM tags WHERE Name=?TagName";
                             command.CommandText = query;
                             command.Parameters.Clear();
-                            command.Parameters.AddWithValue("?IDTag", idTag);
-                            command.Parameters.AddWithValue("?IDBook", idBook);
-                            command.ExecuteNonQuery();
+                            command.Parameters.AddWithValue("?TagName", tag);
+
+                            reader = command.ExecuteReader();
+                            int idTag = -1;
+
+                            if (reader.Read())
+                            {
+                                idTag = Int32.Parse(reader["IDTag"].ToString());
+                                reader.Close();
+                                query = "INSERT INTO tagged (IDTag, IDBook) VALUES (?IDTag, ?IDBook)";
+                                command.CommandText = query;
+                                command.Parameters.Clear();
+                                command.Parameters.AddWithValue("?IDTag", idTag);
+                                command.Parameters.AddWithValue("?IDBook", idBook);
+                                command.ExecuteNonQuery();
+
+                            }
                         }
-                        reader.Close();
+                       
+                        
                     }
                     //--------------------------------------------------------------------------------------------------
 
