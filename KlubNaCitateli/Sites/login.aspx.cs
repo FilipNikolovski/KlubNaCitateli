@@ -75,6 +75,14 @@ namespace KlubNaCitateli.Sites
                     }
                     read1.Close();
 
+                    command2.CommandText = "SELECT banned from users where username=@username OR Email=@email";
+                    read1 = command2.ExecuteReader();
+                    if (read1.Read())
+                    {
+                        Session["banned"] = read1.GetValue(0).ToString();
+                    }
+                    read1.Close();
+
 
 
 

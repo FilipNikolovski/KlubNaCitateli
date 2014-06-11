@@ -53,6 +53,88 @@ namespace KlubNaCitateli.Sites
             }
         }
 
+        public void addUser()
+        {
+            user = new User(name.Text, surname.Text, email.Text, username.Text, password.Text, TextBox2.Text);
+            bool checkUsername = true;
+            bool checkEmail = true;
+            user.CheckIfUserExists(checkEmail, checkUsername);
+
+            if (!checkEmail && !checkUsername)
+            {
+                finishLabel.Text = "Email and username are already in use.";
+            }
+            else if (!checkEmail)
+            {
+                finishLabel.Text = "Email is already in use.";
+            }
+            else if (!checkUsername)
+            {
+                finishLabel.Text = "Username is already in use.";
+            }
+            else
+            {
+
+                MySqlConnection conn = new MySqlConnection();
+                conn.ConnectionString = ConfigurationManager.ConnectionStrings["BooksConn"].ConnectionString.ToString();
+
+                try
+                {
+                    conn.Open();
+                    MySqlCommand comm = new MySqlCommand();
+                    comm.CommandText = "INSERT into users (name, banned, surname, email, username, password, type, numComments) VALUES(@name, @banned, @surname, @email, @username, @password, @type, @numComments)";
+                    comm.Connection = conn;
+                    comm.Parameters.AddWithValue("@name", user.name);
+                    comm.Parameters.AddWithValue("@surname", user.surname);
+                    comm.Parameters.AddWithValue("@email", user.email);
+                    comm.Parameters.AddWithValue("@username", user.username);
+                    comm.Parameters.AddWithValue("@password", user.password);
+                    comm.Parameters.AddWithValue("@type", "user");
+                    comm.Parameters.AddWithValue("@numComments", 0);
+                    comm.Parameters.AddWithValue("@banned", 0);
+
+                    comm.ExecuteNonQuery();
+                    string iduser = "";
+                    comm.CommandText = "select iduser from users where username=@username";
+                    MySqlDataReader reader = comm.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        iduser = reader.GetValue(0).ToString();
+
+                    }
+                    reader.Close();
+
+
+
+                    string categories = demo.Text;
+                    string[] cat = categories.Split(new char[] { ',' });
+
+                    comm.CommandText = "Insert into usercategories (IDUser, IDCategory) values (@IDUser, @IDCategory)";
+                    foreach (string category in cat)
+                    {
+                        if (category.Trim() != "")
+                        {
+                            comm.Parameters.Clear();
+                            comm.Parameters.AddWithValue("@IDUser", iduser);
+                            comm.Parameters.AddWithValue("@IDCategory", category);
+                            comm.ExecuteNonQuery();
+
+                        }
+                    }
+
+                }
+                catch (Exception err)
+                {
+                    Console.WriteLine(err.Message);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+
+            }
+            Response.Redirect("login.aspx");
+        }
 
         public void finishButton_click(object sender, EventArgs e)
         {
@@ -88,92 +170,17 @@ namespace KlubNaCitateli.Sites
                     originalBMP.Dispose();
                     newBMP.Dispose();
                     oGraphics.Dispose();
-
-
-                    user = new User(name.Text, surname.Text, email.Text, username.Text, password.Text, TextBox2.Text);
-                    bool checkUsername = true;
-                    bool checkEmail = true;
-                    user.CheckIfUserExists(checkEmail, checkUsername);
-
-                    if (!checkEmail && !checkUsername)
-                    {
-                        finishLabel.Text = "Email and username are already in use.";
-                    }
-                    else if (!checkEmail)
-                    {
-                        finishLabel.Text = "Email is already in use.";
-                    }
-                    else if (!checkUsername)
-                    {
-                        finishLabel.Text = "Username is already in use.";
-                    }
-                    else
-                    {
-
-                        MySqlConnection conn = new MySqlConnection();
-                        conn.ConnectionString = ConfigurationManager.ConnectionStrings["BooksConn"].ConnectionString.ToString();
-
-                        try
-                        {
-                            conn.Open();
-                            MySqlCommand comm = new MySqlCommand();
-                            comm.CommandText = "INSERT into users (name, surname, email, username, password, type, numComments) VALUES(@name, @surname, @email, @username, @password, @type, @numComments)";
-                            comm.Connection = conn;
-                            comm.Parameters.AddWithValue("@name", user.name);
-                            comm.Parameters.AddWithValue("@surname", user.surname);
-                            comm.Parameters.AddWithValue("@email", user.email);
-                            comm.Parameters.AddWithValue("@username", user.username);
-                            comm.Parameters.AddWithValue("@password", user.password);
-                            comm.Parameters.AddWithValue("@type", "user");
-                            comm.Parameters.AddWithValue("@numComments", 0);
-
-                            comm.ExecuteNonQuery();
-                            string iduser = "";
-                            comm.CommandText = "select iduser from users where username=@username";
-                            MySqlDataReader reader = comm.ExecuteReader();
-                            if (reader.Read())
-                            {
-                                iduser = reader.GetValue(0).ToString();
-
-                            }
-                            reader.Close();
-
-
-
-                            string categories = demo.Text;
-                            string[] cat = categories.Split(new char[] { ',' });
-
-                            comm.CommandText = "Insert into usercategories (IDUser, IDCategory) values (@IDUser, @IDCategory)";
-                            foreach (string category in cat)
-                            {
-                                if (category.Trim() != "")
-                                {
-                                    comm.Parameters.Clear();
-                                    comm.Parameters.AddWithValue("@IDUser", iduser);
-                                    comm.Parameters.AddWithValue("@IDCategory", category);
-                                    comm.ExecuteNonQuery();
-
-                                }
-                            }
-
-                        }
-                        catch (Exception err)
-                        {
-                            Console.WriteLine(err.Message);
-                        }
-                        finally
-                        {
-                            conn.Close();
-                        }
-
-                    }
-                    Response.Redirect("login.aspx");
+                    addUser();
                 }
                 else
                 {
                     string script = "<script>alert('The image file is not valid. Valid extensions are .jpg and .png! Try again.');</script>";
                     Page.ClientScript.RegisterStartupScript(this.GetType(), "openDialog", script);
                 }
+            }
+            else
+            {
+                addUser();
             }
 
             
