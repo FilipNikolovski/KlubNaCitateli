@@ -30,8 +30,8 @@ namespace KlubNaCitateli.Sites
             reader.Close();
 
             MySqlCommand command1 = new MySqlCommand();
-            command1.CommandText = "Select name from Books where idbook=@idbook";
-            command1.Parameters.AddWithValue("@idbook", mostWanted);
+            command1.CommandText = "Select name from Books where idbook=?idbook";
+            command1.Parameters.AddWithValue("?idbook", mostWanted);
             command1.Connection = connection;
             MySqlDataReader reader1 = command1.ExecuteReader();
             if (reader1.Read())
@@ -39,9 +39,9 @@ namespace KlubNaCitateli.Sites
                 mostWantedBookName.Text = reader1.GetValue(0).ToString();
             }
             reader1.Close();
-            command1.CommandText = "select thumbnail from books where idbook=@idbook";
+            command1.CommandText = "select thumbnail from books where idbook=?idbook";
             command1.Parameters.Clear();
-            command1.Parameters.AddWithValue("@idbook", mostWanted);
+            command1.Parameters.AddWithValue("?idbook", mostWanted);
             reader1 = command1.ExecuteReader();
             if (reader1.Read())
             {
@@ -61,8 +61,8 @@ namespace KlubNaCitateli.Sites
             reader2.Close();
 
             MySqlCommand command3 = new MySqlCommand();
-            command3.CommandText = "Select name from Books where idbook=@idbook";
-            command3.Parameters.AddWithValue("@idbook", mostViewed);
+            command3.CommandText = "Select name from Books where idbook=?idbook";
+            command3.Parameters.AddWithValue("?idbook", mostViewed);
             command3.Connection = connection;
             MySqlDataReader reader3 = command3.ExecuteReader();
             if (reader3.Read())
@@ -70,9 +70,9 @@ namespace KlubNaCitateli.Sites
                 mostViewedBookName.Text = reader3.GetValue(0).ToString();
             }
             reader3.Close();
-            command3.CommandText = "select thumbnail from books where idbook=@idbook";
+            command3.CommandText = "select thumbnail from books where idbook=?idbook";
             command3.Parameters.Clear();
-            command3.Parameters.AddWithValue("@idbook", mostViewed);
+            command3.Parameters.AddWithValue("?idbook", mostViewed);
             reader3 = command3.ExecuteReader();
             if (reader3.Read())
             {
@@ -93,8 +93,8 @@ namespace KlubNaCitateli.Sites
             reader4.Close();
 
             MySqlCommand command5 = new MySqlCommand();
-            command5.CommandText = "Select name from Books where idbook=@idbook";
-            command5.Parameters.AddWithValue("@idbook", bestThisMonth);
+            command5.CommandText = "Select name from Books where idbook=?idbook";
+            command5.Parameters.AddWithValue("?idbook", bestThisMonth);
             command5.Connection = connection;
             MySqlDataReader reader5 = command5.ExecuteReader();
             if (reader5.Read())
@@ -102,7 +102,7 @@ namespace KlubNaCitateli.Sites
                 bestThisMonthBookName.Text = reader5.GetValue(0).ToString();
             }
             reader5.Close();
-            command5.CommandText = "Select thumbnail from books where idbook=@idbook";
+            command5.CommandText = "Select thumbnail from books where idbook=?idbook";
             reader5 = command5.ExecuteReader();
             if (reader5.Read())
             {
@@ -113,10 +113,15 @@ namespace KlubNaCitateli.Sites
 
             if (Session["Name"] != null)
             {
+                /*select categories.name from categories
+where idcategory in (select belongsto.idcategory from belongsto, usercategories, users 
+where belongsto.idcategory=usercategories.idcategory 
+	and usercategories.iduser=users.iduser 
+	and users.iduser=56 order by rand()) limit 3*/
 
                 MySqlCommand command7 = new MySqlCommand();
-                command7.CommandText = "select books.name from books, belongsto, usercategories, users where books.idbook=belongsto.idbook and belongsto.idcategory=usercategories.idcategory and usercategories.iduser=users.iduser and users.iduser=@iduser limit 1";
-                command7.Parameters.AddWithValue("@iduser", Session["id"]);
+                command7.CommandText = "select books.name from books, belongsto, usercategories, users where books.idbook=belongsto.idbook and belongsto.idcategory=usercategories.idcategory and usercategories.iduser=users.iduser and users.iduser=?iduser limit 1";
+                command7.Parameters.AddWithValue("?iduser", Session["id"]);
                 command7.Connection = connection;
                 MySqlDataReader reader7 = command7.ExecuteReader();
                 if (reader7.Read())
@@ -124,7 +129,7 @@ namespace KlubNaCitateli.Sites
                     firstCategoryBookName.Text = reader7.GetValue(0).ToString();
                 }
                 reader7.Close();
-                command7.CommandText = "select books.thumbnail from books, belongsto, usercategories, users where books.idbook=belongsto.idbook and belongsto.idcategory=usercategories.idcategory and usercategories.iduser=users.iduser and users.iduser=@iduser limit 1";
+                command7.CommandText = "select books.thumbnail from books, belongsto, usercategories, users where books.idbook=belongsto.idbook and belongsto.idcategory=usercategories.idcategory and usercategories.iduser=users.iduser and users.iduser=?iduser limit 1";
                 command7.Connection = connection;
                 reader7 = command7.ExecuteReader();
                 if (reader7.Read())
@@ -132,9 +137,9 @@ namespace KlubNaCitateli.Sites
                     firstCategoryPanel.BackImageUrl = reader7.GetValue(0).ToString();
                 }
                 reader7.Close();
-                command7.CommandText = "select categories.name from categories, belongsto, books where books.idbook=belongsto.idbook and belongsto.idcategory=categories.idcategory and books.name=@name";
+                command7.CommandText = "select categories.name from categories, belongsto, books where books.idbook=belongsto.idbook and belongsto.idcategory=categories.idcategory and books.name=?name";
                 command7.Connection = connection;
-                command7.Parameters.AddWithValue("@name", firstCategoryBookName);
+                command7.Parameters.AddWithValue("?name", firstCategoryBookName);
                 reader7 = command7.ExecuteReader();
                 if (reader7.Read())
                 {
@@ -143,7 +148,7 @@ namespace KlubNaCitateli.Sites
                 reader7.Close();
 
 
-                command7.CommandText = "select books.name from books, belongsto, usercategories, users where books.idbook=belongsto.idbook and belongsto.idcategory=usercategories.idcategory and usercategories.iduser=users.iduser and users.iduser=@iduser order by books.idbook asc limit 1 ";
+                command7.CommandText = "select books.name from books, belongsto, usercategories, users where books.idbook=belongsto.idbook and belongsto.idcategory=usercategories.idcategory and usercategories.iduser=users.iduser and users.iduser=?iduser order by books.idbook asc limit 1 ";
                 command7.Connection = connection;
                 reader7 = command7.ExecuteReader();
                 if (reader7.Read())
@@ -151,7 +156,7 @@ namespace KlubNaCitateli.Sites
                     secondCategoryBookName.Text = reader7.GetValue(0).ToString();
                 }
                 reader7.Close();
-                command7.CommandText = "select books.thumbnail from books, belongsto, usercategories, users where books.idbook=belongsto.idbook and belongsto.idcategory=usercategories.idcategory and usercategories.iduser=users.iduser and users.iduser=@iduser order by books.idbook asc limit 1 ";
+                command7.CommandText = "select books.thumbnail from books, belongsto, usercategories, users where books.idbook=belongsto.idbook and belongsto.idcategory=usercategories.idcategory and usercategories.iduser=users.iduser and users.iduser=?iduser order by books.idbook asc limit 1 ";
                 command7.Connection = connection;
                 reader7 = command7.ExecuteReader();
                 if (reader7.Read())
@@ -159,10 +164,10 @@ namespace KlubNaCitateli.Sites
                     secondCategoryPanel.BackImageUrl = reader7.GetValue(0).ToString();
                 }
                 reader7.Close();
-                command7.CommandText = "select categories.name from categories, belongsto, books where books.idbook=belongsto.idbook and belongsto.idcategory=categories.idcategory and books.name=@name";
+                command7.CommandText = "select categories.name from categories, belongsto, books where books.idbook=belongsto.idbook and belongsto.idcategory=categories.idcategory and books.name=?name";
                 command7.Connection = connection;
                 command7.Parameters.Clear();
-                command7.Parameters.AddWithValue("@name", secondCategoryBookName.Text);
+                command7.Parameters.AddWithValue("?name", secondCategoryBookName.Text);
                 reader7 = command7.ExecuteReader();
                 if (reader7.Read())
                 {
@@ -171,7 +176,7 @@ namespace KlubNaCitateli.Sites
                 reader7.Close();
 
 
-                command7.CommandText = "select books.name from books, belongsto, usercategories, users where books.idbook=belongsto.idbook and belongsto.idcategory=usercategories.idcategory and usercategories.iduser=users.iduser and users.iduser=@iduser order by books.name desc limit 1";
+                command7.CommandText = "select books.name from books, belongsto, usercategories, users where books.idbook=belongsto.idbook and belongsto.idcategory=usercategories.idcategory and usercategories.iduser=users.iduser and users.iduser=?iduser order by books.name desc limit 1";
                 command7.Parameters.AddWithValue("@iduser", Session["id"]);
                 command7.Connection = connection;
                 reader7 = command7.ExecuteReader();
@@ -180,7 +185,7 @@ namespace KlubNaCitateli.Sites
                     thirdCategoryBookName.Text = reader7.GetValue(0).ToString();
                 }
                 reader7.Close();
-                command7.CommandText = "select books.thumbnail from books, belongsto, usercategories, users where books.idbook=belongsto.idbook and belongsto.idcategory=usercategories.idcategory and usercategories.iduser=users.iduser and users.iduser=@iduser order by books.name desc limit 1 ";
+                command7.CommandText = "select books.thumbnail from books, belongsto, usercategories, users where books.idbook=belongsto.idbook and belongsto.idcategory=usercategories.idcategory and usercategories.iduser=users.iduser and users.iduser=?iduser order by books.name desc limit 1 ";
                 command7.Connection = connection;
                 reader7 = command7.ExecuteReader();
                 if (reader7.Read())
@@ -190,10 +195,10 @@ namespace KlubNaCitateli.Sites
                 reader7.Close();
 
 
-                command7.CommandText = "select categories.name from categories, belongsto, books where books.idbook=belongsto.idbook and belongsto.idcategory=categories.idcategory and books.name=@name";
+                command7.CommandText = "select categories.name from categories, belongsto, books where books.idbook=belongsto.idbook and belongsto.idcategory=categories.idcategory and books.name=?name";
                 command7.Connection = connection;
                 command7.Parameters.Clear();
-                command7.Parameters.AddWithValue("@name", thirdCategoryBookName.Text);
+                command7.Parameters.AddWithValue("?name", thirdCategoryBookName.Text);
                 reader7 = command7.ExecuteReader();
                 if (reader7.Read())
                 {

@@ -82,20 +82,20 @@ namespace KlubNaCitateli.Sites
                 {
                     conn.Open();
                     MySqlCommand comm = new MySqlCommand();
-                    comm.CommandText = "INSERT into users (name, banned, surname, email, username, password, type, numComments) VALUES(@name, @banned, @surname, @email, @username, @password, @type, @numComments)";
+                    comm.CommandText = "INSERT into users (name, banned, surname, email, username, password, type, numComments) VALUES(?name, ?banned, ?surname, ?email, ?username, ?password, ?type, ?numComments)";
                     comm.Connection = conn;
-                    comm.Parameters.AddWithValue("@name", user.name);
-                    comm.Parameters.AddWithValue("@surname", user.surname);
-                    comm.Parameters.AddWithValue("@email", user.email);
-                    comm.Parameters.AddWithValue("@username", user.username);
-                    comm.Parameters.AddWithValue("@password", user.password);
-                    comm.Parameters.AddWithValue("@type", "user");
-                    comm.Parameters.AddWithValue("@numComments", 0);
-                    comm.Parameters.AddWithValue("@banned", 0);
+                    comm.Parameters.AddWithValue("?name", user.name);
+                    comm.Parameters.AddWithValue("?surname", user.surname);
+                    comm.Parameters.AddWithValue("?email", user.email);
+                    comm.Parameters.AddWithValue("?username", user.username);
+                    comm.Parameters.AddWithValue("?password", user.password);
+                    comm.Parameters.AddWithValue("?type", "user");
+                    comm.Parameters.AddWithValue("?numComments", 0);
+                    comm.Parameters.AddWithValue("?banned", 0);
 
                     comm.ExecuteNonQuery();
                     string iduser = "";
-                    comm.CommandText = "select iduser from users where username=@username";
+                    comm.CommandText = "select iduser from users where username=?username";
                     MySqlDataReader reader = comm.ExecuteReader();
                     if (reader.Read())
                     {
@@ -109,14 +109,14 @@ namespace KlubNaCitateli.Sites
                     string categories = demo.Text;
                     string[] cat = categories.Split(new char[] { ',' });
 
-                    comm.CommandText = "Insert into usercategories (IDUser, IDCategory) values (@IDUser, @IDCategory)";
+                    comm.CommandText = "Insert into usercategories (IDUser, IDCategory) values (?IDUser, ?IDCategory)";
                     foreach (string category in cat)
                     {
                         if (category.Trim() != "")
                         {
                             comm.Parameters.Clear();
-                            comm.Parameters.AddWithValue("@IDUser", iduser);
-                            comm.Parameters.AddWithValue("@IDCategory", category);
+                            comm.Parameters.AddWithValue("?IDUser", iduser);
+                            comm.Parameters.AddWithValue("?IDCategory", category);
                             comm.ExecuteNonQuery();
 
                         }
