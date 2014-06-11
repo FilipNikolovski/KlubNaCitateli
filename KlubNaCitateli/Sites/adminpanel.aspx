@@ -86,6 +86,7 @@
     <asp:Label ID="lblError" runat="server" Text="lblError" Visible="False"></asp:Label>
     <asp:HiddenField ID="bookField" runat="server" />
     <asp:HiddenField ID="bookIdsField" runat="server" />
+
     <div id="dialog-form">
         <label id="title">
             Choose categories and tags</label>
@@ -225,6 +226,7 @@
         <div id="tab-4">
         </div>
     </div>
+
     <asp:ScriptManager runat="server" ID="scriptManager">
         <Services>
             <asp:ServiceReference Path="../Services/BookService.svc" />

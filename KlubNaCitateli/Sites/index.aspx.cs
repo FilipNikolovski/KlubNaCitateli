@@ -11,7 +11,7 @@ namespace KlubNaCitateli.Sites
 {
     public partial class index : System.Web.UI.Page
     {
-        int mostWanted = -1, mostViewed = -1, bestThisMonth = -1, category1 = -1, category2 = -1, category3 = -1;
+        int mostWanted = -1, mostViewed = -1, bestThisMonth = -1, category1 = -1, category2 = -1, category3 = -1, category4=-1, category5=-1, category6=-1;
         List<int> categoriesList = new List<int>(2);
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -117,7 +117,7 @@ namespace KlubNaCitateli.Sites
             {
                 List<string> namesCategories = new List<string>();
                 MySqlCommand command6 = new MySqlCommand();
-                command6.CommandText = "select categories.idcategory, name from usercategories, categories where iduser=?iduser and usercategories.idcategory=categories.idcategory order by rand() limit 3";
+                command6.CommandText = "select categories.idcategory, name from usercategories, categories where iduser=?iduser and usercategories.idcategory=categories.idcategory order by rand() limit 6";
                 command6.Parameters.AddWithValue("?iduser", Session["id"].ToString());
                 command6.Connection = connection;
                 MySqlDataReader reader6 = command6.ExecuteReader();
@@ -158,6 +158,9 @@ namespace KlubNaCitateli.Sites
                 firstCategoryName.Text = namesCategories[0];
                 secondCategoryName.Text = namesCategories[1];
                 thirdCategoryName.Text = namesCategories[2];
+                fourthCategoryName.Text = namesCategories[3];
+                fifthCategoryName.Text = namesCategories[4];
+                sixthCategoryName.Text = namesCategories[5];
 
 
 
@@ -208,13 +211,69 @@ namespace KlubNaCitateli.Sites
                     reader6.Close();
                 }
 
+<<<<<<< HEAD
+=======
+                command6.Parameters.Clear();
+                command6.Parameters.AddWithValue("?category", categoriesList[3]);
+                reader6 = command6.ExecuteReader();
+                if (reader6.HasRows)
+                {
+                    if (reader6.Read())
+                    {
+                        category4 = Convert.ToInt32(reader6.GetValue(0));
+
+                        fourthCategoryBookName.Text = reader6["name"].ToString();
+                        fourthCategoryPanel.BackImageUrl = reader6["thumbnail"].ToString();
+
+                    }
+                    reader6.Close();
+                }
+
+                command6.Parameters.Clear();
+                command6.Parameters.AddWithValue("?category", categoriesList[4]);
+                reader6 = command6.ExecuteReader();
+                if (reader6.HasRows)
+                {
+                    if (reader6.Read())
+                    {
+                        category5 = Convert.ToInt32(reader6.GetValue(0));
+
+                        fifthCategoryBookName.Text = reader6["name"].ToString();
+                        fifthCategoryPanel.BackImageUrl = reader6["thumbnail"].ToString();
+
+                    }
+                    reader6.Close();
+                }
+
+                command6.Parameters.Clear();
+                command6.Parameters.AddWithValue("?category", categoriesList[5]);
+                reader6 = command6.ExecuteReader();
+                if (reader6.HasRows)
+                {
+                    if (reader6.Read())
+                    {
+                        category6 = Convert.ToInt32(reader6.GetValue(0));
+
+                        sixthCategoryBookName.Text = reader6["name"].ToString();
+                        sixthCategoryPanel.BackImageUrl = reader6["thumbnail"].ToString();
+
+                    }
+                    reader6.Close();
+                }
+
+
+
+
+
+
+>>>>>>> 445099f8a263a8182ecd8b5e1def3ea455116c22
                 connection.Close();
             }
             else
             {
                 List<string> namesCategories = new List<string>();
                 MySqlCommand command6 = new MySqlCommand();
-                command6.CommandText = "select categories.idcategory, name from categories, belongsto where belongsto.idcategory=categories.idcategory group by idcategory having count(idbook) > 0 order by rand() limit 3";
+                command6.CommandText = "select categories.idcategory, name from categories, belongsto where belongsto.idcategory=categories.idcategory group by idcategory having count(idbook) > 0 order by rand() limit 6";
                 command6.Connection = connection;
                 MySqlDataReader reader6 = command6.ExecuteReader();
 
@@ -235,6 +294,9 @@ namespace KlubNaCitateli.Sites
                 firstCategoryName.Text = namesCategories[0];
                 secondCategoryName.Text = namesCategories[1];
                 thirdCategoryName.Text = namesCategories[2];
+                fourthCategoryName.Text = namesCategories[3];
+                fifthCategoryName.Text = namesCategories[4];
+                sixthCategoryName.Text = namesCategories[5];
 
                 command6.CommandText = "select books.idbook, books.thumbnail, books.name from books, belongsto where books.idbook=belongsto.idbook and belongsto.idcategory=?category order by rand() limit 1";
                 command6.Parameters.AddWithValue("?category", categoriesList[0]);
@@ -280,6 +342,54 @@ namespace KlubNaCitateli.Sites
 
                         thirdCategoryBookName.Text = reader6["name"].ToString();
                         thirdCategoryPanel.BackImageUrl = reader6["thumbnail"].ToString();
+
+                    }
+                    reader6.Close();
+                }
+
+                command6.Parameters.Clear();
+                command6.Parameters.AddWithValue("?category", categoriesList[3]);
+                reader6 = command6.ExecuteReader();
+                if (reader6.HasRows)
+                {
+                    if (reader6.Read())
+                    {
+                        category4 = Convert.ToInt32(reader6.GetValue(0));
+
+                        fourthCategoryBookName.Text = reader6["name"].ToString();
+                        fourthCategoryPanel.BackImageUrl = reader6["thumbnail"].ToString();
+
+                    }
+                    reader6.Close();
+                }
+
+                command6.Parameters.Clear();
+                command6.Parameters.AddWithValue("?category", categoriesList[4]);
+                reader6 = command6.ExecuteReader();
+                if (reader6.HasRows)
+                {
+                    if (reader6.Read())
+                    {
+                        category5 = Convert.ToInt32(reader6.GetValue(0));
+
+                        fifthCategoryBookName.Text = reader6["name"].ToString();
+                        fifthCategoryPanel.BackImageUrl = reader6["thumbnail"].ToString();
+
+                    }
+                    reader6.Close();
+                }
+
+                command6.Parameters.Clear();
+                command6.Parameters.AddWithValue("?category", categoriesList[5]);
+                reader6 = command6.ExecuteReader();
+                if (reader6.HasRows)
+                {
+                    if (reader6.Read())
+                    {
+                        category6 = Convert.ToInt32(reader6.GetValue(0));
+
+                        sixthCategoryBookName.Text = reader6["name"].ToString();
+                        sixthCategoryPanel.BackImageUrl = reader6["thumbnail"].ToString();
 
                     }
                     reader6.Close();
