@@ -259,13 +259,7 @@ namespace KlubNaCitateli.Sites
                     reader6.Close();
                 }
 
-
-
-
-
-
                 connection.Close();
-
             }
             else
             {
@@ -285,6 +279,7 @@ namespace KlubNaCitateli.Sites
                     }
 
                 }
+
                 reader6.Close();
 
 
@@ -294,7 +289,6 @@ namespace KlubNaCitateli.Sites
                 fourthCategoryName.Text = namesCategories[3];
                 fifthCategoryName.Text = namesCategories[4];
                 sixthCategoryName.Text = namesCategories[5];
-
 
                 command6.CommandText = "select books.idbook, books.thumbnail, books.name from books, belongsto where books.idbook=belongsto.idbook and belongsto.idcategory=?category order by rand() limit 1";
                 command6.Parameters.AddWithValue("?category", categoriesList[0]);
@@ -397,21 +391,8 @@ namespace KlubNaCitateli.Sites
                 connection.Close();
             }
 
-
-
         }
 
-
-
-
-
     }
-
-
-
-
-
-
-
 
 }

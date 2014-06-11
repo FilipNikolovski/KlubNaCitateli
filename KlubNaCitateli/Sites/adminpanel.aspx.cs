@@ -601,6 +601,33 @@ namespace KlubNaCitateli.Sites
                 {
                     connection.Open();
 
+                    GridViewRow row = (GridViewRow)gvUsers.Rows[e.RowIndex];
+                    TextBox tbType = (TextBox)row.Cells[5].Controls[0];
+                    TextBox tbBanned = (TextBox)row.Cells[6].Controls[0];
+
+                    if (tbType.Text != "administrator" && tbType.Text != "user" && tbType.Text != "moderator")
+                    {
+                        ClientScript.RegisterStartupScript(this.GetType(), "Alert", "alert('The type must be administrator, user or moderator.');", true);
+                    }
+                    else if (tbBanned.Text != "0" && tbBanned.Text != "1")
+                    {
+                        ClientScript.RegisterStartupScript(this.GetType(), "Alert", "alert('You can use only 1 or 0 in the banned column.');", true);
+                    }
+                    else
+                    {
+                        string sql = "UPDATE Users SET Type=?Type, Banned=?Banned WHERE IDUser=?IDUser";
+
+                        MySqlCommand command = new MySqlCommand(sql, connection);
+                        command.Parameters.AddWithValue("?Type", tbType.Text);
+                        command.Parameters.AddWithValue("?Banned", tbBanned.Text);
+                        command.Parameters.AddWithValue("?IDUser", gvUsers.DataKeys[e.RowIndex].Value);
+
+                        command.ExecuteNonQuery();
+
+                        gvUsers.EditIndex = -1;
+                        FillUsersGrid();
+                    }
+
                 }
                 catch (Exception ex)
                 {
@@ -612,8 +639,7 @@ namespace KlubNaCitateli.Sites
                     connection.Close();
                 }
 
-                gvUsers.EditIndex = -1;
-                FillUsersGrid();
+                
             }
         }
 
