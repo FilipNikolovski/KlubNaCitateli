@@ -12,7 +12,7 @@ namespace KlubNaCitateli.Sites
     public partial class index : System.Web.UI.Page
     {
         int mostWanted = -1, mostViewed = -1, bestThisMonth = -1, category1 = -1, category2 = -1, category3 = -1;
-        List<int> categoriesList = new List<int>(3);
+        List<int> categoriesList = new List<int>(2);
         protected void Page_Load(object sender, EventArgs e)
         {
             MySqlConnection connection = new MySqlConnection();
@@ -114,23 +114,6 @@ namespace KlubNaCitateli.Sites
             if (Session["Name"] != null)
             {
 
-
-                //MySqlCommand command6 = new MySqlCommand();
-                //command6.CommandText = "select name from categories limit 3";
-                //command6.Connection = connection;
-                //MySqlDataReader reader6 = command6.ExecuteReader();
-                //List<string> categories = new List<string>();
-                //int i = 0;
-                //while (reader6.Read())
-                //{
-                //    categories.Add(reader6.GetValue(i).ToString());
-                //    i++;
-                //}
-                //reader6.Close();
-                //firstCategoryName.Text = categories[0];
-                //secondCategoryName.Text = categories[1];
-                //thirdCategoryName.Text = categories[2];
-
                 MySqlCommand command7 = new MySqlCommand();
                 command7.CommandText = "select books.name from books, belongsto, usercategories, users where books.idbook=belongsto.idbook and belongsto.idcategory=usercategories.idcategory and usercategories.iduser=users.iduser and users.iduser=@iduser limit 1";
                 command7.Parameters.AddWithValue("@iduser", Session["id"]);
@@ -231,108 +214,90 @@ namespace KlubNaCitateli.Sites
             else
             {
                 MySqlCommand command6 = new MySqlCommand();
-                command6.CommandText = "select count(idcategory) from categories where idcategory in (select idcategory from belongsto group by idcategory having count(idbook)> 0)";
+                command6.CommandText = "select idcategory from belongsto group by idcategory having count(idbook)in (select count(idbook) from belongsto group by idcategory ) order by count(idbook) desc limit 3";
                 command6.Connection = connection;
                 MySqlDataReader reader6 = command6.ExecuteReader();
-                int numCategories = -1;
+               
                 if (reader6.HasRows)
                 {
-                    if (reader6.Read())
+                     
+                    while(reader6.Read())
                     {
-                        numCategories = Convert.ToInt32(reader6.GetValue(0));   
+                        categoriesList.Add(Convert.ToInt32(reader6["idcategory"]));  
+                       
                     }
                     reader6.Close();
                 }
+               
 
-                Random rnd = new Random();
-                category1 = rnd.Next(1, numCategories);
-                category2 = rnd.Next(1, numCategories);
-                category3 = rnd.Next(1, numCategories);
-                int numberBooks = -1;
-                command6.CommandText = "select count(books.idbook) from books, belongsto where books.idbook=belongsto.idbook and belongsto.idcategory=?category";
-                command6.Parameters.AddWithValue("?category", category1);
+                
+                command6.CommandText = "select books.idbook, books.thumbnail, books.name from books, belongsto where books.idbook=belongsto.idbook and belongsto.idcategory=?category order by rand() limit 1";
+                command6.Parameters.AddWithValue("?category", categoriesList[0]);
                 reader6 = command6.ExecuteReader();
                 if (reader6.HasRows)
                 {
                     if (reader6.Read())
                     {
-                        numberBooks = Convert.ToInt32(reader6.GetValue(0));
+                        category1 = Convert.ToInt32(reader6.GetValue(0));
+                        firstCategoryBookName.Text = reader6["name"].ToString();
+                        firstCategoryPanel.BackImageUrl = reader6["thumbnail"].ToString();
+                       
                     }
                     reader6.Close();
                 }
 
-                
-
-                int randomBook=-1;
-
-                randomBook = rnd.Next(1, numberBooks);
-                command6.CommandText = "select books.idbook from books, belongsto where books.idbook=belongsto.idbook and belongsto.idcategory=?category";
-                
-                reader6 = command6.ExecuteReader();
-                if (reader6.HasRows)
-                {
-                    if (reader6.Read())
-                    {
-                        categoriesList.Add(Convert.ToInt32(reader6.GetValue(0)));
-                        reader6.Close();
-                    }
-                }
-
-                command6.CommandText = "select count(books.idbook) from books, belongsto where books.idbook=belongsto.idbook and belongsto.idcategory=?category";
                 command6.Parameters.Clear();
-                command6.Parameters.AddWithValue("?category", category2);
+                command6.Parameters.AddWithValue("?category", categoriesList[1]);
                 reader6 = command6.ExecuteReader();
                 if (reader6.HasRows)
                 {
                     if (reader6.Read())
                     {
-                        numberBooks = Convert.ToInt32(reader6.GetValue(0));
+                        category2 = Convert.ToInt32(reader6.GetValue(0));
+                        secondCategoryBookName.Text = reader6["name"].ToString();
+                        secondCategoryPanel.BackImageUrl = reader6["thumbnail"].ToString();
+                       
                     }
                     reader6.Close();
                 }
 
 
-                randomBook = rnd.Next(1, numberBooks);
-                command6.CommandText = "select books.idbook from books, belongsto where books.idbook=belongsto.idbook and belongsto.idcategory=?category";
-                
-                reader6 = command6.ExecuteReader();
-                if (reader6.HasRows)
-                {
-                    int secondBook = Convert.ToInt32(reader6.GetValue(randomBook));
-                    if (categoriesList.Contains(secondBook))
-                    {
-                        categoriesList.Add(Convert.ToInt32(reader6.GetValue(randomBook)));
-                    }
-                    reader6.Close();
-                }
-
-                command6.CommandText = "select count(books.idbook) from books, belongsto where books.idbook=belongsto.idbook and belongsto.idcategory=?category";
                 command6.Parameters.Clear();
-                command6.Parameters.AddWithValue("?category", category3);
+                command6.Parameters.AddWithValue("?category", categoriesList[2]);
                 reader6 = command6.ExecuteReader();
                 if (reader6.HasRows)
                 {
                     if (reader6.Read())
                     {
-                        numberBooks = Convert.ToInt32(reader6.GetValue(0));
+                        category3 = Convert.ToInt32(reader6.GetValue(0));
+                      
+                        thirdCategoryBookName.Text = reader6["name"].ToString();
+                        thirdCategoryPanel.BackImageUrl = reader6["thumbnail"].ToString();
+                       
                     }
                     reader6.Close();
                 }
-                randomBook = rnd.Next(1, numberBooks);
-                command6.CommandText = "select books.idbook from books, belongsto where books.idbook=belongsto.idbook and belongsto.idcategory=?category";
-
-                reader6 = command6.ExecuteReader();
-                if (reader6.HasRows)
+                List<string> names = new List<string>();
+                foreach(int id in categoriesList)
                 {
-                    int secondBook = Convert.ToInt32(reader6.GetValue(randomBook));
-                    if (categoriesList.Contains(secondBook))
+                    command6.CommandText="Select name from categories where idcategory=?idcategory";
+                    command6.Parameters.Clear();
+                    command6.Parameters.AddWithValue("?idcategory", id);
+                    reader6 = command6.ExecuteReader();
+                    if(reader6.HasRows)
                     {
-                        categoriesList.Add(Convert.ToInt32(reader6.GetValue(randomBook)));
+                        if(reader6.Read())
+                        {
+                            names.Add(reader6["name"].ToString());
+                        }
+                    
                     }
                     reader6.Close();
                 }
-
-                firstCategoryName.Text = categoriesList[0] + " " + categoriesList[1] + " " + categoriesList[2];
+                firstCategoryName.Text = names[0];
+                secondCategoryName.Text = names[1];
+                thirdCategoryName.Text = names[2];
+                }
 
 
 
@@ -352,4 +317,3 @@ namespace KlubNaCitateli.Sites
 
 
     }
-}
