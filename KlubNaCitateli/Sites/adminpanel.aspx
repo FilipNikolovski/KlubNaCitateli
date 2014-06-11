@@ -102,7 +102,7 @@
         <legend>Manage Categories</legend>
         <asp:TextBox ID="tbCategory" runat="server"></asp:TextBox>
         <asp:Button ID="btnAddCategory" runat="server" Text="Add category" 
-            onclick="btnAddCategory_Click" />
+            onclick="btnAddCategory_Click" ValidationGroup="vGroup1" />
 
         <asp:RegularExpressionValidator ID="revCategory" runat="server" 
             ErrorMessage="The category name must only consist of characters." 
@@ -142,7 +142,7 @@
         <legend>Add Books from Google.books DB</legend>
         <asp:TextBox ID="tbSearchBooks" runat="server"></asp:TextBox>
         <asp:Button ID="btnSearch" runat="server" Text="Search" 
-            onclick="btnSearch_Click" />
+            onclick="btnSearch_Click" ValidationGroup="vGroup2" />
 
         <asp:RequiredFieldValidator ID="rfvSearchBooks" runat="server" 
             ErrorMessage="The input must not be empty." ControlToValidate="tbSearchBooks" 

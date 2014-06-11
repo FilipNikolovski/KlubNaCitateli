@@ -26,7 +26,6 @@
             </asp:TableRow>
             <asp:TableRow>
                 <asp:TableCell CssClass="table">
-                   
                     <asp:Label ID="mostWantedBookName" runat="server" Text="" CssClass="bookNameLabel"
                         Multiline="True"></asp:Label>
                 </asp:TableCell>
@@ -35,7 +34,6 @@
                     </asp:Panel>
                 </asp:TableCell>
                 <asp:TableCell CssClass="table">
-                    
                     <asp:Label ID="mostViewedBookName" runat="server" Text="" CssClass="bookNameLabel"
                         Multiline="True"></asp:Label>
                 </asp:TableCell>
@@ -44,7 +42,6 @@
                     </asp:Panel>
                 </asp:TableCell>
                 <asp:TableCell CssClass="table">
-                    
                     <asp:Label ID="bestThisMonthBookName" runat="server" Text="" CssClass="bookNameLabel"
                         Multiline="True"></asp:Label></asp:TableCell>
                 <asp:TableCell>
@@ -67,24 +64,54 @@
             </asp:TableRow>
             <asp:TableRow>
                 <asp:TableCell CssClass="table">
-                    
                     <asp:Label ID="firstCategoryBookName" runat="server" Text="" CssClass="bookNameLabel"></asp:Label></asp:TableCell>
                 <asp:TableCell>
                     <asp:Panel ID="firstCategoryPanel" CollumnSpan="2" runat="server" CssClass="bookPlacePanel">
                     </asp:Panel>
                 </asp:TableCell>
                 <asp:TableCell CssClass="table">
-                    
                     <asp:Label ID="secondCategoryBookName" runat="server" Text="" CssClass="bookNameLabel"></asp:Label></asp:TableCell>
                 <asp:TableCell>
                     <asp:Panel ID="secondCategoryPanel" CollumnSpan="2" runat="server" CssClass="bookPlacePanel">
                     </asp:Panel>
                 </asp:TableCell>
                 <asp:TableCell CssClass="table">
-                    
                     <asp:Label ID="thirdCategoryBookName" runat="server" Text="" CssClass="bookNameLabel"></asp:Label></asp:TableCell>
                 <asp:TableCell>
                     <asp:Panel ID="thirdCategoryPanel" CollumnSpan="2" runat="server" CssClass="bookPlacePanel">
+                    </asp:Panel>
+                </asp:TableCell>
+            </asp:TableRow>
+        </asp:Table>
+        <asp:Table ID="Table1" runat="server" CssClass="tableRow">
+            <asp:TableRow>
+                <asp:TableCell CssClass="tablename">
+                    <asp:Label ID="fourthCategoryName" runat="server" Text=""></asp:Label></asp:TableCell>
+                <asp:TableCell></asp:TableCell>
+                <asp:TableCell CssClass="tablename">
+                    <asp:Label ID="fifthCategoryName" runat="server" Text=""></asp:Label></asp:TableCell>
+                <asp:TableCell></asp:TableCell>
+                <asp:TableCell CssClass="tablename">
+                    <asp:Label ID="sixthCategoryName" runat="server" Text=""></asp:Label></asp:TableCell>
+                <asp:TableCell></asp:TableCell>
+            </asp:TableRow>
+            <asp:TableRow>
+                <asp:TableCell CssClass="table">
+                    <asp:Label ID="fourthCategoryBookName" runat="server" Text="" CssClass="bookNameLabel"></asp:Label></asp:TableCell>
+                <asp:TableCell>
+                    <asp:Panel ID="fourthCategoryPanel" CollumnSpan="2" runat="server" CssClass="bookPlacePanel">
+                    </asp:Panel>
+                </asp:TableCell>
+                <asp:TableCell CssClass="table">
+                    <asp:Label ID="fifthCategoryBookName" runat="server" Text="" CssClass="bookNameLabel"></asp:Label></asp:TableCell>
+                <asp:TableCell>
+                    <asp:Panel ID="fifthCategoryPanel" CollumnSpan="2" runat="server" CssClass="bookPlacePanel">
+                    </asp:Panel>
+                </asp:TableCell>
+                <asp:TableCell CssClass="table">
+                    <asp:Label ID="sixthCategoryBookName" runat="server" Text="" CssClass="bookNameLabel"></asp:Label></asp:TableCell>
+                <asp:TableCell>
+                    <asp:Panel ID="sixthCategoryPanel" CollumnSpan="2" runat="server" CssClass="bookPlacePanel">
                     </asp:Panel>
                 </asp:TableCell>
             </asp:TableRow>
