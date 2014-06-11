@@ -30,7 +30,7 @@
         </asp:TableRow>
         <asp:TableRow ID="TableRow4" runat="server" CssClass=".TableRow">
         <asp:TableCell ID="TableCell4" runat="server" CssClass="tabCell">
-            <asp:TextBox ID="password" runat="server" CssClass="tabBox">
+            <asp:TextBox ID="password" runat="server" CssClass="tabBox" TextMode="Password">
             </asp:TextBox><br />
             <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" 
             ErrorMessage="You must enter password!" ControlToValidate="password"></asp:RequiredFieldValidator>
