@@ -185,8 +185,7 @@
         <legend>Manage Users</legend>
         <asp:GridView ID="gvUsers" runat="server" CellPadding="4" DataKeyNames="IDUser" 
             ForeColor="#333333" GridLines="None" 
-            onrowcancelingedit="gvUsers_RowCancelingEdit" 
-            onrowdeleting="gvUsers_RowDeleting" onrowediting="gvUsers_RowEditing" 
+            onrowcancelingedit="gvUsers_RowCancelingEdit" onrowediting="gvUsers_RowEditing" 
             onrowupdating="gvUsers_RowUpdating">
             <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
             <Columns>

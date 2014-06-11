@@ -82,11 +82,7 @@
                     </script>
                     <asp:UpdatePanel ID="UpdatePanel2" runat="server" UpdateMode="Always">
                         <ContentTemplate>
-<<<<<<< HEAD
-                            <asp:Button ID="Button3" runat="server" CssClass="btn" CausesValidation="true" Text="Next" />
-=======
                             <asp:Button ID="Button3" runat="server" CssClass="btn" CausesValidation="false" Text="Next" />
->>>>>>> 82c92de2ba4824252c2b3543f864471753d0fd7f
                         </ContentTemplate>
                     </asp:UpdatePanel>
                 </div>
@@ -122,12 +118,6 @@
                                                 preventDuplicates: true
                                             });
 
-<<<<<<< HEAD
-=======
-
-
-
->>>>>>> 82c92de2ba4824252c2b3543f864471753d0fd7f
                                         });
                                     </script>
                                 </div>
