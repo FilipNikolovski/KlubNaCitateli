@@ -113,6 +113,11 @@ namespace KlubNaCitateli.Sites
 
             if (Session["Name"] != null)
             {
+                /*select categories.name from categories
+where idcategory in (select belongsto.idcategory from belongsto, usercategories, users 
+where belongsto.idcategory=usercategories.idcategory 
+	and usercategories.iduser=users.iduser 
+	and users.iduser=56 order by rand()) limit 3*/
 
                 MySqlCommand command7 = new MySqlCommand();
                 command7.CommandText = "select books.name from books, belongsto, usercategories, users where books.idbook=belongsto.idbook and belongsto.idcategory=usercategories.idcategory and usercategories.iduser=users.iduser and users.iduser=?iduser limit 1";
@@ -172,7 +177,11 @@ namespace KlubNaCitateli.Sites
 
 
                 command7.CommandText = "select books.name from books, belongsto, usercategories, users where books.idbook=belongsto.idbook and belongsto.idcategory=usercategories.idcategory and usercategories.iduser=users.iduser and users.iduser=?iduser order by books.name desc limit 1";
+<<<<<<< HEAD
                 command7.Parameters.AddWithValue("?iduser", Session["id"]);
+=======
+                command7.Parameters.AddWithValue("@iduser", Session["id"]);
+>>>>>>> b250eb1956daedc9af9a7c7d76317116c46cc772
                 command7.Connection = connection;
                 reader7 = command7.ExecuteReader();
                 if (reader7.Read())
