@@ -211,8 +211,6 @@ namespace KlubNaCitateli.Sites
                     reader6.Close();
                 }
 
-<<<<<<< HEAD
-=======
                 command6.Parameters.Clear();
                 command6.Parameters.AddWithValue("?category", categoriesList[3]);
                 reader6 = command6.ExecuteReader();
@@ -261,12 +259,6 @@ namespace KlubNaCitateli.Sites
                     reader6.Close();
                 }
 
-
-
-
-
-
->>>>>>> 445099f8a263a8182ecd8b5e1def3ea455116c22
                 connection.Close();
             }
             else
