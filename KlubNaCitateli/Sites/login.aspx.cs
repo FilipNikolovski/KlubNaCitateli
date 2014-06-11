@@ -83,9 +83,6 @@ namespace KlubNaCitateli.Sites
                     }
                     read1.Close();
 
-
-
-
                     Response.Redirect("index.aspx");
                 }
                 else
