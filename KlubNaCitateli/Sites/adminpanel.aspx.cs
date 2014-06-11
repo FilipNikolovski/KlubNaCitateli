@@ -25,6 +25,7 @@ namespace KlubNaCitateli.Sites
             if (!IsPostBack)
             {
                 FillCategoriesGrid();
+                FillUsersGrid();
             }
         }
 
@@ -61,6 +62,42 @@ namespace KlubNaCitateli.Sites
                 catch (Exception ex)
                 {
                     lblError.Text = ex.Message;
+                    lblError.Visible = true;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+        }
+
+        private void FillUsersGrid()
+        {
+            using (MySqlConnection connection = new MySqlConnection())
+            {
+                connection.ConnectionString = ConfigurationManager.ConnectionStrings["BooksConn"].ConnectionString;
+
+                try
+                {
+                    connection.Open();
+
+                    string query = "SELECT * FROM users";
+
+                    MySqlCommand command = new MySqlCommand(query, connection);
+                    MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+
+                    DataSet ds = new DataSet();
+
+                    adapter.Fill(ds, "Users");
+
+                    gvUsers.DataSource = ds.Tables["Users"];
+                    gvUsers.DataBind();
+
+                    ViewState["Users"] = ds;
+                }
+                catch (Exception e)
+                {
+                    lblError.Text = e.Message;
                     lblError.Visible = true;
                 }
                 finally
@@ -292,11 +329,16 @@ namespace KlubNaCitateli.Sites
                 {
                     connection.Open();
 
-                    string query = "DELETE FROM Categories WHERE IDCategory=?IDCategory";
+                    string query = "DELETE FROM BelongsTo WHERE IDCategory=?IDCategory";
 
                     MySqlCommand command = new MySqlCommand(query, connection);
                     command.Parameters.AddWithValue("?IDCategory", gvCategories.DataKeys[e.RowIndex].Value);
                     command.ExecuteNonQuery();
+
+                    query = "DELETE FROM Categories WHERE IDCategory=?IDCategory";
+                    command.CommandText = query;
+                    command.ExecuteNonQuery();
+                    
                 }
                 catch (Exception ex)
                 {
@@ -547,6 +589,52 @@ namespace KlubNaCitateli.Sites
             List<Book> bookList = ViewState["BookList"] as List<Book>;
             gvBooks.DataSource = bookList;
             gvBooks.DataBind();
+        }
+
+        protected void gvUsers_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        {
+            using (MySqlConnection connection = new MySqlConnection())
+            {
+                connection.ConnectionString = ConfigurationManager.ConnectionStrings["BooksConn"].ConnectionString;
+
+                try
+                {
+                    connection.Open();
+
+                }
+                catch (Exception ex)
+                {
+                    lblError.Text = ex.Message;
+                    lblError.Visible = true;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+
+                gvUsers.EditIndex = -1;
+                FillUsersGrid();
+            }
+        }
+
+        protected void gvUsers_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+            gvUsers.EditIndex = e.NewEditIndex;
+
+            DataSet ds = (DataSet)ViewState["Users"];
+
+            gvUsers.DataSource = ds.Tables["Users"];
+            gvUsers.DataBind();
+        }
+
+        protected void gvUsers_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        {
+            gvUsers.EditIndex = -1;
+
+            DataSet ds = (DataSet)ViewState["Users"];
+
+            gvUsers.DataSource = ds.Tables["Users"];
+            gvUsers.DataBind();
         }
 
     }
