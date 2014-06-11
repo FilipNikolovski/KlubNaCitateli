@@ -22,9 +22,9 @@ namespace KlubNaCitateli.Sites
 
 
             MySqlCommand command = new MySqlCommand();
-            command.CommandText = "SELECT password from users where username=@username OR Email=@email";
-            command.Parameters.AddWithValue("@username", username.Text.ToString());
-            command.Parameters.AddWithValue("@email", username.Text.ToString());
+            command.CommandText = "SELECT password from users where username=?username OR Email=?email";
+            command.Parameters.AddWithValue("?username", username.Text.ToString());
+            command.Parameters.AddWithValue("?email", username.Text.ToString());
             command.Connection = conn;
             conn.Open();
             MySqlDataReader reader = command.ExecuteReader();
@@ -34,9 +34,9 @@ namespace KlubNaCitateli.Sites
                 {
                     reader.Close();
                     MySqlCommand command1 = new MySqlCommand();
-                    command1.CommandText = "SELECT name from users where username=@username OR Email=@email";
-                    command1.Parameters.AddWithValue("@username", username.Text.ToString());
-                    command1.Parameters.AddWithValue("@email", username.Text.ToString());
+                    command1.CommandText = "SELECT name from users where username=?username OR Email=?email";
+                    command1.Parameters.AddWithValue("?username", username.Text.ToString());
+                    command1.Parameters.AddWithValue("?email", username.Text.ToString());
                     command1.Connection = conn;
                     MySqlDataReader read = command1.ExecuteReader();
                     if (read.Read())
@@ -45,9 +45,9 @@ namespace KlubNaCitateli.Sites
                     }
                     read.Close();
                     MySqlCommand command2 = new MySqlCommand();
-                    command2.CommandText = "SELECT surname from users where username=@username OR Email=@email";
-                    command2.Parameters.AddWithValue("@username", username.Text.ToString());
-                    command2.Parameters.AddWithValue("@email", username.Text.ToString());
+                    command2.CommandText = "SELECT surname from users where username=?username OR Email=?email";
+                    command2.Parameters.AddWithValue("?username", username.Text.ToString());
+                    command2.Parameters.AddWithValue("?email", username.Text.ToString());
                     command2.Connection = conn;
                     MySqlDataReader read1 = command2.ExecuteReader();
                     if (read1.Read())
@@ -57,7 +57,7 @@ namespace KlubNaCitateli.Sites
 
                     read1.Close();
 
-                    command2.CommandText = "SELECT type from users where username=@username OR Email=@email";
+                    command2.CommandText = "SELECT type from users where username=?username OR Email=?email";
                     read1 = command2.ExecuteReader();
                     if (read1.Read())
                     {
@@ -67,7 +67,7 @@ namespace KlubNaCitateli.Sites
 
 
                     Session["UsernameOrEmail"] = username.ToString();
-                    command2.CommandText = "SELECT iduser from users where username=@username OR Email=@email";
+                    command2.CommandText = "SELECT iduser from users where username=?username OR Email=?email";
                     read1 = command2.ExecuteReader();
                     if (read1.Read())
                     {
@@ -75,16 +75,13 @@ namespace KlubNaCitateli.Sites
                     }
                     read1.Close();
 
-                    command2.CommandText = "SELECT banned from users where username=@username OR Email=@email";
+                    command2.CommandText = "SELECT banned from users where username=?username OR Email=?email";
                     read1 = command2.ExecuteReader();
                     if (read1.Read())
                     {
                         Session["banned"] = read1.GetValue(0).ToString();
                     }
                     read1.Close();
-
-
-
 
                     Response.Redirect("index.aspx");
                 }
