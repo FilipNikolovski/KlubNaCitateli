@@ -177,11 +177,8 @@ where belongsto.idcategory=usercategories.idcategory
 
 
                 command7.CommandText = "select books.name from books, belongsto, usercategories, users where books.idbook=belongsto.idbook and belongsto.idcategory=usercategories.idcategory and usercategories.iduser=users.iduser and users.iduser=?iduser order by books.name desc limit 1";
-<<<<<<< HEAD
                 command7.Parameters.AddWithValue("?iduser", Session["id"]);
-=======
-                command7.Parameters.AddWithValue("@iduser", Session["id"]);
->>>>>>> b250eb1956daedc9af9a7c7d76317116c46cc772
+
                 command7.Connection = connection;
                 reader7 = command7.ExecuteReader();
                 if (reader7.Read())
