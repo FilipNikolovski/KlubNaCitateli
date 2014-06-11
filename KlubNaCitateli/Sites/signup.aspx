@@ -37,11 +37,9 @@
                         <asp:TableRow ID="TableRow2" runat="server">
                             <asp:TableCell ID="TableCell3" runat="server" CssClass="table-first"><label>Password:</label></asp:TableCell>
                             <asp:TableCell ID="TableCell4" runat="server">
-<<<<<<< HEAD
-                                <asp:TextBox ID="password" runat="server" CssClass="table-second"></asp:TextBox>
-=======
+
                                 <asp:TextBox ID="password"  runat="server" CssClass="table-second" TextMode="Password"></asp:TextBox>
->>>>>>> 82c92de2ba4824252c2b3543f864471753d0fd7f
+
                                 <br />
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="You must enter a password!"
                                     ControlToValidate="password">
@@ -49,12 +47,9 @@
                         </asp:TableRow>
                         <asp:TableRow ID="TableRow3" runat="server">
                             <asp:TableCell ID="TableCell5" runat="server" CssClass="table-first"><label>Retype password:</label></asp:TableCell>
-                            <asp:TableCell ID="TableCell6" runat="server">
-<<<<<<< HEAD
-                                <asp:TextBox ID="repassword" runat="server" CssClass="table-second"></asp:TextBox>
-=======
+                            <asp:TableCell ID="TableCell6" runat="server">                            
                                 <asp:TextBox ID="repassword" runat="server" CssClass="table-second" TextMode="Password"></asp:TextBox>
->>>>>>> 82c92de2ba4824252c2b3543f864471753d0fd7f
+
                                 <br />
                                 <asp:CompareValidator ID="CompareValidator1" runat="server" ErrorMessage="Password doesn't match!"
                                     ControlToCompare="password" ControlToValidate="repassword"></asp:CompareValidator>
