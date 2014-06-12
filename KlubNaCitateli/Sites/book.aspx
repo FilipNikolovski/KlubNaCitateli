@@ -6,13 +6,4 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="mainContent" runat="server">
 
-<div>
-        <input type="text" id="demo-input" name="blah" />
-        <input type="button" value="Submit" />
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $("#demo-input").tokenInput("http://shell.loopj.com/tokeninput/tvshows.php");
-            });
-        </script>
-    </div>
 </asp:Content>
