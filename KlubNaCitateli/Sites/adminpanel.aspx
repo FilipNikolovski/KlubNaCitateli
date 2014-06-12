@@ -15,12 +15,8 @@
                     $("#<%= selectedTab.ClientID %>").val(selectedTab);
                 },
                 active: $("#<%= selectedTab.ClientID %>").val()
-<<<<<<< HEAD
-
             });
-=======
-                });
->>>>>>> 1a7671c36297f108d83da8b67bca5a83e52353d8
+
 
             function onSuccess(result) {
                 alert(result);

@@ -13,11 +13,8 @@ namespace KlubNaCitateli.Sites
     {
         int mostWanted = -1, mostViewed = -1, bestThisMonth = -1, category1 = -1, category2 = -1, category3 = -1, category4 = -1, category5 = -1, category6 = -1;
         List<int> categoriesList = new List<int>(2);
-<<<<<<< HEAD
 
-=======
         MySqlConnection connection;
->>>>>>> 1a7671c36297f108d83da8b67bca5a83e52353d8
         protected void Page_Load(object sender, EventArgs e)
         {
             try
@@ -134,39 +131,35 @@ namespace KlubNaCitateli.Sites
                     }
                     reader6.Close();
 
-<<<<<<< HEAD
-                while (categoriesList.Count < 6)
-                {
-                    command6.CommandText = "select categories.idcategory, name from categories, belongsto where belongsto.idcategory=categories.idcategory group by idcategory having count(idbook) > 0 order by rand() limit 1";
-                    command6.Connection = connection;
-=======
-                    command6.Parameters.Clear();
-                    command6.Parameters.AddWithValue("?category", categoriesList[1]);
->>>>>>> 1a7671c36297f108d83da8b67bca5a83e52353d8
-                    reader6 = command6.ExecuteReader();
-                    if (reader6.HasRows)
+                    while (categoriesList.Count < 6)
                     {
-                        if (reader6.Read())
+                        command6.CommandText = "select categories.idcategory, name from categories, belongsto where belongsto.idcategory=categories.idcategory group by idcategory having count(idbook) > 0 order by rand() limit 1";
+                        command6.Connection = connection;
+                        command6.Parameters.Clear();
+                        command6.Parameters.AddWithValue("?category", categoriesList[1]);
+
+                        reader6 = command6.ExecuteReader();
+                        if (reader6.HasRows)
                         {
-                            category2 = Convert.ToInt32(reader6.GetValue(0));
-                            secondCategoryBookName.Text = reader6["name"].ToString();
-                            secondCategoryPanel.ImageUrl = reader6["thumbnail"].ToString();
-                            secondCategoryPanel.PostBackUrl = "~/Sites/book.aspx?id=" + category2;
-                            secondCategoryBookName.PostBackUrl = "~/Sites/book.aspx?id=" + category2;
+                            if (reader6.Read())
+                            {
+                                category2 = Convert.ToInt32(reader6.GetValue(0));
+                                secondCategoryBookName.Text = reader6["name"].ToString();
+                                secondCategoryPanel.ImageUrl = reader6["thumbnail"].ToString();
+                                secondCategoryPanel.PostBackUrl = "~/Sites/book.aspx?id=" + category2;
+                                secondCategoryBookName.PostBackUrl = "~/Sites/book.aspx?id=" + category2;
+                            }
+
                         }
-
+                        reader6.Close();
                     }
-                    reader6.Close();
-<<<<<<< HEAD
-                }
 
-                firstCategoryName.Text = namesCategories[0];
-                secondCategoryName.Text = namesCategories[1];
-                thirdCategoryName.Text = namesCategories[2];
-                fourthCategoryName.Text = namesCategories[3];
-                fifthCategoryName.Text = namesCategories[4];
-                sixthCategoryName.Text = namesCategories[5];
-=======
+                    firstCategoryName.Text = namesCategories[0];
+                    secondCategoryName.Text = namesCategories[1];
+                    thirdCategoryName.Text = namesCategories[2];
+                    fourthCategoryName.Text = namesCategories[3];
+                    fifthCategoryName.Text = namesCategories[4];
+                    sixthCategoryName.Text = namesCategories[5];
 
                     command6.Parameters.Clear();
                     command6.Parameters.AddWithValue("?category", categoriesList[2]);
@@ -176,14 +169,11 @@ namespace KlubNaCitateli.Sites
                         if (reader6.Read())
                         {
                             category3 = Convert.ToInt32(reader6.GetValue(0));
->>>>>>> 1a7671c36297f108d83da8b67bca5a83e52353d8
 
                             thirdCategoryBookName.Text = reader6["name"].ToString();
                             thirdCategoryPanel.ImageUrl = reader6["thumbnail"].ToString();
                             thirdCategoryPanel.PostBackUrl = "~/Sites/book.aspx?id=" + category3;
                             thirdCategoryBookName.PostBackUrl = "~/Sites/book.aspx?id=" + category3;
-
-
                         }
 
                     }
@@ -275,32 +265,29 @@ namespace KlubNaCitateli.Sites
                         if (reader6.HasRows)
                         {
 
-<<<<<<< HEAD
-                while (categoriesList.Count < 6)
-                {
-                    command6.CommandText = "select categories.idcategory, name from categories, belongsto where belongsto.idcategory=categories.idcategory group by idcategory having count(idbook) > 0 order by rand() limit 1";
-                    command6.Connection = connection;
-                    reader6 = command6.ExecuteReader();
+                            while (categoriesList.Count < 6)
+                            {
+                                command6.CommandText = "select categories.idcategory, name from categories, belongsto where belongsto.idcategory=categories.idcategory group by idcategory having count(idbook) > 0 order by rand() limit 1";
+                                command6.Connection = connection;
+                                reader6 = command6.ExecuteReader();
 
-                    if (reader6.HasRows)
-                    {
+                                if (reader6.HasRows)
+                                {
 
-                        if (reader6.Read())
-                        {
-                            categoriesList.Add(Convert.ToInt32(reader6["idcategory"]));
-                            namesCategories.Add(reader6["name"].ToString());
+                                    if (reader6.Read())
+                                    {
+                                        categoriesList.Add(Convert.ToInt32(reader6["idcategory"]));
+                                        namesCategories.Add(reader6["name"].ToString());
 
-                        }
+                                    }
 
-                    }
-                    reader6.Close();
-                }
-=======
+                                }
+                                reader6.Close();
+                            }
                             if (reader6.Read())
                             {
                                 categoriesList.Add(Convert.ToInt32(reader6["idcategory"]));
                                 namesCategories.Add(reader6["name"].ToString());
->>>>>>> 1a7671c36297f108d83da8b67bca5a83e52353d8
 
                             }
 
