@@ -232,6 +232,10 @@
             </fieldset>
         </div>
         <div id="tab-4">
+            <fieldset>
+                <legend>Add Book</legend>
+
+            </fieldset>
         </div>
     </div>
 
