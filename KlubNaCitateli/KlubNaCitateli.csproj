@@ -90,6 +90,8 @@
     <Content Include="Sites\profile.aspx" />
     <Content Include="Sites\search.aspx" />
     <Content Include="Sites\signup.aspx" />
+    <Content Include="Styles\book.css" />
+    <Content Include="Sites\login.aspx" />
     <Content Include="Styles\adminPanel.css" />
     <Content Include="Styles\index.css" />
     <Content Include="Styles\Search.css" />

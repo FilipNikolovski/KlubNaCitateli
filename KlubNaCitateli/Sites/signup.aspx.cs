@@ -186,9 +186,6 @@ namespace KlubNaCitateli.Sites
             
         }
 
-
     }
-
-
 
 }

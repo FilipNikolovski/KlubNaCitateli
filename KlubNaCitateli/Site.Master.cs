@@ -12,6 +12,7 @@ namespace KlubNaCitateli
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+
             if (Session["Name"] != null)
             {
                 HyperLink2.Visible = false;

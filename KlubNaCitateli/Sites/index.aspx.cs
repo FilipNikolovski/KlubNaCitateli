@@ -11,6 +11,7 @@ namespace KlubNaCitateli.Sites
 {
     public partial class index : System.Web.UI.Page
     {
+
         int mostWanted = -1, mostViewed = -1, bestThisMonth = -1, category1 = -1, category2 = -1, category3 = -1, category4=-1, category5=-1, category6=-1;
         List<int> categoriesList = new List<int>(2);
 
