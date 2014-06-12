@@ -9,7 +9,13 @@
     <script type="text/javascript">
         $(document).ready(function () {
 
-            $("#tabs").tabs();
+            $("#tabs").tabs({
+                activate: function () {
+                    var selectedTab = $('#tabs').tabs('option', 'active');
+                    $("#<%= selectedTab.ClientID %>").val(selectedTab);
+                },
+                active: $("#<%= selectedTab.ClientID %>").val()
+                });
 
             function onSuccess(result) {
                 alert(result);
@@ -85,6 +91,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="mainContent" runat="server">
     <asp:Label ID="lblError" runat="server" Text="lblError" Visible="False"></asp:Label>
     <asp:HiddenField ID="bookField" runat="server" />
+    <asp:HiddenField ID="selectedTab" runat="server" />
     <asp:HiddenField ID="bookIdsField" runat="server" />
 
     <div id="dialog-form">
@@ -191,7 +198,7 @@
                 <legend>Add Books from Google.books DB</legend>
                 <asp:TextBox ID="tbSearchBooks" runat="server"></asp:TextBox>
                 <asp:Button ID="btnSearch" runat="server" Text="Search" OnClick="btnSearch_Click"
-                    ValidationGroup="vGroup2" />
+                    ValidationGroup="vGroup2"  />
                 <asp:RequiredFieldValidator ID="rfvSearchBooks" runat="server" ErrorMessage="The input must not be empty."
                     ControlToValidate="tbSearchBooks" ForeColor="Red" Display="None" ValidationGroup="vGroup2"></asp:RequiredFieldValidator>
                 <asp:ValidationSummary ID="vSummary2" runat="server" ValidationGroup="vGroup2" DisplayMode="List"

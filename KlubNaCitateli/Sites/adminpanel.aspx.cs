@@ -27,6 +27,7 @@ namespace KlubNaCitateli.Sites
                 FillCategoriesGrid();
                 FillUsersGrid();
             }
+
         }
 
         private void FillCategoriesGrid()
@@ -409,8 +410,8 @@ namespace KlubNaCitateli.Sites
             {
                 bookField.Value += (author + ",");
             }
-            
-            string script = "<script>$(document).ready(function(){$('#dialog-form').dialog('open');});</script>";
+
+            string script = "<script>$(document).ready(function(){$('#dialog-form').dialog('open');  $('#close').show();});</script>";
             Page.ClientScript.RegisterStartupScript(this.GetType(), "openDialog", script);
         }
 
@@ -575,7 +576,7 @@ namespace KlubNaCitateli.Sites
 
             if (bookIdsField.Value != "")
             {
-                string script = "<script>$(document).ready(function(){$('#dialog-form').dialog('open');});</script>";
+                string script = "<script>$(document).ready(function(){$('#dialog-form').dialog('open'); $('#close').hide();});</script>";
                 Page.ClientScript.RegisterStartupScript(this.GetType(), "openDialog", script);
             }
             else
