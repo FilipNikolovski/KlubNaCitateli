@@ -66,42 +66,42 @@ namespace KlubNaCitateli.Sites
                 if (Session["Name"] != null)
                 {
                     List<string> namesCategories = new List<string>();
-                    MySqlCommand command6 = new MySqlCommand();
-                    command6.CommandText = "select categories.idcategory, name from usercategories, categories where iduser=?iduser and usercategories.idcategory=categories.idcategory order by rand() limit 6";
-                    command6.Parameters.AddWithValue("?iduser", Session["id"].ToString());
-                    command6.Connection = connection;
-                    MySqlDataReader reader6 = command6.ExecuteReader();
+                   
+                    command.CommandText = "select categories.idcategory, name from usercategories, categories where iduser=?iduser and usercategories.idcategory=categories.idcategory order by rand() limit 6";
+                    command.Parameters.AddWithValue("?iduser", Session["id"].ToString());
+                    command.Connection = connection;
+                    reader = command.ExecuteReader();
 
-                    if (reader6.HasRows)
+                    if (reader.HasRows)
                     {
 
-                        while (reader6.Read())
+                        while (reader.Read())
                         {
-                            categoriesList.Add(Convert.ToInt32(reader6["idcategory"]));
-                            namesCategories.Add(reader6["name"].ToString());
+                            categoriesList.Add(Convert.ToInt32(reader["idcategory"]));
+                            namesCategories.Add(reader["name"].ToString());
 
                         }
-                        reader6.Close();
+                        reader.Close();
                     }
 
                     while (categoriesList.Count < 6)
                     {
-                        command6.CommandText = "select categories.idcategory, name from categories, belongsto where belongsto.idcategory=categories.idcategory group by idcategory having count(idbook) > 0 order by rand() limit 1";
-                        command6.Connection = connection;
-                        reader6 = command6.ExecuteReader();
+                        command.CommandText = "select categories.idcategory, name from categories, belongsto where belongsto.idcategory=categories.idcategory group by idcategory having count(idbook) > 0 order by rand() limit 1";
+                        command.Connection = connection;
+                        reader = command.ExecuteReader();
 
-                        if (reader6.HasRows)
+                        if (reader.HasRows)
                         {
 
-                            if (reader6.Read())
+                            if (reader.Read())
                             {
-                                categoriesList.Add(Convert.ToInt32(reader6["idcategory"]));
-                                namesCategories.Add(reader6["name"].ToString());
+                                categoriesList.Add(Convert.ToInt32(reader["idcategory"]));
+                                namesCategories.Add(reader["name"].ToString());
 
                             }
 
                         }
-                        reader6.Close();
+                        reader.Close();
 
                     }
 
@@ -112,52 +112,52 @@ namespace KlubNaCitateli.Sites
                     fifthCategoryName.Text = namesCategories[4];
                     sixthCategoryName.Text = namesCategories[5];
 
-                    command6.CommandText = "select books.idbook, books.thumbnail, books.name from books, belongsto where books.idbook=belongsto.idbook and belongsto.idcategory=?category order by rand() limit 1";
-                    command6.Parameters.AddWithValue("?category", categoriesList[0]);
-                    reader6 = command6.ExecuteReader();
-                    if (reader6.HasRows)
+                    command.CommandText = "select books.idbook, books.thumbnail, books.name from books, belongsto where books.idbook=belongsto.idbook and belongsto.idcategory=?category order by rand() limit 1";
+                    command.Parameters.AddWithValue("?category", categoriesList[0]);
+                    reader = command.ExecuteReader();
+                    if (reader.HasRows)
                     {
-                        if (reader6.Read())
+                        if (reader.Read())
                         {
-                            category1 = Convert.ToInt32(reader6.GetValue(0));
-                            firstCategoryBookName.Text = reader6["name"].ToString();
-                            firstCategoryPanel.ImageUrl = reader6["thumbnail"].ToString();
+                            category1 = Convert.ToInt32(reader.GetValue(0));
+                            firstCategoryBookName.Text = reader["name"].ToString();
+                            firstCategoryPanel.ImageUrl = reader["thumbnail"].ToString();
                             firstCategoryPanel.PostBackUrl = "~/Sites/book.aspx?id=" + category1;
                             firstCategoryBookName.PostBackUrl = "~/Sites/book.aspx?id=" + category1;
 
                         }
 
                     }
-                    reader6.Close();
+                    reader.Close();
 
-                    command6.Parameters.Clear();
-                    command6.Parameters.AddWithValue("?category", categoriesList[1]);
-                    reader6 = command6.ExecuteReader();
-                    if (reader6.HasRows)
+                    command.Parameters.Clear();
+                    command.Parameters.AddWithValue("?category", categoriesList[1]);
+                    reader = command.ExecuteReader();
+                    if (reader.HasRows)
                     {
-                        if (reader6.Read())
+                        if (reader.Read())
                         {
-                            category2 = Convert.ToInt32(reader6.GetValue(0));
-                            secondCategoryBookName.Text = reader6["name"].ToString();
-                            secondCategoryPanel.ImageUrl = reader6["thumbnail"].ToString();
+                            category2 = Convert.ToInt32(reader.GetValue(0));
+                            secondCategoryBookName.Text = reader["name"].ToString();
+                            secondCategoryPanel.ImageUrl = reader["thumbnail"].ToString();
                             secondCategoryPanel.PostBackUrl = "~/Sites/book.aspx?id=" + category2;
                             secondCategoryBookName.PostBackUrl = "~/Sites/book.aspx?id=" + category2;
                         }
 
                     }
-                    reader6.Close();
+                    reader.Close();
 
-                    command6.Parameters.Clear();
-                    command6.Parameters.AddWithValue("?category", categoriesList[2]);
-                    reader6 = command6.ExecuteReader();
-                    if (reader6.HasRows)
+                    command.Parameters.Clear();
+                    command.Parameters.AddWithValue("?category", categoriesList[2]);
+                    reader = command.ExecuteReader();
+                    if (reader.HasRows)
                     {
-                        if (reader6.Read())
+                        if (reader.Read())
                         {
-                            category3 = Convert.ToInt32(reader6.GetValue(0));
+                            category3 = Convert.ToInt32(reader.GetValue(0));
 
-                            thirdCategoryBookName.Text = reader6["name"].ToString();
-                            thirdCategoryPanel.ImageUrl = reader6["thumbnail"].ToString();
+                            thirdCategoryBookName.Text = reader["name"].ToString();
+                            thirdCategoryPanel.ImageUrl = reader["thumbnail"].ToString();
                             thirdCategoryPanel.PostBackUrl = "~/Sites/book.aspx?id=" + category3;
                             thirdCategoryBookName.PostBackUrl = "~/Sites/book.aspx?id=" + category3;
 
@@ -165,18 +165,18 @@ namespace KlubNaCitateli.Sites
                         }
 
                     }
-                    reader6.Close();
-                    command6.Parameters.Clear();
-                    command6.Parameters.AddWithValue("?category", categoriesList[3]);
-                    reader6 = command6.ExecuteReader();
-                    if (reader6.HasRows)
+                    reader.Close();
+                    command.Parameters.Clear();
+                    command.Parameters.AddWithValue("?category", categoriesList[3]);
+                    reader = command.ExecuteReader();
+                    if (reader.HasRows)
                     {
-                        if (reader6.Read())
+                        if (reader.Read())
                         {
-                            category4 = Convert.ToInt32(reader6.GetValue(0));
+                            category4 = Convert.ToInt32(reader.GetValue(0));
 
-                            fourthCategoryBookName.Text = reader6["name"].ToString();
-                            fourthCategoryPanel.ImageUrl = reader6["thumbnail"].ToString();
+                            fourthCategoryBookName.Text = reader["name"].ToString();
+                            fourthCategoryPanel.ImageUrl = reader["thumbnail"].ToString();
                             fourthCategoryPanel.PostBackUrl = "~/Sites/book.aspx?id=" + category4;
                             fourthCategoryBookName.PostBackUrl = "~/Sites/book.aspx?id=" + category4;
 
@@ -184,84 +184,84 @@ namespace KlubNaCitateli.Sites
                         }
 
                     }
-                    reader6.Close();
+                    reader.Close();
 
-                    command6.Parameters.Clear();
-                    command6.Parameters.AddWithValue("?category", categoriesList[4]);
-                    reader6 = command6.ExecuteReader();
-                    if (reader6.HasRows)
+                    command.Parameters.Clear();
+                    command.Parameters.AddWithValue("?category", categoriesList[4]);
+                    reader = command.ExecuteReader();
+                    if (reader.HasRows)
                     {
-                        if (reader6.Read())
+                        if (reader.Read())
                         {
-                            category5 = Convert.ToInt32(reader6.GetValue(0));
+                            category5 = Convert.ToInt32(reader.GetValue(0));
 
-                            fifthCategoryBookName.Text = reader6["name"].ToString();
-                            fifthCategoryPanel.ImageUrl = reader6["thumbnail"].ToString();
+                            fifthCategoryBookName.Text = reader["name"].ToString();
+                            fifthCategoryPanel.ImageUrl = reader["thumbnail"].ToString();
                             fifthCategoryPanel.PostBackUrl = "~/Sites/book.aspx?id=" + category5;
                             fifthCategoryBookName.PostBackUrl = "~/Sites/book.aspx?id=" + category5;
 
                         }
 
                     }
-                    reader6.Close();
+                    reader.Close();
 
-                    command6.Parameters.Clear();
-                    command6.Parameters.AddWithValue("?category", categoriesList[5]);
-                    reader6 = command6.ExecuteReader();
-                    if (reader6.HasRows)
+                    command.Parameters.Clear();
+                    command.Parameters.AddWithValue("?category", categoriesList[5]);
+                    reader = command.ExecuteReader();
+                    if (reader.HasRows)
                     {
-                        if (reader6.Read())
+                        if (reader.Read())
                         {
-                            category6 = Convert.ToInt32(reader6.GetValue(0));
+                            category6 = Convert.ToInt32(reader.GetValue(0));
 
-                            sixthCategoryBookName.Text = reader6["name"].ToString();
-                            sixthCategoryPanel.ImageUrl = reader6["thumbnail"].ToString();
+                            sixthCategoryBookName.Text = reader["name"].ToString();
+                            sixthCategoryPanel.ImageUrl = reader["thumbnail"].ToString();
                             sixthCategoryPanel.PostBackUrl = "~/Sites/book.aspx?id=" + category6;
                             sixthCategoryBookName.PostBackUrl = "~/Sites/book.aspx?id=" + category6;
                         }
 
                     }
-                    reader6.Close();
+                    reader.Close();
 
                 }
                 else
                 {
                     List<string> namesCategories = new List<string>();
-                    MySqlCommand command6 = new MySqlCommand();
-                    command6.CommandText = "select categories.idcategory, name from categories, belongsto where belongsto.idcategory=categories.idcategory group by idcategory having count(idbook) > 0 order by rand() limit 6";
-                    command6.Connection = connection;
-                    MySqlDataReader reader6 = command6.ExecuteReader();
+                   
+                    command.CommandText = "select categories.idcategory, name from categories, belongsto where belongsto.idcategory=categories.idcategory group by idcategory having count(idbook) > 0 order by rand() limit 6";
+                    command.Connection = connection;
+                    reader = command.ExecuteReader();
 
-                    if (reader6.HasRows)
+                    if (reader.HasRows)
                     {
 
-                        while (reader6.Read())
+                        while (reader.Read())
                         {
-                            categoriesList.Add(Convert.ToInt32(reader6["idcategory"]));
-                            namesCategories.Add(reader6["name"].ToString());
+                            categoriesList.Add(Convert.ToInt32(reader["idcategory"]));
+                            namesCategories.Add(reader["name"].ToString());
                         }
 
                     }
 
-                    reader6.Close();
+                    reader.Close();
                     while (categoriesList.Count < 6)
                     {
-                        command6.CommandText = "select categories.idcategory, name from categories, belongsto where belongsto.idcategory=categories.idcategory group by idcategory having count(idbook) > 0 order by rand() limit 1";
-                        command6.Connection = connection;
-                        reader6 = command6.ExecuteReader();
+                        command.CommandText = "select categories.idcategory, name from categories, belongsto where belongsto.idcategory=categories.idcategory group by idcategory having count(idbook) > 0 order by rand() limit 1";
+                        command.Connection = connection;
+                        reader = command.ExecuteReader();
 
-                        if (reader6.HasRows)
+                        if (reader.HasRows)
                         {
 
-                            if (reader6.Read())
+                            if (reader.Read())
                             {
-                                categoriesList.Add(Convert.ToInt32(reader6["idcategory"]));
-                                namesCategories.Add(reader6["name"].ToString());
+                                categoriesList.Add(Convert.ToInt32(reader["idcategory"]));
+                                namesCategories.Add(reader["name"].ToString());
 
                             }
 
                         }
-                        reader6.Close();
+                        reader.Close();
 
                     }
 
@@ -273,107 +273,107 @@ namespace KlubNaCitateli.Sites
                     fifthCategoryName.Text = namesCategories[4];
                     sixthCategoryName.Text = namesCategories[5];
 
-                    command6.CommandText = "select books.idbook, books.thumbnail, books.name from books, belongsto where books.idbook=belongsto.idbook and belongsto.idcategory=?category order by rand() limit 1";
-                    command6.Parameters.AddWithValue("?category", categoriesList[0]);
-                    reader6 = command6.ExecuteReader();
-                    if (reader6.HasRows)
+                    command.CommandText = "select books.idbook, books.thumbnail, books.name from books, belongsto where books.idbook=belongsto.idbook and belongsto.idcategory=?category order by rand() limit 1";
+                    command.Parameters.AddWithValue("?category", categoriesList[0]);
+                    reader = command.ExecuteReader();
+                    if (reader.HasRows)
                     {
-                        if (reader6.Read())
+                        if (reader.Read())
                         {
-                            category1 = Convert.ToInt32(reader6.GetValue(0));
-                            firstCategoryBookName.Text = reader6["name"].ToString();
-                            firstCategoryPanel.ImageUrl = reader6["thumbnail"].ToString();
+                            category1 = Convert.ToInt32(reader.GetValue(0));
+                            firstCategoryBookName.Text = reader["name"].ToString();
+                            firstCategoryPanel.ImageUrl = reader["thumbnail"].ToString();
                             firstCategoryPanel.PostBackUrl = "~/Sites/book.aspx?id=" + category1;
                             firstCategoryBookName.PostBackUrl = "~/Sites/book.aspx?id=" + category1;
                         }
 
                     }
-                    reader6.Close();
+                    reader.Close();
 
-                    command6.Parameters.Clear();
-                    command6.Parameters.AddWithValue("?category", categoriesList[1]);
-                    reader6 = command6.ExecuteReader();
-                    if (reader6.HasRows)
+                    command.Parameters.Clear();
+                    command.Parameters.AddWithValue("?category", categoriesList[1]);
+                    reader = command.ExecuteReader();
+                    if (reader.HasRows)
                     {
-                        if (reader6.Read())
+                        if (reader.Read())
                         {
-                            category2 = Convert.ToInt32(reader6.GetValue(0));
-                            secondCategoryBookName.Text = reader6["name"].ToString();
-                            secondCategoryPanel.ImageUrl = reader6["thumbnail"].ToString();
+                            category2 = Convert.ToInt32(reader.GetValue(0));
+                            secondCategoryBookName.Text = reader["name"].ToString();
+                            secondCategoryPanel.ImageUrl = reader["thumbnail"].ToString();
                             secondCategoryPanel.PostBackUrl = "~/Sites/book.aspx?id=" + category2;
                             secondCategoryBookName.PostBackUrl = "~/Sites/book.aspx?id=" + category2;
 
                         }
 
                     }
-                    reader6.Close();
+                    reader.Close();
 
-                    command6.Parameters.Clear();
-                    command6.Parameters.AddWithValue("?category", categoriesList[2]);
-                    reader6 = command6.ExecuteReader();
-                    if (reader6.HasRows)
+                    command.Parameters.Clear();
+                    command.Parameters.AddWithValue("?category", categoriesList[2]);
+                    reader = command.ExecuteReader();
+                    if (reader.HasRows)
                     {
-                        if (reader6.Read())
+                        if (reader.Read())
                         {
-                            category3 = Convert.ToInt32(reader6.GetValue(0));
+                            category3 = Convert.ToInt32(reader.GetValue(0));
 
-                            thirdCategoryBookName.Text = reader6["name"].ToString();
-                            thirdCategoryPanel.ImageUrl = reader6["thumbnail"].ToString();
+                            thirdCategoryBookName.Text = reader["name"].ToString();
+                            thirdCategoryPanel.ImageUrl = reader["thumbnail"].ToString();
                             thirdCategoryPanel.PostBackUrl = "~/Sites/book.aspx?id=" + category3;
                             thirdCategoryBookName.PostBackUrl = "~/Sites/book.aspx?id=" + category3;
                         }
-                        reader6.Close();
+                        reader.Close();
                     }
 
-                    command6.Parameters.Clear();
-                    command6.Parameters.AddWithValue("?category", categoriesList[3]);
-                    reader6 = command6.ExecuteReader();
-                    if (reader6.HasRows)
+                    command.Parameters.Clear();
+                    command.Parameters.AddWithValue("?category", categoriesList[3]);
+                    reader = command.ExecuteReader();
+                    if (reader.HasRows)
                     {
-                        if (reader6.Read())
+                        if (reader.Read())
                         {
-                            category4 = Convert.ToInt32(reader6.GetValue(0));
+                            category4 = Convert.ToInt32(reader.GetValue(0));
 
-                            fourthCategoryBookName.Text = reader6["name"].ToString();
-                            fourthCategoryPanel.ImageUrl = reader6["thumbnail"].ToString();
+                            fourthCategoryBookName.Text = reader["name"].ToString();
+                            fourthCategoryPanel.ImageUrl = reader["thumbnail"].ToString();
                             fourthCategoryPanel.PostBackUrl = "~/Sites/book.aspx?id=" + category4;
                             fourthCategoryBookName.PostBackUrl = "~/Sites/book.aspx?id=" + category4;
                         }
-                        reader6.Close();
+                        reader.Close();
                     }
 
-                    command6.Parameters.Clear();
-                    command6.Parameters.AddWithValue("?category", categoriesList[4]);
-                    reader6 = command6.ExecuteReader();
-                    if (reader6.HasRows)
+                    command.Parameters.Clear();
+                    command.Parameters.AddWithValue("?category", categoriesList[4]);
+                    reader = command.ExecuteReader();
+                    if (reader.HasRows)
                     {
-                        if (reader6.Read())
+                        if (reader.Read())
                         {
-                            category5 = Convert.ToInt32(reader6.GetValue(0));
+                            category5 = Convert.ToInt32(reader.GetValue(0));
 
-                            fifthCategoryBookName.Text = reader6["name"].ToString();
-                            fifthCategoryPanel.ImageUrl = reader6["thumbnail"].ToString();
+                            fifthCategoryBookName.Text = reader["name"].ToString();
+                            fifthCategoryPanel.ImageUrl = reader["thumbnail"].ToString();
                             fifthCategoryPanel.PostBackUrl = "~/Sites/book.aspx?id=" + category5;
                             fifthCategoryBookName.PostBackUrl = "~/Sites/book.aspx?id=" + category5;
                         }
-                        reader6.Close();
+                        reader.Close();
                     }
 
-                    command6.Parameters.Clear();
-                    command6.Parameters.AddWithValue("?category", categoriesList[5]);
-                    reader6 = command6.ExecuteReader();
-                    if (reader6.HasRows)
+                    command.Parameters.Clear();
+                    command.Parameters.AddWithValue("?category", categoriesList[5]);
+                    reader = command.ExecuteReader();
+                    if (reader.HasRows)
                     {
-                        if (reader6.Read())
+                        if (reader.Read())
                         {
-                            category6 = Convert.ToInt32(reader6.GetValue(0));
+                            category6 = Convert.ToInt32(reader.GetValue(0));
 
-                            sixthCategoryBookName.Text = reader6["name"].ToString();
-                            sixthCategoryPanel.ImageUrl = reader6["thumbnail"].ToString();
+                            sixthCategoryBookName.Text = reader["name"].ToString();
+                            sixthCategoryPanel.ImageUrl = reader["thumbnail"].ToString();
                             sixthCategoryPanel.PostBackUrl = "~/Sites/book.aspx?id=" + category6;
                             sixthCategoryBookName.PostBackUrl = "~/Sites/book.aspx?id=" + category6;
                         }
-                        reader6.Close();
+                        reader.Close();
                     }
 
                 }
