@@ -135,7 +135,7 @@ namespace KlubNaCitateli.Sites
                     reader6.Close();
                 }
 
-                while (categoriesList.Count < 3)
+                while (categoriesList.Count < 6)
                 {
                     command6.CommandText = "select categories.idcategory, name from categories, belongsto where belongsto.idcategory=categories.idcategory group by idcategory having count(idbook) > 0 order by rand() limit 1";
                     command6.Connection = connection;
@@ -153,7 +153,6 @@ namespace KlubNaCitateli.Sites
 
                     }
                     reader6.Close();
-
                 }
 
                 firstCategoryName.Text = namesCategories[0];
@@ -283,6 +282,25 @@ namespace KlubNaCitateli.Sites
 
                 reader6.Close();
 
+                while (categoriesList.Count < 6)
+                {
+                    command6.CommandText = "select categories.idcategory, name from categories, belongsto where belongsto.idcategory=categories.idcategory group by idcategory having count(idbook) > 0 order by rand() limit 1";
+                    command6.Connection = connection;
+                    reader6 = command6.ExecuteReader();
+
+                    if (reader6.HasRows)
+                    {
+
+                        if (reader6.Read())
+                        {
+                            categoriesList.Add(Convert.ToInt32(reader6["idcategory"]));
+                            namesCategories.Add(reader6["name"].ToString());
+
+                        }
+
+                    }
+                    reader6.Close();
+                }
 
                 firstCategoryName.Text = namesCategories[0];
                 secondCategoryName.Text = namesCategories[1];
