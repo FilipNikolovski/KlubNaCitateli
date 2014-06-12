@@ -21,23 +21,32 @@
 </head>
 <body>
     <form id="form1" runat="server">
-        <div id="header">
-            <div id="logo">
-            <!--mesto za logoto-->
-            </div>
-            <div id="navigation">
-                <!--meni-->
-            </div>
-            <div id="login">
-                <!--forma za login od desno-->
-                <br />
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Sites/login.aspx">Log In</asp:HyperLink>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/Sites/signup.aspx">Sign Up</asp:HyperLink>
-            </div>
+    <div id="header">
+        <div id="logo">
+        <!--mesto za logoto-->
+            <asp:Image ID="Image1" runat="server" CssClass="logopic" />
         </div>
-
+        <div id="navigation">
+            <!--meni-->
+        </div>
+        <div id="login">
+            <!--forma za login od desno-->
+           <ul id="signLog">
+           <li>
+           <asp:LinkButton ID="HyperLink2" runat="server" CssClass="links" 
+                   OnClick="signUp_click" CausesValidation="False">Sign Up</asp:LinkButton>
+           <asp:Label ID="nameSurname" runat="server" CssClass="nameSurname"></asp:Label>
+           </li>
+            <li>|</li>
+            <li>
+            
+            <asp:LinkButton ID="HyperLink1" runat="server" CssClass="links" Text="Log In" 
+                    OnClick="logInOut_click" CausesValidation="False" ></asp:LinkButton>
+            
+       </li>
+        </ul>
+         </div>
+    </div>
         <div id="content">
             <asp:ContentPlaceHolder ID="mainContent" runat="server"></asp:ContentPlaceHolder>    
         </div>

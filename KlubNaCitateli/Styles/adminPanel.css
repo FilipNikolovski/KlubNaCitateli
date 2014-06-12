@@ -1,0 +1,61 @@
+﻿body 
+{
+    
+}
+
+#dialog-form
+{
+    background-color:#4169E1;
+    color:White;
+}
+#buttons
+{
+    background-color:#4169E1;
+    color:White;
+    margin-top:-8px;
+    height:10%;
+    padding:20px;
+
+}
+#fieldSet1, #fieldSet2
+{
+    margin:20px;
+    padding:10px;
+}
+
+#separateLabel
+{
+    margin:5px;
+    font-size:small;
+}
+
+.tbTags
+{
+    width:80%;
+    margin:10px;
+}
+.cblCategories
+{
+    margin:5px;
+}
+
+#category, #tags
+{
+    margin:5px;
+}
+.ui-dialog-titlebar-close{
+    display: none;
+}
+#add, #close
+{
+    border:1px solid gray;
+    border-radius:5px;
+    width:49%;
+    height:120%;
+    margin:auto;
+    color:#4169E1;
+}
+#title
+{   padding:70px;
+    font-size:large;
+}
