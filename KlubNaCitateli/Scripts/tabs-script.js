@@ -19,6 +19,7 @@
 
 $(document).ready(function () {
 
+
     $("#div2").hide();
     $("#li1").css("background-color", "#D3D3D3");
 
@@ -35,34 +36,7 @@ $(document).ready(function () {
         $(this).css("background-color", "#D3D3D3");
     });
 
-    var availableTags = [
-      "ActionScript",
-      "AppleScript",
-      "Asp",
-      "BASIC",
-      "C",
-      "C++",
-      "Clojure",
-      "COBOL",
-      "ColdFusion",
-      "Erlang",
-      "Fortran",
-      "Groovy",
-      "Haskell",
-      "Java",
-      "JavaScript",
-      "Lisp",
-      "Perl",
-      "PHP",
-      "Python",
-      "Ruby",
-      "Scala",
-      "Scheme"
-    ];
-
-    $("#tags").autocomplete({
-        source: availableTags
-    });
+ 
 
 
 

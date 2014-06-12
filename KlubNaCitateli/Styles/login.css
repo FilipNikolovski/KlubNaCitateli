@@ -1,0 +1,63 @@
+﻿body {
+}
+#main
+{
+    padding-top:50px;
+    font-family:Palatino Linotype;
+     padding-bottom:100px;
+}
+
+.login
+{
+    font-size:140%;
+    margin-left:450px;
+    font-family:Palatino Linotype;
+    text-align:center;
+    font-weight:bold;
+    
+}
+.TableRow
+{
+    margin:5px; 
+    padding:10px; 
+}
+.tabCell
+{
+    margin:5px;
+     padding-left:40px; 
+     padding-top:10px;
+     padding-bottom:10px;
+     font-size:120%;
+}
+.tabBox
+{
+    width:380px;
+    height:40px;
+    margin:5px;
+    margin-left:15px;
+    border-radius:5px;
+}
+#logInForm
+{
+    
+   margin:auto;
+   margin-top:50px;
+    border:solid;
+    border-color:gray;
+    border-width:3px;
+    padding-top:15px;
+    width:500px;
+    border-radius:10px;
+    background-color:#B0C4DE;
+   
+}
+.logInButt
+{
+    margin-left:80px;
+    width:250px;
+    height:40px;
+    border-radius:5px;
+    font-weight:bold;
+    margin-top:15px;
+    margin-bottom:10px;
+}

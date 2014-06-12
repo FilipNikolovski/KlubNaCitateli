@@ -25,7 +25,6 @@
     float:left;
     width:25%;
     height:100%;
-    background-color:Blue;
     display:inline;
 }
 
@@ -34,18 +33,38 @@
     float:left;
     width:35%;
     height:100%;
-    background-color:Green;
     display:inline;
+}
+.logopic
+{
+    height:35px;
+    width:249px;
+}
+#signLog li
+{
+    margin-left:5px;
+    display: inline;    
+    color:Black;
+    width:auto;
+}
+
+#signLog
+{
+    list-style-type:none;
+    margin-top:18px;
+    float:right;
+    width:auto;
+    margin-right:10px;
 }
 
 #login 
 {
     float:right;
-    display:inline;
-    width:30%;
+    width:50%;
     height:100%;
     display:inline;
     color:#1E90FF;
+    margin-top:-50px;
 }
 
 #footer 
@@ -53,4 +72,16 @@
     width:100%;
     height:30px;
     background-color:Yellow;
+}
+
+fieldset 
+{
+    margin: 8px;
+    border: 1px solid silver;
+    padding: 8px;    
+    border-radius: 4px;
+}
+.nameSurname
+{
+width:auto;
 }

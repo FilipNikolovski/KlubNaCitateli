@@ -10,29 +10,23 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="mainContent" runat="server">
         <div id="search">
-            <asp:TextBox ID="TextBox1" runat="server" placeholder="Search.." CssClass="searchBox" ></asp:TextBox>
+            <asp:TextBox ID="tbSearch" runat="server" placeholder="Search.." 
+                CssClass="searchBox" Width="540px" ></asp:TextBox>
+            <asp:Button ID="btnSearch" runat="server" Text="Search" 
+                onclick="btnSearch_Click" /> 
+                   
+            <asp:Label ID="lblError" runat="server" Text="Error" CssClass="label"></asp:Label>
+
         </div>
 
         <div id="searchContent">
             <ul id="sortList">
-                <li><asp:Label ID="Label3" runat="server" Text="Label" CssClass="label">Name</asp:Label></li>
-                <li><asp:Label ID="Label4" runat="server" Text="Label" CssClass="label">Author</asp:Label></li>
-                <li><asp:Label ID="Label5" runat="server" Text="Label" CssClass="label">Year of publish</asp:Label></li>
+                <li><asp:Label ID="Label3" runat="server" Text="Name" CssClass="label"></asp:Label></li>
+                <li><asp:Label ID="Label4" runat="server" Text="Author" CssClass="label"></asp:Label></li>
+                <li><asp:Label ID="Label5" runat="server" Text="Year of publish" CssClass="label"></asp:Label></li>
             </ul>
-            <div id="searchList">
-                <div class="searchItem">
-                    <div class="span1">
-                    </div>
-                    <div class="span2">
-                        <span>blablabla KUjeKUjeKUje KUjeKUjeKUjeKUje</span>
-                    </div>
-                    <div class="span3">
-                    <span>KUjeKUjeKUjeKUjeKUje KUjeKUje,KUjeKUjeKUjeKUjeKUje KUjeKUje </span>
-                    </div>
-                    <div class="span4">
-                    <span>12/12/1992</span>
-                    </div>
-                </div>
+            <div id="searchList" runat="server">
+                
             </div>
 
 
@@ -40,17 +34,12 @@
 
         <div id="filterContainer">
             <ul id="filterList">
-                <li><asp:Label ID="Label1" runat="server" Text="Label">Category</asp:Label></li>
+                <li><asp:Label ID="Label1" runat="server" Text="Category"></asp:Label></li>
                 <li><asp:CheckBoxList ID="CategoryList" runat="server"></asp:CheckBoxList></li>
-                <li><asp:Label ID="Label2" runat="server" Text="Label">Language</asp:Label></li>
+                <li><asp:Label ID="Label2" runat="server" Text="Language"></asp:Label></li>
                 <li><asp:CheckBoxList ID="LanguageList" runat="server"></asp:CheckBoxList></li>
             </ul>
         </div>
-        <asp:ScriptManager ID="ScriptManager1" runat="server">
-            <Services>
-                <asp:ServiceReference Path="~/Services/SearchService.svc" />
-            </Services>
-        </asp:ScriptManager>
 
 </asp:Content>
 
