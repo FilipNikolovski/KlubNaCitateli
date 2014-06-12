@@ -67,7 +67,7 @@ namespace KlubNaCitateli.Sites
                 if (Session["Name"] != null)
                 {
                     List<string> namesCategories = new List<string>();
-                   
+
                     command.CommandText = "select categories.idcategory, name from usercategories, categories where iduser=?iduser and usercategories.idcategory=categories.idcategory order by rand() limit 6";
                     command.Parameters.AddWithValue("?iduser", Session["id"].ToString());
                     command.Connection = connection;
@@ -131,26 +131,6 @@ namespace KlubNaCitateli.Sites
                     }
                     reader.Close();
 
-<<<<<<< HEAD
-                    while (categoriesList.Count < 6)
-                    {
-                        command6.CommandText = "select categories.idcategory, name from categories, belongsto where belongsto.idcategory=categories.idcategory group by idcategory having count(idbook) > 0 order by rand() limit 1";
-                        command6.Connection = connection;
-                        command6.Parameters.Clear();
-                        command6.Parameters.AddWithValue("?category", categoriesList[1]);
-
-                        reader6 = command6.ExecuteReader();
-                        if (reader6.HasRows)
-                        {
-                            if (reader6.Read())
-                            {
-                                category2 = Convert.ToInt32(reader6.GetValue(0));
-                                secondCategoryBookName.Text = reader6["name"].ToString();
-                                secondCategoryPanel.ImageUrl = reader6["thumbnail"].ToString();
-                                secondCategoryPanel.PostBackUrl = "~/Sites/book.aspx?id=" + category2;
-                                secondCategoryBookName.PostBackUrl = "~/Sites/book.aspx?id=" + category2;
-                            }
-=======
                     command.Parameters.Clear();
                     command.Parameters.AddWithValue("?category", categoriesList[1]);
                     reader = command.ExecuteReader();
@@ -164,22 +144,9 @@ namespace KlubNaCitateli.Sites
                             secondCategoryPanel.PostBackUrl = "~/Sites/book.aspx?id=" + category2;
                             secondCategoryBookName.PostBackUrl = "~/Sites/book.aspx?id=" + category2;
                         }
->>>>>>> 229cd16615b18ce2435a6597f638ad76d41a6ea5
 
-                        }
-                        reader6.Close();
                     }
-<<<<<<< HEAD
-
-                    firstCategoryName.Text = namesCategories[0];
-                    secondCategoryName.Text = namesCategories[1];
-                    thirdCategoryName.Text = namesCategories[2];
-                    fourthCategoryName.Text = namesCategories[3];
-                    fifthCategoryName.Text = namesCategories[4];
-                    sixthCategoryName.Text = namesCategories[5];
-=======
                     reader.Close();
->>>>>>> 229cd16615b18ce2435a6597f638ad76d41a6ea5
 
                     command.Parameters.Clear();
                     command.Parameters.AddWithValue("?category", categoriesList[2]);
@@ -194,6 +161,8 @@ namespace KlubNaCitateli.Sites
                             thirdCategoryPanel.ImageUrl = reader["thumbnail"].ToString();
                             thirdCategoryPanel.PostBackUrl = "~/Sites/book.aspx?id=" + category3;
                             thirdCategoryBookName.PostBackUrl = "~/Sites/book.aspx?id=" + category3;
+
+
                         }
 
                     }
@@ -259,7 +228,7 @@ namespace KlubNaCitateli.Sites
                 else
                 {
                     List<string> namesCategories = new List<string>();
-                   
+
                     command.CommandText = "select categories.idcategory, name from categories, belongsto where belongsto.idcategory=categories.idcategory group by idcategory having count(idbook) > 0 order by rand() limit 6";
                     command.Connection = connection;
                     reader = command.ExecuteReader();
@@ -285,30 +254,7 @@ namespace KlubNaCitateli.Sites
                         if (reader.HasRows)
                         {
 
-<<<<<<< HEAD
-                            while (categoriesList.Count < 6)
-                            {
-                                command6.CommandText = "select categories.idcategory, name from categories, belongsto where belongsto.idcategory=categories.idcategory group by idcategory having count(idbook) > 0 order by rand() limit 1";
-                                command6.Connection = connection;
-                                reader6 = command6.ExecuteReader();
-
-                                if (reader6.HasRows)
-                                {
-
-                                    if (reader6.Read())
-                                    {
-                                        categoriesList.Add(Convert.ToInt32(reader6["idcategory"]));
-                                        namesCategories.Add(reader6["name"].ToString());
-
-                                    }
-
-                                }
-                                reader6.Close();
-                            }
-                            if (reader6.Read())
-=======
                             if (reader.Read())
->>>>>>> 229cd16615b18ce2435a6597f638ad76d41a6ea5
                             {
                                 categoriesList.Add(Convert.ToInt32(reader["idcategory"]));
                                 namesCategories.Add(reader["name"].ToString());
@@ -441,8 +387,6 @@ namespace KlubNaCitateli.Sites
             {
                 connection.Close();
             }
-
-
         }
 
     }
