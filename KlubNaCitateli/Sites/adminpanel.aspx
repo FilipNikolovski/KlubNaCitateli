@@ -9,7 +9,14 @@
     <script type="text/javascript">
         $(document).ready(function () {
 
-            $("#tabs").tabs();
+            $("#tabs").tabs({
+                activate: function () {
+                    var selectedTab = $('#tabs').tabs('option', 'active');
+                    $("#<%= selectedTab.ClientID %>").val(selectedTab);
+                },
+                active: $("#<%= selectedTab.ClientID %>").val()
+
+            });
 
             function onSuccess(result) {
                 alert(result);
@@ -86,6 +93,7 @@
     <asp:Label ID="lblError" runat="server" Text="lblError" Visible="False"></asp:Label>
     <asp:HiddenField ID="bookField" runat="server" />
     <asp:HiddenField ID="bookIdsField" runat="server" />
+    <asp:HiddenField ID="selectedTab" runat="server" Value="0" />
 
     <div id="dialog-form">
         <label id="title">
