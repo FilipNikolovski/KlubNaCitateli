@@ -1,13 +1,18 @@
 ﻿body 
 {
-    margin: 10px auto;
-    font-family: "Helvetica";
-    width:1000px;
     background-image:url("../Images/bg-body.jpg");
 }
+#form1
+{
+    font-family: "Helvetica";
+    width: 60%;
+    margin: auto;
+}
+    
 #content
 {
     background-color:#E6E6FA;
+     
 }
 #header 
 {

@@ -21,30 +21,30 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    <div id="header">
-        <div id="logo">
-        <!--mesto za logoto-->
+        <div id="header">
+            <div id="logo">
+            <!--mesto za logoto-->
+            </div>
+            <div id="navigation">
+                <!--meni-->
+            </div>
+            <div id="login">
+                <!--forma za login od desno-->
+                <br />
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Sites/login.aspx">Log In</asp:HyperLink>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/Sites/signup.aspx">Sign Up</asp:HyperLink>
+            </div>
         </div>
-        <div id="navigation">
-            <!--meni-->
-        </div>
-        <div id="login">
-            <!--forma za login od desno-->
-            <br />
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Sites/login.aspx">Log In</asp:HyperLink>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/Sites/signup.aspx">Sign Up</asp:HyperLink>
-        </div>
-    </div>
 
-    <div id="content">
-        <asp:ContentPlaceHolder ID="mainContent" runat="server"></asp:ContentPlaceHolder>    
-    </div>
+        <div id="content">
+            <asp:ContentPlaceHolder ID="mainContent" runat="server"></asp:ContentPlaceHolder>    
+        </div>
 
-    <div id="footer">
-        <!--footer-->
-    </div>
+        <div id="footer">
+            <!--footer-->
+        </div>
     </form>
 </body>
 </html>

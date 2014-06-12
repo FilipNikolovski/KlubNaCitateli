@@ -11,14 +11,9 @@ namespace KlubNaCitateli
 {
     public partial class Site : System.Web.UI.MasterPage
     {
-<<<<<<< HEAD
-
-=======
         protected void Page_Load(object sender, EventArgs e)
         {
- 
-
+            
         }
->>>>>>> bbda8ad890363eab826f2fadd9a8d048119a1f36
     }
 }
