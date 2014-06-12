@@ -13,6 +13,7 @@ namespace KlubNaCitateli.Sites
     {
         int mostWanted = -1, mostViewed = -1, bestThisMonth = -1, category1 = -1, category2 = -1, category3 = -1, category4 = -1, category5 = -1, category6 = -1;
         List<int> categoriesList = new List<int>(2);
+
         MySqlConnection connection;
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -66,7 +67,7 @@ namespace KlubNaCitateli.Sites
                 if (Session["Name"] != null)
                 {
                     List<string> namesCategories = new List<string>();
-                   
+
                     command.CommandText = "select categories.idcategory, name from usercategories, categories where iduser=?iduser and usercategories.idcategory=categories.idcategory order by rand() limit 6";
                     command.Parameters.AddWithValue("?iduser", Session["id"].ToString());
                     command.Connection = connection;
@@ -227,7 +228,7 @@ namespace KlubNaCitateli.Sites
                 else
                 {
                     List<string> namesCategories = new List<string>();
-                   
+
                     command.CommandText = "select categories.idcategory, name from categories, belongsto where belongsto.idcategory=categories.idcategory group by idcategory having count(idbook) > 0 order by rand() limit 6";
                     command.Connection = connection;
                     reader = command.ExecuteReader();
@@ -386,8 +387,6 @@ namespace KlubNaCitateli.Sites
             {
                 connection.Close();
             }
-
-
         }
 
     }

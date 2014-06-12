@@ -283,7 +283,7 @@ namespace KlubNaCitateli.Sites
                     }
                     else
                     {
-                        ClientScript.RegisterStartupScript(this.GetType(), "Alert", "alert('That category already exists');", true);
+                        ClientScript.RegisterStartupScript(this.GetType(), "Alert", "$(document).ready(function(){alert('That category already exists');});", true);
                     }
                 }
                 catch (Exception ex)
@@ -580,7 +580,7 @@ namespace KlubNaCitateli.Sites
                 Page.ClientScript.RegisterStartupScript(this.GetType(), "openDialog", script);
             }
             else
-                ClientScript.RegisterStartupScript(this.GetType(), "Alert", "alert('No books were added to the database.');", true);
+                ClientScript.RegisterStartupScript(this.GetType(), "Alert", "$(document).ready(function(){alert('No books were added to the database.');});", true);
         }
 
         protected void gvBooks_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -608,11 +608,11 @@ namespace KlubNaCitateli.Sites
 
                     if (tbType.Text != "administrator" && tbType.Text != "user" && tbType.Text != "moderator")
                     {
-                        ClientScript.RegisterStartupScript(this.GetType(), "Alert", "alert('The type must be administrator, user or moderator.');", true);
+                        ClientScript.RegisterStartupScript(this.GetType(), "Alert", "$(document).ready(function(){alert('The type must be administrator, user or moderator.');});", true);
                     }
                     else if (tbBanned.Text != "0" && tbBanned.Text != "1")
                     {
-                        ClientScript.RegisterStartupScript(this.GetType(), "Alert", "alert('You can use only 1 or 0 in the banned column.');", true);
+                        ClientScript.RegisterStartupScript(this.GetType(), "Alert", "$(document).ready(function(){alert('You can use only 1 or 0 in the banned column.');});", true);
                     }
                     else
                     {

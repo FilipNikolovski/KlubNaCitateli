@@ -15,7 +15,8 @@
                     $("#<%= selectedTab.ClientID %>").val(selectedTab);
                 },
                 active: $("#<%= selectedTab.ClientID %>").val()
-                });
+            });
+
 
             function onSuccess(result) {
                 alert(result);
@@ -93,6 +94,7 @@
     <asp:HiddenField ID="bookField" runat="server" />
     <asp:HiddenField ID="selectedTab" runat="server" />
     <asp:HiddenField ID="bookIdsField" runat="server" />
+    <asp:HiddenField ID="selectedTab" runat="server" Value="0" />
 
     <div id="dialog-form">
         <label id="title">
@@ -231,6 +233,42 @@
             </fieldset>
         </div>
         <div id="tab-4">
+            <fieldset>
+                <legend>Add Book</legend>
+                <table>
+                    <tr>
+                        <td>ISBN:</td>
+                        <td><asp:TextBox ID="tbISBN" runat="server"></asp:TextBox></td>
+                    </tr>
+                    <tr>
+                        <td>Book Name:</td>
+                        <td><asp:TextBox ID="tbBookName" runat="server"></asp:TextBox></td>
+                    </tr>
+                    <tr>
+                        <td>Language:</td>
+                        <td><asp:TextBox ID="tbLanguage" runat="server"></asp:TextBox></td>
+                    </tr>
+                    <tr>
+                        <td>Year Published:</td>
+                        <td><asp:TextBox ID="tbYearPublished" runat="server"></asp:TextBox></td>
+                    </tr>
+                    <tr>
+                        <td>Cover:</td>
+                        <td><asp:FileUpload ID="imageUpload" runat="server" /></td>
+                    </tr>
+                    <tr>
+                        <td>Authors:</td>
+                        <td><asp:TextBox ID="tbAuthors" runat="server"></asp:TextBox></td>
+                    </tr>
+                    <tr>
+                        <td>Description:</td>
+                        <td><asp:TextBox ID="tbDescription" runat="server" TextMode="MultiLine"></asp:TextBox> </td>
+                    </tr>
+                    <tr>
+                        <td><asp:Button ID="btnSubmit" runat="server" Text="Submit" /></td>
+                    </tr>
+                </table>
+            </fieldset>
         </div>
     </div>
 
