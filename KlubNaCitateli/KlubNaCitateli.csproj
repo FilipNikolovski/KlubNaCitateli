@@ -96,7 +96,6 @@
     <Content Include="Styles\Site.css" />
     <Content Include="Styles\signup.css" />
     <Content Include="Styles\login.css" />
-    <Content Include="Styles\token-input-facebook.css" />
     <Content Include="Styles\token-input.css" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
