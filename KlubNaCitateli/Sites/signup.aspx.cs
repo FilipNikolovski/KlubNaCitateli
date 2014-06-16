@@ -164,7 +164,7 @@ namespace KlubNaCitateli.Sites
                     // Draw the new graphic based on the resized bitmap
                     oGraphics.DrawImage(originalBMP, 0, 0, newWidth, newHeight);
                     // Save the new graphic file to the server
-                    newBMP.Save(Server.MapPath("~/Images/ProfilePicture/") + (user.username + ext));
+                    newBMP.Save(Server.MapPath("~/Images/ProfilePicture/") + (username.Text + ext));
 
                     // Once finished with the bitmap objects, we deallocate them.
                     originalBMP.Dispose();
