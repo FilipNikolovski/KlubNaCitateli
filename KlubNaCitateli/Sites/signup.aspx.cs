@@ -149,14 +149,14 @@ namespace KlubNaCitateli.Sites
                     Bitmap originalBMP = new Bitmap(profileImage.FileContent);
 
                     // Calculate the new image dimensions
-                    int origWidth = originalBMP.Width;
-                    int origHeight = originalBMP.Height;
-                    int sngRatio = origWidth / origHeight;
-                    int newWidth = 200;
-                    int newHeight = newWidth / sngRatio;
+                    float origWidth = originalBMP.Width;
+                    float origHeight = originalBMP.Height;
+                    float sngRatio = origWidth / origHeight;
+                    float newWidth = 200;
+                    float newHeight = newWidth / sngRatio;
 
                     // Create a new bitmap which will hold the previous resized bitmap
-                    Bitmap newBMP = new Bitmap(originalBMP, newWidth, newHeight);
+                    Bitmap newBMP = new Bitmap(originalBMP, (int)newWidth, (int)newHeight);
 
                     // Create a graphic based on the new bitmap
                     Graphics oGraphics = Graphics.FromImage(newBMP);
@@ -167,7 +167,7 @@ namespace KlubNaCitateli.Sites
                     // Draw the new graphic based on the resized bitmap
                     oGraphics.DrawImage(originalBMP, 0, 0, newWidth, newHeight);
                     // Save the new graphic file to the server
-                    newBMP.Save(Server.MapPath("~/Images/ProfilePicture/") + (user.username + ext));
+                    newBMP.Save(Server.MapPath("~/Images/ProfilePicture/") + (username.Text + ext));
 
                     // Once finished with the bitmap objects, we deallocate them.
                     originalBMP.Dispose();

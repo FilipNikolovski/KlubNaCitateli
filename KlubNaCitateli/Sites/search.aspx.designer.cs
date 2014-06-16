@@ -85,30 +85,12 @@ namespace KlubNaCitateli.Sites {
         protected global::System.Web.UI.WebControls.Label Label1;
         
         /// <summary>
-        /// CategoryList control.
+        /// cblCategories control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBoxList CategoryList;
-        
-        /// <summary>
-        /// Label2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label2;
-        
-        /// <summary>
-        /// LanguageList control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBoxList LanguageList;
+        protected global::System.Web.UI.WebControls.CheckBoxList cblCategories;
     }
 }
