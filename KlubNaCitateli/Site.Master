@@ -6,21 +6,46 @@
 <head runat="server">
     <title>Клуб на читатели</title>
     <meta charset="utf-8" />
-    <link href="Styles/Site.css" rel="stylesheet" type="text/css" />
+    <link href="Styles/Site.css" rel="stylesheet" type="text/css" /> 
+    <script type="text/javascript" src="<%= Page.ResolveClientUrl("../Scripts/jquery-1.10.2.js") %>"></script>
+    
+    <script type="text/javascript" src="<%= Page.ResolveClientUrl("../Scripts/jquery-ui-1.10.4.custom.js") %>"></script>
+    
+    <script type="text/javascript" src="<%= Page.ResolveClientUrl("../Scripts/jquery-ui-1.10.4.custom.min.js") %>"></script>
+    
+    
     <asp:ContentPlaceHolder ID="head" runat="server">
+  
     </asp:ContentPlaceHolder>
+
 </head>
 <body>
+    <form id="form1" runat="server">
     <div id="header">
         <div id="logo">
         <!--mesto za logoto-->
+            <asp:Image ID="Image1" runat="server" CssClass="logopic" />
         </div>
         <div id="navigation">
             <!--meni-->
         </div>
         <div id="login">
             <!--forma za login od desno-->
-        </div>
+           <ul id="signLog">
+           <li>
+           <asp:LinkButton ID="HyperLink2" runat="server" CssClass="links" 
+                   OnClick="signUp_click" CausesValidation="False">Sign Up</asp:LinkButton>
+           <asp:Label ID="nameSurname" runat="server" CssClass="nameSurname"></asp:Label>
+           </li>
+            <li>|</li>
+            <li>
+            
+            <asp:LinkButton ID="HyperLink1" runat="server" CssClass="links" Text="Log In" 
+                    OnClick="logInOut_click" CausesValidation="False" ></asp:LinkButton>
+            
+       </li>
+        </ul>
+         </div>
     </div>
 
     <div id="content">
@@ -30,5 +55,6 @@
     <div id="footer">
         <!--footer-->
     </div>
+    </form>
 </body>
 </html>
