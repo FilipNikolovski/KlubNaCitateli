@@ -92,7 +92,6 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="mainContent" runat="server">
     <asp:Label ID="lblError" runat="server" Text="lblError" Visible="False"></asp:Label>
     <asp:HiddenField ID="bookField" runat="server" />
-    <asp:HiddenField ID="selectedTab" runat="server" />
     <asp:HiddenField ID="bookIdsField" runat="server" />
     <asp:HiddenField ID="selectedTab" runat="server" Value="0" />
 

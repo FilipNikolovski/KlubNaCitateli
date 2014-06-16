@@ -39,6 +39,9 @@ namespace KlubNaCitateli
             {
                 Session["Name"] = null;
                 Session["Surname"] = null;
+                Session["Id"] = null;
+                Session["Type"] = null;
+                Session["Banned"] = null;
                 Response.Redirect("index.aspx");
             }
         }
