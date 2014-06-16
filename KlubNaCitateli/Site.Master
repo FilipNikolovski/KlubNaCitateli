@@ -24,7 +24,8 @@
     <div id="header">
         <div id="logo">
         <!--mesto za logoto-->
-            <asp:Image ID="Image1" runat="server" CssClass="logopic" />
+        <img runat="server" src="~/Images/booklogo.png"  class="logopic"/>
+        <img id="Img1" runat="server" src="~/Images/readersLogo.png" />
         </div>
         <div id="navigation">
             <!--meni-->

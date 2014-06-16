@@ -18,7 +18,7 @@ namespace KlubNaCitateli.Classes
         public string type { get; set; }
         public int numComments { get; set; }
         public String aboutUser { get; set; }
-       
+
 
         public User(string name, string surname, string email, string username, string password, String aboutUser)
         {
@@ -35,8 +35,11 @@ namespace KlubNaCitateli.Classes
 
         public void CheckIfUserExists(bool checkEmail, bool checkUsername)
         {
-            
-                    MySqlConnection connection = new MySqlConnection();
+
+            using (MySqlConnection connection = new MySqlConnection())
+            {
+                try
+                {
                     connection.ConnectionString = ConfigurationManager.ConnectionStrings["BooksConn"].ConnectionString.ToString();
                     MySqlCommand command = new MySqlCommand();
                     command.CommandText = "SELECT IDUser from users where email=@email";
@@ -49,27 +52,35 @@ namespace KlubNaCitateli.Classes
                         checkEmail = false;
                     }
                     dataReader.Close();
-            
+
                     MySqlCommand command1 = new MySqlCommand();
                     command1.Connection = connection;
                     command1.CommandText = "SELECT IDUser from users where username=@username";
                     command1.Parameters.AddWithValue("@username", username.ToString());
-                   MySqlDataReader dataReader1 = command1.ExecuteReader();
+                    MySqlDataReader dataReader1 = command1.ExecuteReader();
                     if (dataReader1.HasRows)
                     {
                         checkUsername = false;
                     }
                     dataReader1.Close();
-                   
+
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+                finally
+                {
                     connection.Close();
-                
+                }
 
-               
             }
+
         }
-
-
-
-
-
     }
+
+
+
+
+
+}
