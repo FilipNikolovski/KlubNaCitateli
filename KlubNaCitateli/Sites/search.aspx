@@ -15,29 +15,25 @@
             <asp:Button ID="btnSearch" runat="server" Text="Search" 
                 onclick="btnSearch_Click" /> 
                    
-            <asp:Label ID="lblError" runat="server" Text="Error" CssClass="label"></asp:Label>
+            <asp:Label ID="lblError" runat="server" Text="Error" CssClass="label" Visible="false"></asp:Label>
 
         </div>
 
         <div id="searchContent">
             <ul id="sortList">
                 <li><asp:Label ID="Label3" runat="server" Text="Name" CssClass="label"></asp:Label></li>
-                <li><asp:Label ID="Label4" runat="server" Text="Author" CssClass="label"></asp:Label></li>
+                <li><asp:Label ID="Label4" runat="server" Text="Description" CssClass="label"></asp:Label></li>
                 <li><asp:Label ID="Label5" runat="server" Text="Year of publish" CssClass="label"></asp:Label></li>
             </ul>
             <div id="searchList" runat="server">
-                
+                    
             </div>
-
-
         </div>
 
         <div id="filterContainer">
             <ul id="filterList">
                 <li><asp:Label ID="Label1" runat="server" Text="Category"></asp:Label></li>
-                <li><asp:CheckBoxList ID="CategoryList" runat="server"></asp:CheckBoxList></li>
-                <li><asp:Label ID="Label2" runat="server" Text="Language"></asp:Label></li>
-                <li><asp:CheckBoxList ID="LanguageList" runat="server"></asp:CheckBoxList></li>
+                <li><asp:CheckBoxList ID="cblCategories" runat="server"></asp:CheckBoxList></li>
             </ul>
         </div>
 

@@ -3,26 +3,25 @@
     margin: 10px auto;
     font-family: "Helvetica";
     width:1000px;
-    background-image:url("../Images/bg-body.jpg");
+    background-image:url("../Images/bg-body.png");
 }
 #content
 {
-    background-color:#E6E6FA;
+    background-color:#FFF8DC;
 }
 #header 
 {
     width:100%;
-    height:40px;
+    height:52px;
 }
 
 #logo 
 {
     float:left;
-    width:25%;
-    height:100%;
+    height:auto;
     display:inline;
+    font-family:"Lucida Sans Unicode";  
 }
-
 #navigation 
 {
     float:left;
@@ -32,8 +31,8 @@
 }
 .logopic
 {
-    height:35px;
-    width:249px;
+    float:left;
+    margin-right:5px;
 }
 #signLog li
 {

@@ -75,65 +75,68 @@ namespace KlubNaCitateli.Sites
             else
             {
 
-                MySqlConnection conn = new MySqlConnection();
-                conn.ConnectionString = ConfigurationManager.ConnectionStrings["BooksConn"].ConnectionString.ToString();
-
-                try
+                using (MySqlConnection conn = new MySqlConnection())
                 {
-                    conn.Open();
-                    MySqlCommand comm = new MySqlCommand();
-                    comm.CommandText = "INSERT into users (name, banned, surname, email, username, password, type, numComments) VALUES(?name, ?banned, ?surname, ?email, ?username, ?password, ?type, ?numComments)";
-                    comm.Connection = conn;
-                    comm.Parameters.AddWithValue("?name", user.name);
-                    comm.Parameters.AddWithValue("?surname", user.surname);
-                    comm.Parameters.AddWithValue("?email", user.email);
-                    comm.Parameters.AddWithValue("?username", user.username);
-                    comm.Parameters.AddWithValue("?password", user.password);
-                    comm.Parameters.AddWithValue("?type", "user");
-                    comm.Parameters.AddWithValue("?numComments", 0);
-                    comm.Parameters.AddWithValue("?banned", 0);
+                    conn.ConnectionString = ConfigurationManager.ConnectionStrings["BooksConn"].ConnectionString.ToString();
 
-                    comm.ExecuteNonQuery();
-                    string iduser = "";
-                    comm.CommandText = "select iduser from users where username=?username";
-                    MySqlDataReader reader = comm.ExecuteReader();
-                    if (reader.Read())
+                    try
                     {
-                        iduser = reader.GetValue(0).ToString();
+                        conn.Open();
+                        MySqlCommand comm = new MySqlCommand();
+                        comm.CommandText = "INSERT into users (name, banned, surname, email, username, password, type, numComments) VALUES(?name, ?banned, ?surname, ?email, ?username, ?password, ?type, ?numComments)";
+                        comm.Connection = conn;
+                        comm.Parameters.AddWithValue("?name", user.name);
+                        comm.Parameters.AddWithValue("?surname", user.surname);
+                        comm.Parameters.AddWithValue("?email", user.email);
+                        comm.Parameters.AddWithValue("?username", user.username);
+                        comm.Parameters.AddWithValue("?password", user.password);
+                        comm.Parameters.AddWithValue("?type", "user");
+                        comm.Parameters.AddWithValue("?numComments", 0);
+                        comm.Parameters.AddWithValue("?banned", 0);
 
-                    }
-                    reader.Close();
-
-
-
-                    string categories = demo.Text;
-                    string[] cat = categories.Split(new char[] { ',' });
-
-                    comm.CommandText = "Insert into usercategories (IDUser, IDCategory) values (?IDUser, ?IDCategory)";
-                    foreach (string category in cat)
-                    {
-                        if (category.Trim() != "")
+                        comm.ExecuteNonQuery();
+                        string iduser = "";
+                        comm.CommandText = "select iduser from users where username=?username";
+                        MySqlDataReader reader = comm.ExecuteReader();
+                        if (reader.Read())
                         {
-                            comm.Parameters.Clear();
-                            comm.Parameters.AddWithValue("?IDUser", iduser);
-                            comm.Parameters.AddWithValue("?IDCategory", category);
-                            comm.ExecuteNonQuery();
+                            iduser = reader.GetValue(0).ToString();
 
                         }
+                        reader.Close();
+
+
+
+                        string categories = demo.Text;
+                        string[] cat = categories.Split(new char[] { ',' });
+
+                        comm.CommandText = "Insert into usercategories (IDUser, IDCategory) values (?IDUser, ?IDCategory)";
+                        foreach (string category in cat)
+                        {
+                            if (category.Trim() != "")
+                            {
+                                comm.Parameters.Clear();
+                                comm.Parameters.AddWithValue("?IDUser", iduser);
+                                comm.Parameters.AddWithValue("?IDCategory", category);
+                                comm.ExecuteNonQuery();
+
+                            }
+                        }
+
+                    }
+                    catch (Exception err)
+                    {
+                        Console.WriteLine(err.Message);
+                    }
+                    finally
+                    {
+                        conn.Close();
                     }
 
                 }
-                catch (Exception err)
-                {
-                    Console.WriteLine(err.Message);
-                }
-                finally
-                {
-                    conn.Close();
-                }
-
+                Response.Redirect("login.aspx");
             }
-            Response.Redirect("login.aspx");
+            
         }
 
         public void finishButton_click(object sender, EventArgs e)
@@ -146,14 +149,14 @@ namespace KlubNaCitateli.Sites
                     Bitmap originalBMP = new Bitmap(profileImage.FileContent);
 
                     // Calculate the new image dimensions
-                    int origWidth = originalBMP.Width;
-                    int origHeight = originalBMP.Height;
-                    int sngRatio = origWidth / origHeight;
-                    int newWidth = 200;
-                    int newHeight = newWidth / sngRatio;
+                    float origWidth = originalBMP.Width;
+                    float origHeight = originalBMP.Height;
+                    float sngRatio = origWidth / origHeight;
+                    float newWidth = 200;
+                    float newHeight = newWidth / sngRatio;
 
                     // Create a new bitmap which will hold the previous resized bitmap
-                    Bitmap newBMP = new Bitmap(originalBMP, newWidth, newHeight);
+                    Bitmap newBMP = new Bitmap(originalBMP, (int)newWidth, (int)newHeight);
 
                     // Create a graphic based on the new bitmap
                     Graphics oGraphics = Graphics.FromImage(newBMP);
@@ -174,7 +177,7 @@ namespace KlubNaCitateli.Sites
                 }
                 else
                 {
-                    string script = "<script>alert('The image file is not valid. Valid extensions are .jpg and .png! Try again.');</script>";
+                    string script = "<script>$(document).ready(function(){alert('The image file is not valid. Valid extensions are .jpg and .png! Try again.');});</script>";
                     Page.ClientScript.RegisterStartupScript(this.GetType(), "openDialog", script);
                 }
             }

@@ -6,6 +6,9 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using KlubNaCitateli.Classes;
 using System.Text;
+using MySql.Data.MySqlClient;
+using System.Configuration;
+using System.Data;
 
 namespace KlubNaCitateli.Sites
 {
@@ -14,46 +17,119 @@ namespace KlubNaCitateli.Sites
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                FillCategoriesList();
+            }
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)
         {
+
             
-            List<Book> books = new List<Book>();
-            books = Book.SelectListBooks(tbSearch.Text, "Any", "Any");
+        }
 
-            if (books.Count > 0)
+        private void FillCategoriesList()
+        {
+            using (MySqlConnection connection = new MySqlConnection())
             {
-                StringBuilder innerHTML = new StringBuilder();
-                foreach (Book book in books)
+                connection.ConnectionString = ConfigurationManager.ConnectionStrings["BooksConn"].ConnectionString;
+
+                try
                 {
-                    StringBuilder sb = new StringBuilder();
+                    connection.Open();
 
-                    sb.Append("<div class='searchItem'>");
-                    sb.Append("<div class='span1'></div>");
-                    sb.Append("<div class='span2'><span>");
-                    foreach (string author in book.Authors)
-                    {
-                        sb.Append(author.ToString() + " ");
-                    }
-                    sb.Append("</span></div>");
-                    sb.Append("<div class='span3'><span>" + book.Description + "</span></div>");
-                    sb.Append("<div class='span4'><span>" + book.YearPublished + "</span></div>");
+                    string query = "SELECT * FROM Categories";
 
-                    sb.Append("</div>");
-                    innerHTML.Append(sb.ToString());
+                    MySqlCommand command = new MySqlCommand(query, connection);
+
+                    MySqlDataAdapter dataAdapter = new MySqlDataAdapter();
+                    dataAdapter.SelectCommand = command;
+
+                    DataSet ds = new DataSet();
+
+                    dataAdapter.Fill(ds, "Categories");
+
+                    cblCategories.DataSource = ds.Tables["Categories"];
+                    cblCategories.DataTextField = "Name";
+                    cblCategories.DataValueField = "IDCategory";
+                    cblCategories.DataBind();
+
+                    ViewState["Categories"] = ds;
                 }
-
-                searchList.InnerHtml = innerHTML.ToString();
-            }
-
-            else
-            {
-                searchList.InnerHtml = "<div class='searchItem'><span>Search result is empty.</span></div>";
+                catch (Exception e)
+                {
+                    lblError.Text = e.Message;
+                    lblError.Visible = true;
+                }
+                finally
+                {
+                    connection.Close();
+                }
             }
         }
 
+        private void FillSearchContent(string search)
+        {
+            using (MySqlConnection connection = new MySqlConnection())
+            {
 
+                connection.ConnectionString = ConfigurationManager.ConnectionStrings["BooksConn"].ConnectionString;
+
+                try
+                {
+                    connection.Open();
+
+                    List<Book> books = new List<Book>();
+                        
+                    string query = "";
+                    MySqlCommand command = new MySqlCommand(query, connection);
+                    MySqlDataReader reader;
+
+
+
+                    if (books.Count > 0)
+                    {
+                        StringBuilder innerHTML = new StringBuilder();
+                        foreach (Book book in books)
+                        {
+                            StringBuilder sb = new StringBuilder();
+
+                            sb.Append("<div class='searchItem'>");
+
+                            sb.Append("<div class='span1'></div>");
+                            sb.Append("<div class='span2'><span>");
+                            foreach (string author in book.Authors)
+                            {
+                                sb.Append(author.ToString() + " ");
+                            }
+                            sb.Append("</span></div>");
+                            sb.Append("<div class='span3'><span>" + book.Description + "</span></div>");
+                            sb.Append("<div class='span4'><span>" + book.YearPublished + "</span></div>");
+
+                            sb.Append("</div>");
+                            innerHTML.Append(sb.ToString());
+                        }
+
+                        searchList.InnerHtml = innerHTML.ToString();
+                    }
+
+                    else
+                    {
+                        searchList.InnerHtml = "<div class='searchItem'><span>Search result is empty.</span></div>";
+                    }
+                }
+                catch (Exception e)
+                {
+                    lblError.Text = e.Message;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+        }
     }
+
+
 }

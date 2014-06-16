@@ -42,6 +42,7 @@ CREATE TABLE Users (
 	Password varchar(150) NOT NULL,
 	Type varchar(100) NOT NULL,
 	NumComments int,
+	About text,
 	PRIMARY KEY (IDUser)
 );
 

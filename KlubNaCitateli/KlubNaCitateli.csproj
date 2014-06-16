@@ -62,13 +62,18 @@
     <Content Include="bin\KlubNaCitateli.pdb" />
     <Content Include="bin\MySql.Data.dll" />
     <Content Include="Images\bg-body.jpg" />
+    <Content Include="Images\bg-body.png" />
+    <Content Include="Images\book.png" />
     <Content Include="Images\bookclub.jpg" />
+    <Content Include="Images\bookLogo.jpg" />
+    <Content Include="Images\booklogo.png" />
     <Content Include="Images\img-okay.jpg" />
     <Content Include="Images\left-arrow.jpg" />
     <Content Include="Images\okay.jpg" />
     <Content Include="Images\Originals\arrows.jpg" />
     <Content Include="Images\Originals\left-arrow.jpg" />
     <Content Include="Images\Originals\user-icon.png" />
+    <Content Include="Images\readersLogo.png" />
     <Content Include="Images\right-arrow.jpg" />
     <Content Include="Images\user-icon.png" />
     <Content Include="obj\Debug\KlubNaCitateli.csproj.FileListAbsolute.txt" />
@@ -96,7 +101,6 @@
     <Content Include="Styles\Site.css" />
     <Content Include="Styles\signup.css" />
     <Content Include="Styles\login.css" />
-    <Content Include="Styles\token-input-facebook.css" />
     <Content Include="Styles\token-input.css" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
