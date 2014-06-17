@@ -20,12 +20,15 @@
         </div>
 
         <div id="searchContent">
-            <ul id="sortList">
-                <li><asp:Label ID="Label3" runat="server" Text="Name" CssClass="label"></asp:Label></li>
-                <li><asp:Label ID="Label4" runat="server" Text="Description" CssClass="label"></asp:Label></li>
-                <li><asp:Label ID="Label5" runat="server" Text="Year of publish" CssClass="label"></asp:Label></li>
-            </ul>
-            <div id="searchList" runat="server">
+            <table id="sortList">
+                <tr>
+                    <th><asp:Label ID="Label3" runat="server" Text="Thumbnail" CssClass="label"></asp:Label></th>
+                    <th><asp:Label ID="Label4" runat="server" Text="Name" CssClass="label"></asp:Label></th>
+                    <th><asp:Label ID="Label5" runat="server" Text="Year of publish" CssClass="label"></asp:Label></th>
+                    <th><asp:Label ID="Label6" runat="server" Text="Rating" CssClass="label"></asp:Label></th>
+                </tr>
+            </table>
+            <div id="searchList" class="searchList" runat="server">
                     
             </div>
         </div>
