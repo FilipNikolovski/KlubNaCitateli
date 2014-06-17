@@ -245,10 +245,11 @@ namespace KlubNaCitateli.Sites
                                 innerHTML.Append("<td>0</td>");
                             else
                                 innerHTML.Append("<td>" + book.SumRating / (book.NumVotes * 1.0) + "</td>");
+                            innerHTML.Append("<td style='display:none;' class='bookId'>"+ book.IDBook +"</td>");
                             innerHTML.Append("</tr>");
                         }
                         innerHTML.Append("</table>");
-
+                        
                         searchList.InnerHtml = innerHTML.ToString();
                     }
 
