@@ -234,7 +234,7 @@ namespace KlubNaCitateli.Sites
                     {
                         StringBuilder innerHTML = new StringBuilder();
 
-                        innerHTML.Append("<table class=tableSearch>");
+                        innerHTML.Append("<table class='tableSearch'>");
                         foreach (Book book in books)
                         {
                             innerHTML.Append("<tr>");
@@ -244,8 +244,10 @@ namespace KlubNaCitateli.Sites
                             if (book.NumVotes == 0)
                                 innerHTML.Append("<td>0</td>");
                             else
-                                innerHTML.Append("<td>" + book.SumRating / (book.NumVotes * 1.0) + "</td>");
+                                innerHTML.Append("<td>" + (float)(book.SumRating / (book.NumVotes * 1.0)) + "</td>");
+                            innerHTML.Append("<td style='display:none;' class='bookId'>" + book.IDBook + "</td>");
                             innerHTML.Append("</tr>");
+
                         }
                         innerHTML.Append("</table>");
 
