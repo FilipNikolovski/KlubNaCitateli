@@ -223,20 +223,25 @@ namespace KlubNaCitateli.Sites
                         }
                         reader.Close();
                     }
-                    lblError.Text = books.Count.ToString();
-                    lblError.Visible = true;
 
                     if (books.Count > 0)
                     {
                         StringBuilder innerHTML = new StringBuilder();
+
+                        innerHTML.Append("<table class=tableSearch>");
                         foreach (Book book in books)
                         {
-                            StringBuilder sb = new StringBuilder();
-
-
-                           
-                            innerHTML.Append(sb.ToString());
+                            innerHTML.Append("<tr>");
+                            innerHTML.Append("<td><img src=" + book.ThumbnailSrc + " /></td>");
+                            innerHTML.Append("<td>" + book.Name + "</td>");
+                            innerHTML.Append("<td>" + book.YearPublished + "</td>");
+                            if (book.NumVotes == 0)
+                                innerHTML.Append("<td>0</td>");
+                            else
+                                innerHTML.Append("<td>" + book.SumRating / (book.NumVotes * 1.0) + "</td>");
+                            innerHTML.Append("</tr>");
                         }
+                        innerHTML.Append("</table>");
 
                         searchList.InnerHtml = innerHTML.ToString();
                     }
