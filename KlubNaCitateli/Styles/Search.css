@@ -1,11 +1,10 @@
-﻿
-#search
+﻿#search
 {
     margin-top:5px;
     float:right;
     width:55%;
 }
-
+ 
 #filterContainer
 {
     width:30%;
@@ -14,8 +13,8 @@
     margin:10px;
     padding:10px;
 }
-
-#filterList 
+ 
+#filterList
 {
     display:block;
     float:left;
@@ -23,8 +22,8 @@
     padding:0px;
     margin:0px;
 }
-
-#sortList 
+ 
+#sortList
 {
     float:left;
     margin-top:5px;
@@ -32,22 +31,22 @@
     width:100%;
     list-style-type:none;
 }
-
-#sortList li 
+ 
+#sortList li
 {
     display:inline;
     margin-right:30px;
-    
+   
 }
-
-#searchContent 
+ 
+#searchContent
 {
     float:right;
     clear:both;
     width: 60%;
     margin-top:10px;
 }
-
+ 
 .label
 {
     margin-left:10px;
@@ -55,21 +54,19 @@
     text-align:center;
     padding:4px;
 }
-
-.searchList 
+ 
+.searchList
 {
     max-height: 60px;
     overflow: auto;
 }
-
+ 
 thead, tbody {
     display: block;
 }
-
+ 
 tbody
 {
     height: 500px;
     overflow: auto;
 }
-
-
