@@ -1,71 +1,79 @@
-﻿
-#search
+﻿#search
 {
-    margin-top:5px;
-    float:right;
-    width:55%;
+    margin-top: 5px;
+    float: right;
+    width: 55%;
 }
 
 #filterContainer
 {
-    width:30%;
-    height:600px;
+    width: 30%;
+    height: 600px;
     border: 1px solid black;
-    margin:10px;
-    padding:10px;
+    margin: 10px;
+    padding: 10px;
 }
 
-#filterList 
+#filterList
 {
-    display:block;
-    float:left;
-    list-style-type:none;
-    padding:0px;
-    margin:0px;
+    display: block;
+    float: left;
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
 }
 
-#sortList 
+#sortList
 {
-    float:left;
-    margin-top:5px;
-    padding:0px;
-    width:100%;
-    list-style-type:none;
+    float: left;
+    margin-top: 5px;
+    padding: 0px;
+    width: 100%;
+    list-style-type: none;
 }
 
-#sortList li 
+#sortList li
 {
-    display:inline;
-    margin-right:30px;
-    
+    display: inline;
+    margin-right: 30px;
 }
 
-#searchContent 
+#searchContent
 {
-    float:right;
-    clear:both;
+    float: right;
+    clear: both;
     width: 60%;
-    margin-top:10px;
+    margin-top: 10px;
 }
 
 .label
 {
-    margin-left:10px;
-    width:120px;
-    text-align:center;
-    padding:4px;
+    margin-left: 10px;
+    width: 120px;
+    text-align: center;
+    padding: 4px;
 }
 
-.searchList 
+.searchList
+{
+    width: 100%;
+    max-height: 500px;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+.tableSearch
 {
     width:100%;
-    max-height: 500px;
-    overflow:scroll;
-    overflow-x:hidden;
+    border-collapse:collapse;
+}
+.tableSearch tr
+{
+  width:100%;
 }
 
-thead, tbody {
-    display: block;
+.tableSearch td, #sortList th
+{
+    width: 25%;
+    text-align: center;
 }
-
-
