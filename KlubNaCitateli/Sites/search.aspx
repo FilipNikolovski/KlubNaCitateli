@@ -6,6 +6,34 @@
     <script src="../Scripts/jquery-1.10.2.js" type="text/javascript" language="javascript"></script>
     <script src="../Scripts/jquery-ui-1.10.4.custom.min.js" type="text/javascript" language="javascript"></script>
     <script src="../Scripts/Search.js" type="text/javascript" language="javascript"></script>
+    <style>
+    .hovertd
+        {
+            background-color: #19A3FF;
+            cursor:pointer;
+            opacity:0.7;
+        }
+        </style>
+    <script>
+        $(document).ready(function () {
+
+            $(".tableSearch tr").each(function () {
+
+                $(this).hover(function () {
+                    $(this).addClass("hovertd");
+                }, function () {
+                    $(this).removeClass("hovertd");
+                });
+            });
+
+            $(".tableSearch tr").on( "click", function () {
+                window.location = "book.aspx?id=" + $(this).find(".bookId").html();
+                return false;
+              
+            });
+
+        });
+        </script>
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="mainContent" runat="server">
