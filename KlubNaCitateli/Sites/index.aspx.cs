@@ -14,9 +14,10 @@ namespace KlubNaCitateli.Sites
         int mostWanted = -1, mostViewed = -1, bestThisMonth = -1, category1 = -1, category2 = -1, category3 = -1, category4 = -1, category5 = -1, category6 = -1;
         List<int> categoriesList = new List<int>();
 
-       
         protected void Page_Load(object sender, EventArgs e)
         {
+            
+           
             using (MySqlConnection connection = new MySqlConnection())
             {
                 try

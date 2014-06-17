@@ -75,6 +75,8 @@
     <Content Include="Images\Originals\user-icon.png" />
     <Content Include="Images\readersLogo.png" />
     <Content Include="Images\right-arrow.jpg" />
+    <Content Include="Images\searchCover.png" />
+    <Content Include="Images\slika.png" />
     <Content Include="Images\user-icon.png" />
     <Content Include="obj\Debug\KlubNaCitateli.csproj.FileListAbsolute.txt" />
     <Content Include="obj\Debug\KlubNaCitateli.dll" />
