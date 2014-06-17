@@ -58,18 +58,14 @@
 
 .searchList 
 {
-    max-height: 60px;
-    overflow: auto;
+    width:100%;
+    max-height: 500px;
+    overflow:scroll;
+    overflow-x:hidden;
 }
 
 thead, tbody {
     display: block;
-}
-
-tbody
-{
-    height: 500px;
-    overflow: auto;
 }
 
 
