@@ -80,11 +80,7 @@ namespace KlubNaCitateli.Sites
 
                     List<Book> books = new List<Book>();
 
-                    string query = "Select distinct books.* from books, belongsto where "
-                        + "books.idbook=belongsto.idbook and belongsto.idcategory=?IDCategory and "
-                        + "(books.idbook in (select tagged.idbook from tagged,tags where tagged.idtag=tags.idtag and LOWER(tags.name) like '%' + @Search + '%') or"
-                        + " books.idbook in (select wrote.idbook from authors, wrote where authors.idauthor=wrote.idauthor and LOWER(authors.name) like '%' + @Search + '%')"
-                        + " or LOWER(books.name) like '%' + @Search + '%')";
+                    string query = "";
 
                     MySqlCommand command = new MySqlCommand(query, connection);
                     MySqlDataReader reader;
@@ -94,13 +90,89 @@ namespace KlubNaCitateli.Sites
                     {
                         if (category.Selected)
                         {
+                            query = "Select books.* from books, belongsto where "
+                                + "books.idbook=belongsto.idbook and belongsto.idcategory=?IDCategory and "
+                                + "(books.idbook in (select tagged.idbook from tagged,tags where tagged.idtag=tags.idtag and LOWER(tags.name) like ?Search) or"
+                                + " books.idbook in (select wrote.idbook from authors, wrote where authors.idauthor=wrote.idauthor and LOWER(authors.name) like ?Search)"
+                                + " or LOWER(books.name) like ?Search)";
+
                             categorySelected = true;
+                            command.CommandText = query;
                             command.Parameters.Clear();
                             command.Parameters.AddWithValue("?IDCategory", category.Value);
-                            command.Parameters.AddWithValue("@Search", search);
+                            command.Parameters.AddWithValue("?Search",'%' + search.ToLower() + '%');
                             reader = command.ExecuteReader();
 
                             if (reader.HasRows)
+                            {
+                                while (reader.Read())
+                                {
+                                    Book book = new Book();
+                                    book.IDBook = Int32.Parse(reader["IDBook"].ToString());
+                                    book.ISBN = reader["ISBN"].ToString();
+                                    book.Name = reader["Name"].ToString();
+                                    book.Description = reader["Description"].ToString();
+                                    book.Language = reader["Language"].ToString();
+                                    book.ImageSrc = reader["CoverLink"].ToString();
+                                    book.ThumbnailSrc = reader["Thumbnail"].ToString();
+                                    book.YearPublished = reader["YearPublished"].ToString();
+                                    book.DateAdded = reader["DateAdded"].ToString();
+                                    book.SumRating = Int32.Parse(reader["SumRating"].ToString());
+                                    book.NumVotes = Int32.Parse(reader["NumVotes"].ToString());
+
+                                    bool flag = true;
+                                    foreach (Book b in books)
+                                    {
+                                        if (b.IDBook == book.IDBook)
+                                        {
+                                            flag = false;
+                                            break;
+                                        }
+                                    }
+                                    if (flag)
+                                        books.Add(book);
+                                }
+                                reader.Close();
+
+                                foreach (Book book in books)
+                                {
+                                    query = "SELECT Name FROM Authors, Wrote WHERE Authors.IDAuthor=Wrote.IDAuthor AND Wrote.IDBook=?IDBook";
+
+                                    command.CommandText = query;
+                                    command.Parameters.Clear();
+                                    command.Parameters.AddWithValue("?IDBook", book.IDBook);
+                                    reader = command.ExecuteReader();
+
+                                    if (reader.HasRows)
+                                    {
+                                        while (reader.Read())
+                                        {
+                                            book.Authors.Add(reader["Name"].ToString());
+                                        }
+                                    }
+                                    reader.Close();
+                                }
+                                
+                            }
+                            reader.Close();
+                        }
+                    }
+
+                    if ( ! categorySelected)
+                    {
+                        query = "Select distinct books.* from books where "
+                        + "books.idbook in (select tagged.idbook from tagged,tags where tagged.idtag=tags.idtag and LOWER(tags.name) like ?Search) or"
+                        + " books.idbook in (select wrote.idbook from authors, wrote where authors.idauthor=wrote.idauthor and LOWER(authors.name) like ?Search)"
+                        + " or LOWER(books.name) like ?Search";
+
+                        command.CommandText = query;
+                        command.Parameters.Clear();
+                        command.Parameters.AddWithValue("?Search",'%' +  search.ToLower() + '%');
+                        reader = command.ExecuteReader();
+
+                        if (reader.HasRows)
+                        {
+                            while (reader.Read())
                             {
                                 Book book = new Book();
                                 book.IDBook = Int32.Parse(reader["IDBook"].ToString());
@@ -112,46 +184,47 @@ namespace KlubNaCitateli.Sites
                                 book.ThumbnailSrc = reader["Thumbnail"].ToString();
                                 book.YearPublished = reader["YearPublished"].ToString();
                                 book.DateAdded = reader["DateAdded"].ToString();
-                                book.SumRating = Int32.Parse(reader["Name"].ToString());
+                                book.SumRating = Int32.Parse(reader["SumRating"].ToString());
                                 book.NumVotes = Int32.Parse(reader["NumVotes"].ToString());
 
-                                books.Add(book);
+                                bool flag = true;
+                                foreach (Book b in books)
+                                {
+                                    if (b.IDBook == book.IDBook)
+                                    {
+                                        flag = false;
+                                        break;
+                                    }
+                                }
+                                if (flag)
+                                    books.Add(book);
                             }
                             reader.Close();
-                        }
-                    }
 
-                    if (!categorySelected)
-                    {
-                        query = "Select distinct books.* from books where "
-                        + "books.idbook in (select tagged.idbook from tagged,tags where tagged.idtag=tags.idtag and LOWER(tags.name) like '%'+?Search+'%') or"
-                        + " books.idbook in (select wrote.idbook from authors, wrote where authors.idauthor=wrote.idauthor and LOWER(authors.name) like '%'+?Search+'%')"
-                        + " or LOWER(books.name) like '%'+?Search+'%'";
+                            foreach (Book book  in books)
+                            {
+                                query = "SELECT Name FROM Authors, Wrote WHERE Authors.IDAuthor=Wrote.IDAuthor AND Wrote.IDBook=?IDBook";
 
-                        command.CommandText = query;
-                        command.Parameters.Clear();
-                        command.Parameters.AddWithValue("?Search", search);
-                        reader = command.ExecuteReader();
+                                command.CommandText = query;
+                                command.Parameters.Clear();
+                                command.Parameters.AddWithValue("?IDBook", book.IDBook);
+                                reader = command.ExecuteReader();
 
-                        if (reader.HasRows)
-                        {
-                            Book book = new Book();
-                            book.IDBook = Int32.Parse(reader["IDBook"].ToString());
-                            book.ISBN = reader["ISBN"].ToString();
-                            book.Name = reader["Name"].ToString();
-                            book.Description = reader["Description"].ToString();
-                            book.Language = reader["Language"].ToString();
-                            book.ImageSrc = reader["CoverLink"].ToString();
-                            book.ThumbnailSrc = reader["Thumbnail"].ToString();
-                            book.YearPublished = reader["YearPublished"].ToString();
-                            book.DateAdded = reader["DateAdded"].ToString();
-                            book.SumRating = Int32.Parse(reader["Name"].ToString());
-                            book.NumVotes = Int32.Parse(reader["NumVotes"].ToString());
-
-                            books.Add(book);
+                                if (reader.HasRows)
+                                {
+                                    while (reader.Read())
+                                    {
+                                        book.Authors.Add(reader["Name"].ToString());
+                                    }
+                                }
+                                reader.Close();
+                            }
+                            
                         }
                         reader.Close();
                     }
+                    lblError.Text = books.Count.ToString();
+                    lblError.Visible = true;
 
                     if (books.Count > 0)
                     {
@@ -160,19 +233,8 @@ namespace KlubNaCitateli.Sites
                         {
                             StringBuilder sb = new StringBuilder();
 
-                            sb.Append("<div class='searchItem'>");
 
-                            sb.Append("<div class='span1'></div>");
-                            sb.Append("<div class='span2'><span>");
-                            foreach (string author in book.Authors)
-                            {
-                                sb.Append(author.ToString() + " ");
-                            }
-                            sb.Append("</span></div>");
-                            sb.Append("<div class='span3'><span>" + book.Description + "</span></div>");
-                            sb.Append("<div class='span4'><span>" + book.YearPublished + "</span></div>");
-
-                            sb.Append("</div>");
+                           
                             innerHTML.Append(sb.ToString());
                         }
 
@@ -187,7 +249,7 @@ namespace KlubNaCitateli.Sites
                 }
                 catch (Exception e)
                 {
-                    lblError.Text = e.Message;
+                    lblError.Text = e.Message + " " + e.InnerException;
                     lblError.Visible = true;
                 }
                 finally

@@ -25,7 +25,7 @@ namespace KlubNaCitateli.Classes
 
         public Book()
         {
-
+            Authors = new List<string>();
         }
 
         public Book(int id, string isbn, string name, List<string> authors, string imagesrc, string desc, string date, string dateAdded, int sumRating, int numVotes)
