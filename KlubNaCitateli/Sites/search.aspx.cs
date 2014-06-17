@@ -20,6 +20,12 @@ namespace KlubNaCitateli.Sites
             if (!IsPostBack)
             {
                 FillCategoriesList();
+
+                if (Request.QueryString["search"] != null)
+                {
+                    tbSearch.Text = Request.QueryString["search"].ToString();
+                    FillSearchContent(Request.QueryString["search"].ToString());
+                }
             }
         }
 

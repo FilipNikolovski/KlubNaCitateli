@@ -6,18 +6,12 @@
     <script>
         $(document).ready(function () {
 
-           
-
-            $("#<%= searchWord.ClientID %>").keyup(function (e) {
-                if (e.keyCode == 13 && ) {
-                   window.location="search.aspx?search=" + $("#<%=searchWord.ClientID %>").val();
+            $("#<%= searchWord.ClientID %>").keydown(function (e) {
+                if (e.keyCode == 13) {
+                    window.location = "search.aspx?search=" + $("#<%=searchWord.ClientID %>").val();
+                    return false;
                 }
             });
-
-           
-
-
-
         });
     </script>
 </asp:Content>
