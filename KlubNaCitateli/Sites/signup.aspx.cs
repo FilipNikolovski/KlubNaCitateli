@@ -83,7 +83,7 @@ namespace KlubNaCitateli.Sites
                     {
                         conn.Open();
                         MySqlCommand comm = new MySqlCommand();
-                        comm.CommandText = "INSERT into users (name, banned, surname, email, username, password, type, numComments) VALUES(?name, ?banned, ?surname, ?email, ?username, ?password, ?type, ?numComments)";
+                        comm.CommandText = "INSERT into users (name, banned, surname, email, username, password, about, type, numComments) VALUES(?name, ?banned, ?surname, ?email, ?username, ?password, ?about, ?type, ?numComments)";
                         comm.Connection = conn;
                         comm.Parameters.AddWithValue("?name", user.name);
                         comm.Parameters.AddWithValue("?surname", user.surname);
@@ -93,6 +93,7 @@ namespace KlubNaCitateli.Sites
                         comm.Parameters.AddWithValue("?type", "user");
                         comm.Parameters.AddWithValue("?numComments", 0);
                         comm.Parameters.AddWithValue("?banned", 0);
+                        comm.Parameters.AddWithValue("?about", user.aboutUser);
 
                         comm.ExecuteNonQuery();
                         string iduser = "";
@@ -144,7 +145,7 @@ namespace KlubNaCitateli.Sites
             if (profileImage.HasFile)
             {
                 string ext = Path.GetExtension(this.profileImage.FileName);
-                if (ext == ".jpg" || ext == ".png")
+                if (ext == ".jpg" || ext == ".png" || ext == ".JPG" || ext == ".PNG")
                 {
                     Bitmap originalBMP = new Bitmap(profileImage.FileContent);
 

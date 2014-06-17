@@ -9,11 +9,12 @@
            
 
             $("#<%= searchWord.ClientID %>").keyup(function (e) {
-                if (e.keyCode == 13) {
-                    window.location.replace("~/Sites/search.aspx?search=" + $("#<%=searchWord.ClientID %>").val());
+                if (e.keyCode == 13 && ) {
+                   window.location="search.aspx?search=" + $("#<%=searchWord.ClientID %>").val();
                 }
             });
 
+           
 
 
 
@@ -22,9 +23,11 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="mainContent" runat="server">
     <asp:Panel ID="Panel1" runat="server" CssClass="searchPanel">
-        <asp:Label ID="Label1" runat="server" Text="Book club is more than reviews" CssClass="bookPanel"></asp:Label>
+        <asp:Label ID="Label1" runat="server" Text="Readers club is more than reviews" CssClass="bookPanel"></asp:Label>
         <br />
         <asp:TextBox ID="searchWord" runat="server" CssClass="searchBox"></asp:TextBox>
+        <asp:ImageButton ColumnSpan="2" ID="ImageButton1" runat="server" CssClass="bookPlacePanel" Visible="false" OnClientClick="return false;" >
+                    </asp:ImageButton>
     </asp:Panel>
     <asp:Panel ID="Panel2" runat="server" CssClass="panel2">
         <asp:Table runat="server" CssClass="tableRow">
@@ -46,7 +49,7 @@
                         Multiline="True"></asp:LinkButton>
                 </asp:TableCell>
                 <asp:TableCell>
-                    <asp:ImageButton ColumnSpan="2" ID="mostWantedPanel" runat="server" CssClass="bookPlacePanel">
+                    <asp:ImageButton ColumnSpan="2" ID="mostWantedPanel" runat="server" CssClass="bookPlacePanel" UseSubmitBehavior="false" >
                     </asp:ImageButton>
                 </asp:TableCell>
                 <asp:TableCell CssClass="table">
@@ -54,7 +57,7 @@
                         Multiline="True"></asp:LinkButton>
                 </asp:TableCell>
                 <asp:TableCell>
-                    <asp:ImageButton ColumnSpan="2" ID="mostViewedPanel" runat="server" CssClass="bookPlacePanel">
+                    <asp:ImageButton ColumnSpan="2" ID="mostViewedPanel" runat="server" CssClass="bookPlacePanel" UseSubmitBehavior="false">
                     </asp:ImageButton>
                 </asp:TableCell>
                 <asp:TableCell CssClass="table">
