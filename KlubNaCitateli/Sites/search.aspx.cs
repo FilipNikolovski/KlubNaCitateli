@@ -244,13 +244,9 @@ namespace KlubNaCitateli.Sites
                             if (book.NumVotes == 0)
                                 innerHTML.Append("<td>0</td>");
                             else
-<<<<<<< HEAD
-                                innerHTML.Append("<td>" + book.SumRating / (book.NumVotes * 1.0) + "</td>");
-                            innerHTML.Append("<td style='display:none;' class='bookId'>"+ book.IDBook +"</td>");
-=======
                                 innerHTML.Append("<td>" + (float)(book.SumRating / (book.NumVotes * 1.0)) + "</td>");
                             innerHTML.Append("<td style='display:none;' class='bookId'>" + book.IDBook + "</td>");
->>>>>>> 288b1a6d3bf0d8853fe7bc4af9759a34da3f6545
+
                             innerHTML.Append("</tr>");
 
                         }
