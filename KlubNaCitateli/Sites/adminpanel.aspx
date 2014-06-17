@@ -176,8 +176,9 @@
                         <asp:BoundField DataField="Name" HeaderText="Name" ReadOnly="True" />
                         <asp:BoundField DataField="Surname" HeaderText="Surname" ReadOnly="True" />
                         <asp:BoundField DataField="Email" HeaderText="Email" ReadOnly="True" />
-                        <asp:HyperLinkField DataNavigateUrlFields="IDUser" DataNavigateUrlFormatString="~/Sites/profile.aspx?userid={0}"
-                            DataTextField="Username" HeaderText="Username" NavigateUrl="~/Sites/profile.aspx" />
+                        <asp:HyperLinkField DataNavigateUrlFields="IDUser" DataNavigateUrlFormatString="~/Sites/profile.aspx?id={0}"
+                            DataTextField="Username" HeaderText="Username" 
+                            NavigateUrl="~/Sites/profile.aspx" />
                         <asp:BoundField DataField="Type" HeaderText="Type" />
                         <asp:BoundField DataField="Banned" HeaderText="Banned" />
                     </Columns>
