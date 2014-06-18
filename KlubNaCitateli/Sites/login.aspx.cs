@@ -88,6 +88,11 @@ namespace KlubNaCitateli.Sites
                             }
                             read1.Close();
 
+                            if (Session["Type"].ToString().Equals("administrator"))
+                            {
+                                Response.Redirect("adminpanel.aspx");
+                            }
+                            else
                             Response.Redirect("index.aspx");
                         }
                         else

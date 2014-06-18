@@ -3,6 +3,7 @@
     <link href="../Styles/login.css" rel="stylesheet" type="text/css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="mainContent" runat="server">
+ <asp:Panel ID="Panel1" runat="server" DefaultButton="Button1">
     <div id="main">
 
     <asp:Label ID="Label1" runat="server" Text="Log In" CssClass="login"></asp:Label>
@@ -38,7 +39,9 @@
         </asp:TableRow>
          <asp:TableRow ID="TableRow5" runat="server" CssClass=".TableRow">
         <asp:TableCell ID="TableCell5" runat="server" CssClass="tabCell">
+       
             <asp:Button ID="Button1" runat="server" Text="Log In" CssClass="logInButt" OnClick="logIn_click"/>
+            
             <br />
             <asp:Label ID="loginInfo" runat="server"></asp:Label>
             </asp:TableCell>
@@ -47,8 +50,8 @@
         </asp:Table>
     </div>
 
+   
 
 
-
-</div>
+</div> </asp:Panel>
 </asp:Content>
