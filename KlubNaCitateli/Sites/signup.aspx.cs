@@ -18,6 +18,10 @@ namespace KlubNaCitateli.Sites
         User user;
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["Id"] != null)
+            {
+                Response.Redirect("~/Sites/index.aspx");
+            }
             this.Page.Form.Enctype = "multipart/form-data";
             if (!this.IsPostBack)
             {

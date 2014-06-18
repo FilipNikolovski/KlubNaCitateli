@@ -14,18 +14,13 @@ namespace KlubNaCitateli
         {
             if (Session["Name"] != null)
             {
-                HyperLink2.Visible = false;
                 HyperLink1.Text = "Log out";
-                nameSurname.Text = Session["Name"].ToString() + " " + Session["Surname"].ToString();
-                
+                HyperLink2.Text =Session["Name"].ToString() + " " + Session["Surname"].ToString();  
             }
             else
             {
                 HyperLink1.Text = "Log in";
                 HyperLink2.Visible = true;
-                nameSurname.Visible = false;
-                
-
             }
 
         }
@@ -47,8 +42,14 @@ namespace KlubNaCitateli
         }
         public void signUp_click(object sender, EventArgs e)
         {
-            
-                Response.Redirect("signup.aspx");
+            if (HyperLink2.Text == "Sign Up")
+            { 
+                Response.Redirect("signup.aspx"); 
+            }
+            else
+            {
+                Response.Redirect("profile.aspx?id="+Session["Id"].ToString());
+            }
             
         }
     }

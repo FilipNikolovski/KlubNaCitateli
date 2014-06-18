@@ -25,7 +25,7 @@
         <div id="logo">
         <!--mesto za logoto-->
         <img runat="server" src="~/Images/booklogo.png"  class="logopic"/>
-        <img id="Img1" runat="server" src="~/Images/readersLogo.png" />
+        <asp:ImageButton ID="ImageButton1" runat="server" CssClass="Img1" ImageUrl="~/Images/readersLogo.png" PostBackUrl="~/Sites/index.aspx"></asp:ImageButton>
         </div>
         <div id="navigation">
             <!--meni-->
@@ -36,7 +36,6 @@
            <li>
            <asp:LinkButton ID="HyperLink2" runat="server" CssClass="links" 
                    OnClick="signUp_click" CausesValidation="False">Sign Up</asp:LinkButton>
-           <asp:Label ID="nameSurname" runat="server" CssClass="nameSurname"></asp:Label>
            </li>
             <li>|</li>
             <li>

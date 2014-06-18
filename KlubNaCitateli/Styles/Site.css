@@ -76,6 +76,7 @@ text-align:right;
     width:100%;
     height:auto;
     background-color:#FFF8DC;
+    font-size:80%;
 }
 
 fieldset 
@@ -85,7 +86,12 @@ fieldset
     padding: 8px;    
     border-radius: 4px;
 }
-.nameSurname
+
+.links
 {
-width:auto;
+    color:#4169E1;
+}
+.Img1
+{
+    border:none !important;
 }

@@ -67,6 +67,7 @@
     <Content Include="Images\bookclub.jpg" />
     <Content Include="Images\bookLogo.jpg" />
     <Content Include="Images\booklogo.png" />
+    <Content Include="Images\buttons.png" />
     <Content Include="Images\img-okay.jpg" />
     <Content Include="Images\left-arrow.jpg" />
     <Content Include="Images\okay.jpg" />
@@ -75,6 +76,7 @@
     <Content Include="Images\Originals\user-icon.png" />
     <Content Include="Images\readersLogo.png" />
     <Content Include="Images\right-arrow.jpg" />
+    <Content Include="Images\searchBox.png" />
     <Content Include="Images\searchCover.png" />
     <Content Include="Images\slika.png" />
     <Content Include="Images\user-icon.png" />
