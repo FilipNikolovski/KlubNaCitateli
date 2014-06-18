@@ -12,15 +12,19 @@ namespace KlubNaCitateli
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            HyperLink3.PostBackUrl = "~/Sites/search.aspx";
+            HyperLink4.PostBackUrl = "~/Sites/forum.aspx";
+            HyperLink5.PostBackUrl = "~/Sites/index.aspx";
+
             if (Session["Name"] != null)
             {
                 HyperLink1.Text = "Log out";
-                HyperLink2.Text =Session["Name"].ToString() + " " + Session["Surname"].ToString();  
+                HyperLink2.Text =Session["Name"].ToString() + " " + Session["Surname"].ToString();
+               
             }
             else
             {
                 HyperLink1.Text = "Log in";
-                HyperLink2.Visible = true;
             }
 
         }
@@ -51,6 +55,16 @@ namespace KlubNaCitateli
                 Response.Redirect("profile.aspx?id="+Session["Id"].ToString());
             }
             
+        }
+
+        public void myProfile_click(object sender, EventArgs e)
+        {
+            if (Session["Id"] != null)
+            {
+                Response.Redirect("profile.aspx?id=" + Session["Id"].ToString());
+            }
+            else
+                Response.Redirect("login.aspx"); 
         }
     }
 }

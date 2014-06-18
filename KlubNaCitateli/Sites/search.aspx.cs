@@ -265,7 +265,7 @@ namespace KlubNaCitateli.Sites
 
                     else
                     {
-                        searchList.InnerHtml = "<div class='searchItem'><span>Search result is empty. There are no matching books with '"+search.ToString()+"'.</span></div>";
+                        searchList.InnerHtml = "<div class='searchItem'><span>Search result is empty. There are no matching books with '"+search.ToString()+"' in selected categories.</span></div>";
                     }
 
                 }
