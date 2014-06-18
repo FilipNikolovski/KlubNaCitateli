@@ -26,6 +26,11 @@ namespace KlubNaCitateli.Sites
             {
                 FillCategoriesGrid();
                 FillUsersGrid();
+
+                if (Session["Type"] == null || Session["Type"].ToString() != "administrator")
+                {
+                    Response.Redirect("~/Sites/login.aspx");
+                }
             }
 
         }

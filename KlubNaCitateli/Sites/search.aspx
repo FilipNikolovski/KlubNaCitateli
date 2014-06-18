@@ -13,7 +13,7 @@
             cursor:pointer;
             opacity:0.7;
         }
-        </style>
+    </style>
     <script>
         $(document).ready(function () {
 

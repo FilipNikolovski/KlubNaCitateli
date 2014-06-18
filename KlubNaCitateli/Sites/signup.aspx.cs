@@ -45,8 +45,6 @@ namespace KlubNaCitateli.Sites
                         }
 
                         reader.Close();
-
-
                     }
                     finally
                     {
