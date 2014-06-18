@@ -17,9 +17,9 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="mainContent" runat="server">
     <asp:Panel ID="Panel1" runat="server" CssClass="searchPanel">
-        <asp:Label ID="Label1" runat="server" Text="Readers club is more than reviews" CssClass="bookPanel"></asp:Label>
+        <asp:Label ID="Label1" runat="server" Text="Find the book that you need" CssClass="bookPanel"></asp:Label>
         <br />
-        <asp:TextBox ID="searchWord" runat="server" CssClass="searchBox"></asp:TextBox>
+        <asp:TextBox ID="searchWord" runat="server" CssClass="searchBox" placeholder="Search.."></asp:TextBox>
         <asp:ImageButton ColumnSpan="2" ID="ImageButton1" runat="server" CssClass="bookPlacePanel" Visible="false" OnClientClick="return false;" >
                     </asp:ImageButton>
     </asp:Panel>

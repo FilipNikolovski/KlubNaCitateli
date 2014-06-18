@@ -14,11 +14,11 @@ padding-top:20px;
 }
 .bookPanel
 {
-    font-size:200%;
-    height:50px;
+	font-size:200%;
+	height:50px;
    padding:30px;
-    color:#4169E1;
-    
+	color:#4169E1;
+	
 }
 
 .tablename
@@ -38,21 +38,30 @@ padding-bottom:50px;
 }
 .searchBox
 {
-    margin-top:50px;
-    margin-left:275px;
-    width:450px;
-    height:25px;
-    border:1px solid black;
-    border-radius:10;
+	margin-top:50px;
+	margin-left:275px;
+	width:450px;
+	border:none;
+	color:#888888;
+	background:url("../Images/searchBox.png") no-repeat;
+	border-radius:5px;
+	font-family:Arial,Helvetica,sans-serif;
+	font-size:15px;
+	height:36px;
+	line-height:36px;
+	margin-right:12px;
+	outline:medium none;
+	padding:0 0 0 35px;
+	text-shadow:1px 1px 0 white;
 }
 
 
 
 .bookPlacePanel
 {
-    width:128px;
-    height:171px;
-    border:1px solid black;
+	width:128px;
+	height:171px;
+	border:1px solid black;
 }
 
 .panel2
@@ -62,9 +71,9 @@ width:100%;
 
 .bookNameLabel
 {
-    width:100px;
-    color:#4169E1;
-    font-weight:bold;
-    text-decoration:none;
-     
+	width:100px;
+	color:#4169E1;
+	font-weight:bold;
+	text-decoration:none;
+	 
 }

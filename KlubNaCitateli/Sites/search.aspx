@@ -37,15 +37,17 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="mainContent" runat="server">
+<asp:Panel runat="server" DefaultButton="btnSearch">
         <div id="search">
             <asp:TextBox ID="tbSearch" runat="server" placeholder="Search.." 
-                CssClass="searchBox" Width="540px" ></asp:TextBox>
-            <asp:Button ID="btnSearch" runat="server" Text="Search" 
-                onclick="btnSearch_Click" /> 
+                CssClass="searchBox" ></asp:TextBox>
+            <asp:Button ID="btnSearch" runat="server" Text="" 
+                onclick="btnSearch_Click" CssClass="submitButton" /> 
                    
             <asp:Label ID="lblError" runat="server" Text="Error" CssClass="label" Visible="false"></asp:Label>
 
         </div>
+        </asp:Panel>
 
         <div id="searchContent">
             <table id="sortList">
@@ -54,6 +56,7 @@
                     <th><asp:Label ID="Label4" runat="server" Text="Name" CssClass="label"></asp:Label></th>
                     <th><asp:Label ID="Label5" runat="server" Text="Year of publish" CssClass="label"></asp:Label></th>
                     <th><asp:Label ID="Label6" runat="server" Text="Rating" CssClass="label"></asp:Label></th>
+                    <th><asp:Label ID="Label2" runat="server" Text="Authors" CssClass="label"></asp:Label></th>
                 </tr>
             </table>
             <div id="searchList" class="searchList" runat="server">
@@ -63,7 +66,7 @@
 
         <div id="filterContainer">
             <ul id="filterList">
-                <li><asp:Label ID="Label1" runat="server" Text="Category"></asp:Label></li>
+                <li><asp:Label ID="Label1" runat="server" Text="Category" CssClass="categoryLabel"></asp:Label></li>
                 <li><asp:CheckBoxList ID="cblCategories" runat="server"></asp:CheckBoxList></li>
             </ul>
         </div>

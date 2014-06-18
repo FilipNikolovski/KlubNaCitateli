@@ -27,9 +27,13 @@
 #navigation 
 {
     float:left;
-    width:35%;
+    width:45%;
     height:100%;
     display:inline;
+    margin-left:50px;
+      background-color:#FFF8DC;
+      
+    border-radius:5px;
 }
 .logopic
 {
@@ -43,6 +47,16 @@
     color:Black;
     width:auto;
 }
+#menu li
+{
+    margin-right:30px;
+    display: inline;    
+    color:Black;
+    width:100%;
+    height:100%;
+    margin-top:15px;
+    text-decoration:none;
+}
 
 #signLog
 {
@@ -52,6 +66,15 @@
     width:auto;
     margin-right:10px;
 }
+#menu
+{
+    list-style-type:none;
+    float:left;
+    width:auto;
+    height:80%;
+  
+}
+
 #footer div
 {
    padding:10px;
@@ -76,6 +99,7 @@ text-align:right;
     width:100%;
     height:auto;
     background-color:#FFF8DC;
+    font-size:80%;
 }
 
 fieldset 
@@ -85,3 +109,23 @@ fieldset
     padding: 8px;    
     border-radius: 4px;
 }
+<<<<<<< HEAD
+=======
+
+.links, .menulinks
+{
+    color:#4169E1;
+    text-decoration:none;
+    padding:5px;
+}
+.Img1
+{
+    border:none !important;
+}
+.hoverlinks
+{
+    border:1px gray solid;
+    border-radius:5px;
+    font-size:120%;
+}
+>>>>>>> 95814633f269bff814387770879a0e5d59a02939

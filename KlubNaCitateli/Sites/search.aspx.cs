@@ -26,6 +26,7 @@ namespace KlubNaCitateli.Sites
                     tbSearch.Text = Request.QueryString["search"].ToString();
                     FillSearchContent(Request.QueryString["search"].ToString());
                 }
+              
             }
         }
 
@@ -232,6 +233,7 @@ namespace KlubNaCitateli.Sites
 
                     if (books.Count > 0)
                     {
+                       
                         StringBuilder innerHTML = new StringBuilder();
 
                         innerHTML.Append("<table class='tableSearch'>");
@@ -246,7 +248,17 @@ namespace KlubNaCitateli.Sites
                             else
                                 innerHTML.Append("<td>" + (float)(book.SumRating / (book.NumVotes * 1.0)) + "</td>");
                             innerHTML.Append("<td style='display:none;' class='bookId'>" + book.IDBook + "</td>");
+<<<<<<< HEAD
 
+=======
+                            StringBuilder sb = new StringBuilder();
+                            foreach (string author in book.Authors)
+                            {
+                                sb.Append(author.ToString() + "<br/>");
+                            }
+                            innerHTML.Append("<td>" + sb.ToString() + "</td>");
+                           
+>>>>>>> 95814633f269bff814387770879a0e5d59a02939
                             innerHTML.Append("</tr>");
 
                         }
@@ -257,7 +269,7 @@ namespace KlubNaCitateli.Sites
 
                     else
                     {
-                        searchList.InnerHtml = "<div class='searchItem'><span>Search result is empty.</span></div>";
+                        searchList.InnerHtml = "<div class='searchItem'><span>Search result is empty. There are no matching books with '"+search.ToString()+"' in selected categories.</span></div>";
                     }
 
                 }

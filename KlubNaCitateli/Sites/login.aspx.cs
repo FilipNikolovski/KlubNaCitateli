@@ -13,7 +13,8 @@ namespace KlubNaCitateli.Sites
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session["Id"] != null)
+                Response.Redirect("~/Sites/index.aspx");
         }
         public void logIn_click(object sender, EventArgs e)
         {

@@ -12,7 +12,14 @@
     <script type="text/javascript" src="<%= Page.ResolveClientUrl("../Scripts/jquery-ui-1.10.4.custom.js") %>"></script>
     
     <script type="text/javascript" src="<%= Page.ResolveClientUrl("../Scripts/jquery-ui-1.10.4.custom.min.js") %>"></script>
-    
+    <script>
+        $(document).ready(function () {
+            $(".menulinks").hover(function () { $(this).addClass("hoverlinks"); }, function () { $(this).removeClass("hoverlinks"); });
+
+
+
+
+        });</script>
     
     <asp:ContentPlaceHolder ID="head" runat="server">
   
@@ -25,10 +32,16 @@
         <div id="logo">
         <!--mesto za logoto-->
         <img runat="server" src="~/Images/booklogo.png"  class="logopic"/>
-        <img id="Img1" runat="server" src="~/Images/readersLogo.png" />
+        <asp:ImageButton ID="ImageButton1" runat="server" CssClass="Img1" ImageUrl="~/Images/readersLogo.png" PostBackUrl="~/Sites/index.aspx"></asp:ImageButton>
         </div>
         <div id="navigation">
-            <!--meni-->
+           <ul id="menu">
+           <li><asp:LinkButton ID="HyperLink5" runat="server" NavigateUrl="~/Sites/index.aspx" CssClass="menulinks">Home</asp:LinkButton> </li>
+            <li><asp:LinkButton ID="myProfileLink" runat="server" Text="My profile" OnClick="myProfile_click" CssClass="menulinks"></asp:LinkButton></li>
+           <li><asp:LinkButton ID="HyperLink3" runat="server" NavigateUrl="~/Sites/search.aspx" CssClass="menulinks">Search</asp:LinkButton></li>
+           <li><asp:LinkButton ID="HyperLink4" runat="server" NavigateUrl="~/Sites/forum.aspx" CssClass="menulinks">Forum</asp:LinkButton></li>
+          
+           </ul>
         </div>
         <div id="login">
             <!--forma za login od desno-->
@@ -36,7 +49,6 @@
            <li>
            <asp:LinkButton ID="HyperLink2" runat="server" CssClass="links" 
                    OnClick="signUp_click" CausesValidation="False">Sign Up</asp:LinkButton>
-           <asp:Label ID="nameSurname" runat="server" CssClass="nameSurname"></asp:Label>
            </li>
             <li>|</li>
             <li>
