@@ -19,7 +19,14 @@ namespace KlubNaCitateli
             if (Session["Name"] != null)
             {
                 HyperLink1.Text = "Log out";
-                HyperLink2.Text =Session["Name"].ToString() + " " + Session["Surname"].ToString();
+                if (Session["Type"].ToString().Equals("administrator"))
+                {
+                    HyperLink2.Text = "Admin panel";
+                }
+                else
+                { 
+                    HyperLink2.Text = Session["Name"].ToString() + " " + Session["Surname"].ToString(); 
+                }
                
             }
             else
@@ -50,9 +57,13 @@ namespace KlubNaCitateli
             { 
                 Response.Redirect("signup.aspx"); 
             }
+            else if (HyperLink2.Text == "Admin panel")
+            {
+                Response.Redirect("adminpanel.aspx");
+            }
             else
             {
-                Response.Redirect("profile.aspx?id="+Session["Id"].ToString());
+                Response.Redirect("profile.aspx?id=" + Session["Id"].ToString());
             }
             
         }
@@ -61,7 +72,9 @@ namespace KlubNaCitateli
         {
             if (Session["Id"] != null)
             {
-                Response.Redirect("profile.aspx?id=" + Session["Id"].ToString());
+               
+               Response.Redirect("profile.aspx?id=" + Session["Id"].ToString()); 
+                
             }
             else
                 Response.Redirect("login.aspx"); 
