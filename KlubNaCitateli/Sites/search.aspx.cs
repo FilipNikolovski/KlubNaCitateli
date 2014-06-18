@@ -248,17 +248,13 @@ namespace KlubNaCitateli.Sites
                             else
                                 innerHTML.Append("<td>" + (float)(book.SumRating / (book.NumVotes * 1.0)) + "</td>");
                             innerHTML.Append("<td style='display:none;' class='bookId'>" + book.IDBook + "</td>");
-<<<<<<< HEAD
 
-=======
                             StringBuilder sb = new StringBuilder();
                             foreach (string author in book.Authors)
                             {
                                 sb.Append(author.ToString() + "<br/>");
                             }
                             innerHTML.Append("<td>" + sb.ToString() + "</td>");
-                           
->>>>>>> 95814633f269bff814387770879a0e5d59a02939
                             innerHTML.Append("</tr>");
 
                         }
