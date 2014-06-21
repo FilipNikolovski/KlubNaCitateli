@@ -1,61 +1,93 @@
-﻿body 
+﻿body
 {
-    
 }
 
 #dialog-form
 {
-    background-color:#4169E1;
-    color:White;
+    background-color: #4169E1;
+    color: White;
 }
 #buttons
 {
-    background-color:#4169E1;
-    color:White;
-    margin-top:-8px;
-    height:10%;
-    padding:20px;
-
+    background-color: #4169E1;
+    color: White;
+    margin-top: -8px;
+    height: 10%;
+    padding: 20px;
 }
 #fieldSet1, #fieldSet2
 {
-    margin:20px;
-    padding:10px;
+    margin: 20px;
+    padding: 10px;
 }
 
 #separateLabel
 {
-    margin:5px;
-    font-size:small;
+    margin: 5px;
+    font-size: small;
 }
 
 .tbTags
 {
-    width:80%;
-    margin:10px;
+    width: 80%;
+    margin: 10px;
 }
 .cblCategories
 {
-    margin:5px;
+    margin: 5px;
 }
 
 #category, #tags
 {
-    margin:5px;
+    margin: 5px;
 }
-.ui-dialog-titlebar-close{
-    display: none;
-}
-#add, #close
+
+#add
 {
-    border:1px solid gray;
-    border-radius:5px;
-    width:49%;
-    height:120%;
-    margin:auto;
-    color:#4169E1;
+    border: 1px solid gray;
+    border-radius: 5px;
+    width: 49%;
+    height: 120%;
+    margin: auto;
+    color: #4169E1;
 }
 #title
-{   padding:70px;
-    font-size:large;
+{
+    padding: 70px;
+    font-size: large;
+}
+
+.overlay
+{
+    position: fixed;
+    z-index: 98;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    background-color: #aaa;
+    filter: alpha(opacity=80);
+    opacity: 0.8;
+}
+.overlayContent
+{
+    z-index: 99;
+    margin: 250px auto;
+    width: 80px;
+    height: 80px;
+}
+.overlayContent h2
+{
+    font-size: 18px;
+    font-weight: bold;
+    color: #000;
+}
+.overlayContent img
+{
+    width: 80px;
+    height: 80px;
+}
+
+.ui-dialog-titlebar-close {
+  visibility: hidden;
 }
