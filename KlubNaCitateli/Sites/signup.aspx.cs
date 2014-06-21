@@ -60,7 +60,7 @@ namespace KlubNaCitateli.Sites
             user = new User(name.Text, surname.Text, email.Text, username.Text, password.Text, TextBox2.Text);
             bool checkUsername = true;
             bool checkEmail = true;
-            user.CheckIfUserExists(checkEmail, checkUsername);
+            user.CheckIfUserExists(out checkEmail, out checkUsername);
 
             if (!checkEmail && !checkUsername)
             {

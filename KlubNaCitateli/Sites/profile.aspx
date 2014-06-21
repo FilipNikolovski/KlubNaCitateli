@@ -5,11 +5,13 @@ Inherits="KlubNaCitateli.Sites.profile" %>
 <style>
 .profilePicture
 {
-    background-position:center center;
-    width:200px;
-    max-height:400px;
-    height:auto;
+   width:200px;
+height:200px;
+background-size:100%;
+background-repeat:no-repeat;
+background-position:center;
 }
+
 </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="mainContent" runat="server">

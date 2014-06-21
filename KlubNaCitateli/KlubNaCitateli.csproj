@@ -74,6 +74,7 @@
     <Content Include="Images\Originals\arrows.jpg" />
     <Content Include="Images\Originals\left-arrow.jpg" />
     <Content Include="Images\Originals\user-icon.png" />
+    <Content Include="Images\pattern.png" />
     <Content Include="Images\readersLogo.png" />
     <Content Include="Images\right-arrow.jpg" />
     <Content Include="Images\searchBox.png" />
@@ -96,15 +97,20 @@
     <Content Include="Sites\index.aspx" />
     <Content Include="Sites\login.aspx" />
     <Content Include="Sites\mybooks.aspx" />
+    <Content Include="Sites\post.aspx" />
     <Content Include="Sites\profile.aspx" />
     <Content Include="Sites\search.aspx" />
     <Content Include="Sites\signup.aspx" />
+    <Content Include="Sites\threads.aspx" />
     <Content Include="Styles\adminPanel.css" />
+    <Content Include="Styles\forum.css" />
     <Content Include="Styles\index.css" />
+    <Content Include="Styles\post.css" />
     <Content Include="Styles\Search.css" />
     <Content Include="Styles\Site.css" />
     <Content Include="Styles\signup.css" />
     <Content Include="Styles\login.css" />
+    <Content Include="Styles\threads.css" />
     <Content Include="Styles\token-input.css" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -176,6 +182,13 @@
     <Compile Include="Sites\mybooks.aspx.designer.cs">
       <DependentUpon>mybooks.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Sites\post.aspx.cs">
+      <DependentUpon>post.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Sites\post.aspx.designer.cs">
+      <DependentUpon>post.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Sites\profile.aspx.cs">
       <DependentUpon>profile.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -196,6 +209,13 @@
     </Compile>
     <Compile Include="Sites\signup.aspx.designer.cs">
       <DependentUpon>signup.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Sites\threads.aspx.cs">
+      <DependentUpon>threads.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Sites\threads.aspx.designer.cs">
+      <DependentUpon>threads.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -225,7 +245,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>52688</DevelopmentServerPort>
+          <DevelopmentServerPort>51818</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>
