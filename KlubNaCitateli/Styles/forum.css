@@ -1,0 +1,49 @@
+﻿body {
+}
+
+.headerLabel
+{
+    font-size:150%;
+    padding:50px;
+
+}
+.topic
+{
+    padding:10px;
+    padding-left:20px;
+   
+    border-bottom:1px gray solid;
+    clear:both;
+}
+.topic:last-child
+{
+border-bottom:0px;
+}
+
+.naslov
+{
+    padding:5px;
+background-color:Black;
+color:White;
+border-top-left-radius:10px;
+border-top-right-radius:10px;
+}
+.maintopics
+{
+margin:20px;
+border:1px gray solid;
+border-radius:10px;
+}
+.thread
+{
+float:left;
+}
+.mostCommCat
+{
+float:right;
+
+}
+.nodiv
+{
+clear:both;
+}

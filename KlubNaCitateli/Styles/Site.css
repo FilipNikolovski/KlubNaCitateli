@@ -27,13 +27,11 @@
 #navigation 
 {
     float:left;
-    width:45%;
-    height:100%;
+    width:auto;
+    height:auto;
     display:inline;
     margin-left:50px;
-      background-color:#FFF8DC;
-      
-    border-radius:5px;
+    
 }
 .logopic
 {
@@ -47,16 +45,7 @@
     color:Black;
     width:auto;
 }
-#menu li
-{
-    margin-right:30px;
-    display: inline;    
-    color:Black;
-    width:100%;
-    height:100%;
-    margin-top:15px;
-    text-decoration:none;
-}
+
 
 #signLog
 {
@@ -66,15 +55,6 @@
     width:auto;
     margin-right:10px;
 }
-#menu
-{
-    list-style-type:none;
-    float:left;
-    width:auto;
-    height:80%;
-  
-}
-
 #footer div
 {
    padding:10px;
@@ -110,20 +90,78 @@ fieldset
     border-radius: 4px;
 }
 
-.links, .menulinks
+.menulinks
 {
     color:#4169E1;
     text-decoration:none;
-    padding:5px;
+    padding-top:20px;
+  padding-bottom:20px;
+  padding-left:25px;
+  padding-right:25px;
 }
 .Img1
 {
     border:none !important;
 }
-.hoverlinks
-{
-    border:1px gray solid;
-    border-radius:5px;
-    font-size:120%;
-}
 
+#navigation {
+  zoom: 1;
+  width: auto;
+  background: #FFF8DC;
+  padding: 8px 0;
+}
+#navigation:before {
+  content: '';
+  display: block;
+}
+#navigation:after {
+  content: '';
+  display: table;
+  clear: both;
+}
+#navigation ul {
+  list-style-type: none;
+  position: relative;
+  display: block;
+  font-size: 12px;
+  font-family: Verdana, Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px solid #4169E1;
+  zoom: 1;
+}
+#navigation ul:before {
+  content: '';
+  display: block;
+}
+#navigation ul:after {
+  content: '';
+  display: table;
+  clear: both;
+}
+#navigation li {
+  display: block;
+  float: left;
+  margin: 0;
+  padding: 0;
+}
+#navigation li .menulinks {
+  float: left;
+  color: #4169E1;
+  text-decoration: none;
+  height: 24px;
+  padding: 9px 15px 0;
+  font-weight: normal;
+}
+#navigation li:hover,
+#navigation .active {
+  text-decoration: none;
+  border-bottom: 2px solid #4169E1;
+}
+#navigation li:hover .menulinks {
+  color: darkblue;
+}
+#navigation .active .menulinks {
+  color: #4169E1;
+  font-weight: 700;
+}
