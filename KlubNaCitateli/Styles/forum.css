@@ -7,15 +7,40 @@
     padding:50px;
 
 }
+.class2
+{
+text-align:right;
+}
+.class1, .class2
+{
+margin-top:5px;
+}
+.topicLink
+{
+    font-weight:bold;
+}
+.hover, .posts
+{
+cursor:pointer;
+}
+
+.posts
+{
+   font-weight:bold;
+    opacity:0.85;
+
+}
 .topic
+{
+    clear:both;
+}
+.border
 {
     padding:10px;
     padding-left:20px;
-   
-    border-bottom:1px gray solid;
-    clear:both;
+ border-bottom:1px gray solid;
 }
-.topic:last-child
+.border:last-child
 {
 border-bottom:0px;
 }

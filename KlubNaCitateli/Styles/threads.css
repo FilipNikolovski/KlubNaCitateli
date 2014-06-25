@@ -15,6 +15,34 @@
     border-bottom:1px gray solid;
     clear:both;
 }
+.btnAddNewThread
+{
+    float:right;
+}
+
+#cont
+{
+margin:5px;
+clean:both;
+background-color:Black;
+}
+.threadname
+{
+font-weight:bold;
+}
+.userD
+{
+    font-weight:bold;
+    opacity:0.85;
+}
+.hover
+{
+cursor:pointer;
+}
+.right
+{
+text-align:right;
+}
 .topic:last-child
 {
 border-bottom:0px;
@@ -23,10 +51,17 @@ border-bottom:0px;
 .naslov
 {
     padding:5px;
-background-color:Black;
 color:White;
 border-top-left-radius:10px;
 border-top-right-radius:10px;
+}
+.naslov
+{
+float:left;
+}
+.btnAddThread
+{
+float:right;
 }
 .maintopics
 {
@@ -41,9 +76,32 @@ float:left;
 .mostCommCat
 {
 float:right;
+text-align:right;
 
+}
+#nodiv, .cont
+{
+clear:both;
 }
 .nodiv
 {
 clear:both;
+
+background-color:Black;
+}
+.user, .numcomments
+{
+margin-top:5px;
+}
+.allblack
+{
+background-color:Black;
+border-radius:10px;
+}
+.btnAddThread
+{
+
+height:25px;
+margin:4px;
+
 }
