@@ -59,8 +59,8 @@ CREATE TABLE DiscussionThreads(
 	ThreadName varchar(350) NOT NULL,
 	DateCreated varchar(11),
 	PRIMARY KEY (IDThread),
-	FOREIGN KEY (IDUser) REFERENCES Users (IDUser),
-	FOREIGN KEY (IDTopic) REFERENCES ForumTopics (IDTopic)
+	FOREIGN KEY (IDUser) REFERENCES Users (IDUser) ON CASCADE DELETE,
+	FOREIGN KEY (IDTopic) REFERENCES ForumTopics (IDTopic) ON CASCADE DELETE
 );
 
 CREATE TABLE Posts (
@@ -70,8 +70,8 @@ CREATE TABLE Posts (
 	PostComment text NOT NULL,
 	DatePosted varchar(11),
 	PRIMARY KEY (IDPost),
-	FOREIGN KEY (IDUser) REFERENCES Users (IDUser),
-	FOREIGN KEY (IDThread) REFERENCES DiscussionThreads (IDThread)
+	FOREIGN KEY (IDUser) REFERENCES Users (IDUser) ON CASCADE DELETE,
+	FOREIGN KEY (IDThread) REFERENCES DiscussionThreads (IDThread) ON CASCADE DELETE
 );
 
 CREATE TABLE Wrote (
