@@ -133,8 +133,10 @@ namespace KlubNaCitateli.Sites
                         namesCategories.Add(reader6["name"].ToString());
 
                     }
-                    reader6.Close();
+                   
                 }
+
+                reader6.Close();
 
                 while (categoriesList.Count < 6)
                 {

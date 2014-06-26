@@ -3,13 +3,9 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="../Styles/book.css" type="text/css" rel="Stylesheet" />
     <style type="text/css">
-        #name
-        {
-            height: 57px;
-        }
         #list
         {
-            margin-bottom: 115px;
+            width: 167px;
         }
     </style>
 </asp:Content>
@@ -17,8 +13,11 @@
 <div id="content">
     <div id="div1">
         <div id="info">
-            <div id="image">
-                <asp:Image ID="imgBook" runat="server" Height="159px" Width="129px" />
+            <div id="image_stars">
+                <div id="image">
+                    <asp:Image ID="imgBook" runat="server" Height="159px" Width="129px" />
+                </div>
+                <div id="stars"></div>
                 <ul>
                     <li></li>
                     <li></li>
@@ -26,27 +25,36 @@
                     <li></li>
                     <li></li>
                 </ul>
-                <asp:Button ID="btnAddFavourites" runat="server" Text="Button" />
+                <div id="button">
+                    <asp:Button ID="btnAddFavourites" runat="server" Text="Button" />
+                </div>
             </div>
             <div id="about">
                 <div id="name">
+                <span>
                     <asp:Label ID="lblNameBook" runat="server" Text="Ime Kniga"></asp:Label>
-                    <br /> by <br />
-                    <asp:Label ID="lblNameAuthor" runat="server" Text="Ime Aftor"></asp:Label>
+                </span>
+                    <br /> 
+                        <label>by</label>
+                    <br />
+                    <span>
+                        <asp:Label ID="lblNameAuthor" runat="server" Text="Ime Aftor"></asp:Label>
+                    </span>
                 </div>
                 <div id="description">
                     <label>Description</label>
                     <br />
-                    <asp:Panel ID="pnlDescription" runat="server" Height="115px">
+                    <div id="text_description">
+                        <asp:Panel ID="pnlDescription" runat="server" Height="115px">
                         j;asnasjdasdnaiodason</asp:Panel>
+                    </div>
                 </div>
             </div>
+                <div id="list">
+                </div>
             <div id="links">
                 <label>Download/By Links</label>
-                <div id="list">
-                    <asp:ListBox ID="lbBookLinks" runat="server"></asp:ListBox>
                 </div>
-            </div>
         </div>
         <div id="infoTags">
             <div id="info2">

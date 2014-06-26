@@ -23,10 +23,7 @@ namespace KlubNaCitateli.Classes
         public int NumVotes { get; set; }
         public List<string> Authors;
 
-        public Book()
-        {
-
-        }
+        public Book() {}
 
         public Book(int id, string isbn, string name, List<string> authors, string imagesrc, string desc, string date, string dateAdded, int sumRating, int numVotes)
         {
@@ -45,7 +42,6 @@ namespace KlubNaCitateli.Classes
             {
                 Authors.Add(authors[i]);
             }
-
         }
 
         //Vrakja lista na knigi
@@ -119,6 +115,5 @@ namespace KlubNaCitateli.Classes
                 return list;
             }
         }
-
     }
 }
