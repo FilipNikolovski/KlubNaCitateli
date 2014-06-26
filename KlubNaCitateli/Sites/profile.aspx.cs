@@ -13,9 +13,6 @@ namespace KlubNaCitateli.Sites
 {
     public partial class profile : System.Web.UI.Page
     {
-<<<<<<< HEAD
-
-=======
         protected void Page_Load(object sender, EventArgs e)
         {
             using (MySqlConnection connection = new MySqlConnection())
@@ -128,6 +125,6 @@ namespace KlubNaCitateli.Sites
             confirmChangeAboutBtn.Visible = true;
             changeAboutBtn.Visible = false;
         }
->>>>>>> 1bf304ac17f10fa20fa26ae57e61c449e2fdce23
+
     }
 }

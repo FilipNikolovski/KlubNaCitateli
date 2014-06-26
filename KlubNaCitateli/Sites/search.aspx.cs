@@ -282,9 +282,4 @@ namespace KlubNaCitateli.Sites
         }
     }
 
-<<<<<<< HEAD
-    }
-=======
-
->>>>>>> 1bf304ac17f10fa20fa26ae57e61c449e2fdce23
 }

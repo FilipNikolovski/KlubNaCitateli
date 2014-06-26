@@ -1,13 +1,10 @@
 ﻿body 
 {
-<<<<<<< HEAD
-    background-image:url("../Images/bg-body.jpg");
-=======
+
     margin: 10px auto;
     font-family: "Helvetica";
     width:1000px;
     background-image:url("../Images/bg-body.png");
->>>>>>> 1bf304ac17f10fa20fa26ae57e61c449e2fdce23
 }
 #form1
 {
@@ -18,14 +15,9 @@
     
 #content
 {
-<<<<<<< HEAD
-    background-color:#E6E6FA;
-     
-=======
     background-color:#FFF8DC;
     margin-top:10px;
     margin-bottom:10px;
->>>>>>> 1bf304ac17f10fa20fa26ae57e61c449e2fdce23
 }
 #header 
 {

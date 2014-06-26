@@ -59,11 +59,6 @@
             <asp:ContentPlaceHolder ID="mainContent" runat="server"></asp:ContentPlaceHolder>    
         </div>
 
-<<<<<<< HEAD
-        <div id="footer">
-            <!--footer-->
-        </div>
-=======
     <div id="content">
         <asp:ContentPlaceHolder ID="mainContent" runat="server"></asp:ContentPlaceHolder>    
     </div>
@@ -78,7 +73,6 @@
         Стефан Маневски. 
        <br /> All right reserved </div>
     </div>
->>>>>>> 1bf304ac17f10fa20fa26ae57e61c449e2fdce23
     </form>
 </body>
 </html>

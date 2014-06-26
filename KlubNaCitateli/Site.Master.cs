@@ -12,12 +12,10 @@ namespace KlubNaCitateli
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-<<<<<<< HEAD
-=======
+
             HyperLink3.PostBackUrl = "~/Sites/search.aspx";
             HyperLink4.PostBackUrl = "~/Sites/forum.aspx";
             HyperLink5.PostBackUrl = "~/Sites/index.aspx";
->>>>>>> 1bf304ac17f10fa20fa26ae57e61c449e2fdce23
 
             if (Session["Name"] != null)
             {

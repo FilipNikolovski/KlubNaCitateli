@@ -13,8 +13,7 @@ namespace KlubNaCitateli.Sites
 {
     public partial class forum : System.Web.UI.Page
     {
-<<<<<<< HEAD
-=======
+
         Dictionary<int, string> topicIds = new Dictionary<int, string>();
         Dictionary<int, List<Thread>> topicsInfo = new Dictionary<int, List<Thread>>();
         protected void Page_Load(object sender, EventArgs e)
@@ -139,8 +138,6 @@ namespace KlubNaCitateli.Sites
                     connection.Close();
                 }
             }
-
->>>>>>> 1bf304ac17f10fa20fa26ae57e61c449e2fdce23
 
     }
 }

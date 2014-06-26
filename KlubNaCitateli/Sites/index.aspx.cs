@@ -11,14 +11,8 @@ namespace KlubNaCitateli.Sites
 {
     public partial class index : System.Web.UI.Page
     {
-<<<<<<< HEAD
-
-        int mostWanted = -1, mostViewed = -1, bestThisMonth = -1, category1 = -1, category2 = -1, category3 = -1, category4=-1, category5=-1, category6=-1;
-        List<int> categoriesList = new List<int>(2);
-=======
         int mostWanted = -1, mostViewed = -1, bestThisMonth = -1, category1 = -1, category2 = -1, category3 = -1, category4 = -1, category5 = -1, category6 = -1;
         List<int> categoriesList = new List<int>();
->>>>>>> 1bf304ac17f10fa20fa26ae57e61c449e2fdce23
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -122,19 +116,6 @@ namespace KlubNaCitateli.Sites
 
                         }
 
-<<<<<<< HEAD
-                    }
-                   
-                }
-
-                reader6.Close();
-
-                while (categoriesList.Count < 6)
-                {
-                    command6.CommandText = "select categories.idcategory, name from categories, belongsto where belongsto.idcategory=categories.idcategory group by idcategory having count(idbook) > 0 order by rand() limit 1";
-                    command6.Connection = connection;
-                    reader6 = command6.ExecuteReader();
-=======
                         firstCategoryName.Text = namesCategories[0];
                         secondCategoryName.Text = namesCategories[1];
                         thirdCategoryName.Text = namesCategories[2];
@@ -157,7 +138,6 @@ namespace KlubNaCitateli.Sites
                                 firstCategoryBookName.PostBackUrl = "~/Sites/book.aspx?id=" + category1;
 
                             }
->>>>>>> 1bf304ac17f10fa20fa26ae57e61c449e2fdce23
 
                         }
                         reader.Close();
