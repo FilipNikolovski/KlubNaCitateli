@@ -43,10 +43,7 @@ cursor:pointer;
 {
 text-align:right;
 }
-.topic:last-child
-{
-border-bottom:0px;
-}
+
 
 .naslov
 {
@@ -102,6 +99,57 @@ border-radius:10px;
 {
 
 height:25px;
-margin:4px;
+padding-right:6px;
+color:White;
+text-decoration:underline;
 
+
+}
+#dialog-form, #dialog-form1
+{
+    background-color: #4169E1;
+    color: White;
+}
+#buttons, #buttons2
+{
+    background-color: #4169E1;
+    color: White;
+    margin-top: -8px;
+    padding: 20px;
+}
+#fieldSet1, #fieldSet2
+{
+    margin: 10px;
+    margin-top: 30px;
+}
+
+.separateLabel
+{
+    width:100%;
+}
+#add, #cancel, #yes, #no
+{
+    border: 1px solid gray;
+    border-radius: 5px;
+    width: 49%;
+    height: 120%;
+    margin: auto;
+    color: #4169E1;
+}
+.ui-dialog-titlebar-close {
+  visibility: hidden;
+}
+.delete
+{
+   float:right;
+   width:30px;
+   height:30px;
+   background:url("../Images/delete.png") no-repeat;
+   margin-left:10px;
+   margin-top:10px;
+}
+#demo
+{
+    width:310px;
+    margin:auto;
 }
