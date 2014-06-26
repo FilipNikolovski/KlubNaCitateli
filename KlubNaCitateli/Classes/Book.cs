@@ -23,7 +23,14 @@ namespace KlubNaCitateli.Classes
         public int NumVotes { get; set; }
         public List<string> Authors;
 
+<<<<<<< HEAD
         public Book() {}
+=======
+        public Book()
+        {
+            Authors = new List<string>();
+        }
+>>>>>>> 1bf304ac17f10fa20fa26ae57e61c449e2fdce23
 
         public Book(int id, string isbn, string name, List<string> authors, string imagesrc, string desc, string date, string dateAdded, int sumRating, int numVotes)
         {
@@ -44,6 +51,7 @@ namespace KlubNaCitateli.Classes
             }
         }
 
+<<<<<<< HEAD
         //Vrakja lista na knigi
         public static List<Book> SelectListBooks(string search, string language, string category)
         {
@@ -115,5 +123,7 @@ namespace KlubNaCitateli.Classes
                 return list;
             }
         }
+=======
+>>>>>>> 1bf304ac17f10fa20fa26ae57e61c449e2fdce23
     }
 }

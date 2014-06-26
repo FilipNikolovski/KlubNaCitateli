@@ -3,12 +3,25 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="../Styles/index.css" rel="stylesheet" type="text/css" />
+    <script>
+        $(document).ready(function () {
+
+            $("#<%= searchWord.ClientID %>").keydown(function (e) {
+                if (e.keyCode == 13) {
+                    window.location = "search.aspx?search=" + $("#<%=searchWord.ClientID %>").val();
+                    return false;
+                }
+            });
+        });
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="mainContent" runat="server">
     <asp:Panel ID="Panel1" runat="server" CssClass="searchPanel">
-        <asp:Label ID="Label1" runat="server" Text="Book club is more than reviews" CssClass="bookPanel"></asp:Label>
+        <asp:Label ID="Label1" runat="server" Text="Find the book that you need" CssClass="bookPanel"></asp:Label>
         <br />
-        <asp:TextBox ID="searchWord" runat="server" CssClass="searchBox"></asp:TextBox>
+        <asp:TextBox ID="searchWord" runat="server" CssClass="searchBox" placeholder="Search.."></asp:TextBox>
+        <asp:ImageButton ColumnSpan="2" ID="ImageButton1" runat="server" CssClass="bookPlacePanel" Visible="false" OnClientClick="return false;" >
+                    </asp:ImageButton>
     </asp:Panel>
     <asp:Panel ID="Panel2" runat="server" CssClass="panel2">
         <asp:Table runat="server" CssClass="tableRow">
@@ -26,27 +39,27 @@
             </asp:TableRow>
             <asp:TableRow>
                 <asp:TableCell CssClass="table">
-                    <asp:Label ID="mostWantedBookName" runat="server" Text="" CssClass="bookNameLabel"
-                        Multiline="True"></asp:Label>
+                    <asp:LinkButton ID="mostWantedBookName" runat="server" Text="" CssClass="bookNameLabel"
+                        Multiline="True"></asp:LinkButton>
                 </asp:TableCell>
                 <asp:TableCell>
-                    <asp:Panel ColumnSpan="2" ID="mostWantedPanel" runat="server" CssClass="bookPlacePanel">
-                    </asp:Panel>
+                    <asp:ImageButton ColumnSpan="2" ID="mostWantedPanel" runat="server" CssClass="bookPlacePanel" UseSubmitBehavior="false" >
+                    </asp:ImageButton>
                 </asp:TableCell>
                 <asp:TableCell CssClass="table">
-                    <asp:Label ID="mostViewedBookName" runat="server" Text="" CssClass="bookNameLabel"
-                        Multiline="True"></asp:Label>
+                    <asp:LinkButton ID="mostViewedBookName" runat="server" Text="" CssClass="bookNameLabel"
+                        Multiline="True"></asp:LinkButton>
                 </asp:TableCell>
                 <asp:TableCell>
-                    <asp:Panel ColumnSpan="2" ID="mostViewedPanel" runat="server" CssClass="bookPlacePanel">
-                    </asp:Panel>
+                    <asp:ImageButton ColumnSpan="2" ID="mostViewedPanel" runat="server" CssClass="bookPlacePanel" UseSubmitBehavior="false">
+                    </asp:ImageButton>
                 </asp:TableCell>
                 <asp:TableCell CssClass="table">
-                    <asp:Label ID="bestThisMonthBookName" runat="server" Text="" CssClass="bookNameLabel"
-                        Multiline="True"></asp:Label></asp:TableCell>
+                    <asp:LinkButton ID="bestThisMonthBookName" runat="server" Text="" CssClass="bookNameLabel"
+                        Multiline="True"></asp:LinkButton></asp:TableCell>
                 <asp:TableCell>
-                    <asp:Panel ColumnSpan="2" ID="bestThisMonthPanel" runat="server" CssClass="bookPlacePanel">
-                    </asp:Panel>
+                    <asp:ImageButton ColumnSpan="2" ID="bestThisMonthPanel" runat="server" CssClass="bookPlacePanel">
+                    </asp:ImageButton>
                 </asp:TableCell>
             </asp:TableRow>
         </asp:Table>
@@ -64,22 +77,22 @@
             </asp:TableRow>
             <asp:TableRow>
                 <asp:TableCell CssClass="table">
-                    <asp:Label ID="firstCategoryBookName" runat="server" Text="" CssClass="bookNameLabel"></asp:Label></asp:TableCell>
+                    <asp:LinkButton ID="firstCategoryBookName" runat="server" Text="" CssClass="bookNameLabel"></asp:LinkButton></asp:TableCell>
                 <asp:TableCell>
-                    <asp:Panel ID="firstCategoryPanel" CollumnSpan="2" runat="server" CssClass="bookPlacePanel">
-                    </asp:Panel>
+                    <asp:ImageButton ID="firstCategoryPanel" CollumnSpan="2" runat="server" CssClass="bookPlacePanel">
+                    </asp:ImageButton>
                 </asp:TableCell>
                 <asp:TableCell CssClass="table">
-                    <asp:Label ID="secondCategoryBookName" runat="server" Text="" CssClass="bookNameLabel"></asp:Label></asp:TableCell>
+                    <asp:LinkButton ID="secondCategoryBookName" runat="server" Text="" CssClass="bookNameLabel"></asp:LinkButton></asp:TableCell>
                 <asp:TableCell>
-                    <asp:Panel ID="secondCategoryPanel" CollumnSpan="2" runat="server" CssClass="bookPlacePanel">
-                    </asp:Panel>
+                    <asp:ImageButton ID="secondCategoryPanel" CollumnSpan="2" runat="server" CssClass="bookPlacePanel">
+                    </asp:ImageButton>
                 </asp:TableCell>
                 <asp:TableCell CssClass="table">
-                    <asp:Label ID="thirdCategoryBookName" runat="server" Text="" CssClass="bookNameLabel"></asp:Label></asp:TableCell>
+                    <asp:LinkButton ID="thirdCategoryBookName" runat="server" Text="" CssClass="bookNameLabel"></asp:LinkButton></asp:TableCell>
                 <asp:TableCell>
-                    <asp:Panel ID="thirdCategoryPanel" CollumnSpan="2" runat="server" CssClass="bookPlacePanel">
-                    </asp:Panel>
+                    <asp:ImageButton ID="thirdCategoryPanel" CollumnSpan="2" runat="server" CssClass="bookPlacePanel">
+                    </asp:ImageButton>
                 </asp:TableCell>
             </asp:TableRow>
         </asp:Table>
@@ -97,22 +110,22 @@
             </asp:TableRow>
             <asp:TableRow>
                 <asp:TableCell CssClass="table">
-                    <asp:Label ID="fourthCategoryBookName" runat="server" Text="" CssClass="bookNameLabel"></asp:Label></asp:TableCell>
+                    <asp:LinkButton ID="fourthCategoryBookName" runat="server" Text="" CssClass="bookNameLabel"></asp:LinkButton></asp:TableCell>
                 <asp:TableCell>
-                    <asp:Panel ID="fourthCategoryPanel" CollumnSpan="2" runat="server" CssClass="bookPlacePanel">
-                    </asp:Panel>
+                    <asp:ImageButton ID="fourthCategoryPanel" CollumnSpan="2" runat="server" CssClass="bookPlacePanel">
+                    </asp:ImageButton>
                 </asp:TableCell>
                 <asp:TableCell CssClass="table">
-                    <asp:Label ID="fifthCategoryBookName" runat="server" Text="" CssClass="bookNameLabel"></asp:Label></asp:TableCell>
+                    <asp:LinkButton ID="fifthCategoryBookName" runat="server" Text="" CssClass="bookNameLabel"></asp:LinkButton></asp:TableCell>
                 <asp:TableCell>
-                    <asp:Panel ID="fifthCategoryPanel" CollumnSpan="2" runat="server" CssClass="bookPlacePanel">
-                    </asp:Panel>
+                    <asp:ImageButton ID="fifthCategoryPanel" CollumnSpan="2" runat="server" CssClass="bookPlacePanel">
+                    </asp:ImageButton>
                 </asp:TableCell>
                 <asp:TableCell CssClass="table">
-                    <asp:Label ID="sixthCategoryBookName" runat="server" Text="" CssClass="bookNameLabel"></asp:Label></asp:TableCell>
+                    <asp:LinkButton ID="sixthCategoryBookName" runat="server" Text="" CssClass="bookNameLabel"></asp:LinkButton></asp:TableCell>
                 <asp:TableCell>
-                    <asp:Panel ID="sixthCategoryPanel" CollumnSpan="2" runat="server" CssClass="bookPlacePanel">
-                    </asp:Panel>
+                    <asp:ImageButton ID="sixthCategoryPanel" CollumnSpan="2" runat="server" CssClass="bookPlacePanel">
+                    </asp:ImageButton>
                 </asp:TableCell>
             </asp:TableRow>
         </asp:Table>

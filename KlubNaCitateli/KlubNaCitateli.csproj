@@ -61,15 +61,31 @@
     <Content Include="bin\KlubNaCitateli.dll" />
     <Content Include="bin\KlubNaCitateli.pdb" />
     <Content Include="bin\MySql.Data.dll" />
+    <Content Include="Images\delete.png" />
     <Content Include="Images\bg-body.jpg" />
+    <Content Include="Images\bg-body.png" />
+    <Content Include="Images\book.png" />
     <Content Include="Images\bookclub.jpg" />
+    <Content Include="Images\bookLogo.jpg" />
+    <Content Include="Images\booklogo.png" />
+    <Content Include="Images\buttons.png" />
     <Content Include="Images\img-okay.jpg" />
     <Content Include="Images\left-arrow.jpg" />
+    <Content Include="Images\loading.gif" />
+    <Content Include="Images\next.png" />
     <Content Include="Images\okay.jpg" />
     <Content Include="Images\Originals\arrows.jpg" />
     <Content Include="Images\Originals\left-arrow.jpg" />
     <Content Include="Images\Originals\user-icon.png" />
+    <Content Include="Images\pattern.png" />
+    <Content Include="Images\previous.png" />
+    <Content Include="Images\readersLogo.png" />
     <Content Include="Images\right-arrow.jpg" />
+    <Content Include="Images\searchBox.png" />
+    <Content Include="Images\searchCover.png" />
+    <Content Include="Images\slika.png" />
+    <Content Include="Images\snext.png" />
+    <Content Include="Images\sprevious.png" />
     <Content Include="Images\user-icon.png" />
     <Content Include="obj\Debug\KlubNaCitateli.csproj.FileListAbsolute.txt" />
     <Content Include="obj\Debug\KlubNaCitateli.dll" />
@@ -77,28 +93,35 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-ui-1.10.4.custom.js" />
     <Content Include="Scripts\jquery-ui-1.10.4.custom.min.js" />
+    <Content Include="Scripts\jquery.paginate.js" />
     <Content Include="Scripts\jquery.tokeninput.js" />
     <Content Include="Scripts\Search.js" />
     <Content Include="Scripts\tabs-script.js" />
     <Content Include="Services\BookService.svc" />
+    <Content Include="Services\ForumService.svc" />
     <Content Include="Sites\adminpanel.aspx" />
     <Content Include="Sites\book.aspx" />
     <Content Include="Sites\forum.aspx" />
     <Content Include="Sites\index.aspx" />
     <Content Include="Sites\login.aspx" />
     <Content Include="Sites\mybooks.aspx" />
+    <Content Include="Sites\post.aspx" />
     <Content Include="Sites\profile.aspx" />
     <Content Include="Sites\search.aspx" />
     <Content Include="Sites\signup.aspx" />
     <Content Include="Styles\book.css" />
     <Content Include="Sites\login.aspx" />
+    <Content Include="Sites\threads.aspx" />
     <Content Include="Styles\adminPanel.css" />
+    <Content Include="Styles\forum.css" />
     <Content Include="Styles\index.css" />
+    <Content Include="Styles\post.css" />
     <Content Include="Styles\Search.css" />
     <Content Include="Styles\Site.css" />
     <Content Include="Styles\signup.css" />
     <Content Include="Styles\login.css" />
-    <Content Include="Styles\token-input-facebook.css" />
+    <Content Include="Styles\style.css" />
+    <Content Include="Styles\threads.css" />
     <Content Include="Styles\token-input.css" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -119,6 +142,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\BookService.svc.cs">
       <DependentUpon>BookService.svc</DependentUpon>
+    </Compile>
+    <Compile Include="Services\ForumService.svc.cs">
+      <DependentUpon>ForumService.svc</DependentUpon>
     </Compile>
     <Compile Include="Services\JSONHelper.cs" />
     <Compile Include="Site.Master.cs">
@@ -170,6 +196,13 @@
     <Compile Include="Sites\mybooks.aspx.designer.cs">
       <DependentUpon>mybooks.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Sites\post.aspx.cs">
+      <DependentUpon>post.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Sites\post.aspx.designer.cs">
+      <DependentUpon>post.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Sites\profile.aspx.cs">
       <DependentUpon>profile.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -191,6 +224,14 @@
     <Compile Include="Sites\signup.aspx.designer.cs">
       <DependentUpon>signup.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Sites\threads.aspx.cs">
+      <DependentUpon>threads.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Sites\threads.aspx.designer.cs">
+      <DependentUpon>threads.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Thread.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -219,7 +260,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>52688</DevelopmentServerPort>
+          <DevelopmentServerPort>51818</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

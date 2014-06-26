@@ -18,7 +18,7 @@ namespace KlubNaCitateli.Classes
         public string type { get; set; }
         public int numComments { get; set; }
         public String aboutUser { get; set; }
-       
+
 
         public User(string name, string surname, string email, string username, string password, String aboutUser)
         {
@@ -33,14 +33,19 @@ namespace KlubNaCitateli.Classes
         }
 
 
-        public void CheckIfUserExists(bool checkEmail, bool checkUsername)
+        public void CheckIfUserExists(out bool checkEmail, out bool checkUsername)
         {
-            
-                    MySqlConnection connection = new MySqlConnection();
+            checkEmail = true;
+            checkUsername = true;
+
+            using (MySqlConnection connection = new MySqlConnection())
+            {
+                try
+                {
                     connection.ConnectionString = ConfigurationManager.ConnectionStrings["BooksConn"].ConnectionString.ToString();
                     MySqlCommand command = new MySqlCommand();
-                    command.CommandText = "SELECT IDUser from users where email=@email";
-                    command.Parameters.AddWithValue("@email", email.ToString());
+                    command.CommandText = "SELECT IDUser from users where email=?email";
+                    command.Parameters.AddWithValue("?email", email.ToString());
                     command.Connection = connection;
                     connection.Open();
                     MySqlDataReader dataReader = command.ExecuteReader();
@@ -49,27 +54,35 @@ namespace KlubNaCitateli.Classes
                         checkEmail = false;
                     }
                     dataReader.Close();
-            
+
                     MySqlCommand command1 = new MySqlCommand();
                     command1.Connection = connection;
-                    command1.CommandText = "SELECT IDUser from users where username=@username";
-                    command1.Parameters.AddWithValue("@username", username.ToString());
-                   MySqlDataReader dataReader1 = command1.ExecuteReader();
+                    command1.CommandText = "SELECT IDUser from users where username=?username";
+                    command1.Parameters.AddWithValue("?username", username.ToString());
+                    MySqlDataReader dataReader1 = command1.ExecuteReader();
                     if (dataReader1.HasRows)
                     {
                         checkUsername = false;
                     }
                     dataReader1.Close();
-                   
+
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+                finally
+                {
                     connection.Close();
-                
+                }
 
-               
             }
+
         }
-
-
-
-
-
     }
+
+
+
+
+
+}

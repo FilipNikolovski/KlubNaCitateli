@@ -10,6 +10,7 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="mainContent" runat="server">
+<<<<<<< HEAD
 <div id="content">
     <div id="div1">
         <div id="info">
@@ -76,4 +77,7 @@
     
     </div>
 </div>
+=======
+
+>>>>>>> 1bf304ac17f10fa20fa26ae57e61c449e2fdce23
 </asp:Content>
