@@ -19,13 +19,18 @@ namespace KlubNaCitateli.Sites
     public partial class adminpanel : System.Web.UI.Page
     {
         private static string api_key = "AIzaSyDQNdTLOCVjieDzeY9IZoyaMvpDy4ApRec&maxResults";
-        
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 FillCategoriesGrid();
                 FillUsersGrid();
+
+                if (Session["Type"] == null || Session["Type"].ToString() != "administrator")
+                {
+                    Response.Redirect("~/Sites/login.aspx");
+                }
             }
 
         }
@@ -110,151 +115,151 @@ namespace KlubNaCitateli.Sites
 
         protected void btnSearch_Click(object sender, EventArgs e)
         {
-                using (WebClient webClient = new WebClient())
+
+            using (WebClient webClient = new WebClient())
+            {
+                string url = "";
+                string urlContents = "";
+                url = "https://www.googleapis.com/books/v1/volumes?key=AIzaSyDQNdTLOCVjieDzeY9IZoyaMvpDy4ApRec&maxResults=40&q=";
+                url += tbSearchBooks.Text;
+
+                try
                 {
-                    string url = "";
-                    string urlContents = "";
-                    url = "https://www.googleapis.com/books/v1/volumes?key=AIzaSyDQNdTLOCVjieDzeY9IZoyaMvpDy4ApRec&maxResults=40&q=";
-                    url += tbSearchBooks.Text;
+                    urlContents = webClient.DownloadString(url);
+                }
+                catch (Exception exc)
+                {
+                    lblError.Text = exc.Message;
+                    lblError.Visible = true;
+                }
 
-                    try
+                if (urlContents.ToString().Trim() != "")
+                {
+                    Dictionary<string, object> jsonData = new Dictionary<string, object>();
+
+                    jsonData = new JavaScriptSerializer().Deserialize<Dictionary<string, object>>(urlContents);
+
+                    ArrayList items = jsonData["items"] as ArrayList;
+
+                    List<string> idList = new List<string>();
+                    for (int i = 0; i < items.Count; i++)
                     {
-                        urlContents = webClient.DownloadString(url);
+                        Dictionary<string, object> item = items[i] as Dictionary<string, object>;
+                        idList.Add(item["id"].ToString());
                     }
-                    catch(Exception exc)
+
+                    //Prevzemanje lista na knigi od google.books
+                    List<Book> bookList = new List<Book>();
+
+                    foreach (string id in idList)
                     {
-                        lblError.Text = exc.Message;
-                        lblError.Visible = true;
-                    }
+                        url = "https://www.googleapis.com/books/v1/volumes/";
+                        url += (id + "?key=" + api_key);
 
-                    if (urlContents.ToString().Trim() != "")
-                    {
-                        Dictionary<string, object> jsonData = new Dictionary<string, object>();
-
-                        jsonData = new JavaScriptSerializer().Deserialize<Dictionary<string, object>>(urlContents);
-
-                        ArrayList items = jsonData["items"] as ArrayList;
-
-                        List<string> idList = new List<string>();
-                        for (int i = 0; i < items.Count; i++)
+                        try
                         {
-                            Dictionary<string, object> item = items[i] as Dictionary<string, object>;
-                            idList.Add(item["id"].ToString());
-                        }
+                            urlContents = webClient.DownloadString(url);
+                            jsonData = new JavaScriptSerializer().Deserialize<Dictionary<string, object>>(urlContents);
 
-                        //Prevzemanje lista na knigi od google.books
-                        List<Book> bookList = new List<Book>();
+                            Dictionary<string, object> volumeInfo = jsonData["volumeInfo"] as Dictionary<string, object>;
 
-                        foreach (string id in idList)
-                        {
-                            url = "https://www.googleapis.com/books/v1/volumes/";
-                            url += (id + "?key=" + api_key);
+                            //Kreiranje i dodavanje na kniga vo lista----------------------------------------
 
-                            try
+                            //ISBN id na kniga
+                            if (volumeInfo.ContainsKey("industryIdentifiers"))
                             {
-                                urlContents = webClient.DownloadString(url);
-                                jsonData = new JavaScriptSerializer().Deserialize<Dictionary<string, object>>(urlContents);
+                                Book book = new Book();
 
-                                Dictionary<string, object> volumeInfo = jsonData["volumeInfo"] as Dictionary<string, object>;
+                                ArrayList isbn = volumeInfo["industryIdentifiers"] as ArrayList;
+                                Dictionary<string, object> isbn10 = isbn[0] as Dictionary<string, object>;
+                                book.ISBN = isbn10["identifier"].ToString();
 
-                                //Kreiranje i dodavanje na kniga vo lista----------------------------------------
-                                
-                                //ISBN id na kniga
-                                if (volumeInfo.ContainsKey("industryIdentifiers"))
+                                if (volumeInfo.ContainsKey("title"))
+                                    book.Name = volumeInfo["title"].ToString();
+                                else
+                                    book.Name = "No title available";
+
+                                if (volumeInfo.ContainsKey("description"))
+                                    book.Description = volumeInfo["description"].ToString();
+                                else
+                                    book.Description = "No description available.";
+
+                                if (volumeInfo.ContainsKey("publishedDate"))
+                                    book.YearPublished = volumeInfo["publishedDate"].ToString();
+                                else
+                                    book.YearPublished = "-";
+                                if (volumeInfo.ContainsKey("language"))
+                                    book.Language = volumeInfo["language"].ToString();
+                                else
+                                    book.Language = "No language";
+
+                                book.DateAdded = DateTime.Now.Year.ToString();
+                                book.SumRating = 0;
+                                book.NumVotes = 0;
+
+                                //Avtori
+                                if (volumeInfo.ContainsKey("authors"))
                                 {
-                                    Book book = new Book();
-
-                                    ArrayList isbn = volumeInfo["industryIdentifiers"] as ArrayList;
-                                    Dictionary<string, object> isbn10 = isbn[0] as Dictionary<string, object>;
-                                    book.ISBN = isbn10["identifier"].ToString();
-
-                                    if (volumeInfo.ContainsKey("title"))
-                                        book.Name = volumeInfo["title"].ToString();
-                                    else
-                                        book.Name = "No title available";
-
-                                    if (volumeInfo.ContainsKey("description"))
-                                        book.Description = volumeInfo["description"].ToString();
-                                    else
-                                        book.Description = "No description available.";
-
-                                    if (volumeInfo.ContainsKey("publishedDate"))
-                                        book.YearPublished = volumeInfo["publishedDate"].ToString();
-                                    else
-                                        book.YearPublished = "-";
-                                    if (volumeInfo.ContainsKey("language"))
-                                        book.Language = volumeInfo["language"].ToString();
-                                    else
-                                        book.Language = "No language";
-
-                                    book.DateAdded = DateTime.Now.Year.ToString();
-                                    book.SumRating = 0;
-                                    book.NumVotes = 0;
-
-                                    //Avtori
-                                    if (volumeInfo.ContainsKey("authors"))
+                                    ArrayList authors = volumeInfo["authors"] as ArrayList;
+                                    List<string> authorList = new List<string>();
+                                    for (int i = 0; i < authors.Count; i++)
                                     {
-                                        ArrayList authors = volumeInfo["authors"] as ArrayList;
-                                        List<string> authorList = new List<string>();
-                                        for (int i = 0; i < authors.Count; i++)
-                                        {
-                                            authorList.Add(authors[i].ToString());
-                                        }
-                                        book.Authors = authorList;
+                                        authorList.Add(authors[i].ToString());
                                     }
-                                    else
-                                    {
-                                        book.Authors = new List<string>();
-                                        book.Authors.Add("-");
-                                    }
-
-
-                                    //Link kon sliki
-                                    Dictionary<string, object> imageLinks = volumeInfo["imageLinks"] as Dictionary<string, object>;
-                                    if (imageLinks.ContainsKey("small"))
-                                        book.ImageSrc = imageLinks["small"].ToString();
-                                    else if (imageLinks.ContainsKey("medium"))
-                                        book.ImageSrc = imageLinks["medium"].ToString();
-                                    else if (imageLinks.ContainsKey("large"))
-                                        book.ImageSrc = imageLinks["large"].ToString();
-                                    else
-                                        book.ImageSrc = "defaultImage.png";
-                                    if (imageLinks.ContainsKey("thumbnail"))
-                                        book.ThumbnailSrc = imageLinks["thumbnail"].ToString();
-                                    else if (imageLinks.ContainsKey("smallThumbnail"))
-                                        book.ThumbnailSrc = imageLinks["smallThumbnail"].ToString();
-                                    else
-                                        book.ThumbnailSrc = "defaultThumb.png";
-
-                                    //-------------------------------------------------------------------------------
-                                    bookList.Add(book);
+                                    book.Authors = authorList;
+                                }
+                                else
+                                {
+                                    book.Authors = new List<string>();
+                                    book.Authors.Add("-");
                                 }
 
-                            }
-                            catch (Exception ex)
-                            {
-                                lblError.Text = ex.Message;
-                                lblError.Visible = true;
-                            }
-                        }
 
-                        if (bookList.Count > 0)
+                                //Link kon sliki
+                                Dictionary<string, object> imageLinks = volumeInfo["imageLinks"] as Dictionary<string, object>;
+                                if (imageLinks.ContainsKey("small"))
+                                    book.ImageSrc = imageLinks["small"].ToString();
+                                else if (imageLinks.ContainsKey("medium"))
+                                    book.ImageSrc = imageLinks["medium"].ToString();
+                                else if (imageLinks.ContainsKey("large"))
+                                    book.ImageSrc = imageLinks["large"].ToString();
+                                else
+                                    book.ImageSrc = "defaultImage.png";
+                                if (imageLinks.ContainsKey("thumbnail"))
+                                    book.ThumbnailSrc = imageLinks["thumbnail"].ToString();
+                                else if (imageLinks.ContainsKey("smallThumbnail"))
+                                    book.ThumbnailSrc = imageLinks["smallThumbnail"].ToString();
+                                else
+                                    book.ThumbnailSrc = "defaultThumb.png";
+
+                                //-------------------------------------------------------------------------------
+                                bookList.Add(book);
+                            }
+
+                        }
+                        catch (Exception ex)
                         {
-                            gvBooks.DataSource = bookList;
-                            gvBooks.DataBind();
-
-                            ViewState["BookList"] = bookList;
-
-                            addAllBooks.Visible = true;
-                            gvBooks.Visible = true;
-
-                            bookField.Value = "";
-                            bookIdsField.Value = "";
+                            lblError.Text = ex.Message;
+                            lblError.Visible = true;
                         }
-                        
                     }
-                   
+
+                    if (bookList.Count > 0)
+                    {
+                        gvBooks.DataSource = bookList;
+                        gvBooks.DataBind();
+
+                        ViewState["BookList"] = bookList;
+
+                        addAllBooks.Visible = true;
+                        gvBooks.Visible = true;
+
+                        bookField.Value = "";
+                        bookIdsField.Value = "";
+                    }
+
                 }
+            }
         }
 
         protected void btnAddCategory_Click(object sender, EventArgs e)
@@ -268,7 +273,7 @@ namespace KlubNaCitateli.Sites
                     connection.Open();
 
                     string query = "SELECT * FROM Categories WHERE Name=?Name";
-                    
+
                     MySqlCommand command = new MySqlCommand(query, connection);
                     command.Parameters.AddWithValue("?Name", tbCategory.Text);
 
@@ -339,7 +344,7 @@ namespace KlubNaCitateli.Sites
                     query = "DELETE FROM Categories WHERE IDCategory=?IDCategory";
                     command.CommandText = query;
                     command.ExecuteNonQuery();
-                    
+
                 }
                 catch (Exception ex)
                 {
@@ -411,8 +416,7 @@ namespace KlubNaCitateli.Sites
                 bookField.Value += (author + ",");
             }
 
-            string script = "<script>$(document).ready(function(){$('#dialog-form').dialog('open');  $('#close').show();});</script>";
-            Page.ClientScript.RegisterStartupScript(this.GetType(), "openDialog", script);
+            addBooksFinished.Value = "true";
         }
 
         protected void addAllBooks_Click(object sender, EventArgs e)
@@ -519,7 +523,7 @@ namespace KlubNaCitateli.Sites
                                             command.Parameters.AddWithValue("?Name", author);
 
                                             reader = command.ExecuteReader();
-                                            
+
                                             if (reader.Read())
                                             {
                                                 int idAuthor = Int32.Parse(reader["IDAuthor"].ToString());
@@ -554,10 +558,10 @@ namespace KlubNaCitateli.Sites
                             }
                             else
                                 reader.Close();
-                            
+
                         }
                     }
-                    
+
                 }
                 catch (Exception ex)
                 {
@@ -576,17 +580,16 @@ namespace KlubNaCitateli.Sites
 
             if (bookIdsField.Value != "")
             {
-                string script = "<script>$(document).ready(function(){$('#dialog-form').dialog('open'); $('#close').hide();});</script>";
-                Page.ClientScript.RegisterStartupScript(this.GetType(), "openDialog", script);
+                addBooksFinished.Value = "true";
             }
             else
-                ClientScript.RegisterStartupScript(this.GetType(), "Alert", "$(document).ready(function(){alert('No books were added to the database.');});", true);
+                addBooksFinished.Value = "false";
         }
 
         protected void gvBooks_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             gvBooks.PageIndex = e.NewPageIndex;
-            
+
             List<Book> bookList = ViewState["BookList"] as List<Book>;
             gvBooks.DataSource = bookList;
             gvBooks.DataBind();
@@ -640,7 +643,7 @@ namespace KlubNaCitateli.Sites
                     connection.Close();
                 }
 
-                
+
             }
         }
 

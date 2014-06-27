@@ -1,6 +1,18 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="profile.aspx.cs" 
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="profile.aspx.cs" 
+
 Inherits="KlubNaCitateli.Sites.profile" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+<style>
+.profilePicture
+{
+   width:200px;
+height:200px;
+background-size:100%;
+background-repeat:no-repeat;
+background-position:center;
+}
+
+</style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="mainContent" runat="server">
     <asp:Table ID="Table1" runat="server" Width="100%">
@@ -9,7 +21,7 @@ Inherits="KlubNaCitateli.Sites.profile" %>
                 <asp:Table ID="Table2" runat="server">
                     <asp:TableRow>
                         <asp:TableCell>
-                            <asp:Image ID="Image1" runat="server" ImageUrl="/Images/user-icon.png" />
+                            <asp:Image ID="Image1" runat="server" ImageUrl="/Images/user-icon.png" CssClass="profilePicture" />
                         </asp:TableCell>
                     </asp:TableRow>
                     <asp:TableRow>
@@ -99,7 +111,8 @@ Inherits="KlubNaCitateli.Sites.profile" %>
         </asp:TableRow>
         <asp:TableRow>
             <asp:TableCell> 
-                <asp:TextBox ID="TextBox3" runat="server" Text="asdasd" Height="200px" Width="100%" TextMode="MultiLine" 
+                <asp:TextBox ID="TextBox3" runat="server" Text="asdasd" Height="200px" Width="100%" TextMode="MultiLine" 
+
 ReadOnly="true"></asp:TextBox>
             </asp:TableCell>
         </asp:TableRow>

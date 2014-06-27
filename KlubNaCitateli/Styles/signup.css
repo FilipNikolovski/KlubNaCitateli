@@ -103,14 +103,13 @@ margin-left:50px;
 .table-first
 {
     width:200px;
-    margin-top:20px;
-    margin-bottom:20px;
+  
 }
 
 .table-second
 {
-    margin-top:20px;
-    margin-bottom:20px;
+    margin-top:5px;
+    margin-bottom:5px;
     width:330px;
     height:30px;
     border-radius:5px;

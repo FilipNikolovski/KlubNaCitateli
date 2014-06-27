@@ -12,20 +12,26 @@ namespace KlubNaCitateli
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            HyperLink3.PostBackUrl = "~/Sites/search.aspx";
+            HyperLink4.PostBackUrl = "~/Sites/forum.aspx";
+            HyperLink5.PostBackUrl = "~/Sites/index.aspx";
+
             if (Session["Name"] != null)
             {
-                HyperLink2.Visible = false;
                 HyperLink1.Text = "Log out";
-                nameSurname.Text = Session["Name"].ToString() + " " + Session["Surname"].ToString();
-                
+                if (Session["Type"].ToString().Equals("administrator"))
+                {
+                    HyperLink2.Text = "Admin panel";
+                }
+                else
+                { 
+                    HyperLink2.Text = Session["Name"].ToString() + " " + Session["Surname"].ToString(); 
+                }
+               
             }
             else
             {
                 HyperLink1.Text = "Log in";
-                HyperLink2.Visible = true;
-                nameSurname.Visible = false;
-                
-
             }
 
         }
@@ -47,9 +53,31 @@ namespace KlubNaCitateli
         }
         public void signUp_click(object sender, EventArgs e)
         {
+            if (HyperLink2.Text == "Sign Up")
+            { 
+                Response.Redirect("signup.aspx"); 
+            }
+            else if (HyperLink2.Text == "Admin panel")
+            {
+                Response.Redirect("adminpanel.aspx");
+            }
+            else
+            {
+                Response.Redirect("profile.aspx?id=" + Session["Id"].ToString());
+            }
             
-                Response.Redirect("signup.aspx");
-            
+        }
+
+        public void myProfile_click(object sender, EventArgs e)
+        {
+            if (Session["Id"] != null)
+            {
+               
+               Response.Redirect("profile.aspx?id=" + Session["Id"].ToString()); 
+                
+            }
+            else
+                Response.Redirect("login.aspx"); 
         }
     }
 }

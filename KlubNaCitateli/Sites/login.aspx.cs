@@ -13,7 +13,8 @@ namespace KlubNaCitateli.Sites
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session["Id"] != null)
+                Response.Redirect("~/Sites/index.aspx");
         }
         public void logIn_click(object sender, EventArgs e)
         {
@@ -87,6 +88,11 @@ namespace KlubNaCitateli.Sites
                             }
                             read1.Close();
 
+                            if (Session["Type"].ToString().Equals("administrator"))
+                            {
+                                Response.Redirect("adminpanel.aspx");
+                            }
+                            else
                             Response.Redirect("index.aspx");
                         }
                         else

@@ -18,6 +18,10 @@ namespace KlubNaCitateli.Sites
         User user;
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Session["Id"] != null)
+            {
+                Response.Redirect("~/Sites/index.aspx");
+            }
             this.Page.Form.Enctype = "multipart/form-data";
             if (!this.IsPostBack)
             {
@@ -41,8 +45,6 @@ namespace KlubNaCitateli.Sites
                         }
 
                         reader.Close();
-
-
                     }
                     finally
                     {
@@ -58,7 +60,7 @@ namespace KlubNaCitateli.Sites
             user = new User(name.Text, surname.Text, email.Text, username.Text, password.Text, TextBox2.Text);
             bool checkUsername = true;
             bool checkEmail = true;
-            user.CheckIfUserExists(checkEmail, checkUsername);
+            user.CheckIfUserExists(out checkEmail, out checkUsername);
 
             if (!checkEmail && !checkUsername)
             {
@@ -83,7 +85,7 @@ namespace KlubNaCitateli.Sites
                     {
                         conn.Open();
                         MySqlCommand comm = new MySqlCommand();
-                        comm.CommandText = "INSERT into users (name, banned, surname, email, username, password, type, numComments) VALUES(?name, ?banned, ?surname, ?email, ?username, ?password, ?type, ?numComments)";
+                        comm.CommandText = "INSERT into users (name, banned, surname, email, username, password, about, type, numComments) VALUES(?name, ?banned, ?surname, ?email, ?username, ?password, ?about, ?type, ?numComments)";
                         comm.Connection = conn;
                         comm.Parameters.AddWithValue("?name", user.name);
                         comm.Parameters.AddWithValue("?surname", user.surname);
@@ -93,6 +95,7 @@ namespace KlubNaCitateli.Sites
                         comm.Parameters.AddWithValue("?type", "user");
                         comm.Parameters.AddWithValue("?numComments", 0);
                         comm.Parameters.AddWithValue("?banned", 0);
+                        comm.Parameters.AddWithValue("?about", user.aboutUser);
 
                         comm.ExecuteNonQuery();
                         string iduser = "";
@@ -144,7 +147,7 @@ namespace KlubNaCitateli.Sites
             if (profileImage.HasFile)
             {
                 string ext = Path.GetExtension(this.profileImage.FileName);
-                if (ext == ".jpg" || ext == ".png")
+                if (ext == ".jpg" || ext == ".png" || ext == ".JPG" || ext == ".PNG")
                 {
                     Bitmap originalBMP = new Bitmap(profileImage.FileContent);
 

@@ -1,0 +1,155 @@
+﻿body {
+}
+
+.headerLabel
+{
+    font-size:150%;
+    padding:50px;
+
+}
+.topic
+{
+    padding:10px;
+    padding-left:20px;
+   
+    border-bottom:1px gray solid;
+    clear:both;
+}
+.btnAddNewThread
+{
+    float:right;
+}
+
+#cont
+{
+margin:5px;
+clean:both;
+background-color:Black;
+}
+.threadname
+{
+font-weight:bold;
+}
+.userD
+{
+    font-weight:bold;
+    opacity:0.85;
+}
+.hover
+{
+cursor:pointer;
+}
+.right
+{
+text-align:right;
+}
+
+
+.naslov
+{
+    padding:5px;
+color:White;
+border-top-left-radius:10px;
+border-top-right-radius:10px;
+}
+.naslov
+{
+float:left;
+}
+.btnAddThread
+{
+float:right;
+}
+.maintopics
+{
+margin:20px;
+border:1px gray solid;
+border-radius:10px;
+}
+.thread
+{
+float:left;
+}
+.mostCommCat
+{
+float:right;
+text-align:right;
+
+}
+#nodiv, .cont
+{
+clear:both;
+}
+.nodiv
+{
+clear:both;
+
+background-color:Black;
+}
+.user, .numcomments
+{
+margin-top:5px;
+}
+.allblack
+{
+background-color:Black;
+border-radius:10px;
+}
+.btnAddThread
+{
+
+height:25px;
+padding-right:6px;
+color:White;
+text-decoration:underline;
+
+
+}
+#dialog-form, #dialog-form1
+{
+    background-color: #4169E1;
+    color: White;
+}
+#buttons, #buttons2
+{
+    background-color: #4169E1;
+    color: White;
+    margin-top: -8px;
+    padding: 20px;
+}
+#fieldSet1, #fieldSet2
+{
+    margin: 10px;
+    margin-top: 30px;
+}
+
+.separateLabel
+{
+    width:100%;
+}
+#add, #cancel, #yes, #no
+{
+    border: 1px solid gray;
+    border-radius: 5px;
+    width: 49%;
+    height: 120%;
+    margin: auto;
+    color: #4169E1;
+}
+.ui-dialog-titlebar-close {
+  visibility: hidden;
+}
+.delete
+{
+   float:right;
+   width:30px;
+   height:30px;
+   background:url("../Images/delete.png") no-repeat;
+   margin-left:10px;
+   margin-top:10px;
+}
+#demo
+{
+    width:310px;
+    margin:auto;
+}
