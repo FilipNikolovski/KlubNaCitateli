@@ -125,5 +125,6 @@ namespace KlubNaCitateli.Sites
             confirmChangeAboutBtn.Visible = true;
             changeAboutBtn.Visible = false;
         }
+
     }
 }
