@@ -6,11 +6,19 @@
   font-family: "raty";
   font-style: normal;
   font-weight: normal;
+<<<<<<< HEAD
   src: url("fonts/raty.eot");
   src: url("fonts/raty.eot?#iefix") format("embedded-opentype");
   src: url("fonts/raty.svg#raty") format("svg");
   src: url("fonts/raty.ttf") format("truetype");
   src: url("fonts/raty.woff") format("woff");
+=======
+  src: url("../Fonts/raty.eot");
+  src: url("../Fonts/raty.eot?#iefix") format("embedded-opentype");
+  src: url("../Fonts/raty.svg#raty") format("svg");
+  src: url("../Fonts/raty.ttf") format("truetype");
+  src: url("../Fonts/raty.woff") format("woff");
+>>>>>>> 750f7bf4c3fa5421d71fc1040c96ca6a2f2a3634
 }
 
 .cancel-on-png, .cancel-off-png, .star-on-png, .star-off-png, .star-half-png {

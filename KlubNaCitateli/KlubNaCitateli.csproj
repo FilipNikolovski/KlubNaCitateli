@@ -79,6 +79,11 @@
     <Content Include="Images\Originals\user-icon.png" />
     <Content Include="Images\pattern.png" />
     <Content Include="Images\previous.png" />
+    <Content Include="Images\RatingImages\cancel-off.png" />
+    <Content Include="Images\RatingImages\cancel-on.png" />
+    <Content Include="Images\RatingImages\star-half.png" />
+    <Content Include="Images\RatingImages\star-off.png" />
+    <Content Include="Images\RatingImages\star-on.png" />
     <Content Include="Images\readersLogo.png" />
     <Content Include="Images\right-arrow.jpg" />
     <Content Include="Images\searchBox.png" />
@@ -94,6 +99,7 @@
     <Content Include="Scripts\jquery-ui-1.10.4.custom.js" />
     <Content Include="Scripts\jquery-ui-1.10.4.custom.min.js" />
     <Content Include="Scripts\jquery.paginate.js" />
+    <Content Include="Scripts\jquery.raty.js" />
     <Content Include="Scripts\jquery.tokeninput.js" />
     <Content Include="Scripts\Search.js" />
     <Content Include="Scripts\tabs-script.js" />
@@ -109,10 +115,13 @@
     <Content Include="Sites\profile.aspx" />
     <Content Include="Sites\search.aspx" />
     <Content Include="Sites\signup.aspx" />
+    <Content Include="Styles\book.css" />
+    <Content Include="Sites\login.aspx" />
     <Content Include="Sites\threads.aspx" />
     <Content Include="Styles\adminPanel.css" />
     <Content Include="Styles\forum.css" />
     <Content Include="Styles\index.css" />
+    <Content Include="Styles\jquery.raty.css" />
     <Content Include="Styles\post.css" />
     <Content Include="Styles\Search.css" />
     <Content Include="Styles\Site.css" />
@@ -241,6 +250,10 @@
     <Content Include="Site.Master" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Fonts\raty.eot" />
+    <None Include="Fonts\raty.svg" />
+    <None Include="Fonts\raty.ttf" />
+    <None Include="Fonts\raty.woff" />
     <None Include="obj\Debug\build.force" />
     <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
     <None Include="obj\Debug\KlubNaCitateli.csprojResolveAssemblyReference.cache" />

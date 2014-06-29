@@ -9,6 +9,7 @@ using System.Text;
 using MySql.Data.MySqlClient;
 using System.Configuration;
 using KlubNaCitateli.Classes;
+using System.Web.Script.Serialization;
 
 namespace KlubNaCitateli.Services
 {
@@ -361,10 +362,97 @@ namespace KlubNaCitateli.Services
             return "Книгите се успешно внесени.";
         }
 
+<<<<<<< HEAD
         public void RateBook(object json)
         {
 
         }
         
+=======
+        [OperationContract]
+        public string RateBook(string json)
+        {
+            Dictionary<string, string> jsonData = new JavaScriptSerializer().Deserialize<Dictionary<string, string>>(json);
+
+            using (MySqlConnection conn = new MySqlConnection())
+            {
+                conn.ConnectionString = ConfigurationManager.ConnectionStrings["BooksConn"].ConnectionString;
+
+                try
+                {
+                    conn.Open();
+
+                    string sql = "SELECT * FROM rates WHERE IDUser = ?IDUser AND IDBook = ?IDBook";
+                    MySqlCommand command = new MySqlCommand(sql, conn);
+
+                    command.Parameters.AddWithValue("?IDUser", jsonData["id"]);
+                    command.Parameters.AddWithValue("?IDBook", jsonData["bookId"]);
+
+                    MySqlDataReader reader = command.ExecuteReader();
+
+                    if (!reader.HasRows)
+                    {
+                        reader.Close();
+                        int totalRating = 0, totalVotes = 0;
+
+                        sql = "SELECT NumVotes, SumRating FROM books WHERE IDBook = ?IDBook";
+
+                        command.CommandText = sql;
+
+                        command.Parameters.Clear();
+                        command.Parameters.AddWithValue("?IDBook", Int32.Parse(jsonData["bookId"]));
+
+                        reader = command.ExecuteReader();
+
+                        if (reader.HasRows)
+                        {
+                            reader.Read();
+                            totalRating = Int32.Parse(reader["SumRating"].ToString());
+                            totalVotes = Int32.Parse(reader["NumVotes"].ToString());
+                        }
+                        reader.Close();
+
+                        totalRating += Int32.Parse(jsonData["rating"].ToString());
+                        totalVotes++;
+
+                        sql = "UPDATE books SET SumRating = ?Rating, NumVotes = ?Votes WHERE IDBook=?IDBook";
+
+                        command.CommandText = sql;
+
+                        command.Parameters.Clear();
+                        command.Parameters.AddWithValue("?Rating", totalRating);
+                        command.Parameters.AddWithValue("?Votes", totalVotes);
+                        command.Parameters.AddWithValue("?IDBook", Int32.Parse(jsonData["bookId"]));
+
+                        command.ExecuteNonQuery();
+
+                        sql = "INSERT INTO rates (IDUser, IDBook) VALUES (?IDUser, ?IDBook)";
+
+                        command.CommandText = sql;
+
+                        command.Parameters.Clear();
+                        command.Parameters.AddWithValue("IDUser", jsonData["id"]);
+                        command.Parameters.AddWithValue("IDBook", jsonData["bookId"]);
+
+                        command.ExecuteNonQuery();
+
+                        return (totalRating / (totalVotes * 1.0F)).ToString();
+                    }
+                    reader.Close();
+                    
+                }
+                catch (Exception e)
+                {
+                    return e.Message;
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+
+            return (0.0F).ToString();
+        }
+>>>>>>> 750f7bf4c3fa5421d71fc1040c96ca6a2f2a3634
     }
 }
