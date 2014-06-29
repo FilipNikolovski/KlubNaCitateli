@@ -33,6 +33,7 @@
             padding: 0;
             border: 1;
             margin-top: 25px;
+            margin-bottom: 25px;
         }
         input.text
         {
@@ -287,7 +288,7 @@
                 <ContentTemplate>
                     <asp:HiddenField ID="bookField" runat="server" />
                     <asp:HiddenField ID="bookIdsField" runat="server" />
-                    <asp:HiddenField ID="addBooksFinished" runat="server" Value="" />
+                    <asp:HiddenField ID="addBooksFinished" runat="server" />
 
                     <fieldset>
                         <legend>Add Books from Google.books DB</legend>
