@@ -10,14 +10,17 @@ using System.Configuration;
 using System.IO;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Diagnostics;
 
 namespace KlubNaCitateli.Sites
 {
     public partial class signup : System.Web.UI.Page
     {
         User user;
+        string iduser = "";
         protected void Page_Load(object sender, EventArgs e)
         {
+            
             if (Session["Id"] != null)
             {
                 Response.Redirect("~/Sites/index.aspx");
@@ -98,7 +101,7 @@ namespace KlubNaCitateli.Sites
                         comm.Parameters.AddWithValue("?about", user.aboutUser);
 
                         comm.ExecuteNonQuery();
-                        string iduser = "";
+                        
                         comm.CommandText = "select iduser from users where username=?username";
                         MySqlDataReader reader = comm.ExecuteReader();
                         if (reader.Read())
@@ -126,10 +129,12 @@ namespace KlubNaCitateli.Sites
                             }
                         }
 
+                       
+
                     }
                     catch (Exception err)
                     {
-                        Console.WriteLine(err.Message);
+                        Debug.WriteLine(err.Message);
                     }
                     finally
                     {
@@ -170,13 +175,17 @@ namespace KlubNaCitateli.Sites
                     // Draw the new graphic based on the resized bitmap
                     oGraphics.DrawImage(originalBMP, 0, 0, newWidth, newHeight);
                     // Save the new graphic file to the server
-                    newBMP.Save(Server.MapPath("~/Images/ProfilePicture/") + (username.Text + ext));
+                    addUser();
+                    Debug.WriteLine(iduser.ToString());
+                    newBMP.Save(Server.MapPath("~/Images/ProfilePicture/") + (iduser + ext));
+
+
 
                     // Once finished with the bitmap objects, we deallocate them.
                     originalBMP.Dispose();
                     newBMP.Dispose();
                     oGraphics.Dispose();
-                    addUser();
+                   
                 }
                 else
                 {

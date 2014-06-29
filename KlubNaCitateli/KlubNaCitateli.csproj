@@ -69,8 +69,10 @@
     <Content Include="Images\bookLogo.jpg" />
     <Content Include="Images\booklogo.png" />
     <Content Include="Images\buttons.png" />
+    <Content Include="Images\deletePost.png" />
     <Content Include="Images\img-okay.jpg" />
     <Content Include="Images\left-arrow.jpg" />
+    <Content Include="Images\left-quotes.png" />
     <Content Include="Images\loading.gif" />
     <Content Include="Images\next.png" />
     <Content Include="Images\okay.jpg" />
@@ -81,6 +83,7 @@
     <Content Include="Images\previous.png" />
     <Content Include="Images\readersLogo.png" />
     <Content Include="Images\right-arrow.jpg" />
+    <Content Include="Images\right-quotes.png" />
     <Content Include="Images\searchBox.png" />
     <Content Include="Images\searchCover.png" />
     <Content Include="Images\slika.png" />
@@ -229,7 +232,7 @@
     <Compile Include="Sites\threads.aspx.designer.cs">
       <DependentUpon>threads.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Thread.cs" />
+    <Compile Include="Classes\Thread.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
