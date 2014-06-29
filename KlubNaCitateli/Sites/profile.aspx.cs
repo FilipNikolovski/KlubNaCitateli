@@ -141,8 +141,6 @@ namespace KlubNaCitateli.Sites
             changeAboutBtn.Visible = false;
         }
 
-<<<<<<< HEAD
-=======
         public void ChangeUsername(Object sender, EventArgs e)
         {
             tbUsername.Visible = true;
@@ -312,6 +310,5 @@ namespace KlubNaCitateli.Sites
                 return;
             }
         }
->>>>>>> 26982380730902fb765316245d85b5ab719ea8d3
     }
 }
