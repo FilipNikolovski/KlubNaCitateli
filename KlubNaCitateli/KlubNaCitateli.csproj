@@ -107,6 +107,7 @@
     <Content Include="Services\ForumService.svc" />
     <Content Include="Sites\adminpanel.aspx" />
     <Content Include="Sites\book.aspx" />
+    <Content Include="Sites\discussionthreads.aspx" />
     <Content Include="Sites\forum.aspx" />
     <Content Include="Sites\index.aspx" />
     <Content Include="Sites\login.aspx" />
@@ -172,6 +173,13 @@
     </Compile>
     <Compile Include="Sites\book.aspx.designer.cs">
       <DependentUpon>book.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Sites\discussionthreads.aspx.cs">
+      <DependentUpon>discussionthreads.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Sites\discussionthreads.aspx.designer.cs">
+      <DependentUpon>discussionthreads.aspx</DependentUpon>
     </Compile>
     <Compile Include="Sites\forum.aspx.cs">
       <DependentUpon>forum.aspx</DependentUpon>
@@ -251,6 +259,7 @@
     <None Include="Fonts\raty.eot" />
     <None Include="Fonts\raty.ttf" />
     <None Include="Fonts\raty.woff" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="obj\Debug\build.force" />
     <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
     <None Include="obj\Debug\KlubNaCitateli.csprojResolveAssemblyReference.cache" />
