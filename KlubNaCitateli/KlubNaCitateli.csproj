@@ -229,7 +229,7 @@
     <Compile Include="Sites\threads.aspx.designer.cs">
       <DependentUpon>threads.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Thread.cs" />
+    <Compile Include="Classes\Thread.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -360,6 +360,11 @@ namespace KlubNaCitateli.Services
 
             return "Книгите се успешно внесени.";
         }
+
+        public void RateBook(object json)
+        {
+
+        }
         
     }
 }

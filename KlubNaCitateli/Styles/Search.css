@@ -1,162 +1,149 @@
 ﻿#search
 {
-	float: right;
-	width: 60%;
-	margin: 20px;
+    float: right;
+    width: 60%;
+    margin: 20px;
 }
 .categoryLabel
 {
-	padding-bottom: 40px;
-	font-weight: bold;
-	margin:45px;
-	
+    padding-bottom: 40px;
+    font-weight: bold;
+    margin: 45px;
 }
 
 #filterContainer
 {
-	width: auto;
-	min-height: 800px;
-	overflow-y: auto;
-	padding: 10px;
+    width: auto;
+    min-height: 800px;
+    overflow-y: auto;
+    padding: 10px;
 }
 
 #filterList
 {
-	display: block;
-	float: left;
-	height: auto;
-	list-style-type: none;
-	padding: 10px;
-	border: 2px solid gray;
-	border-radius: 10px;
+    display: block;
+    float: left;
+    height: auto;
+    list-style-type: none;
+    padding: 10px;
+    border: 2px solid gray;
+    border-radius: 10px;
 }
 
 #filterList li tbody td
 {
-	padding: 5px;
+    padding: 5px;
 }
 #filterList li tbody
 {
-	padding: 5px;
-	padding-left: 20px;
+    padding: 5px;
+    padding-left: 20px;
 }
 
 #sortList
 {
-	float: left;
-	margin-top: 5px;
-	padding: 0px;
-	width: 100%;
-	list-style-type: none;
+    float: left;
+    margin-top: 5px;
+    padding: 0px;
+    width: 100%;
+    list-style-type: none;
 }
 
 #sortList li
 {
-	display: inline;
-	margin-right: 30px;
+    display: inline;
+    margin-right: 30px;
 }
 
 #searchContent
 {
-	float: right;
-	clear: both;
-	width: 77%;
-	margin-top: 10px;
+    float: right;
+    clear: both;
+    width: 77%;
+    margin-top: 10px;
 }
 
 
 .searchList
 {
-	width: 100%;
-	max-height: 730px;
-	overflow: auto scroll;
-	overflow-x: hidden;
+    width: 100%;
+    max-height: 730px;
+    overflow: auto scroll;
+    overflow-x: hidden;
 }
 
 .tableSearch
 {
-	margin-top: 10px;
-	width: 100%;
-	border-collapse: collapse;
+    margin-top: 10px;
+    width: 100%;
+    border-collapse: collapse;
 }
 .tableSearch tr
 {
-	width: 100%;
+    width: 100%;
 }
 
 .tableSearch td, #sortList th
 {
-	width: 20%;
-	text-align: center;
-	padding-top: 5px;
+    width: 20%;
+    text-align: center;
+    padding-top: 5px;
 }
 
 .searchBox
 {
-	/* The search text box. */
-	border: none;
-	color: #888888;
-	background: url("../Images/searchBox.png") no-repeat;
-	float: left;
-	width: 350px;
-	border-radius: 5px;
-	font-family: Arial,Helvetica,sans-serif;
-	font-size: 15px;
-	height: 36px;
-	line-height: 36px;
-	margin-right: 12px;
-	outline: medium none;
-	padding: 0 0 0 35px;
-	text-shadow: 1px 1px 0 white;
-}
-
-.submitButton
-{
-	background: url('../Images/buttons.png') no-repeat;
-	width: 83px;
-	height: 36px;
-	text-indent: -9999px;
-	overflow: hidden;
-	text-transform: uppercase;
-	border: none;
-	cursor: pointer;
+    /* The search text box. */
+    border: none;
+    color: #888888;
+    background: url("../Images/searchBox.png") no-repeat;
+    float: left;
+    width: 350px;
+    border-radius: 5px;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 15px;
+    height: 36px;
+    line-height: 36px;
+    margin-right: 12px;
+    outline: medium none;
+    padding: 0 0 0 35px;
+    text-shadow: 1px 1px 0 white;
 }
 
 .searchItem
 {
-	font-size: 120%;
-	font-weight: bold;
-	margin: 45px;
-	font-style: italic;
+    font-size: 120%;
+    font-weight: bold;
+    margin: 45px;
+    font-style: italic;
 }
 input[type=checkbox]
 {
-	display: none;
+    display: none;
 }
 
 input[type=checkbox] + label
 {
-	padding-left: 27px;
-	height: 22px;
-	display: inline-block;
-	line-height: 22px;
-	background-repeat: no-repeat;
-	background-position: 0 0;
-	vertical-align: middle;
-	cursor: pointer;
+    padding-left: 27px;
+    height: 22px;
+    display: inline-block;
+    line-height: 22px;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    vertical-align: middle;
+    cursor: pointer;
 }
 
 input[type=checkbox]:checked + label
 {
-	background-position: 0 -22px;
+    background-position: 0 -22px;
 }
 label
 {
-	background-image: url(http://csscheckbox.com/checkboxes/u/csscheckbox_b8670e397159419c04208e1a54ed6831.png);
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
+    background-image: url(http://csscheckbox.com/checkboxes/u/csscheckbox_b8670e397159419c04208e1a54ed6831.png);
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
