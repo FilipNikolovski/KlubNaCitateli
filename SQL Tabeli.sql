@@ -100,14 +100,6 @@ CREATE TABLE BookComments (
 	PRIMARY KEY (IDBook, IDUser)
 );
 
-CREATE TABLE Preferences (
-	IDUser int NOT NULL,
-	IDCategory int NOT NULL,
-	FOREIGN KEY (IDUser) REFERENCES Users (IDUser),
-	FOREIGN KEY (IDCategory) REFERENCES Categories (IDCategory),
-	PRIMARY KEY (IDUser, IDCategory)
-);
-
 CREATE TABLE Rates (
 	IDUser int NOT NULL,
 	IDBook bigint NOT NULL,

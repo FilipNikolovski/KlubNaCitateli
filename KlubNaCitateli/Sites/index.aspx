@@ -6,6 +6,8 @@
     <script>
         $(document).ready(function () {
 
+            $("#homeLink").addClass("active");
+
             $("#<%= searchWord.ClientID %>").keydown(function (e) {
                 if (e.keyCode == 13) {
                     window.location = "search.aspx?search=" + $("#<%=searchWord.ClientID %>").val();

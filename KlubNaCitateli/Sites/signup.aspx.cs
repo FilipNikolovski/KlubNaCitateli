@@ -201,9 +201,6 @@ namespace KlubNaCitateli.Sites
             
         }
 
-
     }
-
-
 
 }
