@@ -13,9 +13,9 @@ namespace KlubNaCitateli
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            HyperLink3.PostBackUrl = "~/Sites/search.aspx";
-            HyperLink4.PostBackUrl = "~/Sites/forum.aspx";
-            HyperLink5.PostBackUrl = "~/Sites/index.aspx";
+            searchLink.PostBackUrl = "~/Sites/search.aspx";
+            forumLink.PostBackUrl = "~/Sites/forum.aspx";
+            homeLink.PostBackUrl = "~/Sites/index.aspx";
 
             if (Session["Name"] != null)
             {

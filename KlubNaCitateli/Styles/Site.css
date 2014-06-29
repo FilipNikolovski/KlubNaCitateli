@@ -13,6 +13,7 @@
     background-color: #FFF8DC;
     width: 80%;
     margin: auto;
+    margin-top:5px;
 }
 #header
 {
@@ -35,6 +36,10 @@
     height: auto;
     display: inline;
     margin-left: 50px;
+    zoom: 1;
+    width: auto;
+    background: #FFF8DC;
+    padding: 8px 0;
 }
 .logopic
 {
@@ -83,7 +88,7 @@
     background-color: #FFF8DC;
     font-size: 80%;
     margin: auto;
-    margin-top:20px;
+    margin-top: 20px;
 }
 
 fieldset
@@ -108,13 +113,6 @@ fieldset
     border: none !important;
 }
 
-#navigation
-{
-    zoom: 1;
-    width: auto;
-    background: #FFF8DC;
-    padding: 8px 0;
-}
 #navigation:before
 {
     content: '';
@@ -165,7 +163,11 @@ fieldset
     padding: 9px 15px 0;
     font-weight: normal;
 }
-#navigation li:hover, #navigation .active
+#navigation .active
+{
+      border-bottom: 2px solid #4169E1;
+}
+#navigation a:hover
 {
     text-decoration: none;
     border-bottom: 2px solid #4169E1;

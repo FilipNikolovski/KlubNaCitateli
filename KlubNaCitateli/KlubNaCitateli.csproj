@@ -62,6 +62,8 @@
     <Content Include="bin\KlubNaCitateli.pdb" />
     <Content Include="bin\MySql.Data.dll" />
     <Content Include="Fonts\raty.svg" />
+    <Content Include="Images\bottom_arrow.jpg" />
+    <Content Include="Images\defaultImage.png" />
     <Content Include="Images\delete.png" />
     <Content Include="Images\bg-body.jpg" />
     <Content Include="Images\bg-body.png" />
@@ -72,6 +74,7 @@
     <Content Include="Images\buttons.png" />
     <Content Include="Images\img-okay.jpg" />
     <Content Include="Images\left-arrow.jpg" />
+    <Content Include="Images\left_arrow.jpg" />
     <Content Include="Images\loading.gif" />
     <Content Include="Images\next.png" />
     <Content Include="Images\okay.jpg" />
@@ -80,6 +83,10 @@
     <Content Include="Images\Originals\user-icon.png" />
     <Content Include="Images\pattern.png" />
     <Content Include="Images\previous.png" />
+    <Content Include="Images\ProfilePicture\5.jpg" />
+    <Content Include="Images\ProfilePicture\boki2.png" />
+    <Content Include="Images\ProfilePicture\boki3.jpg" />
+    <Content Include="Images\ProfilePicture\Fico.jpg" />
     <Content Include="Images\RatingImages\cancel-off.png" />
     <Content Include="Images\RatingImages\cancel-on.png" />
     <Content Include="Images\RatingImages\star-half.png" />
@@ -87,27 +94,30 @@
     <Content Include="Images\RatingImages\star-on.png" />
     <Content Include="Images\readersLogo.png" />
     <Content Include="Images\right-arrow.jpg" />
+    <Content Include="Images\right_arrow.jpg" />
     <Content Include="Images\searchBox.png" />
     <Content Include="Images\searchCover.png" />
     <Content Include="Images\slika.png" />
     <Content Include="Images\snext.png" />
     <Content Include="Images\sprevious.png" />
+    <Content Include="Images\top_arrow.jpg" />
     <Content Include="Images\user-icon.png" />
     <Content Include="obj\Debug\KlubNaCitateli.csproj.FileListAbsolute.txt" />
     <Content Include="obj\Debug\KlubNaCitateli.dll" />
     <Content Include="obj\Debug\KlubNaCitateli.pdb" />
     <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.4.4.min.js" />
     <Content Include="Scripts\jquery-ui-1.10.4.custom.js" />
     <Content Include="Scripts\jquery-ui-1.10.4.custom.min.js" />
     <Content Include="Scripts\jquery.paginate.js" />
     <Content Include="Scripts\jquery.raty.js" />
     <Content Include="Scripts\jquery.tokeninput.js" />
+    <Content Include="Scripts\jsCarousel-2.0.0.js" />
     <Content Include="Scripts\tabs-script.js" />
     <Content Include="Services\BookService.svc" />
     <Content Include="Services\ForumService.svc" />
     <Content Include="Sites\adminpanel.aspx" />
     <Content Include="Sites\book.aspx" />
-    <Content Include="Sites\discussionthreads.aspx" />
     <Content Include="Sites\forum.aspx" />
     <Content Include="Sites\index.aspx" />
     <Content Include="Sites\login.aspx" />
@@ -122,6 +132,7 @@
     <Content Include="Styles\forum.css" />
     <Content Include="Styles\index.css" />
     <Content Include="Styles\jquery.raty.css" />
+    <Content Include="Styles\jsCarousel-2.0.0.css" />
     <Content Include="Styles\post.css" />
     <Content Include="Styles\search.css" />
     <Content Include="Styles\Site.css" />
@@ -173,13 +184,6 @@
     </Compile>
     <Compile Include="Sites\book.aspx.designer.cs">
       <DependentUpon>book.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Sites\discussionthreads.aspx.cs">
-      <DependentUpon>discussionthreads.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Sites\discussionthreads.aspx.designer.cs">
-      <DependentUpon>discussionthreads.aspx</DependentUpon>
     </Compile>
     <Compile Include="Sites\forum.aspx.cs">
       <DependentUpon>forum.aspx</DependentUpon>
@@ -249,7 +253,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Images\BookPicture\" />
-    <Folder Include="Images\ProfilePicture\" />
     <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>
   <ItemGroup>
@@ -259,7 +262,6 @@
     <None Include="Fonts\raty.eot" />
     <None Include="Fonts\raty.ttf" />
     <None Include="Fonts\raty.woff" />
-    <None Include="ClassDiagram1.cd" />
     <None Include="obj\Debug\build.force" />
     <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
     <None Include="obj\Debug\KlubNaCitateli.csprojResolveAssemblyReference.cache" />

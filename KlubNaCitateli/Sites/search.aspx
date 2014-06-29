@@ -9,6 +9,8 @@
     <script type="text/javascript">
         $(document).ready(function () {
 
+            $("#searchLink").addClass("active");
+
             $(".tableSearch tr").each(function () {
 
                 $(this).hover(function () {

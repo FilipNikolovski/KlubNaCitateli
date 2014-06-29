@@ -9,7 +9,6 @@
     <script type="text/javascript" src="<%= Page.ResolveClientUrl("../Scripts/jquery-1.10.2.js") %>"></script>
     <script type="text/javascript" src="<%= Page.ResolveClientUrl("../Scripts/jquery-ui-1.10.4.custom.js") %>"></script>
     <script type="text/javascript" src="<%= Page.ResolveClientUrl("../Scripts/jquery-ui-1.10.4.custom.min.js") %>"></script>
-
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
@@ -26,17 +25,17 @@
         <div id="navigation">
             <ul id="menu">
                 <li id="first">
-                    <asp:LinkButton ID="HyperLink5" runat="server" NavigateUrl="~/Sites/index.aspx" CssClass="menulinks"
+                    <asp:LinkButton ID="homeLink" runat="server" NavigateUrl="~/Sites/index.aspx" CssClass="menulinks"
                         CausesValidation="False"><span>Home</span></asp:LinkButton>
                 </li>
                 <li id="second">
                     <asp:LinkButton ID="myProfileLink" runat="server" OnClick="myProfile_click" CssClass="menulinks"
                         CausesValidation="False"><span> My profile</span></asp:LinkButton></li>
                 <li id="third">
-                    <asp:LinkButton ID="HyperLink3" runat="server" NavigateUrl="~/Sites/search.aspx"
+                    <asp:LinkButton ID="searchLink" runat="server" NavigateUrl="~/Sites/search.aspx"
                         CssClass="menulinks" CausesValidation="False"><span>Search</span></asp:LinkButton></li>
                 <li id="fourth">
-                    <asp:LinkButton ID="HyperLink4" runat="server" NavigateUrl="~/Sites/forum.aspx" CssClass="menulinks"
+                    <asp:LinkButton ID="forumLink" runat="server" NavigateUrl="~/Sites/forum.aspx" CssClass="menulinks"
                         CausesValidation="False"><span>Forum</span></asp:LinkButton></li>
             </ul>
         </div>

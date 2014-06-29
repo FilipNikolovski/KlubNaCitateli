@@ -9,6 +9,8 @@ Inherits="KlubNaCitateli.Sites.profile" %>
     <script type="text/javascript">
         $(document).ready(function () {
 
+            $("#myProfileLink").addClass("active");
+
             $('#carouselh').jsCarousel({ onthumbnailclick: function (src) { alert(src); }, autoscroll: false, masked: false, itemstodisplay: 5, orientation: 'h' });
             
         });       
