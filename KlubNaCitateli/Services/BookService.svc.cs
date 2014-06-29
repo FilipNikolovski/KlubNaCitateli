@@ -362,13 +362,6 @@ namespace KlubNaCitateli.Services
             return "Книгите се успешно внесени.";
         }
 
-<<<<<<< HEAD
-        public void RateBook(object json)
-        {
-
-        }
-        
-=======
         [OperationContract]
         public string RateBook(string json)
         {
@@ -453,6 +446,6 @@ namespace KlubNaCitateli.Services
 
             return (0.0F).ToString();
         }
->>>>>>> 750f7bf4c3fa5421d71fc1040c96ca6a2f2a3634
+
     }
 }

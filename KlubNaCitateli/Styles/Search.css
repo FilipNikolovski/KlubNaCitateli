@@ -147,3 +147,10 @@ label
     -ms-user-select: none;
     user-select: none;
 }
+
+.hovertd
+{
+    background-color: #19A3FF;
+    cursor: pointer;
+    opacity: 0.7;
+}

@@ -60,7 +60,7 @@ namespace KlubNaCitateli.Sites
                 }
                 catch (Exception e)
                 {
-
+                    error.Text = e.Message;
                 }
                 finally
                 {

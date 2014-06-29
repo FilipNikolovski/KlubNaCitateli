@@ -2,18 +2,10 @@
     CodeBehind="search.aspx.cs" Inherits="KlubNaCitateli.Sites.search" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <link href="../Styles/Search.css" type="text/css" rel="Stylesheet" />
+    <link href="../Styles/search.css" type="text/css" rel="Stylesheet" />
     <script src="../Scripts/jquery-1.10.2.js" type="text/javascript" language="javascript"></script>
     <script src="../Scripts/jquery-ui-1.10.4.custom.min.js" type="text/javascript" language="javascript"></script>
-    <script src="../Scripts/Search.js" type="text/javascript" language="javascript"></script>
-    <style type="text/css">
-        .hovertd
-        {
-            background-color: #19A3FF;
-            cursor: pointer;
-            opacity: 0.7;
-        }
-    </style>
+    
     <script type="text/javascript">
         $(document).ready(function () {
 
