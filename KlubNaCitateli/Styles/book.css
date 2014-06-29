@@ -1,34 +1,33 @@
 ﻿#content
 {
     width: 100%;
-    border-style: solid;
 }
-#div1
+#div1 tr td
 {
-    width: 100%;
-    border-style: solid;
+    vertical-align: top;
+    margin-top: 0px;
 }
-#info
-{
-    width: 100%;
-    border-style: solid;
-    display: inline;
-}
-#image_stars
+#imageAndInfo tr td
 {
     width: 20%;
-    border-style: solid;
-    float: left;
 }
-#about
+#about tr td
 {
-    width: 40%;
-    border-style: solid;
-    float: left;
+    width: 60%;
 }
-#link 
+#tagsAndLinks tr
 {
-    width: 20%;
-    border-style: solid;
-    float: left;
+    width: 100%;
+}
+#recomendation
+{
+    width: 100%;
+}
+#tmp > td
+{
+    padding-bottom: 2em;
+}
+#tmp2
+{
+    width: 100%;
 }

@@ -46,16 +46,16 @@ namespace KlubNaCitateli.Sites
                     reader.Close();
                     command.CommandText = "Select forumtopics.IDTopic, forumtopics.TopicName, count(distinct DiscussionThreads.IDThread) as Threads, count(distinct Posts.IDPost) as Posts from forumtopics left outer join DiscussionThreads on forumtopics.idtopic=DiscussionThreads.idtopic left outer join Posts on Discussionthreads.IdThread=posts.idthread where forumtopics.idtype=?IDType group by forumtopics.Idtopic";
 
-              
+
                     foreach (KeyValuePair<int, string> current in topicIds)
                     {
-                         List<Thread> list = new List<Thread>();
+                        List<Thread> list = new List<Thread>();
                         command.Parameters.Clear();
                         command.Parameters.AddWithValue("?IDType", current.Key);
                         reader = command.ExecuteReader();
                         if (reader.HasRows)
                         {
-                           
+
                             while (reader.Read())
                             {
                                 Thread thread = new Thread(Convert.ToInt32(reader["IDTopic"]), reader["TopicName"].ToString(), Convert.ToInt32(reader["Threads"]), Convert.ToInt32(reader["Posts"]));
@@ -64,7 +64,7 @@ namespace KlubNaCitateli.Sites
                         }
                         reader.Close();
                         topicsInfo.Add(current.Key, list);
-                       
+
                     }
 
                     foreach (KeyValuePair<int, List<Thread>> current in topicsInfo)
@@ -92,7 +92,7 @@ namespace KlubNaCitateli.Sites
 
 
                     StringBuilder innerHTML = new StringBuilder();
-                    foreach(KeyValuePair<int, List<Thread>> current in topicsInfo)
+                    foreach (KeyValuePair<int, List<Thread>> current in topicsInfo)
                     {
                         if (Session["Type"] != null)
                         {
@@ -105,24 +105,24 @@ namespace KlubNaCitateli.Sites
                         {
                             innerHTML.Append("<div class='maintopics'> <div style='display:none;' id='idtopic'>" + current.Key + "</div><div class='topicnaslov'><div class='naslov'>" + topicIds[current.Key] + "</div><div id='nodiv'></div></div>");
                         }
-                            innerHTML.Append("<div class='topic'>");
+                        innerHTML.Append("<div class='topic'>");
                         foreach (Thread thread in current.Value)
                         {
-                                innerHTML.Append(" <div class='border'><div class='thread'> <div class='topicLink'>"+thread.TopicName+"</div>");
-                                innerHTML.Append("<div class='class1'><label>Threads:</label> <label>" + thread.NumThreads + "</label>  <label>Posts:</label> <label>" + thread.NumPosts + "</label></div>");
-                                innerHTML.Append("<div style='display:none;' class='topicid'>"+thread.IdForumTopic+"</div></div>");
-                                if (Session["Type"] != null)
+                            innerHTML.Append(" <div class='border'><div class='thread'> <div class='topicLink'>" + thread.TopicName + "</div>");
+                            innerHTML.Append("<div class='class1'><label>Threads:</label> <label>" + thread.NumThreads + "</label>  <label>Posts:</label> <label>" + thread.NumPosts + "</label></div>");
+                            innerHTML.Append("<div style='display:none;' class='topicid'>" + thread.IdForumTopic + "</div></div>");
+                            if (Session["Type"] != null)
+                            {
+                                if (Session["Type"].ToString().Equals("administrator"))
                                 {
-                                    if (Session["Type"].ToString().Equals("administrator"))
-                                    {
-                                        innerHTML.Append("<div class='delete'></div>");
-                                    }
+                                    innerHTML.Append("<div class='delete'></div>");
                                 }
-                                innerHTML.Append("<div class='mostCommCat'> <div class='posts'>"+thread.ThreadName+"</div><div class='class2'><label>Posts:</label> <label>"+thread.ThreadNumPosts+"</label></div><div style='display:none;' class='postid'>"+thread.IdThread+"</div></div>");
-                                innerHTML.Append("<div class='nodiv'></div></div>");
+                            }
+                            innerHTML.Append("<div class='mostCommCat'> <div class='posts'>" + thread.ThreadName + "</div><div class='class2'><label>Posts:</label> <label>" + thread.ThreadNumPosts + "</label></div><div style='display:none;' class='postid'>" + thread.IdThread + "</div></div>");
+                            innerHTML.Append("<div class='nodiv'></div></div>");
                         }
 
-                        innerHTML.Append("</div></div>"); 
+                        innerHTML.Append("</div></div>");
 
                     }
                     topicsdiv.InnerHtml = innerHTML.ToString();
@@ -139,5 +139,6 @@ namespace KlubNaCitateli.Sites
                 }
             }
 
+        }
     }
 }

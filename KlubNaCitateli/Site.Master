@@ -55,10 +55,7 @@
         </ul>
          </div>
     </div>
-        <div id="content">
-            <asp:ContentPlaceHolder ID="mainContent" runat="server"></asp:ContentPlaceHolder>    
-        </div>
-
+        
     <div id="content">
         <asp:ContentPlaceHolder ID="mainContent" runat="server"></asp:ContentPlaceHolder>    
     </div>
