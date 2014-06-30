@@ -8,13 +8,15 @@
     <script type="text/javascript">
         $(document).ready(function () {
 
+
             $("#stars").raty({
                 path: "../Images/RatingImages",
-                readOnly: function () {
-                    return "<%=HasVoted %>";
-                },
+
                 score: function () {
                     return "<%=StarRating%>";
+                },
+                readOnly: function () {
+                    return ("<%=HasVoted%>" == "False") ? false : true;
                 },
                 click: function (score, evt) {
 
@@ -28,7 +30,8 @@
                         }
 
                         service.RateBook(JSON.stringify(jsonObj), function (result) {
-                            $(this).raty({ score: result.toFloat() });
+                            alert("Thanks for rating! Feel free to leave a comment on the book.");
+                            $("#stars").raty({ path: "../Images/RatingImages", score: parseFloat(result), readOnly: true });
                         });
                     }
                     else {
@@ -48,8 +51,8 @@
             <asp:ServiceReference Path="../Services/BookService.svc" />
         </Services>
     </asp:ScriptManager>
-
-    <table id="content">
+    <asp:Label ID="error" runat="server" Text=""></asp:Label>
+    <table id="bookContent">
         <tr>
             <td>
                 <table id="div1">

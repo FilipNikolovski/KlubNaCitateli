@@ -49,13 +49,13 @@ namespace KlubNaCitateli {
         protected global::System.Web.UI.WebControls.ImageButton ImageButton1;
         
         /// <summary>
-        /// HyperLink5 control.
+        /// homeLink control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton HyperLink5;
+        protected global::System.Web.UI.WebControls.LinkButton homeLink;
         
         /// <summary>
         /// myProfileLink control.
@@ -67,22 +67,22 @@ namespace KlubNaCitateli {
         protected global::System.Web.UI.WebControls.LinkButton myProfileLink;
         
         /// <summary>
-        /// HyperLink3 control.
+        /// searchLink control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton HyperLink3;
+        protected global::System.Web.UI.WebControls.LinkButton searchLink;
         
         /// <summary>
-        /// HyperLink4 control.
+        /// forumLink control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton HyperLink4;
+        protected global::System.Web.UI.WebControls.LinkButton forumLink;
         
         /// <summary>
         /// HyperLink2 control.

@@ -8,6 +8,8 @@ using MySql.Data.MySqlClient;
 using System.Configuration;
 using System.Text;
 using System.IO;
+using System.Drawing;
+using System.Drawing.Drawing2D;
 
 namespace KlubNaCitateli.Sites
 {
@@ -43,7 +45,7 @@ namespace KlubNaCitateli.Sites
                     }
 
                     MySqlCommand command = new MySqlCommand();
-                    command.CommandText = "select name, surname, username, email, about from users where iduser=?iduser";
+                    command.CommandText = "select iduser, name, surname, username, email, about from users where iduser=?iduser";
                     command.Parameters.AddWithValue("?iduser", id);
                     command.Connection = connection;
                     MySqlDataReader reader = command.ExecuteReader();
@@ -55,13 +57,21 @@ namespace KlubNaCitateli.Sites
                         lblUsername.Text = reader["username"].ToString();
                         lblEmail.Text = reader["email"].ToString();
                         lblAbout.Text = reader["about"].ToString();
-                        if (File.Exists(Server.MapPath("~/Images/ProfilePicture/" + reader["username"].ToString() + ".jpg")))
+                        if (File.Exists(Server.MapPath("~/Images/ProfilePicture/" + reader["iduser"].ToString() + ".jpg")))
                         {
-                            Image1.ImageUrl = "~/Images/ProfilePicture/" + reader["username"].ToString() + ".jpg/";
+                            profileImg.Src = "~/Images/ProfilePicture/" + reader["iduser"].ToString() + ".jpg/";
                         }
-                        else if (File.Exists(Server.MapPath("~/Images/ProfilePicture/" + reader["username"].ToString() + ".png")))
+                        else if (File.Exists(Server.MapPath("~/Images/ProfilePicture/" + reader["iduser"].ToString() + ".png")))
                         {
-                            Image1.ImageUrl = "~/Images/ProfilePicture/" + reader["username"].ToString() + ".png/";
+                            profileImg.Src = "~/Images/ProfilePicture/" + reader["iduser"].ToString() + ".png/";
+                        }
+                        else if (File.Exists(Server.MapPath("~/Images/ProfilePicture/" + reader["iduser"].ToString() + ".JPG")))
+                        {
+                            profileImg.Src = "~/Images/ProfilePicture/" + reader["iduser"].ToString() + ".JPG/";
+                        }
+                        else if (File.Exists(Server.MapPath("~/Images/ProfilePicture/" + reader["iduser"].ToString() + ".PNG")))
+                        {
+                            profileImg.Src = "~/Images/ProfilePicture/" + reader["iduser"].ToString() + ".PNG/";
                         }
                     }
                     else
@@ -92,16 +102,21 @@ namespace KlubNaCitateli.Sites
                     }
                     reader.Close();
 
-                    command.CommandText = "select thumbnail, b.idbook from userbooks as ub, books as b where iduser=?iduser3 and b.idbook=ub.idbook";
+                    command.CommandText = "select distinct thumbnail, name, ub.idbook from userbooks as ub, books as b where iduser=?iduser3 and b.idbook=ub.idbook";
                     command.Parameters.AddWithValue("?iduser3", id);
                     command.Connection = connection;
                     reader = command.ExecuteReader();
                     if (reader.HasRows)
                     {
+                        StringBuilder sb2 = new StringBuilder();
+                        sb2.Append("<div id='carouselh'>");
                         while (reader.Read())
                         {
-                            carousel.InnerHtml += "<a href='book.aspx?id="+ reader["idbook"].ToString() + "'><img src=" + reader["thumbnail"] + "/></a>";
+                            sb2.Append("<div><img src='" + reader["thumbnail"].ToString() + "' /><span class='thumbnail-text'>"+ reader["name"].ToString() +"</span></div>");                            
+                            
                         }
+                        sb2.Append("</div>");
+                        hWrapper.InnerHtml = sb2.ToString();
                     }
                     reader.Close();
                 }
@@ -126,5 +141,174 @@ namespace KlubNaCitateli.Sites
             changeAboutBtn.Visible = false;
         }
 
+        public void ChangeUsername(Object sender, EventArgs e)
+        {
+            tbUsername.Visible = true;
+            tbUsername.Text = lblUsername.Text;
+            lblUsername.Visible = false;
+            confirmChangeUsrBtn.Visible = true;
+            changeUsrBtn.Visible = false;
+        }
+
+        public void ChangeEmail(Object sender, EventArgs e)
+        {
+            tbEmail.Visible = true;
+            tbEmail.Text = lblEmail.Text;
+            lblEmail.Visible = false;
+            confirmChangeEmailBtn.Visible = true;
+            changeEmailBtn.Visible = false;
+        }
+
+        public void ConfirmChangeUsername(Object sender, EventArgs e)
+        {
+            using(MySqlConnection connection = new MySqlConnection())
+            {
+                connection.ConnectionString = ConfigurationManager.ConnectionStrings["BooksConn"].ConnectionString.ToString();
+
+                try
+                {
+                    connection.Open();
+
+                    int id = Convert.ToInt32(Request.QueryString["id"]);
+                    
+                    MySqlCommand command = new MySqlCommand();
+                    command.CommandText = "update users set username=?username where iduser=?iduser";
+                    command.Parameters.AddWithValue("?iduser", id);
+                    command.Parameters.AddWithValue("?username", tbUsername.Text);
+                    command.Connection = connection;
+                    MySqlDataReader reader = command.ExecuteReader();
+                    command.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    lblError.Text = ex.Message;
+                    lblError.Visible = true;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+
+                confirmChangeUsrBtn.Visible = false;
+                lblUsername.Visible = true;
+                lblUsername.Text = tbUsername.Text;
+                tbUsername.Visible = false;
+            }
+        }
+
+        public void ConfirmChangeEmail(Object sender, EventArgs e)
+        {
+            using (MySqlConnection connection = new MySqlConnection())
+            {
+                connection.ConnectionString = ConfigurationManager.ConnectionStrings["BooksConn"].ConnectionString.ToString();
+
+                try
+                {
+                    connection.Open();
+
+                    int id = Convert.ToInt32(Request.QueryString["id"]);
+
+                    MySqlCommand command = new MySqlCommand();
+                    command.CommandText = "update users set email=?email where iduser=?iduser";
+                    command.Parameters.AddWithValue("?iduser", id);
+                    command.Parameters.AddWithValue("?email", tbEmail.Text);
+                    command.Connection = connection;
+                    MySqlDataReader reader = command.ExecuteReader();
+                    command.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    lblError.Text = ex.Message;
+                    lblError.Visible = true;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+
+            confirmChangeEmailBtn.Visible = false;
+            lblEmail.Visible = true;
+            lblEmail.Text = tbEmail.Text;
+            tbEmail.Visible = false;
+        }
+
+        public void ChangePicture(Object sender, EventArgs e)
+        {
+            if (changePicBtn.Text == "Change Picture")
+            {
+                profilePicture.Visible = true;
+                changePicBtn.Text = "Confirm Change";
+                return;
+            }
+            if (profilePicture.HasFile)
+            {
+                if (File.Exists(Server.MapPath("~/Images/ProfilePicture/" + Session["Id"] + ".jpg")))
+                {
+                    string[] img = Directory.GetFiles(Server.MapPath("~/Images/ProfilePicture/"));
+                    File.Delete(img[0]);
+                }
+                else if (File.Exists(Server.MapPath("~/Images/ProfilePicture/" + Session["Id"] + ".JPG")))
+                {
+                    string[] img = Directory.GetFiles(Server.MapPath("~/Images/ProfilePicture/"));
+                    File.Delete(img[0]);
+                }
+                else if (File.Exists(Server.MapPath("~/Images/ProfilePicture/" + Session["Id"] + ".png")))
+                {
+                    string[] img = Directory.GetFiles(Server.MapPath("~/Images/ProfilePicture/"));
+                    File.Delete(img[0]);
+                }
+                else if (File.Exists(Server.MapPath("~/Images/ProfilePicture/" + Session["Id"] + ".PNG")))
+                {
+                    string[] img = Directory.GetFiles(Server.MapPath("~/Images/ProfilePicture/"));
+                    File.Delete(img[0]);
+                }
+
+                string ext = Path.GetExtension(this.profilePicture.FileName);
+                if (ext == ".jpg" || ext == ".png" || ext == ".JPG" || ext == ".PNG")
+                {
+                    Bitmap originalBMP = new Bitmap(profilePicture.FileContent);
+
+                    // Calculate the new image dimensions
+                    float origWidth = originalBMP.Width;
+                    float origHeight = originalBMP.Height;
+                    float sngRatio = origWidth / origHeight;
+                    float newWidth = 200;
+                    float newHeight = newWidth / sngRatio;
+
+                    // Create a new bitmap which will hold the previous resized bitmap
+                    Bitmap newBMP = new Bitmap(originalBMP, (int)newWidth, (int)newHeight);
+
+                    // Create a graphic based on the new bitmap
+                    Graphics oGraphics = Graphics.FromImage(newBMP);
+                    // Set the properties for the new graphic file
+                    oGraphics.SmoothingMode = SmoothingMode.AntiAlias;
+                    oGraphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+
+                    // Draw the new graphic based on the resized bitmap
+                    oGraphics.DrawImage(originalBMP, 0, 0, newWidth, newHeight);
+                    // Save the new graphic file to the server
+                    newBMP.Save(Server.MapPath("~/Images/ProfilePicture/") + (Session["Id"] + ext));
+
+                    // Once finished with the bitmap objects, we deallocate them.
+                    originalBMP.Dispose();
+                    newBMP.Dispose();
+                    oGraphics.Dispose();
+                    profilePicture.Visible = false;
+                    changePicBtn.Text = "Change Picture";
+
+                    Response.Redirect("/Sites/profile.aspx?id=" + Session["Id"].ToString());
+                }
+                else
+                {
+                    string script = "<script>$(document).ready(function(){alert('The image file is not valid. Valid extensions are .jpg and .png! Try again.');});</script>";
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "openDialog", script);
+                }
+            }
+            else
+            {
+                return;
+            }
+        }
     }
 }

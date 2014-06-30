@@ -108,6 +108,11 @@ namespace KlubNaCitateli.Sites
                             innerHTML.Append("</label></div><div class='iduser' style='display:none;'>" + reader["iduser"] + "</div> <label></label></div> ");
                             innerHTML.Append("<div class='nodiv'></div></div>");
                         }
+                        if (brojPostovi > 1 && brojPostovi < 10)
+                        {
+                            innerHTML.Append("</div>");
+
+                        }
                         numPages.Value = brojStrani.ToString();
                         
                     }

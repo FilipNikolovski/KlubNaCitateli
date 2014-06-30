@@ -60,7 +60,7 @@ namespace KlubNaCitateli.Sites
                 }
                 catch (Exception e)
                 {
-
+                    error.Text = e.Message;
                 }
                 finally
                 {
@@ -173,7 +173,11 @@ namespace KlubNaCitateli.Sites
                         StarRating = 0.0F;
 
                     //popolnuvanje na komponentite
-                    imgBook.ImageUrl = book.ImageSrc;
+                    if (book.ImageSrc == "defaultImage.png")
+                        imgBook.ImageUrl = "~/Images/defaultImage.png"; 
+                    else
+                        imgBook.ImageUrl = book.ImageSrc;
+
                     lblDescription.Text = book.Description;
 
                     StringBuilder sb = new StringBuilder();

@@ -5,40 +5,47 @@
     <link href="../Styles/post.css" rel="stylesheet" type="text/css" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="mainContent" runat="server">
-    <div id="progress-bar">urhouerh
-    wo;ji
+    <div id="progress-bar">
+        urhouerh wo;ji
     </div>
     <div class="maincontent">
-        <div class="postHeader">
-        Sto e javascript?
-        </div>
-        <div class="commentsarea">
-            <table id="tablecomments">
-                <tr>
-                <td id="Td1">
-                        <img id="slika" runat="server" class="userpicture"/><br />
-                        <label id="Label4" runat="server">
-                            biurguir</label>
-                    </td>
-                    <td class="commentuser">
-                        <div class="comment"></div>
-                    </td>
-                    
-                </tr>
-                <tr>
-                <td id="Td2">
-                        <img id="Img1" runat="server" class="userpicture"/><br />
-                        <label id="Label1" runat="server">
-                            biurguir</label>
-                    </td>
-                    <td class="commentuser">
-                        <div class="comment"></div>
-                    </td>
-                    
-                </tr>
-                
-                 
-            </table>
+        <div id="commentsarea" class="commentsarea" runat="server">
+            <div class="comm">
+                <div class="posthead">
+                    <span class="postdateold"><span class="date"></span></span>
+                    <img src="../Images/deletePost.png" alt="" class="deletePost" />
+                    <div class="noDiv">
+                    </div>
+                </div>
+                <div class="postdetails">
+                    <div class="userinfo">
+                        <div class="banusr"><asp:LinkButton runat="server" CssClass="banUser" Text="[ Ban user ]"></asp:LinkButton></div>
+                        <div class="username">
+                            <a class=""><strong></strong></a>
+                        </div>
+                        <div class="picture">
+                            <img class="userpicture" alt="" src="../Images/user-icon.png" /></div>
+                            <div class="posts">
+                            <label>Posts:</label><strong>120</strong></div>
+                    </div>
+                    <div class="posttext">
+                        <div class="maintext">
+                            <div class="quote">
+                                <img class="leftquote" src="../Images/left-quotes.png" alt="" /> <label class="quoteBorder"> Originally posted by <label class="quoteuser"></label></label><div>
+                                        <span></span> <img class="leftquote" src="../Images/right-quotes.png" alt="" /> </div>
+                            </div>
+                            <div class="comments">
+                          
+                            </div>
+                        </div>
+                        <div class="btnreply">
+                            <div  runat="server" id="replyWithText">Reply with quote</div></div>
+                    </div>
+                </div>
+                <div class="noDiv">
+                </div>
+            </div>
+            
         </div>
     </div>
 </asp:Content>
