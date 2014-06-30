@@ -13,6 +13,15 @@ namespace KlubNaCitateli.Sites {
     public partial class post {
         
         /// <summary>
+        /// scriptManager control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.ScriptManager scriptManager;
+        
+        /// <summary>
         /// commentsarea control.
         /// </summary>
         /// <remarks>
@@ -20,14 +29,5 @@ namespace KlubNaCitateli.Sites {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl commentsarea;
-        
-        /// <summary>
-        /// replyWithText control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl replyWithText;
     }
 }
