@@ -160,6 +160,87 @@ namespace KlubNaCitateli.Services
 
 
         }
+
+
+        [OperationContract]
+        public string BannedUser(bool banned, int idUser)
+        {
+
+
+            using (MySqlConnection connection = new MySqlConnection())
+            {
+                connection.ConnectionString = ConfigurationManager.ConnectionStrings["BooksConn"].ConnectionString.ToString();
+
+                try
+                {
+
+                    connection.Open();
+                    MySqlCommand command = new MySqlCommand();
+                    command.Connection = connection;
+                    command.CommandText = "Update users set banned=?banned where iduser=?iduser";
+                    command.Parameters.AddWithValue("?banned", banned);
+                    command.Parameters.AddWithValue("?iduser", idUser);
+                    command.ExecuteNonQuery();
+                    if (banned)
+                    {
+                        return "User is banned!";
+                    }
+                    else
+                    {
+                        return "User is unbanned!";
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+                    return "Error";
+                }
+                finally
+                {
+                    connection.Close();
+                }
+
+            }
+        }
+
+
+        [OperationContract]
+        public string DeleteComment(int idpost)
+        {
+            
+                    
+            using (MySqlConnection connection = new MySqlConnection())
+            {
+                connection.ConnectionString = ConfigurationManager.ConnectionStrings["BooksConn"].ConnectionString.ToString();
+
+                try
+                {
+                    
+                    connection.Open();
+                    MySqlCommand command = new MySqlCommand();
+                    command.Connection = connection;
+                    command.CommandText = "Update posts set postcomment=?postcomment where idpost=?idpost";
+                    command.Parameters.AddWithValue("?postcomment","");
+                    command.Parameters.AddWithValue("?idpost", idpost);
+                    command.ExecuteNonQuery();
+                   
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+                    return "Error";
+                }
+                finally
+                {
+                    connection.Close();
+                }
+
+            }
+
+
+
+        }
         
     }
 }

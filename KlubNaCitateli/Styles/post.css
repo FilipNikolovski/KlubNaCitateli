@@ -14,17 +14,32 @@
 }
 .picture
 {
-
+    max-height: 200px;
+  overflow: hidden; 
+  
 }
 
 .userpicture
 {
-    width: 200px;
-    height: 200px;
-    background-size: 100%;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-image: url("../Images/user-icon.png");
+    
+    
+    display: block;
+      max-width: 100%;
+      /* just in case, to force correct aspect ratio */
+      height: auto !important;
+      width: auto\9; /* ie8+9 */
+      /* lt ie8 */
+      -ms-interpolation-mode: bicubic; 
+  margin-left:auto;
+
+}
+.banUser:hover, .unBanUser:hover, .deletePost:hover
+{
+cursor:pointer;
+}
+.usernameLink:hover
+{
+cursor:pointer;
 }
 .postdetails
 {
