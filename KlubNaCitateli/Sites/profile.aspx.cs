@@ -10,12 +10,24 @@ using System.Text;
 using System.IO;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Web.UI.HtmlControls;
 
 namespace KlubNaCitateli.Sites
 {
     public partial class profile : System.Web.UI.Page
     {
+        public int UserId { get; set; }
+
         protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!IsPostBack)
+            {
+                FillUserProfile();
+                FillCategoriesList();
+            }
+        }
+
+        public void FillUserProfile()
         {
             using (MySqlConnection connection = new MySqlConnection())
             {
@@ -24,9 +36,9 @@ namespace KlubNaCitateli.Sites
                 try
                 {
                     connection.Open();
-                    int id = Convert.ToInt32(Request.QueryString["id"]);
+                    UserId = Convert.ToInt32(Request.QueryString["id"]);
 
-                    if (id == 0)
+                    if (UserId == 0)
                     {
                         Response.Redirect("~/Sites/error.aspx");
                     }
@@ -35,20 +47,25 @@ namespace KlubNaCitateli.Sites
                     {
                         int sessionId = Convert.ToInt32(Session["id"].ToString());
 
-                        if (sessionId == id)
+                        if (sessionId == UserId)
                         {
                             changePicBtn.Visible = true;
                             changeUsrBtn.Visible = true;
                             changeEmailBtn.Visible = true;
                             changeAboutBtn.Visible = true;
+                            allCategories.Visible = true;
+                            saveCategories.Visible = true;
                         }
+                        
                     }
 
                     MySqlCommand command = new MySqlCommand();
                     command.CommandText = "select iduser, name, surname, username, email, about from users where iduser=?iduser";
-                    command.Parameters.AddWithValue("?iduser", id);
+                    command.Parameters.AddWithValue("?iduser", UserId);
                     command.Connection = connection;
                     MySqlDataReader reader = command.ExecuteReader();
+
+
                     if (reader.HasRows)
                     {
                         reader.Read();
@@ -80,43 +97,27 @@ namespace KlubNaCitateli.Sites
                     }
                     reader.Close();
 
+                    //Jcarousel User Books
+                    command.CommandText = "select distinct thumbnail, name, ub.idbook from userbooks as ub, books as b where iduser=?iduser and b.idbook=ub.idbook";
 
-                    command.CommandText = "select name from usercategories as uc, categories as c where iduser=?iduser2 and uc.idcategory=c.idcategory";
-                    command.Parameters.AddWithValue("?iduser2", id);
-                    command.Connection = connection;
-                    reader = command.ExecuteReader();
-                    if (reader.HasRows)
-                    {
-                        StringBuilder sb = new StringBuilder();
-                        while (reader.Read())
-                        {
-                            sb.Append(reader["name"].ToString());
-                            sb.Append("<br>");
-                        }
-
-                        lblCategories.Text = sb.ToString();
-                    }
-                    else
-                    {
-                        lblCategories.Text = "You have no categories!!";
-                    }
-                    reader.Close();
-
-                    command.CommandText = "select distinct thumbnail, name, ub.idbook from userbooks as ub, books as b where iduser=?iduser3 and b.idbook=ub.idbook";
-                    command.Parameters.AddWithValue("?iduser3", id);
+                    command.Parameters.Clear();
+                    command.Parameters.AddWithValue("?iduser", UserId);
                     command.Connection = connection;
                     reader = command.ExecuteReader();
                     if (reader.HasRows)
                     {
                         StringBuilder sb2 = new StringBuilder();
-                        sb2.Append("<div id='carouselh'>");
+                        sb2.Append("<div class='jcarousel' data-jcarousel='true'><ul>");
                         while (reader.Read())
                         {
-                            sb2.Append("<div><img src='" + reader["thumbnail"].ToString() + "' /><span class='thumbnail-text'>"+ reader["name"].ToString() +"</span></div>");                            
-                            
+                            sb2.Append("<li><a href='book.aspx?id=" + reader["IDBook"] + "'><img src='" + reader["thumbnail"].ToString() + "' /></a></li>");
                         }
-                        sb2.Append("</div>");
-                        hWrapper.InnerHtml = sb2.ToString();
+                        sb2.Append("</ul></div>");
+                        sb2.Append("<a href='#' class='jcarousel-control-prev'>&lsaquo;</a>");
+                        sb2.Append("<a href='#' class='jcarousel-control-next'>&rsaquo;</a>");
+                        sb2.Append("<p class='jcarousel-pagination'></p>");
+
+                        jcarouselWrapper.InnerHtml = sb2.ToString();
                     }
                     reader.Close();
                 }
@@ -132,6 +133,56 @@ namespace KlubNaCitateli.Sites
             }
         }
 
+        public void FillCategoriesList()
+        {
+            using (MySqlConnection conn = new MySqlConnection())
+            {
+                conn.ConnectionString = ConfigurationManager.ConnectionStrings["BooksConn"].ConnectionString;
+
+                try
+                {
+                    conn.Open();
+
+                    string sql = "SELECT * FROM Categories";
+
+                    MySqlCommand command = new MySqlCommand(sql, conn);
+                    MySqlDataReader reader = command.ExecuteReader();
+
+                    StringBuilder innerHtml = new StringBuilder();
+                    while (reader.Read())
+                    {
+                        innerHtml.Append("<li class='ui-state-default' runat='server'>" + reader["Name"] + "</li>");
+                    }
+                    reader.Close();
+                    allCategories.InnerHtml = innerHtml.ToString();
+
+                    sql = "SELECT c.* FROM Categories as c, UserCategories as uc WHERE uc.IDCategory=c.IDCategory AND uc.IDUser=?IDUser";
+                    command.CommandText = sql;
+                    command.Parameters.AddWithValue("?IDUser", UserId);
+                    reader = command.ExecuteReader();
+
+                    innerHtml.Clear();
+
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            innerHtml.Append("<li class='ui-state-default' runat='server'>" + reader["Name"] + "</li>");
+                        }
+                        myCategories.InnerHtml = innerHtml.ToString();
+                    }
+                    reader.Close();
+                }
+                catch (Exception ex)
+                {
+                    lblError.Text = ex.Message;
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+        }
         public void ChangeAbout(Object sender, EventArgs e)
         {
             tbAbout.Visible = true;
@@ -310,5 +361,6 @@ namespace KlubNaCitateli.Sites
                 return;
             }
         }
+
     }
 }

@@ -112,10 +112,10 @@
     <Content Include="Scripts\jquery-1.4.4.min.js" />
     <Content Include="Scripts\jquery-ui-1.10.4.custom.js" />
     <Content Include="Scripts\jquery-ui-1.10.4.custom.min.js" />
+    <Content Include="Scripts\jquery.jcarousel.min.js" />
     <Content Include="Scripts\jquery.paginate.js" />
     <Content Include="Scripts\jquery.raty.js" />
     <Content Include="Scripts\jquery.tokeninput.js" />
-    <Content Include="Scripts\jsCarousel-2.0.0.js" />
     <Content Include="Scripts\tabs-script.js" />
     <Content Include="Services\BookService.svc" />
     <Content Include="Services\ForumService.svc" />
@@ -134,8 +134,8 @@
     <Content Include="Styles\book.css" />
     <Content Include="Styles\forum.css" />
     <Content Include="Styles\index.css" />
+    <Content Include="Styles\jcarousel.css" />
     <Content Include="Styles\jquery.raty.css" />
-    <Content Include="Styles\jsCarousel-2.0.0.css" />
     <Content Include="Styles\post.css" />
     <Content Include="Styles\search.css" />
     <Content Include="Styles\Site.css" />
