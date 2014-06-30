@@ -10,6 +10,7 @@ using MySql.Data.MySqlClient;
 using System.Configuration;
 using KlubNaCitateli.Classes;
 using System.Web.Script.Serialization;
+using System.Collections;
 
 namespace KlubNaCitateli.Services
 {
@@ -17,7 +18,7 @@ namespace KlubNaCitateli.Services
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
     public class BookService
     {
-        
+
         [OperationContract]
         public string DoWork(string tags, string categories, string bookString)
         {
@@ -66,7 +67,7 @@ namespace KlubNaCitateli.Services
                     }
                     else
                         return "Книгата веќе постои!";
-                    
+
                     //-------------------------------------------------------------------------------------------------
 
                     //Vnesuvanje na AVTORI vo baza---------------------------------------------------------------------
@@ -80,7 +81,7 @@ namespace KlubNaCitateli.Services
                             cm.CommandText = "select IDAuthor from authors where name=?name";
                             cm.Connection = connection;
                             cm.Parameters.AddWithValue("?name", author);
-                            MySqlDataReader rd=cm.ExecuteReader();
+                            MySqlDataReader rd = cm.ExecuteReader();
                             if (!rd.HasRows)
                             {
                                 rd.Close();
@@ -198,7 +199,7 @@ namespace KlubNaCitateli.Services
                             {
                                 rd.Close();
                             }
-                           
+
                         }
                     }
                     //-------------------------------------------------------------------------------------------------
@@ -227,7 +228,7 @@ namespace KlubNaCitateli.Services
                                 command.Parameters.AddWithValue("?IDBook", idBook);
                                 command.ExecuteNonQuery();
                             }
-                        }       
+                        }
                     }
                     //--------------------------------------------------------------------------------------------------
 
@@ -349,7 +350,7 @@ namespace KlubNaCitateli.Services
                         }
                     }
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     return "Таговите и категориите не се успешно внесени.\n Error: " + e.Message;
                 }
@@ -432,7 +433,7 @@ namespace KlubNaCitateli.Services
                         return (totalRating / (totalVotes * 1.0F)).ToString();
                     }
                     reader.Close();
-                    
+
                 }
                 catch (Exception e)
                 {
@@ -445,6 +446,52 @@ namespace KlubNaCitateli.Services
             }
 
             return (0.0F).ToString();
+        }
+
+        [OperationContract]
+        public string SaveCategories(string jsonData)
+        {
+            Dictionary<string, object> json = new JavaScriptSerializer().Deserialize<Dictionary<string, object>>(jsonData);
+
+            using (MySqlConnection conn = new MySqlConnection())
+            {
+                conn.ConnectionString = ConfigurationManager.ConnectionStrings["BooksConn"].ConnectionString;
+
+                try
+                {
+                    conn.Open();
+                    string sql = "DELETE FROM UserCategories WHERE IDUser=?IDUser";
+                    MySqlCommand command = new MySqlCommand(sql, conn);
+
+                    command.Parameters.AddWithValue("IDUser", json["userId"].ToString());
+                    command.ExecuteNonQuery();
+
+                    sql = "INSERT INTO UserCategories (IDCategory,IDUser ) SELECT IDCategory, ?IDUser FROM Categories WHERE Name=?CategoryName";
+                    command.CommandText = sql;
+                    ArrayList categories = json["categories"] as ArrayList;
+
+                    foreach (string category in categories)
+                    {
+                        command.Parameters.Clear();
+                        command.Parameters.AddWithValue("?CategoryName", category);
+                        command.Parameters.AddWithValue("?IDUser", json["userId"].ToString());
+
+                        command.ExecuteNonQuery();
+                    }
+
+                    return "Your categories are saved.";
+                }
+                catch (Exception ex)
+                {
+                    return ex.Message;
+                }
+                finally
+                {
+                    conn.Close();
+                }
+
+                return "There was an error. Please try again.";
+            }
         }
 
     }
