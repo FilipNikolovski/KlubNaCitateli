@@ -17,12 +17,45 @@ namespace KlubNaCitateli.Sites
         {
             int IdTopic = Convert.ToInt32(Request.QueryString["topicid"]);
             idtopic.Value = IdTopic.ToString();
+            if (IdTopic == 0)
+            {
+                Response.Redirect("forum.aspx");
+            }
 
             if (Session["Id"] != null)
             {
                 iduser.Value = Session["Id"].ToString();
             }
+            using (MySqlConnection connection = new MySqlConnection())
+            {
+                StringBuilder innerHTML = new StringBuilder();
+
+                connection.ConnectionString = ConfigurationManager.ConnectionStrings["BooksConn"].ConnectionString.ToString();
+                try
+                {
+                    connection.Open();
+                    MySqlCommand command = new MySqlCommand();
+                    command.Connection = connection;
+                    command.CommandText = "select topicname from forumtopics where idtopic=?IDTopic";
+                    command.Parameters.AddWithValue("?IDTopic", IdTopic);
+                    MySqlDataReader reader = command.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        if (reader.Read())
+                        {
+                            topic.InnerText = reader["topicname"].ToString();
+                        }
+                    }
+                    reader.Close();
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+                }
+                finally { connection.Close(); }
+            }
             LoadThreads(IdTopic);
+
         }
 
         protected void LoadThreads(int IdTopic)
@@ -44,7 +77,7 @@ namespace KlubNaCitateli.Sites
                     {
                         if (reader.Read())
                         {
-                            if(iduser.Value != "")
+                            if (iduser.Value != "")
                                 innerHTML.Append("<div class='cont'><div class='allblack'><div class='naslov'>" + reader["topicname"] + "</div><div runat='server' id='btnAddThread' class='btnAddThread'>+ New Thread</div><div class='nodiv'></div></div>");
                             else
                                 innerHTML.Append("<div class='cont'><div class='allblack'><div class='naslov'>" + reader["topicname"] + "</div><div runat='server' id='btnAddThread' class='btnAddThread' style='display:none;'>+ New Thread</div><div class='nodiv'></div></div>");
@@ -55,10 +88,8 @@ namespace KlubNaCitateli.Sites
                         topics.Visible = false;
                     }
                     reader.Close();
-                    
-
-
-                    command.CommandText = "select discussionthreads.idthread, threadname, count(idpost) as comments, username, users.iduser, DateCreated  from users left outer join discussionthreads on discussionthreads.iduser=users.iduser left outer join posts on discussionthreads.idthread=posts.idthread where discussionthreads.idtopic=?IDTopic group by discussionthreads.idthread";
+                   
+                    command.CommandText = "select discussionthreads.idthread, threadname, count(idpost) as comments, username, users.iduser, DateCreated, discussionthreads.locked  from users left outer join discussionthreads on discussionthreads.iduser=users.iduser left outer join posts on discussionthreads.idthread=posts.idthread where discussionthreads.idtopic=?IDTopic group by discussionthreads.idthread order by idpost desc";
                     reader = command.ExecuteReader();
                     if (reader.HasRows)
                     {
@@ -75,16 +106,26 @@ namespace KlubNaCitateli.Sites
                             }
                             if (brojPostovi == 1)
                             {
-                                innerHTML.Append("<div id='demo"+brojStrani+"' class='demos'>");
+                                innerHTML.Append("<div id='demo" + brojStrani + "' class='demos'>");
                             }
 
                             innerHTML.Append("<div class='topic'> <div class='thread'> <div class='threadname'>" + reader["threadname"] + "</div><div class='numcomments'><label>Comments:</label> <label>" + reader["comments"] + "</label></div>");
-                            innerHTML.Append("<div style='display:none;' class='idthread'>" + reader["idthread"]+"</div></div>");
+                            innerHTML.Append("<div style='display:none;' class='idthread'>" + reader["idthread"] + "</div></div>");
                             if (Session["Type"] != null)
                             {
                                 if (Session["Type"].ToString().Equals("administrator"))
                                 {
                                     innerHTML.Append("<div class='delete'></div>");
+                                    bool val = Convert.ToBoolean(reader["locked"]);
+                                    if (val)
+                                    {
+                                        innerHTML.Append("<div class='unlock'></div>");
+                                    }
+                                    else
+                                    {
+                                        innerHTML.Append("<div class='lock'></div>");
+                                    }
+
                                 }
                             }
                             innerHTML.Append("<div class='mostCommCat'><label>Created by:</label> <label class='userD'>" + reader["username"] + "</label> <div class='user'><label>Date created:</label> <label>");
@@ -114,12 +155,12 @@ namespace KlubNaCitateli.Sites
 
                         }
                         numPages.Value = brojStrani.ToString();
-                        
+
                     }
                     topics.InnerHtml = innerHTML.ToString();
-                    
+
                     reader.Close();
-                    
+
 
                 }
                 catch (Exception ex)
@@ -137,6 +178,6 @@ namespace KlubNaCitateli.Sites
         }
 
 
-      
+
     }
 }

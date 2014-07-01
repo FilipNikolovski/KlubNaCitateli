@@ -3,10 +3,6 @@
 }
 
 
-#progress-bar
-{
-    margin: 20px;
-}
 
 .commentsarea
 {
@@ -18,7 +14,10 @@
   overflow: hidden; 
   
 }
-
+.maincontent
+{
+margin-top:10px;
+}
 .userpicture
 {
     
@@ -115,6 +114,7 @@ background-color:LightGray;
 margin:20px;
 font-style:italic;
 border-radius:5px;
+padding:5px;
 }
 .leftquote
 {
@@ -140,4 +140,73 @@ margin-left:10px;
 margin-bottom:10px;
 margin-top:10px;
 text-align:center;
+}
+.newpostarea
+{
+
+border:1px solid gray;
+margin:8px;
+}
+#demo
+{
+margin-top:5px;
+margin-bottom:5px;
+float:right;
+max-width:390px;
+min-width:130px;
+width:auto;
+}
+.help2
+{
+clear:both;
+}
+.help
+{
+clear:both;
+min-height:40px;
+height:auto;
+}
+.replyQuote
+{
+text-decoration:underline;
+font-weight:bold;
+}
+.replyQuote:hover
+{
+cursor:pointer;
+}
+.commentsarea
+{
+clear:both;
+}
+.posts
+{
+clear:both;
+}
+.text
+{
+float:left;
+width:80%;
+}
+.btnDiv
+{
+float:right;
+width:20%;
+height:200px;
+position:relative;
+}
+.submitPost
+{
+
+width:100px;
+height:30px;
+position:absolute;
+bottom:85px;
+left:30%;
+}
+.newPostText
+{
+height:200px;
+width:98%;
+margin:10px;
 }
