@@ -7,7 +7,7 @@
     <script src="../Scripts/jquery.easing.1.3.js" type="text/javascript" language="JavaScript">
     </script>
     <script src="../Scripts/jquery.jBreadCrumb.1.1.js" type="text/javascript" language="JavaScript"></script>
-    <script>
+    <script type="text/javascript">
         $(document).ready(function () {
 
             $("#breadCrumb3").jBreadCrumb();
@@ -34,9 +34,8 @@
 
 
             $(".addNewTopic").on("click", function () {
-
                 var idtopic = $(this).parent().parent().find(".idtopic").text();
-                $("#<%=idtopic.ClientID %>").val(idtype);
+                $("#<%=idtopic.ClientID %>").val(idtopic);
 
                 $("#dialog-form").dialog("open");
             });

@@ -40,6 +40,7 @@ CREATE TABLE Users (
 	Email varchar(200) NOT NULL,
 	Username varchar(100) NOT NULL,
 	Password varchar(150) NOT NULL,
+	ProfilePicture varchar(200) NOT NULL,
 	Type varchar(100) NOT NULL,
 	NumComments int,
 	About text,
@@ -97,7 +98,7 @@ CREATE TABLE BookComments (
 	Date varchar(11),
 	FOREIGN KEY (IDBook) REFERENCES Books (IDBook),
 	FOREIGN KEY (IDUser) REFERENCES Users (IDUser),
-	PRIMARY KEY (IDBook, IDUser)
+	PRIMARY KEY (IDBook, IDUser, Date)
 );
 
 CREATE TABLE Rates (
@@ -137,7 +138,8 @@ CREATE TABLE TopicTypes (
 	IDType int NOT NULL AUTO_INCREMENT,
 	Name varchar(150) NOT NULL,
 	PRIMARY KEY (IDType)
-)
+);
+
 ALTER TABLE ForumTopics 
   ADD COLUMN IDType INT NOT NULL,
   ADD FOREIGN KEY ForumTopics(IDType) REFERENCES TopicTypes(IDType) ON DELETE CASCADE;

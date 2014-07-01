@@ -519,7 +519,7 @@ namespace KlubNaCitateli.Services
                     {
 
                         command.Parameters.Clear();
-                        command.Parameters.AddWithValue("?TagName", tag.Split(new char[]{'#'})[1]);
+                        command.Parameters.AddWithValue("?TagName", tag.Split(new char[] { '#' })[1]);
                         command.Parameters.AddWithValue("?IDBook", json["bookId"].ToString());
 
                         command.ExecuteNonQuery();
@@ -536,6 +536,65 @@ namespace KlubNaCitateli.Services
                     conn.Close();
                 }
 
+            }
+        }
+
+        [OperationContract]
+        public string AddBookComment(string jsonData)
+        {
+            Dictionary<string, string> json = new JavaScriptSerializer().Deserialize<Dictionary<string, string>>(jsonData);
+            Dictionary<string, string> result = new Dictionary<string,string>();
+
+            using (MySqlConnection conn = new MySqlConnection())
+            {
+                conn.ConnectionString = ConfigurationManager.ConnectionStrings["BooksConn"].ConnectionString;
+
+                try
+                {
+                    conn.Open();
+
+                    string sql = "INSERT INTO BookComments (IDBook, IDUser, Comment, Date) VALUES (?IDBook, ?IDUser, ?Comment, ?Date)";
+                    MySqlCommand command = new MySqlCommand(sql, conn);
+
+                    command.Parameters.AddWithValue("?IDBook", json["bookId"]);
+                    command.Parameters.AddWithValue("?IDUser", json["userId"]);
+                    command.Parameters.AddWithValue("?Comment", json["comment"]);
+                    command.Parameters.AddWithValue("?Date", DateTime.Now.ToString());
+
+                    command.ExecuteNonQuery();
+
+                    sql = "SELECT Username, IDUser FROM Users WHERE IDUser=?IDUser";
+                    command.CommandText = sql;
+                    command.Parameters.Clear();
+                    command.Parameters.AddWithValue("?IDUser", json["userId"]);
+
+                    MySqlDataReader reader = command.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        result["userid"] = reader["IDUser"].ToString();
+                        result["username"] = reader["Username"].ToString();
+                        result["comment"] = json["comment"];
+                        result["status"] = "success";
+                    }
+                    reader.Close();
+
+                    JavaScriptSerializer serializer = new JavaScriptSerializer();
+
+                    return serializer.Serialize((object)result);
+                }
+                catch (Exception ex)
+                {
+                    JavaScriptSerializer serializer = new JavaScriptSerializer();
+
+                    result["status"] = "error";
+                    result["message"] = ex.Message;
+                    return serializer.Serialize((object)result);
+                }
+                finally
+                {
+                    conn.Close();
+                }
             }
 
         }

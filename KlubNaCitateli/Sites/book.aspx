@@ -100,6 +100,43 @@
                 });
             });
 
+            $("#btnComment").on("click", function(){
+            
+                var userId = '<%=IDUser %>';
+
+                if(userId != -1) {
+                    var comment = $("#commentText").val();
+
+                    if(comment.trim() != '') {
+                        var jsonData = {
+                            userId: userId,
+                            bookId: '<%=IDBook %>',
+                            comment: comment
+                        };
+                        var service = new KlubNaCitateli.BookService();
+                        
+                        service.AddBookComment(JSON.stringify(jsonData), function(result) {
+                            
+                            var res = JSON.parse(result);
+                            if(res.status == "success") {
+                                var content = "<div class='bubble-list'><div class='bubble clearfix'><a class='bubble-username' href='profile.aspx?id=" + res.userid + "'>" + res.username +  "</a><div class='bubble-content'><div class='point'></div><p class='bubble-user-comment'>" + res.comment + "</p></div></div></div>";
+                                $("#mainContent_comments").append(content);
+                            }
+                            else {
+                                alert(res.message);
+                            }
+                            
+                        });
+                    }
+                    else {
+                        alert("Your comment is empty.");
+                    }      
+                }
+                else {
+                    alert("You need to login to comment on a book.");
+                }
+            });
+
         }); 
     </script>
 </asp:Content>
@@ -214,49 +251,17 @@
         </div>
     </div>
     <div class="commentsSection">
-        <label>
-            Comments:</label>
-        <div class="comments">
-            <div class="bubble-list">
-                <div class="bubble clearfix">
-                    <img src="#">
-                    <div class="bubble-content">
-                        <div class="point">
-                        </div>
-                        <p>
-                            Welcome To ThePCwizard.in - Helping Beginners. Developing Experts.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="bubble-list">
-                <div class="bubble clearfix">
-                    <img src="#">
-                    <div class="bubble-content">
-                        <div class="point">
-                        </div>
-                        <p>
-                            Welcome To ThePCwizard.in - Helping Beginners. Developing Experts.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="bubble-list">
-                <div class="bubble clearfix">
-                    <img src="#">
-                    <div class="bubble-content">
-                        <div class="point">
-                        </div>
-                        <p>
-                            Welcome To ThePCwizard.in - Helping Beginners. Developing Experts.</p>
-                    </div>
-                </div>
-            </div>
+        <div id="comments" runat="server">
+            <label>Comments:</label>
         </div>
         <div class="commentArea">
-            <input id="commentText" type="text" /><br />
+            <textarea id="commentText" rows="6" cols="50" style="resize: none;">
+            </textarea>
+            <br />
             <input id="btnComment" type="button" value="Comment" />
         </div>
-        <div id="nodiv"></div>
+        <div id="nodiv">
+        </div>
     </div>
-
     <asp:Label ID="lblError" runat="server" Visible="False"></asp:Label>
 </asp:Content>
