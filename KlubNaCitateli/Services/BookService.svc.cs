@@ -447,5 +447,11 @@ namespace KlubNaCitateli.Services
             return (0.0F).ToString();
         }
 
+        [OperationContract]
+        public string SaveTags(string jsonData)
+        {
+
+        }
+
     }
 }
