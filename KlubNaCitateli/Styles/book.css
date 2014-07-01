@@ -23,11 +23,104 @@
 {
     width: 100%;
 }
-#tmp > td
+.tmp > td
 {
     padding-bottom: 2em;
 }
-#tmp2
+.tmp2 > td
 {
-    width: 100%;
+    padding-bottom: 1em;
 }
+
+#mainContent_allTags, #mainContent_tags
+{
+    list-style-type: none;
+    margin-left: 0px;
+    white-space: nowrap;
+    height: 20px;
+    width: 90%;
+}
+
+#mainContent_allTags li, #mainContent_tags li
+{
+    float: left;
+    background-color: #F0F0F0;
+}
+
+.bubble img
+{
+    float: left;
+    width: 70px;
+    height: 70px;
+    border: 3px solid #ffffff;
+    border-radius: 10px;
+}
+.bubble-content
+{
+    position: relative;
+    float: left;
+    margin-left: 12px;
+    width: 60%;
+    padding: 0px 20px;
+    border-radius: 10px;
+    background-color: #FFFFFF;
+    box-shadow: 1px 1px 5px rgba(0,0,0,.2);
+}
+.bubble
+{
+    margin-top: 20px;
+}
+.point
+{
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right: 12px solid #FFF;
+    position: absolute;
+    left: -10px;
+    top: 12px;
+}
+.clearfix:after
+{
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: ".";
+    clear: both;
+    height: 0;
+}
+.bubble-list
+{
+    width: 50%;
+    margin:0px;
+}
+.clearfix
+{
+    display: inline-block;
+}
+* html .clearfix
+{
+    height: 1%;
+}
+.commentsSection
+{
+    margin: 15px;
+    padding: 15px;
+    overflow-y: auto;
+    clear:both;
+}
+
+.commentArea
+{
+    float: left;
+    margin-top:25px;
+}
+.comments 
+{
+    margin:0px;
+}
+
+#nodiv
+{
+    clear: both;
+}
+

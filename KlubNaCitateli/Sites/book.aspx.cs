@@ -33,7 +33,13 @@ namespace KlubNaCitateli.Sites
                         HasVoted = false;
                 }
                 //else 
-                    // Eror 404
+                // Eror 404
+
+                if (Session["Id"] != null && Session["Type"].ToString().Equals("administrator"))
+                {
+                    allTags.Visible = true;
+                    btnSaveTags.Visible = true;
+                }
             }
         }
 
@@ -135,7 +141,7 @@ namespace KlubNaCitateli.Sites
                         book.SumRating = Int32.Parse(reader["SumRating"].ToString());
                         book.NumVotes = Int32.Parse(reader["NumVotes"].ToString());
                     }
-                    
+
                     reader.Close();
 
                     //dodavanje na avtorite vo kreiranata kniga
@@ -166,33 +172,100 @@ namespace KlubNaCitateli.Sites
 
                     reader.Close();
 
-                    //popolnuvanje na stars za rejting na knigata
+                    //dodavanje na tagovite vo kreiranata kniga
+                    sql = "SELECT Name FROM tags, tagged WHERE tags.IDTag=tagged.IDTag AND tagged.IDBook=?IDBook";
+
+                    command.CommandText = sql;
+                    command.Parameters.Clear();
+                    command.Parameters.AddWithValue("?IDBook", bookID);
+                    reader = command.ExecuteReader();
+
+                    if (reader.HasRows)
+                        while (reader.Read())
+                            book.Tags.Add(reader["Name"].ToString());
+
+                    reader.Close();
+
+                    //zemanje na site tagovi koi se koristat od strana na adminot
+                    sql = "SELECT * FROM Tags WHERE IDTag NOT IN (SELECT IDTag FROM tagged WHERE IDBook=?IDBook)";
+
+                    command.CommandText = sql;
+                    command.Parameters.Clear();
+                    command.Parameters.AddWithValue("?IDBook", bookID);
+                    reader = command.ExecuteReader();
+
+                    StringBuilder sb = new StringBuilder();
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            sb.Append("<li><a href='' style='text-decoration: none; color: red; margin-right: 15px;'>" + "#" + reader["Name"] + "</a></li>");
+                        }
+                    }
+                    allTags.InnerHtml = sb.ToString();
+                    reader.Close();
+
+                    //Jcarousel Recommendation Books
+                    command.CommandText = "SELECT b.IDBook, b.Thumbnail FROM Books as b, BelongsTo as bt, Categories as c WHERE b.IDBook = bt.IDBook AND bt.IDCategory = c.IDCategory AND c.Name = ?CategoryName ORDER BY rand() LIMIT 10";
+                    command.Connection = connection;
+                    foreach (string category in book.Categories)
+                    {
+                        command.Parameters.Clear();
+                        command.Parameters.AddWithValue("?IDBook", IDBook);
+                        command.Parameters.AddWithValue("?CategoryName", category);
+                        
+                        reader = command.ExecuteReader();
+                        if (reader.HasRows)
+                        {
+                            StringBuilder sb2 = new StringBuilder();
+                            sb2.Append("<div class='jcarousel' data-jcarousel='true'><ul>");
+                            while (reader.Read())
+                            {
+                                sb2.Append("<li><a href='book.aspx?id=" + reader["IDBook"] + "'><img src='" + reader["thumbnail"].ToString() + "' /></a></li>");
+                            }
+                            sb2.Append("</ul></div>");
+                            sb2.Append("<a href='#' class='jcarousel-control-prev'>&lsaquo;</a>");
+                            sb2.Append("<a href='#' class='jcarousel-control-next'>&rsaquo;</a>");
+                            sb2.Append("<p class='jcarousel-pagination'></p>");
+
+                            jcarouselWrapper.InnerHtml = sb2.ToString();
+                        }
+                        reader.Close();
+                    }
+
+
+                    //setiranje na StarRating
                     if (book.NumVotes > 0)
-                        StarRating = (float) book.SumRating / (book.NumVotes * 1.0F);
+                        StarRating = (float)book.SumRating / (book.NumVotes * 1.0F);
                     else
                         StarRating = 0.0F;
 
                     //popolnuvanje na komponentite
                     if (book.ImageSrc == "defaultImage.png")
-                        imgBook.ImageUrl = "~/Images/defaultImage.png"; 
+                        imgBook.ImageUrl = "~/Images/defaultImage.png";
                     else
                         imgBook.ImageUrl = book.ImageSrc;
 
                     lblDescription.Text = book.Description;
 
-                    StringBuilder sb = new StringBuilder();
+                    sb.Clear();
                     sb.Append(book.Name + "<br/>" + "By" + "<br/>");
-                    sb.Append(string.Join(", ",book.Authors.ToArray()));
+                    sb.Append(string.Join(", ", book.Authors.ToArray()));
 
                     lblAbout.Text = sb.ToString();
 
                     sb.Clear();
-                    sb.Append("Year:   " + book.YearPublished + "<br/>" + "Rating:   " + StarRating + "<br/>" + "Language:   " + book.Language);
-                    sb.Append("<br/>" + "Categories:" + "<br/>");
-                    foreach (string categorie in book.Categories)
-                        sb.Append(categorie + "<br/>");
+                    sb.Append("Year:" + "<label style='margin-left: 18%;'>" + book.YearPublished + "</label>" + "<br/>" + "Rating:" + "<label style='margin-left: 14%;'>" + StarRating + "</label>" + "<br/>" + "Language:" + "<label style='margin-left: 5%;'>" + book.Language + "</label>");
+                    sb.Append("<br/>" + "Categories: ");
+                    sb.Append(string.Join(", ", book.Categories.ToArray()));
 
                     lblInfo.Text = sb.ToString();
+
+                    sb.Clear();
+                    foreach (string tag in book.Tags)
+                        sb.Append("<li><a href='' style='text-decoration: none; color: red; margin-right: 15px;'>" + "#" + tag + "</a></li>");
+
+                    tags.InnerHtml = sb.ToString();
 
                     ViewState["Book"] = book;
                 }

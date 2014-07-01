@@ -85,13 +85,40 @@ namespace KlubNaCitateli.Sites {
         protected global::System.Web.UI.WebControls.Label lblDescription;
         
         /// <summary>
-        /// lblTags control.
+        /// btnSaveTags control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTags;
+        protected global::System.Web.UI.HtmlControls.HtmlInputButton btnSaveTags;
+        
+        /// <summary>
+        /// tags control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl tags;
+        
+        /// <summary>
+        /// allTags control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl allTags;
+        
+        /// <summary>
+        /// jcarouselWrapper control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl jcarouselWrapper;
         
         /// <summary>
         /// lblError control.

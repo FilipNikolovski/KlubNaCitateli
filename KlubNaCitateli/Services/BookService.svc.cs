@@ -463,7 +463,7 @@ namespace KlubNaCitateli.Services
                     string sql = "DELETE FROM UserCategories WHERE IDUser=?IDUser";
                     MySqlCommand command = new MySqlCommand(sql, conn);
 
-                    command.Parameters.AddWithValue("IDUser", json["userId"].ToString());
+                    command.Parameters.AddWithValue("?IDUser", json["userId"].ToString());
                     command.ExecuteNonQuery();
 
                     sql = "INSERT INTO UserCategories (IDCategory, IDUser) SELECT IDCategory, ?IDUser FROM Categories WHERE Name=?CategoryName";
@@ -489,9 +489,55 @@ namespace KlubNaCitateli.Services
                 {
                     conn.Close();
                 }
-
-                return "There was an error. Please try again.";
             }
+        }
+
+        [OperationContract]
+        public string SaveTags(string jsonData)
+        {
+
+            Dictionary<string, object> json = new JavaScriptSerializer().Deserialize<Dictionary<string, object>>(jsonData);
+
+            using (MySqlConnection conn = new MySqlConnection())
+            {
+                conn.ConnectionString = ConfigurationManager.ConnectionStrings["BooksConn"].ConnectionString;
+
+                try
+                {
+                    conn.Open();
+                    string sql = "DELETE FROM tagged WHERE IDBook=?IDBook";
+                    MySqlCommand command = new MySqlCommand(sql, conn);
+
+                    command.Parameters.AddWithValue("?IDBook", json["bookId"].ToString());
+                    command.ExecuteNonQuery();
+
+                    sql = "INSERT INTO tagged (IDTag,IDBook) SELECT IDTag, ?IDBook FROM Tags WHERE Name=?TagName";
+                    command.CommandText = sql;
+                    ArrayList tags = json["tags"] as ArrayList;
+
+                    foreach (string tag in tags)
+                    {
+
+                        command.Parameters.Clear();
+                        command.Parameters.AddWithValue("?TagName", tag.Split(new char[]{'#'})[1]);
+                        command.Parameters.AddWithValue("?IDBook", json["bookId"].ToString());
+
+                        command.ExecuteNonQuery();
+                    }
+
+                    return "The tags are saved.";
+                }
+                catch (Exception ex)
+                {
+                    return ex.Message;
+                }
+                finally
+                {
+                    conn.Close();
+                }
+
+            }
+
         }
 
     }
