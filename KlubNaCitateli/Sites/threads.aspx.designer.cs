@@ -67,6 +67,15 @@ namespace KlubNaCitateli.Sites {
         protected global::System.Web.UI.WebControls.TextBox newthreadtext;
         
         /// <summary>
+        /// topic control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl topic;
+        
+        /// <summary>
         /// contenta control.
         /// </summary>
         /// <remarks>

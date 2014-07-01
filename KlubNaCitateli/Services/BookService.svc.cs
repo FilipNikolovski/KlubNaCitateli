@@ -466,7 +466,7 @@ namespace KlubNaCitateli.Services
                     command.Parameters.AddWithValue("IDUser", json["userId"].ToString());
                     command.ExecuteNonQuery();
 
-                    sql = "INSERT INTO UserCategories (IDCategory,IDUser ) SELECT IDCategory, ?IDUser FROM Categories WHERE Name=?CategoryName";
+                    sql = "INSERT INTO UserCategories (IDCategory, IDUser) SELECT IDCategory, ?IDUser FROM Categories WHERE Name=?CategoryName";
                     command.CommandText = sql;
                     ArrayList categories = json["categories"] as ArrayList;
 

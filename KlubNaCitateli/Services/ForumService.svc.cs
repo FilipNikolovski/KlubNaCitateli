@@ -221,10 +221,10 @@ namespace KlubNaCitateli.Services
                     MySqlCommand command = new MySqlCommand();
                     command.Connection = connection;
                     command.CommandText = "Update posts set postcomment=?postcomment where idpost=?idpost";
-                    command.Parameters.AddWithValue("?postcomment","");
+                    command.Parameters.AddWithValue("?postcomment","This post was deleted by a moderator.");
                     command.Parameters.AddWithValue("?idpost", idpost);
                     command.ExecuteNonQuery();
-                   
+                    return "The post was deleted!";
                 }
                 catch (Exception ex)
                 {
@@ -241,6 +241,87 @@ namespace KlubNaCitateli.Services
 
 
         }
-        
+
+
+        [OperationContract]
+        public string LockThread(bool locked, int idThread)
+        {
+
+
+            using (MySqlConnection connection = new MySqlConnection())
+            {
+                connection.ConnectionString = ConfigurationManager.ConnectionStrings["BooksConn"].ConnectionString.ToString();
+
+                try
+                {
+
+                    connection.Open();
+                    MySqlCommand command = new MySqlCommand();
+                    command.Connection = connection;
+                    command.CommandText = "Update discussionthreads set locked=?locked where idthread=?idthread";
+                    command.Parameters.AddWithValue("?locked", locked);
+                    command.Parameters.AddWithValue("?idthread", idThread);
+                    command.ExecuteNonQuery();
+                    if (locked)
+                    {
+                        return "Thread is locked!";
+                    }
+                    else
+                    {
+                        return "Thread is unlocked!";
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+                    return "Error";
+                }
+                finally
+                {
+                    connection.Close();
+                }
+
+            }
+        }
+
+
+        [OperationContract]
+        public string AddComment(int idThread, int idUser, string comment, string username)
+        {
+
+            var newComment = comment.Replace("[quote]", " <div class='quote'><img class='leftquote' src='../Images/left-quotes.png' alt='' /> <label class='quoteBorder'> Originally posted by  "+username+"  <label class='quoteuser'></label></label><div>");
+            newComment = newComment.Replace("[/quote]", "  <img class='leftquote' src='../Images/right-quotes.png' alt='' /> </div></div><br/>");
+            
+            using (MySqlConnection connection = new MySqlConnection())
+            {
+                connection.ConnectionString = ConfigurationManager.ConnectionStrings["BooksConn"].ConnectionString.ToString();
+
+                try
+                {
+
+                    connection.Open();
+                    MySqlCommand command = new MySqlCommand();
+                    command.Connection = connection;
+                    command.CommandText = "Insert into posts(iduser, idthread, postcomment, dateposted) values(?iduser, ?idthread, ?postcomment, ?dateposted)";
+                    command.Parameters.AddWithValue("?dateposted", DateTime.Today.ToString("dd/MMMM/yy"));
+                    command.Parameters.AddWithValue("?iduser", idUser);
+                    command.Parameters.AddWithValue("?idthread", idThread);
+                    command.Parameters.AddWithValue("?postcomment", newComment);
+                    command.ExecuteNonQuery();
+                    return "Comment is posted";
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+                    return "Error";
+                }
+                finally
+                {
+                    connection.Close();
+                }
+
+            }
+        }
     }
 }

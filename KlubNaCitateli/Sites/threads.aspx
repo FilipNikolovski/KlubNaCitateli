@@ -4,11 +4,17 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="../Styles/threads.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="../Scripts/jquery.paginate.js"></script>
-    
+    <link rel="stylesheet" href="../Styles/BreadCrumb.css" type="text/css"/>
+        
+       
+        <script src="../Scripts/jquery.easing.1.3.js" type="text/javascript" language="JavaScript">
+        </script>
+        <script src="../Scripts/jquery.jBreadCrumb.1.1.js" type="text/javascript" language="JavaScript"></script>
     <link href="../Styles/style.css" rel="stylesheet" type="text/css" />
     <script>
         $(document).ready(function () {
 
+            $("#breadCrumb3").jBreadCrumb();
             var numPages = parseInt($("#<%=numPages.ClientID %>").val());
             $("#demo").hide();
             if (numPages > 0) {
@@ -115,11 +121,10 @@
                 count: numPages,
                 start: 1,
                 display: 8,
-                border: false,
-                text_color: '#79B5E3',
-                background_color: 'none',
-                text_hover_color: '#2573AF',
-                background_hover_color: 'none', 
+                text_color: '#888',
+                background_color: '#EEE',
+                text_hover_color: 'black',
+                background_hover_color: '#CFCFCF',
                 images: false,
                 mouse: 'press',
                 onChange: function (page) {
@@ -130,7 +135,19 @@
 
             });
 
+            $(".topic").delegate(".lock", "click", function () {
+                var idthread = $(this).parent().find(".idthread").text();
+                var service = new KlubNaCitateli.ForumService();
+                service.LockThread(true, parseInt(idthread), onSuccess);
+                $(".idthread:contains(" + idthread + ")").parent().parent().find(".lock").removeClass("lock").addClass("unlock");
+            });
 
+            $(".topic").delegate(".unlock", "click", function () {
+                var idthread = $(this).parent().find(".idthread").text();
+                var service = new KlubNaCitateli.ForumService();
+                service.LockThread(false, parseInt(idthread), onSuccess);
+                $(".idthread:contains(" + idthread + ")").parent().parent().find(".unlock").removeClass("unlock").addClass("lock");
+            });
         });
     </script>
     <style>
@@ -180,11 +197,32 @@
             <input type="button" id="no" value="No" />
         </div>
     </div>
+    <div>
+    <div class="breadCrumbHolder module">
+                <div id="breadCrumb3" class="breadCrumb module">
+                    <ul>
+                        <li>
+                            <a href="index.aspx">Home</a>
+                        </li>
+                        <li>
+                            <a href="forum.aspx">Forum</a>
+                        </li>
+                        <li runat="server" id="topic">
+                           
+                        </li>
+                       
+                    </ul>
+                </div>
+            </div>
+    </div>
     <div id="contenta" runat="server">
         
         <div id="topics" class="maintopics" runat="server">
         </div>
+        <div class="help">
          <div id="demo"></div>
+         <div class="nodiv"></div>
+         </div>
     </div>
    
 </asp:Content>

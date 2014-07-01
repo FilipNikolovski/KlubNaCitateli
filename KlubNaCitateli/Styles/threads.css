@@ -19,7 +19,42 @@
 {
     float:right;
 }
-
+.help
+{
+clear:both;
+min-height:40px;
+height:auto;
+}
+#demo
+{
+float:right;
+max-width:390px;
+min-width:130px;
+width:auto;
+margin:5px;
+}
+.lock
+{
+background:url("../Images/unlock.png") no-repeat;
+float:right;
+width:30px;
+height:30px;
+ margin-left:10px;
+   margin-top:10px;
+}
+.lock:hover, .unlock:hover
+{
+cursor:pointer;
+}
+.unlock
+{
+background:url("../Images/lock.png") no-repeat;
+float:right;
+width:30px;
+height:30px;
+margin-left:10px;
+   margin-top:10px;
+}
 #cont
 {
 margin:5px;
@@ -147,9 +182,4 @@ text-decoration:underline;
    background:url("../Images/delete.png") no-repeat;
    margin-left:10px;
    margin-top:10px;
-}
-#demo
-{
-    width:310px;
-    margin:auto;
 }
