@@ -3,20 +3,15 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="../Styles/forum.css" rel="stylesheet" type="text/css" />
-     <link rel="stylesheet" href="../Styles/BreadCrumb.css" type="text/css"/>
-        
-       
-        <script src="../Scripts/jquery.easing.1.3.js" type="text/javascript" language="JavaScript">
-        </script>
-        <script src="../Scripts/jquery.jBreadCrumb.1.1.js" type="text/javascript" language="JavaScript"></script>
+    <link rel="stylesheet" href="../Styles/BreadCrumb.css" type="text/css" />
+    <script src="../Scripts/jquery.easing.1.3.js" type="text/javascript" language="JavaScript">
+    </script>
+    <script src="../Scripts/jquery.jBreadCrumb.1.1.js" type="text/javascript" language="JavaScript"></script>
     <script>
         $(document).ready(function () {
-<<<<<<< HEAD
-            
-=======
+
             $("#breadCrumb3").jBreadCrumb();
 
->>>>>>> 9f993181614445844dd7fdc064244b1acc165379
             $("#forumLink").addClass("active");
 
             $(".topicLink").click(function () {
@@ -157,19 +152,13 @@
         </div>
     </div>
     <div class="breadCrumbHolder module">
-                <div id="breadCrumb3" class="breadCrumb module">
-                    <ul>
-                        <li>
-                            <a href="index.aspx">Home</a>
-                        </li>
-                        <li>
-                           Forum
-                        </li>
-                       
-                       
-                    </ul>
-                </div>
-            </div>
+        <div id="breadCrumb3" class="breadCrumb module">
+            <ul>
+                <li><a href="index.aspx">Home</a> </li>
+                <li>Forum </li>
+            </ul>
+        </div>
+    </div>
     <div runat="server" id="topicsdiv">
     </div>
 </asp:Content>

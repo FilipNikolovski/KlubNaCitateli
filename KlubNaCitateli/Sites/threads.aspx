@@ -4,22 +4,18 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="../Styles/threads.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="../Scripts/jquery.paginate.js"></script>
-    <link rel="stylesheet" href="../Styles/BreadCrumb.css" type="text/css"/>
-        
-       
-        <script src="../Scripts/jquery.easing.1.3.js" type="text/javascript" language="JavaScript">
-        </script>
-        <script src="../Scripts/jquery.jBreadCrumb.1.1.js" type="text/javascript" language="JavaScript"></script>
+    <link rel="stylesheet" href="../Styles/BreadCrumb.css" type="text/css" />
+    <script src="../Scripts/jquery.easing.1.3.js" type="text/javascript" language="JavaScript">
+    </script>
+    <script src="../Scripts/jquery.jBreadCrumb.1.1.js" type="text/javascript" language="JavaScript"></script>
     <link href="../Styles/style.css" rel="stylesheet" type="text/css" />
     <script>
         $(document).ready(function () {
 
-<<<<<<< HEAD
             $("#forumLink").addClass("active");
 
-=======
             $("#breadCrumb3").jBreadCrumb();
->>>>>>> 9f993181614445844dd7fdc064244b1acc165379
+
             var numPages = parseInt($("#<%=numPages.ClientID %>").val());
             $("#demo").hide();
             if (numPages > 0) {
@@ -169,28 +165,22 @@
             <asp:ServiceReference Path="../Services/ForumService.svc" />
         </Services>
     </asp:ScriptManager>
-    
     <asp:HiddenField ID="idtopic" runat="server" />
     <asp:HiddenField ID="iduser" runat="server" />
-    
     <asp:HiddenField ID="idthread" runat="server" />
-     <asp:HiddenField ID="numPages" runat="server" />
-    
-<div id="dialog-form">
-       
+    <asp:HiddenField ID="numPages" runat="server" />
+    <div id="dialog-form">
         <fieldset id="fieldSet1">
             <legend>New Thread</legend>
-           
-           <asp:TextBox runat="server" CssClass="separateLabel" ID="newthreadtext"></asp:TextBox>
+            <asp:TextBox runat="server" CssClass="separateLabel" ID="newthreadtext"></asp:TextBox>
         </fieldset>
-
         <br />
         <div id="buttons">
             <input type="button" id="add" value="Add" />
-             <input type="button" id="cancel" value="Cancel" />
+            <input type="button" id="cancel" value="Cancel" />
         </div>
-        </div>
-        <div id="dialog-form1">
+    </div>
+    <div id="dialog-form1">
         <fieldset id="fieldSet2">
             <legend>Delete topic</legend>
             <label class="separateLabel">
@@ -203,31 +193,24 @@
         </div>
     </div>
     <div>
-    <div class="breadCrumbHolder module">
-                <div id="breadCrumb3" class="breadCrumb module">
-                    <ul>
-                        <li>
-                            <a href="index.aspx">Home</a>
-                        </li>
-                        <li>
-                            <a href="forum.aspx">Forum</a>
-                        </li>
-                        <li runat="server" id="topic">
-                           
-                        </li>
-                       
-                    </ul>
-                </div>
+        <div class="breadCrumbHolder module">
+            <div id="breadCrumb3" class="breadCrumb module">
+                <ul>
+                    <li><a href="index.aspx">Home</a> </li>
+                    <li><a href="forum.aspx">Forum</a> </li>
+                    <li runat="server" id="topic"></li>
+                </ul>
             </div>
+        </div>
     </div>
     <div id="contenta" runat="server">
-        
         <div id="topics" class="maintopics" runat="server">
         </div>
         <div class="help">
-         <div id="demo"></div>
-         <div class="nodiv"></div>
-         </div>
+            <div id="demo">
+            </div>
+            <div class="nodiv">
+            </div>
+        </div>
     </div>
-   
 </asp:Content>
