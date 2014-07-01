@@ -34,9 +34,15 @@
 
 
             $(".addNewTopic").on("click", function () {
+<<<<<<< HEAD
                 var idtopic = $(this).parent().parent().find(".idtopic").text();
                 $("#<%=idtopic.ClientID %>").val(idtopic);
 
+=======
+
+                var idtype = $(this).parent().parent().find(".idtype").text();
+                $("#<%=idtype.ClientID %>").val(idtype);
+>>>>>>> 8f0bb6925a1fc17a7f07f9f60885250a791a59a1
                 $("#dialog-form").dialog("open");
             });
 

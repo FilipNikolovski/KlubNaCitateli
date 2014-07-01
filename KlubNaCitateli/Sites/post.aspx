@@ -88,7 +88,7 @@
                 var stringQuote = "[quote]";
                 var text = $(this).parent().parent().parent().find('.comments').html();
                 quoteUser = $(this).parent().parent().parent().find('.usernameLink').html();
-                stringQuote += text;
+                stringQuote +=text;
                 stringQuote += "[/quote]";
                 $(".newPostText").val(stringQuote);
                 $(".newPostText").focus();
@@ -144,10 +144,11 @@
         </div>
          
         <div class="help">
+         <div id='demo'></div>
         <div class="help2">
         <div id="newpost" class="newpostarea" runat="server">
             <div class="text">
-                <input type='text' class="newPostText" />
+                <textarea rows="10" cols="100" style="resize:none;" class="newPostText"></textarea>
             </div>
             <div class="btnDiv">
                 <input type="button" value="Post comment" class="submitPost" /></div>
@@ -155,7 +156,7 @@
             </div>
         </div>
         </div>
-        <div id='demo'></div>
+       
         </div>
         </div>
    

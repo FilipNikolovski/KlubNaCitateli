@@ -11,9 +11,12 @@
 {
     padding:10px;
     padding-left:20px;
-   
     border-bottom:1px gray solid;
     clear:both;
+}
+.contenta
+{
+padding-bottom:10px;
 }
 .btnAddNewThread
 {

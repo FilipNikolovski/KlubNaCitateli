@@ -87,6 +87,12 @@
             -moz-box-shadow: 8px 8px 6px -6px black;
             box-shadow: 0 0 10px #000000;
         }
+        #mainContent_tbAbout
+        {
+            -webkit-box-shadow: 8px 8px 6px -6px black;
+            -moz-box-shadow: 8px 8px 6px -6px black;
+            box-shadow: 0 0 10px #000000;
+        }
         #mainContent_myCategories, #mainContent_allCategories
         {
             border: 1px solid #eee;
@@ -124,18 +130,18 @@
             clear: both;
             margin-right: 10px;
         }
-        .fieldsetContainer 
+        .fieldsetContainer
         {
-            clear:both;
-            margin-top:50px;
+            clear: both;
+            margin-top: 50px;
         }
         #profileCategories
         {
             width: 41%;
-            float:left;
-            margin:0px;
-            margin-right:20px;
-            margin-left:20px;
+            float: left;
+            margin: 0px;
+            margin-right: 20px;
+            margin-left: 20px;
             padding-bottom: 15px;
         }
         #profileThreads
@@ -143,7 +149,21 @@
             float: left;
             width: 50%;
             margin-left: 30px;
-            margin:0px !important;
+            margin: 0px !important;
+        }
+        .profile
+        {
+            max-height: 200px;
+            overflow: hidden;
+        }
+        #profileImg
+        {
+            display: block;
+            max-width: 100%; /* just in case, to force correct aspect ratio */
+            height: auto !important;
+            width: auto\9; /* ie8+9 */ /* lt ie8 */
+            -ms-interpolation-mode: bicubic;
+            margin-left: auto;
         }
     </style>
 </asp:Content>
@@ -158,8 +178,9 @@
             <asp:TableCell Width="200px" VerticalAlign="Top">
                 <asp:Table ID="Table2" runat="server">
                     <asp:TableRow>
-                        <asp:TableCell>
-                            <img runat="server" id="profileImg" src="/Images/user-icon.png" alt="" />
+                        <asp:TableCell CssClass="profile">
+                            
+                                <img runat="server" id="profileImg" src="/Images/user-icon.png" alt="" />
                         </asp:TableCell>
                     </asp:TableRow>
                     <asp:TableRow>
@@ -241,7 +262,7 @@
                         <asp:TableCell>
                             <asp:Label ID="lblAbout" runat="server" Text="About" Width="100%" Height="200px"></asp:Label>
                             <asp:TextBox ID="tbAbout" runat="server" Text="About marko" Width="100%" Height="200px"
-                                TextMode="MultiLine" Visible="false"></asp:TextBox>
+                                TextMode="MultiLine" Visible="false" ></asp:TextBox>
                             <asp:Button ID="changeAboutBtn" runat="server" Text="Edit about" OnClick="ChangeAbout"
                                 Visible="false" />
                             <asp:Button ID="confirmChangeAboutBtn" runat="server" Text="Confirm edit" Visible="false" />
@@ -279,7 +300,8 @@
         <fieldset id="profileThreads">
             <legend>Profile threads:</legend>
         </fieldset>
-        <div class='nodiv'></div>
+        <div class='nodiv'>
+        </div>
     </div>
     <asp:Label runat="server" ID="lblError" Text="" Visible="true"></asp:Label>
 </asp:Content>

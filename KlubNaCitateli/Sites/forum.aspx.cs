@@ -98,7 +98,7 @@ namespace KlubNaCitateli.Sites
                         {
                             if (Session["Type"].ToString().Equals("administrator"))
                             {
-                                innerHTML.Append("<div class='maintopics'> <div style='display:none;' class='idtopic'>" + current.Key + "</div><div class='topicnaslov'><div class='naslov'>" + topicIds[current.Key] + "</div><div class='addNewTopic'>+ New Topic</div><div id='nodiv'></div></div>");
+                                innerHTML.Append("<div class='maintopics'> <div style='display:none;' class='idtype'>" + current.Key + "</div><div class='topicnaslov'><div class='naslov'>" + topicIds[current.Key] + "</div><div class='addNewTopic'>+ New Topic</div><div id='nodiv'></div></div>");
                             }
                         }
                         else

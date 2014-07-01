@@ -34,7 +34,8 @@ namespace KlubNaCitateli.Sites
                     connection.Open();
                     MySqlCommand command = new MySqlCommand();
                     command.Connection = connection;
-                    command.CommandText = "Select Locked from discussionthreads where idthread=idthread";
+                    command.CommandText = "Select Locked from discussionthreads where idthread=?idthread";
+                    command.Parameters.AddWithValue("?idthread", idThread);
                     MySqlDataReader reader = command.ExecuteReader();
                     if (reader.HasRows)
                     {
@@ -43,7 +44,10 @@ namespace KlubNaCitateli.Sites
                             if (Session["Id"] != null)
                             {
                                 userId.Value = Session["Id"].ToString();
-                                if (!Convert.ToBoolean(Session["Banned"]) && !Convert.ToBoolean(reader["locked"]))
+
+                                bool bann = Convert.ToBoolean(Session["Banned"]);
+                                bool locked = Convert.ToBoolean(reader["locked"]);
+                                if (!bann && !locked)
                                 {
                                     newpost.Visible = true;
                                 }
@@ -53,6 +57,7 @@ namespace KlubNaCitateli.Sites
                     }
                     reader.Close();
                     command.CommandText = "Select forumtopics.idtopic, topicname from discussionthreads, forumtopics where idthread=?idthread and discussionthreads.idtopic=forumtopics.idtopic";
+                    command.Parameters.Clear();
                     command.Parameters.AddWithValue("?idthread", idThread);
                     reader = command.ExecuteReader();
                     if (reader.HasRows)
@@ -64,7 +69,7 @@ namespace KlubNaCitateli.Sites
                         }
                     }
                     reader.Close();
-                    
+
                     command.CommandText = "Select threadname from discussionthreads where idthread=?idthread";
                     reader = command.ExecuteReader();
                     if (reader.HasRows)
@@ -74,15 +79,17 @@ namespace KlubNaCitateli.Sites
                             thread.InnerText = reader["threadname"].ToString();
                         }
                     }
-                    
+                    reader.Close();
                 }
-
                 catch (Exception ex)
                 {
-
+                    Debug.WriteLine(ex.Message);
                 }
-                finally { connection.Close(); }
-
+                finally
+                {
+                    connection.Close();
+                }
+                
 
 
             }
