@@ -9,7 +9,7 @@
     </script>
     <script src="../Scripts/jquery.jBreadCrumb.1.1.js" type="text/javascript" language="JavaScript"></script>
     <link href="../Styles/style.css" rel="stylesheet" type="text/css" />
-    <script>
+    <script type="text/javascript">
         $(document).ready(function () {
 
             $("#forumLink").addClass("active");

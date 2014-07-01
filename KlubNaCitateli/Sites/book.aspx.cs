@@ -15,17 +15,29 @@ namespace KlubNaCitateli.Sites
     {
         public float StarRating { get; set; }
         public int IDBook { get; set; }
+        public int IDUser { get; set; }
         public bool HasVoted { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
+
+                if (Session["Id"] != null)
+                {
+                    IDUser = Int32.Parse(Session["Id"].ToString());
+                }
+                else
+                {
+                    IDUser = -1;
+                }
+
                 string bookID = Request.QueryString["id"];
 
                 if (IsContainingID(bookID))
                 {
                     SetImgAndInfo(bookID);
+                    SetBookComments(bookID);
                     IDBook = Int32.Parse(bookID);
                     if (Session["Id"] != null)
                         HasVoted = HasUserVoted(bookID, Session["Id"].ToString());
@@ -278,6 +290,48 @@ namespace KlubNaCitateli.Sites
                 {
                     connection.Close();
                 }
+            }
+        }
+
+        public void SetBookComments(string IDBook)
+        {
+            using (MySqlConnection conn = new MySqlConnection())
+            {
+                conn.ConnectionString = ConfigurationManager.ConnectionStrings["BooksConn"].ConnectionString;
+
+                try
+                {
+                    conn.Open();
+
+                    string sql = "SELECT bc.*, u.Username FROM BookComments as bc, users as u WHERE bc.IDBook = ?IDBook AND u.IDUser = bc.IDUser";
+                    MySqlCommand command = new MySqlCommand(sql, conn);
+
+                    command.Parameters.AddWithValue("?IDBook", IDBook);
+                    MySqlDataReader reader = command.ExecuteReader();
+
+                    if (reader.HasRows)
+                    {
+                        StringBuilder sb = new StringBuilder();
+                        while (reader.Read())
+                        {
+                            sb.Append("<div class='bubble-list'><div class='bubble clearfix'>");
+                            sb.Append("<a class='bubble-username' href='profile.aspx?id=" + reader["IDUser"].ToString() + "'>" + reader["Username"] +  "</a>");
+                            sb.Append("<div class='bubble-content'><div class='point'></div><p class='bubble-user-comment'>" + reader["Comment"] + "</p></div></div></div>");
+                        }
+                        comments.InnerHtml = sb.ToString();
+                    }
+                    reader.Close();
+                }
+                catch (Exception e)
+                {
+                    lblError.Text = e.Message + " " + e.InnerException;
+                    lblError.Visible = true;
+                }
+                finally
+                {
+                    conn.Close();
+                }
+
             }
         }
     }

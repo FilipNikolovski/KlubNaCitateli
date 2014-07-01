@@ -47,13 +47,17 @@
     background-color: #F0F0F0;
 }
 
-.bubble img
+.bubble a
 {
     float: left;
-    width: 70px;
-    height: 70px;
     border: 3px solid #ffffff;
     border-radius: 10px;
+    color:#f4a460;
+    font-size:large;
+}
+.bubble a:active 
+{
+    color:#f4a460;
 }
 .bubble-content
 {
@@ -90,8 +94,7 @@
 }
 .bubble-list
 {
-    width: 50%;
-    margin:0px;
+    margin: 0px;
 }
 .clearfix
 {
@@ -105,20 +108,23 @@
 {
     margin: 15px;
     padding: 15px;
-    overflow-y: auto;
-    clear:both;
+    clear: both;
+    margin: 0px !important;
 }
 
 .commentArea
 {
-    float: left;
-    margin-top:25px;
+    float: right;
+    margin-top: 25px;
 }
-.comments 
+#mainContent_comments
 {
-    margin:0px;
+    float: left;
+    width: 55%;
+    overflow-y: auto;
+    height: 350px;
+    border-right: 1px solid grey;
 }
-
 #nodiv
 {
     clear: both;

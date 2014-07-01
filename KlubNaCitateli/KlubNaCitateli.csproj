@@ -75,12 +75,14 @@
     <Content Include="Images\booklogo.png" />
     <Content Include="Images\buttons.png" />
     <Content Include="Images\deletePost.png" />
+    <Content Include="Images\forum-user.png" />
     <Content Include="Images\IconHome.gif" />
     <Content Include="Images\img-okay.jpg" />
     <Content Include="Images\left-arrow.jpg" />
     <Content Include="Images\left_arrow.jpg" />
     <Content Include="Images\left-quotes.png" />
     <Content Include="Images\loading.gif" />
+    <Content Include="Images\lock.png" />
     <Content Include="Images\next.png" />
     <Content Include="Images\okay.jpg" />
     <Content Include="Images\Originals\arrows.jpg" />
@@ -88,10 +90,9 @@
     <Content Include="Images\Originals\user-icon.png" />
     <Content Include="Images\pattern.png" />
     <Content Include="Images\previous.png" />
-    <Content Include="Images\ProfilePicture\5.jpg" />
+    <Content Include="Images\ProfilePicture\51.jpg" />
     <Content Include="Images\ProfilePicture\boki2.png" />
     <Content Include="Images\ProfilePicture\boki3.jpg" />
-    <Content Include="Images\ProfilePicture\Fico.jpg" />
     <Content Include="Images\RatingImages\cancel-off.png" />
     <Content Include="Images\RatingImages\cancel-on.png" />
     <Content Include="Images\RatingImages\star-half.png" />
@@ -107,6 +108,7 @@
     <Content Include="Images\snext.png" />
     <Content Include="Images\sprevious.png" />
     <Content Include="Images\top_arrow.jpg" />
+    <Content Include="Images\unlock.png" />
     <Content Include="Images\user-icon.png" />
     <Content Include="obj\Debug\KlubNaCitateli.csproj.FileListAbsolute.txt" />
     <Content Include="obj\Debug\KlubNaCitateli.dll" />
@@ -129,7 +131,6 @@
     <Content Include="Sites\forum.aspx" />
     <Content Include="Sites\index.aspx" />
     <Content Include="Sites\login.aspx" />
-    <Content Include="Sites\mybooks.aspx" />
     <Content Include="Sites\post.aspx" />
     <Content Include="Sites\profile.aspx" />
     <Content Include="Sites\search.aspx" />
@@ -214,13 +215,6 @@
     </Compile>
     <Compile Include="Sites\login.aspx.designer.cs">
       <DependentUpon>login.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Sites\mybooks.aspx.cs">
-      <DependentUpon>mybooks.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Sites\mybooks.aspx.designer.cs">
-      <DependentUpon>mybooks.aspx</DependentUpon>
     </Compile>
     <Compile Include="Sites\post.aspx.cs">
       <DependentUpon>post.aspx</DependentUpon>

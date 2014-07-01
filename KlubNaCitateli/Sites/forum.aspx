@@ -37,6 +37,7 @@
 
                 var idtype = $(this).parent().parent().find(".idtype").text();
                 $("#<%=idtype.ClientID %>").val(idtype);
+
                 $("#dialog-form").dialog("open");
             });
 
