@@ -143,9 +143,10 @@ namespace KlubNaCitateli.Sites
                 {
                     conn.Open();
 
-                    string sql = "SELECT * FROM Categories";
+                    string sql = "SELECT * FROM Categories WHERE IDCategory NOT IN (SELECT IDCategory FROM UserCategories WHERE IDUser=?IDuser)";
 
                     MySqlCommand command = new MySqlCommand(sql, conn);
+                    command.Parameters.AddWithValue("?IDUser", UserId);
                     MySqlDataReader reader = command.ExecuteReader();
 
                     StringBuilder innerHtml = new StringBuilder();
@@ -158,6 +159,7 @@ namespace KlubNaCitateli.Sites
 
                     sql = "SELECT c.* FROM Categories as c, UserCategories as uc WHERE uc.IDCategory=c.IDCategory AND uc.IDUser=?IDUser";
                     command.CommandText = sql;
+                    command.Parameters.Clear();
                     command.Parameters.AddWithValue("?IDUser", UserId);
                     reader = command.ExecuteReader();
 

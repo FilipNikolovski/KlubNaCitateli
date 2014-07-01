@@ -124,6 +124,27 @@
             clear: both;
             margin-right: 10px;
         }
+        .fieldsetContainer 
+        {
+            clear:both;
+            margin-top:50px;
+        }
+        #profileCategories
+        {
+            width: 41%;
+            float:left;
+            margin:0px;
+            margin-right:20px;
+            margin-left:20px;
+            padding-bottom: 15px;
+        }
+        #profileThreads
+        {
+            float: left;
+            width: 50%;
+            margin-left: 30px;
+            margin:0px !important;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="mainContent" runat="server">
@@ -240,20 +261,25 @@
     <!-- JCAROUSEL -->
     <div id="jcarouselWrapper" runat="server">
     </div>
-    <div id="profileCategories" runat="server">
-        <div class="saveCategories">
-            <p>
-                Categories:</p>
-            <input id="saveCategories" type="button" value="Save Categories" runat="server" visible="false" />
+    <div class="fieldsetContainer">
+        <fieldset id="profileCategories">
+            <legend>Categories</legend>
+            <div class="saveCategories">
+                <input id="saveCategories" type="button" value="Save Categories" runat="server" visible="false" />
+                <div class='nodiv'>
+                </div>
+            </div>
+            <ul id="myCategories" class="connectedSortable" runat="server">
+            </ul>
+            <ul id="allCategories" class="connectedSortable" runat="server" visible="false">
+            </ul>
             <div class='nodiv'>
             </div>
-        </div>
-        <ul id="myCategories" class="connectedSortable" runat="server">
-        </ul>
-        <ul id="allCategories" class="connectedSortable" runat="server" visible="false">
-        </ul>
-        <div class='nodiv'>
-        </div>
+        </fieldset>
+        <fieldset id="profileThreads">
+            <legend>Profile threads:</legend>
+        </fieldset>
+        <div class='nodiv'></div>
     </div>
     <asp:Label runat="server" ID="lblError" Text="" Visible="true"></asp:Label>
 </asp:Content>
