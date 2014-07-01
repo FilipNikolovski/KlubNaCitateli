@@ -449,6 +449,7 @@ namespace KlubNaCitateli.Services
         }
 
         [OperationContract]
+<<<<<<< HEAD
         public string SaveCategories(string jsonData)
         {
             Dictionary<string, object> json = new JavaScriptSerializer().Deserialize<Dictionary<string, object>>(jsonData);
@@ -492,6 +493,11 @@ namespace KlubNaCitateli.Services
 
                 return "There was an error. Please try again.";
             }
+=======
+        public string SaveTags(string jsonData)
+        {
+
+>>>>>>> 7fcc04e80bede8cff34703e5b49ad4b31ae82f17
         }
 
     }

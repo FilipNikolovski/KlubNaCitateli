@@ -23,11 +23,29 @@
 {
     width: 100%;
 }
-#tmp > td
+.tmp > td
 {
     padding-bottom: 2em;
 }
-#tmp2
+.tmp2 > td
 {
-    width: 100%;
+    padding-bottom: 1em;
+}
+
+#mainContent_allTags, #mainContent_tags 
+{
+    list-style-type:none;
+    margin-left: 0px;
+    white-space:nowrap;
+    height:20px;
+}
+
+#mainContent_allTags 
+{
+    background-color:#F0F0F0;
+}
+
+#mainContent_allTags li, #mainContent_tags li 
+{
+    display:inline-block;
 }

@@ -34,6 +34,12 @@ namespace KlubNaCitateli.Sites
                 }
                 //else 
                     // Eror 404
+
+                if (Session["Id"] != null && Session["Type"].ToString().Equals("administrator"))
+                {
+                    allTags.Visible = true;
+                    btnSaveTags.Visible = true;
+                }
             }
         }
 
@@ -166,7 +172,40 @@ namespace KlubNaCitateli.Sites
 
                     reader.Close();
 
-                    //popolnuvanje na stars za rejting na knigata
+                    //dodavanje na tagovite vo kreiranata kniga
+                    sql = "SELECT Name FROM tags, tagged WHERE tags.IDTag=tagged.IDTag AND tagged.IDBook=?IDBook";
+
+                    command.CommandText = sql;
+                    command.Parameters.Clear();
+                    command.Parameters.AddWithValue("?IDBook", bookID);
+                    reader = command.ExecuteReader();
+
+                    if (reader.HasRows)
+                        while (reader.Read())
+                            book.Tags.Add(reader["Name"].ToString());
+
+                    reader.Close();
+
+                    //zemanje na site tagovi koi se koristat od strana na adminot
+                    sql = "SELECT * FROM Tags WHERE IDTag NOT IN (SELECT IDTag FROM tagged WHERE IDBook=?IDBook)";
+
+                    command.CommandText = sql;
+                    command.Parameters.Clear();
+                    command.Parameters.AddWithValue("?IDBook", bookID);
+                    reader = command.ExecuteReader();
+
+                    StringBuilder sb = new StringBuilder();
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            sb.Append("<li><a href='' style='text-decoration: none; color: red; margin-right: 15px;'>" + "#" + reader["Name"] + "</a></li>");
+                        }
+                    }
+                    allTags.InnerHtml = sb.ToString();
+                    reader.Close();
+
+                    //setiranje na StarRating
                     if (book.NumVotes > 0)
                         StarRating = (float) book.SumRating / (book.NumVotes * 1.0F);
                     else
@@ -180,19 +219,24 @@ namespace KlubNaCitateli.Sites
 
                     lblDescription.Text = book.Description;
 
-                    StringBuilder sb = new StringBuilder();
+                    sb.Clear();
                     sb.Append(book.Name + "<br/>" + "By" + "<br/>");
                     sb.Append(string.Join(", ",book.Authors.ToArray()));
 
                     lblAbout.Text = sb.ToString();
 
                     sb.Clear();
-                    sb.Append("Year:   " + book.YearPublished + "<br/>" + "Rating:   " + StarRating + "<br/>" + "Language:   " + book.Language);
-                    sb.Append("<br/>" + "Categories:" + "<br/>");
-                    foreach (string categorie in book.Categories)
-                        sb.Append(categorie + "<br/>");
+                    sb.Append("Year:" + "<label style='margin-left: 18%;'>" + book.YearPublished + "</label>" + "<br/>" + "Rating:" + "<label style='margin-left: 14%;'>" + StarRating + "</label>" + "<br/>" + "Language:" + "<label style='margin-left: 5%;'>" + book.Language + "</label>");
+                    sb.Append("<br/>" + "Categories: ");
+                    sb.Append(string.Join(", ", book.Categories.ToArray()));
 
                     lblInfo.Text = sb.ToString();
+
+                    sb.Clear();
+                    foreach (string tag in book.Tags)
+                        sb.Append("<li><a href='' style='text-decoration: none; color: red; margin-right: 15px;'>" + "#" + tag + "</a></li>");
+
+                    tags.InnerHtml= sb.ToString();
 
                     ViewState["Book"] = book;
                 }

@@ -23,14 +23,16 @@ namespace KlubNaCitateli.Classes
         public int NumVotes { get; set; }
         public List<string> Authors;
         public List<string> Categories;
+        public List<string> Tags;
 
         public Book()
         {
             Authors = new List<string>();
             Categories = new List<string>();
+            Tags = new List<string>();
         }
 
-        public Book(int id, string isbn, string name, List<string> authors, List<string> categories, string imagesrc, string desc, string date, string dateAdded, int sumRating, int numVotes, string language)
+        public Book(int id, string isbn, string name, List<string> authors, List<string> categories, List<string> tags, string imagesrc, string desc, string date, string dateAdded, int sumRating, int numVotes, string language)
         {
             IDBook = id;
             ISBN = isbn;
@@ -50,6 +52,10 @@ namespace KlubNaCitateli.Classes
             Categories = new List<string>();
             for(int i=0; i<categories.Count; i++)
                 Categories.Add(categories[i]);
+
+            Tags = new List<string>();
+            for (int i = 0; i < tags.Count; i++)
+                Tags.Add(tags[i]);
         }
     }
 }
