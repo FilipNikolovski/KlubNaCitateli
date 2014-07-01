@@ -62,8 +62,6 @@
     <Content Include="bin\KlubNaCitateli.pdb" />
     <Content Include="bin\MySql.Data.dll" />
     <Content Include="Fonts\raty.svg" />
-    <Content Include="Images\bc-mid.png" />
-    <Content Include="Images\bc-sprite-full.png" />
     <Content Include="Images\bottom_arrow.jpg" />
     <Content Include="Images\Chevron.gif" />
     <Content Include="Images\ChevronOverlay.png" />

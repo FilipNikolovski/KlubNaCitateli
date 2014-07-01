@@ -303,13 +303,45 @@ namespace KlubNaCitateli.Services
                     connection.Open();
                     MySqlCommand command = new MySqlCommand();
                     command.Connection = connection;
+                    command.CommandText = "select locked from discussionthreads where idthread=?idthread";
+                    command.Parameters.AddWithValue("?idthread", idThread);
+                    MySqlDataReader reader = command.ExecuteReader();
+                   
+                    if (reader.HasRows)
+                    {
+                        if (reader.Read())
+                        {
+                            bool x = Convert.ToBoolean(reader["locked"]);
+                            if (x)
+                            {
+                                return "You can't leave comment! The thread has been locked!";
+                            }
+                        }
+                    }
+                    reader.Close();
+                    command.CommandText = "select banned from users where iduser=?iduser";
+                    command.Parameters.AddWithValue("?iduser", idUser);
+                    reader = command.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        if (reader.Read())
+                        {
+                            bool x = Convert.ToBoolean(reader["banned"]);
+                            if (x)
+                            {
+                                return "You can't leave comment! You have been banned!";
+                            }
+                        }
+                    }
+                    reader.Close();
+
                     command.CommandText = "Insert into posts(iduser, idthread, postcomment, dateposted) values(?iduser, ?idthread, ?postcomment, ?dateposted)";
                     command.Parameters.AddWithValue("?dateposted", DateTime.Today.ToString("dd/MMMM/yy"));
                     command.Parameters.AddWithValue("?iduser", idUser);
                     command.Parameters.AddWithValue("?idthread", idThread);
                     command.Parameters.AddWithValue("?postcomment", newComment);
                     command.ExecuteNonQuery();
-                    return "Comment is posted";
+                    return "Comment is posted!";
                 }
                 catch (Exception ex)
                 {

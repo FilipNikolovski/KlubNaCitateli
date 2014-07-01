@@ -17,10 +17,10 @@ namespace KlubNaCitateli.Sites
     public partial class signup : System.Web.UI.Page
     {
         User user;
-        string iduser = "";
+        int iduser = -1;
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+
             if (Session["Id"] != null)
             {
                 Response.Redirect("~/Sites/index.aspx");
@@ -101,12 +101,15 @@ namespace KlubNaCitateli.Sites
                         comm.Parameters.AddWithValue("?about", user.aboutUser);
 
                         comm.ExecuteNonQuery();
-                        
+
+
                         comm.CommandText = "select iduser from users where username=?username";
+                        comm.Parameters.Clear();
+                        comm.Parameters.AddWithValue("?username", user.username);
                         MySqlDataReader reader = comm.ExecuteReader();
                         if (reader.Read())
                         {
-                            iduser = reader.GetValue(0).ToString();
+                            iduser = Convert.ToInt32(reader["iduser"].ToString());
 
                         }
                         reader.Close();
@@ -129,7 +132,7 @@ namespace KlubNaCitateli.Sites
                             }
                         }
 
-                       
+
 
                     }
                     catch (Exception err)
@@ -144,7 +147,7 @@ namespace KlubNaCitateli.Sites
                 }
                 Response.Redirect("login.aspx");
             }
-            
+
         }
 
         public void finishButton_click(object sender, EventArgs e)
@@ -154,6 +157,7 @@ namespace KlubNaCitateli.Sites
                 string ext = Path.GetExtension(this.profileImage.FileName);
                 if (ext == ".jpg" || ext == ".png" || ext == ".JPG" || ext == ".PNG")
                 {
+
                     Bitmap originalBMP = new Bitmap(profileImage.FileContent);
 
                     // Calculate the new image dimensions
@@ -175,17 +179,41 @@ namespace KlubNaCitateli.Sites
                     // Draw the new graphic based on the resized bitmap
                     oGraphics.DrawImage(originalBMP, 0, 0, newWidth, newHeight);
                     // Save the new graphic file to the server
-                    addUser();
-                    Debug.WriteLine(iduser.ToString());
-                    newBMP.Save(Server.MapPath("~/Images/ProfilePicture/") + (iduser + ext));
-
-
+                    string name = username.Text + ext;
+                    newBMP.Save(Server.MapPath("~/Images/ProfilePicture/") + (username.Text + ext));
 
                     // Once finished with the bitmap objects, we deallocate them.
                     originalBMP.Dispose();
                     newBMP.Dispose();
                     oGraphics.Dispose();
-                   
+
+
+                    addUser();
+                    using (MySqlConnection connection = new MySqlConnection())
+                    {
+                        connection.ConnectionString = ConfigurationManager.ConnectionStrings["BooksConn"].ConnectionString.ToString();
+                        try
+                        {
+                            connection.Open();
+                            MySqlCommand command = new MySqlCommand();
+                            command.CommandText = "update users set profilepicture=?profile where iduser=?iduser";
+                            command.Parameters.AddWithValue("?profile", name);
+                            command.Parameters.AddWithValue("?iduser", iduser);
+                            command.ExecuteNonQuery();
+
+
+                        }
+                        catch (Exception ex)
+                        {
+
+                        }
+                        finally
+                        {
+                            connection.Close();
+                        }
+                    }
+
+
                 }
                 else
                 {
@@ -198,7 +226,7 @@ namespace KlubNaCitateli.Sites
                 addUser();
             }
 
-            
+
         }
 
     }

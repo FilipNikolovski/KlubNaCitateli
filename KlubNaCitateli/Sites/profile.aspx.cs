@@ -60,7 +60,7 @@ namespace KlubNaCitateli.Sites
                     }
 
                     MySqlCommand command = new MySqlCommand();
-                    command.CommandText = "select iduser, name, surname, username, email, about from users where iduser=?iduser";
+                    command.CommandText = "select iduser, name, surname, username, email, about, profilepicture from users where iduser=?iduser";
                     command.Parameters.AddWithValue("?iduser", UserId);
                     command.Connection = connection;
                     MySqlDataReader reader = command.ExecuteReader();
@@ -74,22 +74,11 @@ namespace KlubNaCitateli.Sites
                         lblUsername.Text = reader["username"].ToString();
                         lblEmail.Text = reader["email"].ToString();
                         lblAbout.Text = reader["about"].ToString();
-                        if (File.Exists(Server.MapPath("~/Images/ProfilePicture/" + reader["iduser"].ToString() + ".jpg")))
+                        if (File.Exists(Server.MapPath("~/Images/ProfilePicture/" + (reader["profilepicture"].ToString()))))
                         {
-                            profileImg.Src = "~/Images/ProfilePicture/" + reader["iduser"].ToString() + ".jpg/";
+                            profileImg.Src = "~/Images/ProfilePicture/" + (reader["profilepicture"].ToString());
                         }
-                        else if (File.Exists(Server.MapPath("~/Images/ProfilePicture/" + reader["iduser"].ToString() + ".png")))
-                        {
-                            profileImg.Src = "~/Images/ProfilePicture/" + reader["iduser"].ToString() + ".png/";
-                        }
-                        else if (File.Exists(Server.MapPath("~/Images/ProfilePicture/" + reader["iduser"].ToString() + ".JPG")))
-                        {
-                            profileImg.Src = "~/Images/ProfilePicture/" + reader["iduser"].ToString() + ".JPG/";
-                        }
-                        else if (File.Exists(Server.MapPath("~/Images/ProfilePicture/" + reader["iduser"].ToString() + ".PNG")))
-                        {
-                            profileImg.Src = "~/Images/ProfilePicture/" + reader["iduser"].ToString() + ".PNG/";
-                        }
+                       
                     }
                     else
                     {
@@ -341,7 +330,7 @@ namespace KlubNaCitateli.Sites
                     // Draw the new graphic based on the resized bitmap
                     oGraphics.DrawImage(originalBMP, 0, 0, newWidth, newHeight);
                     // Save the new graphic file to the server
-                    newBMP.Save(Server.MapPath("~/Images/ProfilePicture/") + (Session["Id"] + ext));
+                    newBMP.Save(Server.MapPath("~/Images/ProfilePicture/") + (Session["Username"] + ext));
 
                     // Once finished with the bitmap objects, we deallocate them.
                     originalBMP.Dispose();
@@ -350,7 +339,7 @@ namespace KlubNaCitateli.Sites
                     profilePicture.Visible = false;
                     changePicBtn.Text = "Change Picture";
 
-                    Response.Redirect("/Sites/profile.aspx?id=" + Session["Id"].ToString());
+                    Response.Redirect("/Sites/profile.aspx?id=" + Session["Username"].ToString());
                 }
                 else
                 {
