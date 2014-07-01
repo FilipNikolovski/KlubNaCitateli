@@ -9,6 +9,8 @@
     <script>
         $(document).ready(function () {
 
+            $("#forumLink").addClass("active");
+
             var numPages = parseInt($("#<%=numPages.ClientID %>").val());
             $("#demo").hide();
             if (numPages > 0) {

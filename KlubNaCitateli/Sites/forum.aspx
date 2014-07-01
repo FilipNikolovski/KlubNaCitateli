@@ -5,7 +5,7 @@
     <link href="../Styles/forum.css" rel="stylesheet" type="text/css" />
     <script>
         $(document).ready(function () {
-
+            
             $("#forumLink").addClass("active");
 
             $(".topicLink").click(function () {

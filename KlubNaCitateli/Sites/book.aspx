@@ -4,8 +4,9 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="../Styles/book.css" type="text/css" rel="Stylesheet" />
     <link href="../Styles/jquery.raty.css" type="text/css" rel="Stylesheet" />
-
     <script src="../Scripts/jquery.raty.js" type="text/javascript"></script>
+    <script src="../Scripts/jquery.jcarousel.min.js" type="text/javascript"></script>
+    <link href="../Styles/jcarousel.css" rel="stylesheet" type="text/css" />
     <script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
@@ -44,6 +45,60 @@
             $("#mainContent_tags, #mainContent_allTags").sortable({
                 connectWith: '.connectedSortable'
             }).disableSelection();
+
+            var jcarousel = $('.jcarousel');
+
+            jcarousel.jcarousel({
+                wrap: 'circular',
+            });
+
+
+            $('.jcarousel-control-prev')
+            .jcarouselControl({
+                target: '-=1'
+            });
+
+            $('.jcarousel-control-next')
+            .jcarouselControl({
+                target: '+=1'
+            });
+
+            $('.jcarousel-pagination')
+            .on('jcarouselpagination:active', 'a', function () {
+                $(this).addClass('active');
+            })
+            .on('jcarouselpagination:inactive', 'a', function () {
+                $(this).removeClass('active');
+            })
+            .on('click', function (e) {
+                e.preventDefault();
+            })
+            .jcarouselPagination({
+                perPage: 1,
+                item: function (page) {
+                    return '<a href="#' + page + '">' + page + '</a>';
+                }
+            });
+
+            $("#mainContent_btnSaveTags").on("click", function () {
+
+                var list = $("#mainContent_tags li");
+                var tags = new Array();
+
+                list.each(function () {
+                    tags.push($(this).text());
+                });
+
+                var json = {
+                    bookId: '<%=IDBook %>',
+                    tags: tags
+                };
+
+                var service = new KlubNaCitateli.BookService();
+                service.SaveTags(JSON.stringify(json), function (result) {
+                    alert(result);
+                });
+            });
 
         }); 
     </script>
@@ -125,18 +180,21 @@
                                         <table id="booktags">
                                             <tr>
                                                 <td>
-                                                    <label style="margin-right:5%">Tags</label>
+                                                    <label style="margin-right: 5%">
+                                                        Tags</label>
                                                     <input id="btnSaveTags" type="button" value="Save tags" runat="server" visible="false" />
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <ul id="tags" class="connectedSortable" runat="server"></ul>
+                                                    <ul id="tags" class="connectedSortable" runat="server">
+                                                    </ul>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <ul id="allTags" class="connectedSortable" runat="server" visible="false"></ul>
+                                                    <ul id="allTags" class="connectedSortable" runat="server" visible="false">
+                                                    </ul>
                                                 </td>
                                             </tr>
                                         </table>
@@ -148,28 +206,57 @@
                 </table>
             </td>
         </tr>
-        <tr>
-            <td>
-                <table id="recomendation">
-                    <tr>
-                        <td>
-                            <label>
-                                Recomendation</label>
-                            <asp:Label ID="lblError" runat="server" Visible="False"></asp:Label>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <table id="comments">
-                </table>
-            </td>
-        </tr>
     </table>
+    <div class="recommendations">
+        <label>
+            Recommendations by category:</label>
+        <div id="jcarouselWrapper" runat="server">
+        </div>
+    </div>
+    <div class="commentsSection">
+        <label>
+            Comments:</label>
+        <div class="comments">
+            <div class="bubble-list">
+                <div class="bubble clearfix">
+                    <img src="#">
+                    <div class="bubble-content">
+                        <div class="point">
+                        </div>
+                        <p>
+                            Welcome To ThePCwizard.in - Helping Beginners. Developing Experts.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bubble-list">
+                <div class="bubble clearfix">
+                    <img src="#">
+                    <div class="bubble-content">
+                        <div class="point">
+                        </div>
+                        <p>
+                            Welcome To ThePCwizard.in - Helping Beginners. Developing Experts.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bubble-list">
+                <div class="bubble clearfix">
+                    <img src="#">
+                    <div class="bubble-content">
+                        <div class="point">
+                        </div>
+                        <p>
+                            Welcome To ThePCwizard.in - Helping Beginners. Developing Experts.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="commentArea">
+            <input id="commentText" type="text" /><br />
+            <input id="btnComment" type="button" value="Comment" />
+        </div>
+        <div id="nodiv"></div>
+    </div>
+
+    <asp:Label ID="lblError" runat="server" Visible="False"></asp:Label>
 </asp:Content>

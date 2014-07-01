@@ -33,7 +33,7 @@ namespace KlubNaCitateli.Sites
                         HasVoted = false;
                 }
                 //else 
-                    // Eror 404
+                // Eror 404
 
                 if (Session["Id"] != null && Session["Type"].ToString().Equals("administrator"))
                 {
@@ -141,7 +141,7 @@ namespace KlubNaCitateli.Sites
                         book.SumRating = Int32.Parse(reader["SumRating"].ToString());
                         book.NumVotes = Int32.Parse(reader["NumVotes"].ToString());
                     }
-                    
+
                     reader.Close();
 
                     //dodavanje na avtorite vo kreiranata kniga
@@ -205,15 +205,44 @@ namespace KlubNaCitateli.Sites
                     allTags.InnerHtml = sb.ToString();
                     reader.Close();
 
+                    //Jcarousel Recommendation Books
+                    command.CommandText = "SELECT b.IDBook, b.Thumbnail FROM Books as b, BelongsTo as bt, Categories as c WHERE b.IDBook = bt.IDBook AND bt.IDCategory = c.IDCategory AND c.Name = ?CategoryName ORDER BY rand() LIMIT 10";
+                    command.Connection = connection;
+                    foreach (string category in book.Categories)
+                    {
+                        command.Parameters.Clear();
+                        command.Parameters.AddWithValue("?IDBook", IDBook);
+                        command.Parameters.AddWithValue("?CategoryName", category);
+                        
+                        reader = command.ExecuteReader();
+                        if (reader.HasRows)
+                        {
+                            StringBuilder sb2 = new StringBuilder();
+                            sb2.Append("<div class='jcarousel' data-jcarousel='true'><ul>");
+                            while (reader.Read())
+                            {
+                                sb2.Append("<li><a href='book.aspx?id=" + reader["IDBook"] + "'><img src='" + reader["thumbnail"].ToString() + "' /></a></li>");
+                            }
+                            sb2.Append("</ul></div>");
+                            sb2.Append("<a href='#' class='jcarousel-control-prev'>&lsaquo;</a>");
+                            sb2.Append("<a href='#' class='jcarousel-control-next'>&rsaquo;</a>");
+                            sb2.Append("<p class='jcarousel-pagination'></p>");
+
+                            jcarouselWrapper.InnerHtml = sb2.ToString();
+                        }
+                        reader.Close();
+                    }
+
+
                     //setiranje na StarRating
                     if (book.NumVotes > 0)
-                        StarRating = (float) book.SumRating / (book.NumVotes * 1.0F);
+                        StarRating = (float)book.SumRating / (book.NumVotes * 1.0F);
                     else
                         StarRating = 0.0F;
 
                     //popolnuvanje na komponentite
                     if (book.ImageSrc == "defaultImage.png")
-                        imgBook.ImageUrl = "~/Images/defaultImage.png"; 
+                        imgBook.ImageUrl = "~/Images/defaultImage.png";
                     else
                         imgBook.ImageUrl = book.ImageSrc;
 
@@ -221,7 +250,7 @@ namespace KlubNaCitateli.Sites
 
                     sb.Clear();
                     sb.Append(book.Name + "<br/>" + "By" + "<br/>");
-                    sb.Append(string.Join(", ",book.Authors.ToArray()));
+                    sb.Append(string.Join(", ", book.Authors.ToArray()));
 
                     lblAbout.Text = sb.ToString();
 
@@ -236,7 +265,7 @@ namespace KlubNaCitateli.Sites
                     foreach (string tag in book.Tags)
                         sb.Append("<li><a href='' style='text-decoration: none; color: red; margin-right: 15px;'>" + "#" + tag + "</a></li>");
 
-                    tags.InnerHtml= sb.ToString();
+                    tags.InnerHtml = sb.ToString();
 
                     ViewState["Book"] = book;
                 }
