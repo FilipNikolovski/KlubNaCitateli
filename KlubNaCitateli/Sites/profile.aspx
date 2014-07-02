@@ -261,13 +261,7 @@
          
     </script>
     <style type="text/css">
-        #mainContent_profileImg
-        {
-            width: 200px;
-            max-height: 200px;
-            background-position: center;
-            background-size: 90%;
-        }
+       
         #mainContent_lblAbout
         {
             -webkit-box-shadow: 8px 8px 6px -6px black;
@@ -372,19 +366,19 @@
             margin-left: 20px;
             padding-bottom: 15px;
         }
-        #profileThreads
+        #profileThreads, #userbookcomments
         {
             float: left;
-            width: 50%;
-            margin-left: 30px;
-            margin: 0px !important;
+            width: 23%;
+            margin-top:0px !important;
+            margin-right: 10px;
         }
         .profile
         {
             max-height: 200px;
             overflow: hidden;
         }
-        #profileImg
+        #mainContent_profileImg
         {
             display: block;
             max-width: 100%; /* just in case, to force correct aspect ratio */
@@ -423,16 +417,17 @@
     <asp:HiddenField ID="idsession" runat="server" />
     <asp:Table ID="Table1" runat="server" Width="100%">
         <asp:TableRow Style="margin-bottom: 20px;">
-            <asp:TableCell Width="200px" VerticalAlign="Top">
+            <asp:TableCell VerticalAlign="Top">
                 <asp:Table ID="Table2" runat="server">
-                    <asp:TableRow>
-                        <asp:TableCell CssClass="profile">
-                            <img runat="server" id="profileImg" src="/Images/user-icon.png" alt="" />
+                    <asp:TableRow Width="200px">
+                        <asp:TableCell >
+                        <div class="profile">
+                            <img runat="server" id="profileImg" src="/Images/user-icon.png" alt="" /></div>
                         </asp:TableCell>
                     </asp:TableRow>
                     <asp:TableRow>
-                        <asp:TableCell>
-                            <asp:FileUpload ID="profilePicture" runat="server" Visible="false" />
+                        <asp:TableCell >
+                            <asp:FileUpload ID="profilePicture" CssClass="profilepic" runat="server" Visible="false" />
                             <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Always">
                                 <Triggers>
                                     <asp:PostBackTrigger ControlID="changePicBtn" />
@@ -532,8 +527,13 @@
             </div>
         </fieldset>
         <fieldset id="profileThreads">
-            <legend>Profile threads:</legend>
+            <legend>User threads:</legend>
             <div id="threads" runat="server">
+            </div>
+        </fieldset>
+        <fieldset id="userbookcomments">
+            <legend>User book comments:</legend>
+            <div id="comments" runat="server">
             </div>
         </fieldset>
         <div class='nodiv'>
