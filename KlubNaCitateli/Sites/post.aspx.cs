@@ -49,7 +49,7 @@ namespace KlubNaCitateli.Sites
                             if (Session["Id"] != null)
                             {
                                 bool bann = Convert.ToBoolean(Session["Banned"]);
-                                bool locked = Convert.ToBoolean(reader["locked"]);
+                                bool locked = Convert.ToBoolean(reader["Locked"]);
                                 if (!bann && !locked)
                                 {
                                     newpost.Visible = true;
@@ -86,7 +86,7 @@ namespace KlubNaCitateli.Sites
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine(ex.Message);
+                    lblError.Text = ex.Message;
                 }
                 finally
                 {
@@ -145,7 +145,7 @@ namespace KlubNaCitateli.Sites
                             {
                                 if (Session["Type"].ToString().Equals("administrator"))
                                 {
-                                    bool x = (bool)reader["Banned"];
+                                    bool x = Convert.ToBoolean(reader["Banned"]);
                                     if (!x)
                                     {
                                         innerHTML.Append("<div class='banusr'><div class='banUser' >[ Ban user ]</div></div>");
@@ -196,7 +196,7 @@ namespace KlubNaCitateli.Sites
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine(ex.Message);
+                    
                 }
                 finally
                 {

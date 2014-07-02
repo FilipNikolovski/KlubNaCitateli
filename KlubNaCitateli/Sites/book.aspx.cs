@@ -44,8 +44,10 @@ namespace KlubNaCitateli.Sites
                     else
                         HasVoted = false;
                 }
-                //else 
-                // Eror 404
+                else
+                {
+                    Response.Redirect("~/Sites/error.aspx");
+                }
 
                 if (Session["Id"] != null && Session["Type"].ToString().Equals("administrator"))
                 {

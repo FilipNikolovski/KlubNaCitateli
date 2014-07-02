@@ -62,6 +62,7 @@
     <Content Include="bin\KlubNaCitateli.pdb" />
     <Content Include="bin\MySql.Data.dll" />
     <Content Include="Fonts\raty.svg" />
+    <Content Include="Images\book-missing.png" />
     <Content Include="Images\bottom_arrow.jpg" />
     <Content Include="Images\Chevron.gif" />
     <Content Include="Images\ChevronOverlay.png" />
@@ -129,6 +130,7 @@
     <Content Include="Services\ProfileService.svc" />
     <Content Include="Sites\adminpanel.aspx" />
     <Content Include="Sites\book.aspx" />
+    <Content Include="Sites\error.aspx" />
     <Content Include="Sites\forum.aspx" />
     <Content Include="Sites\index.aspx" />
     <Content Include="Sites\login.aspx" />
@@ -198,6 +200,13 @@
     </Compile>
     <Compile Include="Sites\book.aspx.designer.cs">
       <DependentUpon>book.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Sites\error.aspx.cs">
+      <DependentUpon>error.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Sites\error.aspx.designer.cs">
+      <DependentUpon>error.aspx</DependentUpon>
     </Compile>
     <Compile Include="Sites\forum.aspx.cs">
       <DependentUpon>forum.aspx</DependentUpon>
