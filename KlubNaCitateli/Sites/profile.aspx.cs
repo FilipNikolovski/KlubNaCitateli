@@ -121,6 +121,18 @@ namespace KlubNaCitateli.Sites
                     }
                     reader.Close();
                     threads.InnerHtml = innerHTML.ToString();
+                    innerHTML.Clear();
+                    command.CommandText = "Select distinct books.idbook, name, thumbnail from books, bookcomments where iduser=?iduser and books.idbook=bookcomments.idbook";
+                    reader = command.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            innerHTML.Append("<div class='books'><div style='display:none;' class='idbook'>" + reader["idbook"] + "</div> <img src='" + reader["thumbnail"] + " alt='' class='bookthumbnail'/><span class='bookname'>" + reader["name"] + "</span></div>");
+                        }
+                    }
+                    reader.Close();
+                    comments.InnerHtml = innerHTML.ToString();
                 }
                 catch (Exception ex)
                 {

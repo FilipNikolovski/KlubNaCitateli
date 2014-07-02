@@ -85,7 +85,7 @@ namespace KlubNaCitateli.Sites
                             read1 = command2.ExecuteReader();
                             if (read1.Read())
                             {
-                                Session["Banned"] = read1.GetValue(0).ToString();
+                                Session["Banned"] = read1.GetValue(0);
                             }
                             read1.Close();
 

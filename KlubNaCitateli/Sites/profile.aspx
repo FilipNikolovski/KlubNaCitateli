@@ -50,7 +50,10 @@
 
             }
 
-
+            $(".bookname").click(function () {
+                var id = $(this).parent().find(".idbook").html();
+                window.location = "book.aspx?id=" + id;
+            })
             $("#myProfileLink").addClass("active");
 
             $("#mainContent_saveCategories").on("click", function () {
@@ -404,6 +407,34 @@
         {
             cursor:pointer;
         }
+        .bookthumbnail
+        {
+            width:50px;
+            height:70px;
+        }
+        .bookname
+        {
+            height:100%;
+            margin-top:-100px;
+            font-weight:bold;
+        }
+        #mainContent_comments
+        {
+            
+            height:300px;
+            overflow-y:auto;
+            
+        }
+        .books
+        {
+            min-height:80px;
+            height:auto;
+            margin-bottom:5px;
+        } 
+        .bookname:hover
+        {
+            cursor:pointer;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="mainContent" runat="server">
@@ -448,8 +479,8 @@
                             <asp:Label runat="server" ID="nameLbl" Font-Size="20"></asp:Label>
                         </asp:TableCell>
                     </asp:TableRow>
-                    <asp:TableRow>
-                        <asp:TableCell>
+                    <asp:TableRow Width="100%">
+                        <asp:TableCell >
                             <asp:Table ID="Table4" runat="server">
                                 <asp:TableRow Width="319px">
                                     <asp:TableCell Width="150px">
@@ -490,8 +521,8 @@
                     </asp:TableRow>
                     <asp:TableRow Width="319px">
                         <asp:TableCell>
-                            <asp:Label ID="lblAbout" runat="server" Text="About" Width="100%" Height="200px"></asp:Label>
-                            <input type="text" id="tbAbout" value="" style="width: 100%; height: 200px;" />
+                            <asp:Label ID="lblAbout" runat="server" Text="About" Width="568px" Height="200px"></asp:Label>
+                            <textarea id="tbAbout" rows="12" cols="70" style="resize:none;"></textarea><br />
                             <input type="button" id="changeAboutBtn" value="Edit about" />
                             <input type="button" id="confirmChangeAboutBtn" value="Confirm edit" />
                             <input type="button" id="cancelEditA" value="Cancel" />
@@ -532,7 +563,7 @@
             </div>
         </fieldset>
         <fieldset id="userbookcomments">
-            <legend>User book comments:</legend>
+            <legend>Books user commented on:</legend>
             <div id="comments" runat="server">
             </div>
         </fieldset>
