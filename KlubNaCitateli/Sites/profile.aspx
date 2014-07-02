@@ -10,24 +10,65 @@
     <script type="text/javascript">
         $(document).ready(function () {
 
+            var iduser = $("#<%= iduser.ClientID %>").val();
+            var idsession = $("#<%= idsession.ClientID %>").val();
+
+            if (parseInt(iduser) == parseInt(idsession)) {
+                $("#changeUsrBtn").show();
+                $("#confirmChangeUsrBtn").hide();
+                $("#lblUsername").show();
+                $("#tbUsername").hide();
+                $("#changeEmailBtn").show();
+                $("#confirmChangeEmailBtn").hide();
+                $("#lblEmail").show();
+                $("#tbEmail").hide();
+                $("#cancelEdit").hide();
+                $("#cancelEditE").hide();
+                $("#changeAboutBtn").show();
+                $("#confirmChangeAboutBtn").hide();
+                $("#lblAbout").show();
+                $("#tbAbout").hide();
+                $("#cancelEditA").hide();
+
+            }
+            else {
+                $("#changeUsrBtn").hide();
+                $("#confirmChangeUsrBtn").hide();
+                $("#lblUsername").hide();
+                $("#tbUsername").hide();
+                $("#changeEmailBtn").hide();
+                $("#confirmChangeEmailBtn").hide();
+                $("#lblEmail").hide();
+                $("#tbEmail").hide();
+                $("#cancelEdit").hide();
+                $("#cancelEditE").hide();
+                $("#changeAboutBtn").hide();
+                $("#confirmChangeAboutBtn").hide();
+                $("#lblAbout").hide();
+                $("#tbAbout").hide();
+                $("#cancelEditA").hide();
+
+            }
+
+
             $("#myProfileLink").addClass("active");
 
-            $("#mainContent_saveCategories").on("click", function() {
-                
+            $("#mainContent_saveCategories").on("click", function () {
+
                 var list = $("#mainContent_myCategories li");
                 var myCategories = new Array();
 
-                list.each(function() {
+                list.each(function () {
                     myCategories.push($(this).text());
                 });
-                
+
                 var json = {
                     userId: '<%=UserId %>',
                     categories: myCategories
                 }
 
                 var service = new KlubNaCitateli.BookService();
-                service.SaveCategories(JSON.stringify(json), function(result) {
+                service.SaveCategories(JSON.stringify(json), function (result) {
                     alert(result);
                 });
             });
@@ -39,7 +80,7 @@
             var jcarousel = $('.jcarousel');
 
             jcarousel.jcarousel({
-                wrap: 'circular',
+                wrap: 'circular'
             });
 
 
@@ -69,7 +110,153 @@
                     return '<a href="#' + page + '">' + page + '</a>';
                 }
             });
-            
+            $(".threadname").click(function () {
+                var id = $(this).parent().find(".idthread").html();
+                window.location = "post.aspx?threadid=" + id;
+
+            })
+
+            $("#changeUsrBtn").click(function () {
+                var username = $("#<%= lblUsername.ClientID %>").text();
+                $("#tbUsername").val(username);
+                $("#tbUsername").show();
+                $("#<%= lblUsername.ClientID %>").hide();
+                $("#confirmChangeUsrBtn").show();
+                $("#changeUsrBtn").hide();
+                $("#cancelEdit").show();
+
+            });
+
+            $("#cancelEdit").click(function () {
+                $("#tbUsername").hide();
+                $("#confirmChangeUsrBtn").hide();
+                $("#changeUsrBtn").show();
+                $("#cancelEdit").hide();
+                $("#<%= lblUsername.ClientID %>").show();
+            })
+
+            $("#confirmChangeUsrBtn").click(function () {
+                var username = $("#tbUsername").val();
+                if (username == "") {
+                    alert("You must enter username!");
+                }
+                else {
+                    var iduser = $("#<%= iduser.ClientID %>").val();
+                    var service = new KlubNaCitateli.ProfileService();
+                    service.UpdateUsername(username, parseInt(iduser), onSuccessUsername);
+                }
+            });
+
+            function onSuccessUsername(result) {
+
+                if (result == "Username is updated") {
+                    var username = $("#tbUsername").val();
+                    $("#<%= lblUsername.ClientID %>").text(username);
+                    $("#<%= lblUsername.ClientID %>").show();
+                    $("#tbUsername").hide();
+                    $("#confirmChangeUsrBtn").hide();
+                    $("#changeUsrBtn").show();
+                    $("#cancelEdit").hide();
+                }
+                alert(result);
+            }
+
+            function isValidEmailAddress(emailAddress) {
+                var pattern = new RegExp(/^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?$/i);
+                return pattern.test(emailAddress);
+            };
+            $("#changeEmailBtn").click(function () {
+                var email = $("#<%= lblEmail.ClientID %>").text();
+                $("#tbEmail").val(email);
+                $("#tbEmail").show();
+                $("#<%= lblEmail.ClientID %>").hide();
+                $("#confirmChangeEmailBtn").show();
+                $("#changeEmailBtn").hide();
+                $("#cancelEditE").show();
+
+            });
+
+            $("#cancelEditE").click(function () {
+                $("#tbEmail").hide();
+                $("#confirmChangeEmailBtn").hide();
+                $("#changeEmailBtn").show();
+                $("#cancelEditE").hide();
+                $("#<%= lblEmail.ClientID %>").show();
+            })
+
+            $("#confirmChangeEmailBtn").click(function () {
+                var email = $("#tbEmail").val();
+                if (email == "") {
+                    alert("You must enter email!");
+                }
+                else if (!isValidEmailAddress(email)) {
+                    alert("You must enter valid email format!");
+                }
+                else {
+                    var iduser = $("#<%= iduser.ClientID %>").val();
+                    var service = new KlubNaCitateli.ProfileService();
+                    service.UpdateEmail(email, parseInt(iduser), onSuccessEmail);
+                }
+            });
+
+            function onSuccessEmail(result) {
+
+                if (result == "Email is updated") {
+                    var email = $("#tbEmail").val();
+                    $("#<%= lblEmail.ClientID %>").text(email);
+                    $("#<%= lblEmail.ClientID %>").show();
+                    $("#tbEmail").hide();
+                    $("#confirmChangeEmailBtn").hide();
+                    $("#changeEmailBtn").show();
+                    $("#cancelEditE").hide();
+                }
+                alert(result);
+            }
+
+            $("#changeAboutBtn").click(function () {
+                var username = $("#<%= lblAbout.ClientID %>").text();
+                $("#tbAbout").val(username);
+                $("#tbAbout").show();
+                $("#<%= lblAbout.ClientID %>").hide();
+                $("#confirmChangeAboutBtn").show();
+                $("#changeAboutBtn").hide();
+                $("#cancelEditA").show();
+
+            });
+
+            $("#cancelEditA").click(function () {
+                $("#tbAbout").hide();
+                $("#confirmChangeAboutBtn").hide();
+                $("#changeAboutBtn").show();
+                $("#cancelEditA").hide();
+                $("#<%= lblAbout.ClientID %>").show();
+            })
+
+            $("#confirmChangeAboutBtn").click(function () {
+                var username = $("#tbAbout").val();
+                var iduser = $("#<%= iduser.ClientID %>").val();
+                var service = new KlubNaCitateli.ProfileService();
+                service.UpdateAbout(username, parseInt(iduser), onSuccessAbout);
+
+            });
+
+            function onSuccessAbout(result) {
+
+                if (result == "About is updated") {
+                    var username = $("#tbAbout").val();
+                    $("#<%= lblAbout.ClientID %>").text(username);
+                    $("#<%= lblAbout.ClientID %>").show();
+                    $("#tbAbout").hide();
+                    $("#confirmChangeAboutBtn").hide();
+                    $("#changeAboutBtn").show();
+                    $("#cancelEditA").hide();
+                }
+                alert(result);
+            }
+
+
+
+
         });       
          
     </script>
@@ -87,12 +274,53 @@
             -moz-box-shadow: 8px 8px 6px -6px black;
             box-shadow: 0 0 10px #000000;
         }
-        #mainContent_tbAbout
+        #tbAbout
         {
             -webkit-box-shadow: 8px 8px 6px -6px black;
             -moz-box-shadow: 8px 8px 6px -6px black;
             box-shadow: 0 0 10px #000000;
         }
+        .example-commentheading
+        {
+            position: relative;
+            padding: 0;
+            color: #b513af;
+            min-height: 20px;
+            height: auto;
+            width: 90%;
+            margin-top: 15px;
+        }
+        
+        /* creates the rectangle */
+        .example-commentheading:before
+        {
+            zoom: 2;
+            content: "";
+            position: absolute;
+            top: 0px;
+            left: -15px;
+            width: 15px;
+            height: 10px;
+            background: #4169E1; /* css3 */
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 3px;
+        }
+        
+        /* creates the triangle */
+        .example-commentheading:after
+        {
+            zoom: 2;
+            content: "";
+            position: absolute;
+            top: 6px;
+            left: -9px;
+            border: 4px solid transparent;
+            border-left-color: #4169E1; /* reduce the damage in FF3.0 */
+            display: block;
+            width: 0;
+        }
+        
         #mainContent_myCategories, #mainContent_allCategories
         {
             border: 1px solid #eee;
@@ -165,22 +393,41 @@
             -ms-interpolation-mode: bicubic;
             margin-left: auto;
         }
+        #mainContent_threads
+        {
+            height: 100px;
+            width: 100%;
+            color: Black;
+            margin-left: 30px;
+        }
+        .threadname
+        {
+            margin-left:10px;
+            color:#4169E1;
+            font-weight:bold;
+        }
+        .threadname:hover
+        {
+            cursor:pointer;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="mainContent" runat="server">
     <asp:ScriptManager runat="server" ID="scriptManager">
         <Services>
             <asp:ServiceReference Path="../Services/BookService.svc" />
+            <asp:ServiceReference Path="../Services/ProfileService.svc" />
         </Services>
     </asp:ScriptManager>
+    <asp:HiddenField ID="iduser" runat="server" />
+    <asp:HiddenField ID="idsession" runat="server" />
     <asp:Table ID="Table1" runat="server" Width="100%">
         <asp:TableRow Style="margin-bottom: 20px;">
             <asp:TableCell Width="200px" VerticalAlign="Top">
                 <asp:Table ID="Table2" runat="server">
                     <asp:TableRow>
                         <asp:TableCell CssClass="profile">
-                            
-                                <img runat="server" id="profileImg" src="/Images/user-icon.png" alt="" />
+                            <img runat="server" id="profileImg" src="/Images/user-icon.png" alt="" />
                         </asp:TableCell>
                     </asp:TableRow>
                     <asp:TableRow>
@@ -203,51 +450,39 @@
                 <asp:Table ID="Table3" runat="server">
                     <asp:TableRow>
                         <asp:TableCell>
-                            <asp:Label runat="server" ID="nameLbl" Text="Marko Markovski" Font-Size="20"></asp:Label>
+                            <asp:Label runat="server" ID="nameLbl" Font-Size="20"></asp:Label>
                         </asp:TableCell>
                     </asp:TableRow>
                     <asp:TableRow>
                         <asp:TableCell>
                             <asp:Table ID="Table4" runat="server">
-                                <asp:TableRow>
+                                <asp:TableRow Width="319px">
                                     <asp:TableCell Width="150px">
-                                        <asp:ValidationSummary runat="server" ValidationGroup="Group1" />
                                         <asp:Label ID="Label1" runat="server" Text="Username:"></asp:Label>
                                     </asp:TableCell>
                                     <asp:TableCell Width="300px">
-                                        <asp:Label ID="lblUsername" runat="server" Text="MarkoMarkovski1"></asp:Label>
-                                        <asp:TextBox ID="tbUsername" runat="server" Visible="false" ValidationGroup="Group1"></asp:TextBox>
-                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="You must enter a value!"
-                                            ControlToValidate="tbUsername" ForeColor="Red" ValidationGroup="Group1">
-                                        </asp:RequiredFieldValidator>
+                                        <asp:Label ID="lblUsername" runat="server"></asp:Label>
+                                        <input type="text" id="tbUsername" />
+                                        <br />
                                     </asp:TableCell>
                                     <asp:TableCell>
-                                        <asp:Button runat="server" ID="changeUsrBtn" Text="Edit username" Visible="false"
-                                            OnClick="ChangeUsername" CausesValidation="false" />
-                                        <asp:Button runat="server" ID="confirmChangeUsrBtn" Text="Confirm edit" Visible="false"
-                                            OnClick="ConfirmChangeUsername" />
+                                        <input type="button" id="changeUsrBtn" value="Edit username"/>
+                                        <input type="button" id="confirmChangeUsrBtn" value="Confirm edit"/>
+                                        <input type="button" id="cancelEdit" value="Cancel"/>
                                     </asp:TableCell>
                                 </asp:TableRow>
-                                <asp:TableRow>
+                                <asp:TableRow Width="319px">
                                     <asp:TableCell>
-                                        <asp:ValidationSummary runat="server" ValidationGroup="Group2" />
                                         <asp:Label ID="Label3" runat="server" Text="Email:"></asp:Label>
                                     </asp:TableCell>
                                     <asp:TableCell>
-                                        <asp:Label ID="lblEmail" runat="server" Text="markoMarkovski@email.com"></asp:Label>
-                                        <asp:TextBox ID="tbEmail" runat="server" Visible="false" ValidationGroup="Group2"></asp:TextBox>
-                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="You must enter a value!"
-                                            ControlToValidate="tbEmail" ForeColor="Red" ValidationGroup="Group2">
-                                        </asp:RequiredFieldValidator>
-                                        <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="tbEmail"
-                                            ErrorMessage="Incorrect format!" ValidationExpression="^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$"
-                                            ForeColor="Red" ValidationGroup="Group2"></asp:RegularExpressionValidator>
+                                        <asp:Label ID="lblEmail" runat="server"></asp:Label>
+                                        <input type="text" id="tbEmail" />
                                     </asp:TableCell>
                                     <asp:TableCell>
-                                        <asp:Button ID="changeEmailBtn" runat="server" Text="Edit email" Visible="false"
-                                            OnClick="ChangeEmail" CausesValidation="false" />
-                                        <asp:Button ID="confirmChangeEmailBtn" runat="server" Text="Confirm edit" Visible="false"
-                                            OnClick="ConfirmChangeEmail" />
+                                        <input type="button" id="changeEmailBtn" value="Edit email"/>
+                                        <input type="button" id="confirmChangeEmailBtn" value="Confirm edit" />
+                                         <input type="button" id="cancelEditE" value="Cancel"/>
                                     </asp:TableCell>
                                 </asp:TableRow>
                             </asp:Table>
@@ -258,14 +493,13 @@
                             <asp:Label ID="Label5" runat="server" Text="About"></asp:Label>
                         </asp:TableCell>
                     </asp:TableRow>
-                    <asp:TableRow>
+                    <asp:TableRow Width="319px">
                         <asp:TableCell>
                             <asp:Label ID="lblAbout" runat="server" Text="About" Width="100%" Height="200px"></asp:Label>
-                            <asp:TextBox ID="tbAbout" runat="server" Text="About marko" Width="100%" Height="200px"
-                                TextMode="MultiLine" Visible="false" ></asp:TextBox>
-                            <asp:Button ID="changeAboutBtn" runat="server" Text="Edit about" OnClick="ChangeAbout"
-                                Visible="false" />
-                            <asp:Button ID="confirmChangeAboutBtn" runat="server" Text="Confirm edit" Visible="false" />
+                            <input type="text" id="tbAbout" value="" style="width: 100%; height: 200px;" />
+                            <input type="button" id="changeAboutBtn" value="Edit about" />
+                            <input type="button" id="confirmChangeAboutBtn" value="Confirm edit" />
+                            <input type="button" id="cancelEditA" value="Cancel" />
                         </asp:TableCell>
                     </asp:TableRow>
                 </asp:Table>
@@ -299,6 +533,8 @@
         </fieldset>
         <fieldset id="profileThreads">
             <legend>Profile threads:</legend>
+            <div id="threads" runat="server">
+            </div>
         </fieldset>
         <div class='nodiv'>
         </div>

@@ -126,6 +126,7 @@
     <Content Include="Scripts\tabs-script.js" />
     <Content Include="Services\BookService.svc" />
     <Content Include="Services\ForumService.svc" />
+    <Content Include="Services\ProfileService.svc" />
     <Content Include="Sites\adminpanel.aspx" />
     <Content Include="Sites\book.aspx" />
     <Content Include="Sites\forum.aspx" />
@@ -173,6 +174,9 @@
     </Compile>
     <Compile Include="Services\ForumService.svc.cs">
       <DependentUpon>ForumService.svc</DependentUpon>
+    </Compile>
+    <Compile Include="Services\ProfileService.svc.cs">
+      <DependentUpon>ProfileService.svc</DependentUpon>
     </Compile>
     <Compile Include="Site.Master.cs">
       <DependentUpon>Site.Master</DependentUpon>

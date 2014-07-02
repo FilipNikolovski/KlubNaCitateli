@@ -18,6 +18,7 @@ namespace KlubNaCitateli.Sites
     {
         User user;
         int iduser = -1;
+        string profile = "";
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -58,7 +59,7 @@ namespace KlubNaCitateli.Sites
             }
         }
 
-        public void addUser()
+        public void addUser(string profile)
         {
             user = new User(name.Text, surname.Text, email.Text, username.Text, password.Text, TextBox2.Text);
             bool checkUsername = true;
@@ -88,7 +89,7 @@ namespace KlubNaCitateli.Sites
                     {
                         conn.Open();
                         MySqlCommand comm = new MySqlCommand();
-                        comm.CommandText = "INSERT into users (name, banned, surname, email, username, password, about, type, numComments) VALUES(?name, ?banned, ?surname, ?email, ?username, ?password, ?about, ?type, ?numComments)";
+                        comm.CommandText = "INSERT into users (name, banned, surname, email, username, password, about, type, numComments, profilepicture) VALUES(?name, ?banned, ?surname, ?email, ?username, ?password, ?about, ?type, ?numComments, ?profile)";
                         comm.Connection = conn;
                         comm.Parameters.AddWithValue("?name", user.name);
                         comm.Parameters.AddWithValue("?surname", user.surname);
@@ -99,6 +100,7 @@ namespace KlubNaCitateli.Sites
                         comm.Parameters.AddWithValue("?numComments", 0);
                         comm.Parameters.AddWithValue("?banned", 0);
                         comm.Parameters.AddWithValue("?about", user.aboutUser);
+                        comm.Parameters.AddWithValue("?profile", profile);
 
                         comm.ExecuteNonQuery();
 
@@ -179,7 +181,7 @@ namespace KlubNaCitateli.Sites
                     // Draw the new graphic based on the resized bitmap
                     oGraphics.DrawImage(originalBMP, 0, 0, newWidth, newHeight);
                     // Save the new graphic file to the server
-                    string name = username.Text + ext;
+                    profile = username.Text + ext;
                     newBMP.Save(Server.MapPath("~/Images/ProfilePicture/") + (username.Text + ext));
 
                     // Once finished with the bitmap objects, we deallocate them.
@@ -188,31 +190,7 @@ namespace KlubNaCitateli.Sites
                     oGraphics.Dispose();
 
 
-                    addUser();
-                    using (MySqlConnection connection = new MySqlConnection())
-                    {
-                        connection.ConnectionString = ConfigurationManager.ConnectionStrings["BooksConn"].ConnectionString.ToString();
-                        try
-                        {
-                            connection.Open();
-                            MySqlCommand command = new MySqlCommand();
-                            command.CommandText = "update users set profilepicture=?profile where iduser=?iduser";
-                            command.Parameters.AddWithValue("?profile", name);
-                            command.Parameters.AddWithValue("?iduser", iduser);
-                            command.ExecuteNonQuery();
-
-
-                        }
-                        catch (Exception ex)
-                        {
-
-                        }
-                        finally
-                        {
-                            connection.Close();
-                        }
-                    }
-
+                    addUser(profile);
 
                 }
                 else
@@ -223,7 +201,7 @@ namespace KlubNaCitateli.Sites
             }
             else
             {
-                addUser();
+                addUser("");
             }
 
 

@@ -11,6 +11,7 @@ using System.IO;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Web.UI.HtmlControls;
+using System.Diagnostics;
 
 namespace KlubNaCitateli.Sites
 {
@@ -37,27 +38,23 @@ namespace KlubNaCitateli.Sites
                 {
                     connection.Open();
                     UserId = Convert.ToInt32(Request.QueryString["id"]);
+                        iduser.Value=UserId.ToString();
 
                     if (UserId == 0)
                     {
                         Response.Redirect("~/Sites/error.aspx");
                     }
 
-                    if (Session["id"] != null)
+                    if (Session["Id"] != null)
                     {
-                        int sessionId = Convert.ToInt32(Session["id"].ToString());
-
+                        int sessionId = Convert.ToInt32(Session["Id"].ToString());
+                        idsession.Value = sessionId.ToString();
                         if (sessionId == UserId)
                         {
-                            changePicBtn.Visible = true;
-                            changeUsrBtn.Visible = true;
-                            changeEmailBtn.Visible = true;
-                            changeAboutBtn.Visible = true;
-                            allCategories.Visible = true;
                             saveCategories.Visible = true;
+                            allCategories.Visible = true;
                         }
-                        
-                    }
+                     }
 
                     MySqlCommand command = new MySqlCommand();
                     command.CommandText = "select iduser, name, surname, username, email, about, profilepicture from users where iduser=?iduser";
@@ -109,6 +106,20 @@ namespace KlubNaCitateli.Sites
                         jcarouselWrapper.InnerHtml = sb2.ToString();
                     }
                     reader.Close();
+
+                    command.CommandText = "Select idthread, threadname from discussionthreads where iduser=?iduser";
+                    reader = command.ExecuteReader();
+                    StringBuilder innerHTML = new StringBuilder();
+                    if (reader.HasRows)
+                    {
+                        
+                        while (reader.Read())
+                        {
+                            innerHTML.Append("<div class='example-commentheading'><div style='display:none;' class='idthread'>" + reader["idthread"] + "</div><div class='threadname'>" + reader["threadname"].ToString() + "</div></div>");
+                        }
+                    }
+                    reader.Close();
+                    threads.InnerHtml = innerHTML.ToString();
                 }
                 catch (Exception ex)
                 {
@@ -174,107 +185,8 @@ namespace KlubNaCitateli.Sites
                 }
             }
         }
-        public void ChangeAbout(Object sender, EventArgs e)
-        {
-            tbAbout.Visible = true;
-            tbAbout.Text = lblAbout.Text;
-            lblAbout.Visible = false;
-            confirmChangeAboutBtn.Visible = true;
-            changeAboutBtn.Visible = false;
-        }
-
-        public void ChangeUsername(Object sender, EventArgs e)
-        {
-            tbUsername.Visible = true;
-            tbUsername.Text = lblUsername.Text;
-            lblUsername.Visible = false;
-            confirmChangeUsrBtn.Visible = true;
-            changeUsrBtn.Visible = false;
-        }
-
-        public void ChangeEmail(Object sender, EventArgs e)
-        {
-            tbEmail.Visible = true;
-            tbEmail.Text = lblEmail.Text;
-            lblEmail.Visible = false;
-            confirmChangeEmailBtn.Visible = true;
-            changeEmailBtn.Visible = false;
-        }
-
-        public void ConfirmChangeUsername(Object sender, EventArgs e)
-        {
-            using(MySqlConnection connection = new MySqlConnection())
-            {
-                connection.ConnectionString = ConfigurationManager.ConnectionStrings["BooksConn"].ConnectionString.ToString();
-
-                try
-                {
-                    connection.Open();
-
-                    int id = Convert.ToInt32(Request.QueryString["id"]);
-                    
-                    MySqlCommand command = new MySqlCommand();
-                    command.CommandText = "update users set username=?username where iduser=?iduser";
-                    command.Parameters.AddWithValue("?iduser", id);
-                    command.Parameters.AddWithValue("?username", tbUsername.Text);
-                    command.Connection = connection;
-                    MySqlDataReader reader = command.ExecuteReader();
-                    command.ExecuteNonQuery();
-                }
-                catch (Exception ex)
-                {
-                    lblError.Text = ex.Message;
-                    lblError.Visible = true;
-                }
-                finally
-                {
-                    connection.Close();
-                }
-
-                confirmChangeUsrBtn.Visible = false;
-                lblUsername.Visible = true;
-                lblUsername.Text = tbUsername.Text;
-                tbUsername.Visible = false;
-            }
-        }
-
-        public void ConfirmChangeEmail(Object sender, EventArgs e)
-        {
-            using (MySqlConnection connection = new MySqlConnection())
-            {
-                connection.ConnectionString = ConfigurationManager.ConnectionStrings["BooksConn"].ConnectionString.ToString();
-
-                try
-                {
-                    connection.Open();
-
-                    int id = Convert.ToInt32(Request.QueryString["id"]);
-
-                    MySqlCommand command = new MySqlCommand();
-                    command.CommandText = "update users set email=?email where iduser=?iduser";
-                    command.Parameters.AddWithValue("?iduser", id);
-                    command.Parameters.AddWithValue("?email", tbEmail.Text);
-                    command.Connection = connection;
-                    MySqlDataReader reader = command.ExecuteReader();
-                    command.ExecuteNonQuery();
-                }
-                catch (Exception ex)
-                {
-                    lblError.Text = ex.Message;
-                    lblError.Visible = true;
-                }
-                finally
-                {
-                    connection.Close();
-                }
-            }
-
-            confirmChangeEmailBtn.Visible = false;
-            lblEmail.Visible = true;
-            lblEmail.Text = tbEmail.Text;
-            tbEmail.Visible = false;
-        }
-
+       
+        
         public void ChangePicture(Object sender, EventArgs e)
         {
             if (changePicBtn.Text == "Change Picture")

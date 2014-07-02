@@ -21,9 +21,14 @@ namespace KlubNaCitateli.Sites
             {
                 Response.Redirect("forum.aspx");
             }
+            if (Session["Id"] != null)
+            {
+                userId.Value = Session["Id"].ToString();
+            }
             threadId.Value = idThread.ToString();
             showPosts(idThread);
             newpost.Visible = false;
+            
             using (MySqlConnection connection = new MySqlConnection())
             {
                 StringBuilder innerHTML = new StringBuilder();
@@ -43,8 +48,6 @@ namespace KlubNaCitateli.Sites
                         {
                             if (Session["Id"] != null)
                             {
-                                userId.Value = Session["Id"].ToString();
-
                                 bool bann = Convert.ToBoolean(Session["Banned"]);
                                 bool locked = Convert.ToBoolean(reader["locked"]);
                                 if (!bann && !locked)
@@ -106,7 +109,7 @@ namespace KlubNaCitateli.Sites
                     connection.Open();
                     MySqlCommand command = new MySqlCommand();
                     command.Connection = connection;
-                    command.CommandText = "select Posts.*, Users.username, Users.Banned,(select count(idpost) from Posts where posts.iduser=users.iduser group by Posts.iduser) as numberPosts from Posts, Users where Users.iduser=Posts.iduser and idthread=?idthread order by idpost asc";
+                    command.CommandText = "select Posts.*, Users.username, Users.profilepicture, Users.Banned,(select count(idpost) from Posts where posts.iduser=users.iduser group by Posts.iduser) as numberPosts from Posts, Users where Users.iduser=Posts.iduser and idthread=?idthread order by idpost asc";
                     command.Parameters.AddWithValue("?idthread", idThread);
                     MySqlDataReader reader = command.ExecuteReader();
                     if (reader.HasRows)
@@ -157,21 +160,9 @@ namespace KlubNaCitateli.Sites
 
                             innerHTML.Append("<div class='username'><div class='usernameLink'><strong>" + reader["username"].ToString() + "</strong></div></div>");
                             innerHTML.Append("<div class='picture'><img class='userpicture' alt=''");
-                            if (File.Exists(Server.MapPath("~/Images/ProfilePicture/" + reader["iduser"].ToString() + ".jpg")))
+                            if (File.Exists(Server.MapPath("~/Images/ProfilePicture/" + reader["profilepicture"].ToString())))
                             {
-                                innerHTML.Append("src='../Images/ProfilePicture/" + reader["iduser"].ToString() + ".jpg' /></div>");
-                            }
-                            else if (File.Exists(Server.MapPath("~/Images/ProfilePicture/" + reader["iduser"].ToString() + ".png")))
-                            {
-                                innerHTML.Append("src='../Images/ProfilePicture/" + reader["iduser"].ToString() + ".png' /></div>");
-                            }
-                            else if (File.Exists(Server.MapPath("~/Images/ProfilePicture/" + reader["iduser"].ToString() + ".JPG")))
-                            {
-                                innerHTML.Append("src='../Images/ProfilePicture/" + reader["iduser"].ToString() + ".JPG' /></div>");
-                            }
-                            else if (File.Exists(Server.MapPath("~/Images/ProfilePicture/" + reader["iduser"].ToString() + ".PNG")))
-                            {
-                                innerHTML.Append("src='../Images/ProfilePicture/" + reader["iduser"].ToString() + ".jpg' /></div>");
+                                innerHTML.Append("src='../Images/ProfilePicture/" + reader["profilepicture"].ToString()+"' /></div>");
                             }
                             else
                             {

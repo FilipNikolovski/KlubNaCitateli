@@ -14,25 +14,47 @@
     <script type="text/javascript">
         $(document).ready(function () {
 
-            
+            $(".submitPost").click(function () {
+                var userId = $("#<%=userId.ClientID %>").val();
+                var postcomment = $(this).parent().parent().find(".newPostText").val();
+                var threadId = $("#<%=threadId.ClientID %>").val();
+                var service = new KlubNaCitateli.ForumService();
+                service.AddComment(threadId, userId, postcomment, quoteUser, onSuccess);
+            });
+            var quoteUser;
+            $(".replyQuote").click(function () {
+                var stringQuote = "[quote]";
+                var text = $(this).parent().parent().parent().find('.comments').html();
+                quoteUser = $(this).parent().parent().parent().find('.usernameLink').html();
+                stringQuote += text;
+                stringQuote += "[/quote]";
+                $(".newPostText").val(stringQuote);
+                $(".newPostText").focus();
+            });
+
 
             var numPages = parseInt($("#<%=numPages.ClientID %>").val());
             $("#demo").hide();
+
             if (numPages > 0) {
                 $("#demo").show();
             }
+
             $(".demos").hide();
             $("#demo1").show();
+
             $(".usernameLink").click(function () {
                 var id = $(this).parent().parent().find(".iduser").html();
                 window.location = "profile.aspx?id=" + id;
             });
+
             var id;
             function onSuccess(result) {
 
                 alert(result);
 
             }
+
             $(".comm").delegate(".banUser", "click", function () {
                 id = $(this).parent().parent().find(".iduser").html();
                 var service = new KlubNaCitateli.ForumService();
@@ -53,14 +75,15 @@
                 if ($(this).text() == "This post was deleted by a moderator.") {
                     $(this).css("font-style", "italic");
                 }
-            })
+            });
+
             $(".deletePost").click(function () {
 
                 var idcomment = $(this).parent().parent().find(".idcomment").text();
                 var service = new KlubNaCitateli.ForumService();
                 service.DeleteComment(parseInt(idcomment), onSuccess);
                 $(".idcomment:contains(" + idcomment + ")").parent().find(".comments").html("<div style='font-style:italic;'>This post was deleted by a moderator.</div>")
-            })
+            });
 
             var pages;
             $("#demo").paginate({
@@ -77,33 +100,15 @@
                     pages = page;
                     $(".demos").hide();
                     $("#demo" + page).show();
-              
+
                 }
             });
 
-          
 
-            var quoteUser;
-            $(".replyQuote").click(function () {
-                var stringQuote = "[quote]";
-                var text = $(this).parent().parent().parent().find('.comments').html();
-                quoteUser = $(this).parent().parent().parent().find('.usernameLink').html();
-                stringQuote +=text;
-                stringQuote += "[/quote]";
-                $(".newPostText").val(stringQuote);
-                $(".newPostText").focus();
-            })
-
-            $(".submitPost").click(function () {
-                var userId = $("#<%=userId.ClientID %>").val();
-                var postcomment = $(this).parent().parent().find(".newPostText").val();
-                var threadId = $("#<%=threadId.ClientID %>").val();
-                var service = new KlubNaCitateli.ForumService();
-                service.AddComment(threadId, userId, postcomment, quoteUser, onSuccess);
-            })
-
-            $("#breadCrumb3").jBreadCrumb();
             
+           
+            $("#breadCrumb3").jBreadCrumb();
+
         });  
     </script>
 </asp:Content>
