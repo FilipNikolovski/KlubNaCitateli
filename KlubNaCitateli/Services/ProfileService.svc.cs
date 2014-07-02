@@ -8,6 +8,7 @@ using System.ServiceModel.Web;
 using System.Text;
 using MySql.Data.MySqlClient;
 using System.Configuration;
+using System.Web.Script.Serialization;
 
 namespace KlubNaCitateli.Services
 {
@@ -110,7 +111,6 @@ namespace KlubNaCitateli.Services
                         return "Email is already in use. Please choose another one!";
                     }
 
-
                 }
                 catch (Exception ex)
                 {
@@ -120,15 +120,8 @@ namespace KlubNaCitateli.Services
                     connection.Close();
                 }
 
-
-
                 return "Error";
-
-
-
             }
-
-
         }
 
         [OperationContract]
@@ -165,15 +158,64 @@ namespace KlubNaCitateli.Services
                     connection.Close();
                 }
 
-
-
                 return "Error";
-
-
-
             }
+        }
 
+        [OperationContract]
+        public string AddToFavorites(string jsonData)
+        {
+            Dictionary<string, string> json = new JavaScriptSerializer().Deserialize<Dictionary<string, string>>(jsonData);
+            Dictionary<string, string> result = new Dictionary<string, string>();
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
 
+            using (MySqlConnection conn = new MySqlConnection())
+            {
+                conn.ConnectionString = ConfigurationManager.ConnectionStrings["BooksConn"].ConnectionString;
+                try
+                {
+                    conn.Open();
+                    
+                    string sql = "SELECT * FROM UserBooks WHERE IDUser=?IDUser AND IDBook=?IDBook";
+                    MySqlCommand command = new MySqlCommand(sql, conn);
+                    command.Parameters.AddWithValue("?IDUser", json["userId"]);
+                    command.Parameters.AddWithValue("?IDBook", json["bookId"]);
+
+                    MySqlDataReader reader = command.ExecuteReader();
+
+                    if (reader.HasRows)
+                    {
+                        reader.Close();
+                        result["status"] = "error";
+                        result["message"] = "You already have this book in your favorites.";
+
+                        return serializer.Serialize((object)result);
+                    }
+                    else
+                    {
+                        reader.Close();
+
+                        command.CommandText = "INSERT INTO UserBooks (IDUser, IDBook) VALUES (?IDUser, ?IDBook)";
+                        command.ExecuteNonQuery();
+
+                        result["status"] = "success";
+                        result["message"] = "The book has been added to your favorites.";
+
+                        return serializer.Serialize((object)result);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    result["status"] = "error";
+                    result["message"] = ex.Message;
+
+                    return serializer.Serialize((object)result);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
         }
     }
 }

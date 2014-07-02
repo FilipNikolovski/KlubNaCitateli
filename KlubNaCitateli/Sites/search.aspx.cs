@@ -154,7 +154,8 @@ namespace KlubNaCitateli.Sites
                                     {
                                         while (reader.Read())
                                         {
-                                            book.Authors.Add(reader["Name"].ToString());
+                                            if(!book.Authors.Contains(reader["Name"]))
+                                                book.Authors.Add(reader["Name"].ToString());
                                         }
                                     }
                                     reader.Close();

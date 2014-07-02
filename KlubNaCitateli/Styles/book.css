@@ -50,8 +50,6 @@
 .bubble a
 {
     float: left;
-    border: 3px solid #ffffff;
-    border-radius: 10px;
     color:#f4a460;
     font-size:large;
 }

@@ -559,7 +559,9 @@ namespace KlubNaCitateli.Services
                     command.Parameters.AddWithValue("?IDBook", json["bookId"]);
                     command.Parameters.AddWithValue("?IDUser", json["userId"]);
                     command.Parameters.AddWithValue("?Comment", json["comment"]);
+
                     command.Parameters.AddWithValue("?Date", DateTime.Now.ToString());
+                    result["date"] = DateTime.Now.ToString();
 
                     command.ExecuteNonQuery();
 

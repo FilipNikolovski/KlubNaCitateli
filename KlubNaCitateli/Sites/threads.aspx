@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true"
     CodeBehind="threads.aspx.cs" Inherits="KlubNaCitateli.Sites.threads" %>
-
+ 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="../Styles/threads.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="../Scripts/jquery.paginate.js"></script>
@@ -211,6 +211,8 @@
             </div>
             <div class="nodiv">
             </div>
+            <asp:Label ID="lblError" runat="server" Text=""></asp:Label>
         </div>
     </div>
+
 </asp:Content>
