@@ -100,6 +100,10 @@ namespace KlubNaCitateli.Sites
                             {
                                 innerHTML.Append("<div class='maintopics'> <div style='display:none;' class='idtype'>" + current.Key + "</div><div class='topicnaslov'><div class='naslov'>" + topicIds[current.Key] + "</div><div class='addNewTopic'>+ New Topic</div><div id='nodiv'></div></div>");
                             }
+                            else
+                            {
+                                innerHTML.Append("<div class='maintopics'> <div style='display:none;' id='idtopic'>" + current.Key + "</div><div class='topicnaslov'><div class='naslov'>" + topicIds[current.Key] + "</div><div id='nodiv'></div></div>");
+                            }
                         }
                         else
                         {

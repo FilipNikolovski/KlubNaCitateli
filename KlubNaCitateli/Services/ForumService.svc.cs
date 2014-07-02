@@ -336,6 +336,7 @@ namespace KlubNaCitateli.Services
                     reader.Close();
 
                     command.CommandText = "Insert into posts(iduser, idthread, postcomment, dateposted) values(?iduser, ?idthread, ?postcomment, ?dateposted)";
+                    command.Parameters.Clear();
                     command.Parameters.AddWithValue("?dateposted", DateTime.Today.ToString("dd/MMMM/yy"));
                     command.Parameters.AddWithValue("?iduser", idUser);
                     command.Parameters.AddWithValue("?idthread", idThread);
