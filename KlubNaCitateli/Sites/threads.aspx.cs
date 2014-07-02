@@ -13,6 +13,8 @@ namespace KlubNaCitateli.Sites
 {
     public partial class threads : System.Web.UI.Page
     {
+        public int IDUser { get; set; }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             int IdTopic = Convert.ToInt32(Request.QueryString["topicid"]);
@@ -22,9 +24,10 @@ namespace KlubNaCitateli.Sites
                 Response.Redirect("forum.aspx");
             }
 
+            IDUser = -1;
             if (Session["Id"] != null)
             {
-                iduser.Value = Session["Id"].ToString();
+                IDUser = Int32.Parse(Session["Id"].ToString());
             }
             using (MySqlConnection connection = new MySqlConnection())
             {
@@ -33,6 +36,7 @@ namespace KlubNaCitateli.Sites
                 connection.ConnectionString = ConfigurationManager.ConnectionStrings["BooksConn"].ConnectionString.ToString();
                 try
                 {
+                    
                     connection.Open();
                     MySqlCommand command = new MySqlCommand();
                     command.Connection = connection;
@@ -77,10 +81,16 @@ namespace KlubNaCitateli.Sites
                     {
                         if (reader.Read())
                         {
-                            if (iduser.Value != "")
+                            if (IDUser != -1)
+                            {
                                 innerHTML.Append("<div class='cont'><div class='allblack'><div class='naslov'>" + reader["topicname"] + "</div><div runat='server' id='btnAddThread' class='btnAddThread'>+ New Thread</div><div class='nodiv'></div></div>");
+                            }
+
                             else
+                            {
                                 innerHTML.Append("<div class='cont'><div class='allblack'><div class='naslov'>" + reader["topicname"] + "</div><div runat='server' id='btnAddThread' class='btnAddThread' style='display:none;'>+ New Thread</div><div class='nodiv'></div></div>");
+                            }
+
                         }
                     }
                     else
@@ -88,8 +98,8 @@ namespace KlubNaCitateli.Sites
                         topics.Visible = false;
                     }
                     reader.Close();
-                   
-                    command.CommandText = "select discussionthreads.idthread, threadname, count(idpost) as comments, username, users.iduser, DateCreated, discussionthreads.locked  from users left outer join discussionthreads on discussionthreads.iduser=users.iduser left outer join posts on discussionthreads.idthread=posts.idthread where discussionthreads.idtopic=?IDTopic group by discussionthreads.idthread order by idpost desc";
+
+                    command.CommandText = "select discussionthreads.idthread, threadname, count(idpost) as comments, username, users.iduser, DateCreated, discussionthreads.locked  from users left outer join discussionthreads on discussionthreads.iduser=users.iduser left outer join posts on discussionthreads.idthread=posts.idthread where discussionthreads.idtopic=?IDTopic group by discussionthreads.idthread";
                     reader = command.ExecuteReader();
                     if (reader.HasRows)
                     {
@@ -157,6 +167,7 @@ namespace KlubNaCitateli.Sites
                         numPages.Value = brojStrani.ToString();
 
                     }
+
                     topics.InnerHtml = innerHTML.ToString();
 
                     reader.Close();
@@ -165,19 +176,13 @@ namespace KlubNaCitateli.Sites
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine(ex.Message);
+                    lblError.Text = ex.Message;
                 }
                 finally
                 {
                     connection.Close();
                 }
             }
-
-
-
         }
-
-
-
     }
 }

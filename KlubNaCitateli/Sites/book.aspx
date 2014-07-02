@@ -100,6 +100,33 @@
                 });
             });
 
+            $("#btnAddToFavorites").on("click", function(){
+                
+                var userId = '<%=IDUser %>';
+
+                if(userId != -1) {
+                    var service = new KlubNaCitateli.ProfileService();
+                    var json = {
+                        userId: userId,
+                        bookId: '<%=IDBook %>'
+                    };
+
+                    service.AddToFavorites(JSON.stringify(json), function(result){
+
+                        var res = JSON.parse(result);
+                        if(res.status == "success") {
+                            alert(res.message);
+                        }
+                        else {
+                            alert(res.message);
+                        }
+                    });
+                }
+                else {
+                    alert("You must login to add books to favorites.");
+                }
+            });
+
             $("#btnComment").on("click", function(){
             
                 var userId = '<%=IDUser %>';
@@ -119,7 +146,7 @@
                             
                             var res = JSON.parse(result);
                             if(res.status == "success") {
-                                var content = "<div class='bubble-list'><div class='bubble clearfix'><a class='bubble-username' href='profile.aspx?id=" + res.userid + "'>" + res.username +  "</a><div class='bubble-content'><div class='point'></div><p class='bubble-user-comment'>" + res.comment + "</p></div></div></div>";
+                                var content = "<div class='bubble-list'><div class='bubble clearfix'><a class='bubble-username' href='profile.aspx?id=" + res.userid + "'>" + res.username + "</a><div class='bubble-content'><div class='point'></div><p class='bubble-user-comment'>" + res.comment + "</p></div></div></div>";
                                 $("#mainContent_comments").append(content);
                             }
                             else {
@@ -144,6 +171,7 @@
     <asp:ScriptManager runat="server" ID="scriptManager">
         <Services>
             <asp:ServiceReference Path="../Services/BookService.svc" />
+            <asp:ServiceReference Path="../Services/ProfileService.svc" />
         </Services>
     </asp:ScriptManager>
     <asp:Label ID="error" runat="server" Text=""></asp:Label>
@@ -167,7 +195,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <asp:Button ID="btnAddFavourites" runat="server" Text="Add" />
+                                        <input id="btnAddToFavorites" type="button" value="Add to favorites" />
                                     </td>
                                 </tr>
                                 <tr>
@@ -180,13 +208,17 @@
                                         <table id="links">
                                             <tr>
                                                 <td>
-                                                    <label>
-                                                        Download/Buy Links</label>
+                                                    Download / Buy Links
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <asp:Label ID="lblLinks" runat="server"></asp:Label>
+                                                    <asp:HyperLink ID="hlAmazon" runat="server">www.amazon.com</asp:HyperLink>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <asp:HyperLink ID="hlEbooks" runat="server">www.ebooks.com</asp:HyperLink>
                                                 </td>
                                             </tr>
                                         </table>

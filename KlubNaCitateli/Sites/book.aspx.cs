@@ -279,6 +279,11 @@ namespace KlubNaCitateli.Sites
 
                     tags.InnerHtml = sb.ToString();
 
+                    //Dodavanje buy/download linkovi
+                    hlAmazon.NavigateUrl = "http://www.amazon.com/gp/product/" + book.ISBN;
+                    hlEbooks.NavigateUrl = "http://www.ebooks.com/searchapp/searchresults.net?term=" + book.ISBN;
+
+
                     ViewState["Book"] = book;
                 }
                 catch (Exception e)
@@ -315,7 +320,7 @@ namespace KlubNaCitateli.Sites
                         while (reader.Read())
                         {
                             sb.Append("<div class='bubble-list'><div class='bubble clearfix'>");
-                            sb.Append("<a class='bubble-username' href='profile.aspx?id=" + reader["IDUser"].ToString() + "'>" + reader["Username"] +  "</a>");
+                            sb.Append("<a class='bubble-username' href='profile.aspx?id=" + reader["IDUser"].ToString() + "'>" + reader["Username"] + "</a>");
                             sb.Append("<div class='bubble-content'><div class='point'></div><p class='bubble-user-comment'>" + reader["Comment"] + "</p></div></div></div>");
                         }
                         comments.InnerHtml = sb.ToString();
