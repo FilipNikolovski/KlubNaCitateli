@@ -50,7 +50,10 @@
 
             }
 
-
+            $(".bookname").click(function () {
+                var id = $(this).parent().find(".idbook").html();
+                window.location = "book.aspx?id=" + id;
+            })
             $("#myProfileLink").addClass("active");
 
             $("#mainContent_saveCategories").on("click", function () {
@@ -261,13 +264,7 @@
          
     </script>
     <style type="text/css">
-        #mainContent_profileImg
-        {
-            width: 200px;
-            max-height: 200px;
-            background-position: center;
-            background-size: 90%;
-        }
+       
         #mainContent_lblAbout
         {
             -webkit-box-shadow: 8px 8px 6px -6px black;
@@ -372,19 +369,19 @@
             margin-left: 20px;
             padding-bottom: 15px;
         }
-        #profileThreads
+        #profileThreads, #userbookcomments
         {
             float: left;
-            width: 50%;
-            margin-left: 30px;
-            margin: 0px !important;
+            width: 23%;
+            margin-top:0px !important;
+            margin-right: 10px;
         }
         .profile
         {
             max-height: 200px;
             overflow: hidden;
         }
-        #profileImg
+        #mainContent_profileImg
         {
             display: block;
             max-width: 100%; /* just in case, to force correct aspect ratio */
@@ -410,6 +407,34 @@
         {
             cursor:pointer;
         }
+        .bookthumbnail
+        {
+            width:50px;
+            height:70px;
+        }
+        .bookname
+        {
+            height:100%;
+            margin-top:-100px;
+            font-weight:bold;
+        }
+        #mainContent_comments
+        {
+            
+            height:300px;
+            overflow-y:auto;
+            
+        }
+        .books
+        {
+            min-height:80px;
+            height:auto;
+            margin-bottom:5px;
+        } 
+        .bookname:hover
+        {
+            cursor:pointer;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="mainContent" runat="server">
@@ -423,16 +448,17 @@
     <asp:HiddenField ID="idsession" runat="server" />
     <asp:Table ID="Table1" runat="server" Width="100%">
         <asp:TableRow Style="margin-bottom: 20px;">
-            <asp:TableCell Width="200px" VerticalAlign="Top">
+            <asp:TableCell VerticalAlign="Top">
                 <asp:Table ID="Table2" runat="server">
-                    <asp:TableRow>
-                        <asp:TableCell CssClass="profile">
-                            <img runat="server" id="profileImg" src="/Images/user-icon.png" alt="" />
+                    <asp:TableRow Width="200px">
+                        <asp:TableCell >
+                        <div class="profile">
+                            <img runat="server" id="profileImg" src="/Images/user-icon.png" alt="" /></div>
                         </asp:TableCell>
                     </asp:TableRow>
                     <asp:TableRow>
-                        <asp:TableCell>
-                            <asp:FileUpload ID="profilePicture" runat="server" Visible="false" />
+                        <asp:TableCell >
+                            <asp:FileUpload ID="profilePicture" CssClass="profilepic" runat="server" Visible="false" />
                             <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Always">
                                 <Triggers>
                                     <asp:PostBackTrigger ControlID="changePicBtn" />
@@ -453,8 +479,8 @@
                             <asp:Label runat="server" ID="nameLbl" Font-Size="20"></asp:Label>
                         </asp:TableCell>
                     </asp:TableRow>
-                    <asp:TableRow>
-                        <asp:TableCell>
+                    <asp:TableRow Width="100%">
+                        <asp:TableCell >
                             <asp:Table ID="Table4" runat="server">
                                 <asp:TableRow Width="319px">
                                     <asp:TableCell Width="150px">
@@ -495,8 +521,8 @@
                     </asp:TableRow>
                     <asp:TableRow Width="319px">
                         <asp:TableCell>
-                            <asp:Label ID="lblAbout" runat="server" Text="About" Width="100%" Height="200px"></asp:Label>
-                            <input type="text" id="tbAbout" value="" style="width: 100%; height: 200px;" />
+                            <asp:Label ID="lblAbout" runat="server" Text="About" Width="568px" Height="200px"></asp:Label>
+                            <textarea id="tbAbout" rows="12" cols="70" style="resize:none;"></textarea><br />
                             <input type="button" id="changeAboutBtn" value="Edit about" />
                             <input type="button" id="confirmChangeAboutBtn" value="Confirm edit" />
                             <input type="button" id="cancelEditA" value="Cancel" />
@@ -532,8 +558,13 @@
             </div>
         </fieldset>
         <fieldset id="profileThreads">
-            <legend>Profile threads:</legend>
+            <legend>User threads:</legend>
             <div id="threads" runat="server">
+            </div>
+        </fieldset>
+        <fieldset id="userbookcomments">
+            <legend>Books user commented on:</legend>
+            <div id="comments" runat="server">
             </div>
         </fieldset>
         <div class='nodiv'>

@@ -53,6 +53,7 @@ namespace KlubNaCitateli.Sites
                         {
                             saveCategories.Visible = true;
                             allCategories.Visible = true;
+                            changePicBtn.Visible = true;
                         }
                      }
 
@@ -120,6 +121,18 @@ namespace KlubNaCitateli.Sites
                     }
                     reader.Close();
                     threads.InnerHtml = innerHTML.ToString();
+                    innerHTML.Clear();
+                    command.CommandText = "Select distinct books.idbook, name, thumbnail from books, bookcomments where iduser=?iduser and books.idbook=bookcomments.idbook";
+                    reader = command.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            innerHTML.Append("<div class='books'><div style='display:none;' class='idbook'>" + reader["idbook"] + "</div> <img src='" + reader["thumbnail"] + " alt='' class='bookthumbnail'/><span class='bookname'>" + reader["name"] + "</span></div>");
+                        }
+                    }
+                    reader.Close();
+                    comments.InnerHtml = innerHTML.ToString();
                 }
                 catch (Exception ex)
                 {
@@ -250,8 +263,24 @@ namespace KlubNaCitateli.Sites
                     oGraphics.Dispose();
                     profilePicture.Visible = false;
                     changePicBtn.Text = "Change Picture";
-
-                    Response.Redirect("/Sites/profile.aspx?id=" + Session["Username"].ToString());
+                    using (MySqlConnection connection = new MySqlConnection())
+                    {
+                        connection.ConnectionString = ConfigurationManager.ConnectionStrings["BooksConn"].ConnectionString;
+                        try
+                        {
+                            connection.Open();
+                            MySqlCommand command = new MySqlCommand();
+                            command.CommandText = "update users set profilepicture=?profilepicture where iduser=?iduser";
+                            command.Connection = connection;
+                            command.Parameters.AddWithValue("?profilepicture", Session["Username"] + ext);
+                            command.Parameters.AddWithValue("?iduser", iduser);
+                            command.ExecuteNonQuery();
+                        }
+                        catch (Exception ex)
+                        { }
+                        finally { connection.Close(); }
+                    }
+                    Response.Redirect("../Sites/profile.aspx?id=" + Session["Id"].ToString());
                 }
                 else
                 {

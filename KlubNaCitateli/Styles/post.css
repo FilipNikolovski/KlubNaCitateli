@@ -11,204 +11,193 @@
 .picture
 {
     max-height: 200px;
-  overflow: hidden; 
-  
+    overflow: hidden;
 }
 .maincontent
 {
-margin-top:10px;
+    margin-top: 10px;
 }
 .userpicture
 {
-    
-    
     display: block;
-      max-width: 100%;
-      /* just in case, to force correct aspect ratio */
-      height: auto !important;
-      width: auto\9; /* ie8+9 */
-      /* lt ie8 */
-      -ms-interpolation-mode: bicubic; 
-  margin-left:auto;
-
+    max-width: 100%; /* just in case, to force correct aspect ratio */
+    height: auto !important;
+    width: auto\9; /* ie8+9 */ /* lt ie8 */
+    -ms-interpolation-mode: bicubic;
+    margin-left: auto;
 }
 .banUser:hover, .unBanUser:hover, .deletePost:hover
 {
-cursor:pointer;
+    cursor: pointer;
 }
 .usernameLink:hover
 {
-cursor:pointer;
+    cursor: pointer;
 }
 .postdetails
 {
-    clear:both;
-    height:auto;
+    clear: both;
+    height: auto;
 }
 .userinfo
 {
-    float:left;
-    width:20%;
-    height:80%
+    float: left;
+    width: 20%;
+    height: 80%;
 }
 .posttext
 {
-    float:right;
-    width:79%;
-    min-height:100%;
-    height:auto;
-    border-left:1px solid gray;
-    position:relative;
+    float: right;
+    width: 79%;
+    min-height: 100%;
+    height: auto;
+    border-left: 1px solid gray;
+    position: relative;
 }
 .maintext
 {
-   border-bottom:1px solid gray; 
-  padding:10px;
-   margin-bottom:30px;
-   min-height:260px;
-   height:auto;
-  
-    
+    border-bottom: 1px solid gray;
+    padding: 10px;
+    margin-bottom: 30px;
+    min-height: 260px;
+    height: auto;
 }
 .comm
 {
-border:1px solid gray;
-margin:3px;
-min-height:250px;
-height:auto;
-
+    border: 1px solid gray;
+    margin: 3px;
+    min-height: 250px;
+    height: auto;
 }
 img
 {
-
 }
 .comments
 {
- margin-top:10px;
-   margin-left:20px;
-   margin-right:20px;
+    margin-top: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 .posthead
 {
-background-color:Black;
-color:White;
-clear:both;
+    background-color: Black;
+    color: White;
+    clear: both;
 }
 .deletePost
 {
-float:right;
+    float: right;
 }
 .postdateold
 {
-float:left;
+    float: left;
 }
 
 .noDiv
 {
-    clear:both;
+    clear: both;
 }
 
 .quote
 {
-background-color:LightGray;
-margin:20px;
-font-style:italic;
-border-radius:5px;
-padding:5px;
+    background-color: LightGray;
+    margin: 20px;
+    font-style: italic;
+    border-radius: 5px;
+    padding: 5px;
 }
 .leftquote
 {
-background-size:120%;
-margin-top:-10px;
+    background-size: 120%;
+    margin-top: -10px;
 }
 .btnreply
 {
-text-align:right;
-height:30px;
-background-color:LightGray;
-position:absolute;
-bottom:0px;
-width:100%;
+    text-align: right;
+    height: 30px;
+    background-color: LightGray;
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
 }
 .quoteBorder
 {
-    border-bottom:1px gray solid;
+    border-bottom: 1px gray solid;
 }
 .username, .banusr, .posts
 {
-margin-left:10px;
-margin-bottom:10px;
-margin-top:10px;
-text-align:center;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    text-align: center;
 }
 .newpostarea
 {
-
-border:1px solid gray;
-margin:8px;
+    border: 1px solid gray;
+    margin: 8px;
 }
 #demo
 {
-margin-top:5px;
-margin-bottom:5px;
-float:right;
-max-width:390px;
-min-width:130px;
-width:auto;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    float: right;
+    max-width: 390px;
+    min-width: 130px;
+    width: auto;
 }
 .help2
 {
-clear:both;
-height:auto;
-min-height:30px;
+    clear: both;
+    height: auto;
+    min-height: 30px;
 }
 .help
 {
-clear:both;
-min-height:40px;
-height:auto;
-padding-bottom:10px;
+    clear: both;
+    min-height: 40px;
+    height: auto;
+    padding-bottom: 10px;
 }
 .replyQuote
 {
-text-decoration:underline;
-font-weight:bold;
-padding:4px;
+    text-decoration: underline;
+    font-weight: bold;
+    padding: 4px;
 }
 .replyQuote:hover
 {
-cursor:pointer;
+    cursor: pointer;
 }
 .commentsarea
 {
-clear:both;
+    clear: both;
 }
 .posts
 {
-clear:both;
+    clear: both;
 }
 .text
 {
-float:left;
-width:80%;
+    float: left;
+    width: 80%;
 }
 .btnDiv
 {
-float:right;
-width:20%;
-height:200px;
-position:relative;
+    float: right;
+    width: 20%;
+    height: 200px;
+    position: relative;
 }
 .submitPost
 {
-width:100px;
-height:30px;
-position:absolute;
-bottom:85px;
-left:30%;
+    width: 100px;
+    height: 30px;
+    position: absolute;
+    bottom: 85px;
+    left: 30%;
 }
 .newPostText
 {
-height:auto;
-margin:10px;
+    height: auto;
+    margin: 10px;
 }

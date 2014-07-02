@@ -50,14 +50,15 @@ namespace KlubNaCitateli.Sites
                             }
                             read.Close();
                             MySqlCommand command2 = new MySqlCommand();
-                            command2.CommandText = "SELECT surname from users where username=?username OR Email=?email";
+                            command2.CommandText = "SELECT surname, username from users where username=?username OR Email=?email";
                             command2.Parameters.AddWithValue("?username", username.Text.ToString());
                             command2.Parameters.AddWithValue("?email", username.Text.ToString());
                             command2.Connection = conn;
                             MySqlDataReader read1 = command2.ExecuteReader();
                             if (read1.Read())
                             {
-                                Session["Surname"] = read1.GetValue(0).ToString();
+                                Session["Surname"] = read1["surname"].ToString();
+                                Session["Username"] = read1["username"].ToString();
                             }
 
                             read1.Close();
