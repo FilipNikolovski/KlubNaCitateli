@@ -37,13 +37,17 @@ namespace KlubNaCitateli.Sites
                 try
                 {
                     connection.Open();
-                    UserId = Convert.ToInt32(Request.QueryString["id"]);
-                        iduser.Value=UserId.ToString();
 
-                    if (UserId == 0)
+                    string id = Request.QueryString["id"];
+                    int tempId = 0;
+
+                    if (string.IsNullOrEmpty(id) || !Int32.TryParse(id,out tempId))
                     {
                         Response.Redirect("~/Sites/error.aspx");
                     }
+
+                    iduser.Value = id;
+                    UserId = tempId;
 
                     if (Session["Id"] != null)
                     {
@@ -53,9 +57,10 @@ namespace KlubNaCitateli.Sites
                         {
                             saveCategories.Visible = true;
                             allCategories.Visible = true;
+                            showAll.Visible = true;
                             changePicBtn.Visible = true;
                         }
-                     }
+                    }
 
                     MySqlCommand command = new MySqlCommand();
                     command.CommandText = "select iduser, name, surname, username, email, about, profilepicture from users where iduser=?iduser";
@@ -76,7 +81,7 @@ namespace KlubNaCitateli.Sites
                         {
                             profileImg.Src = "~/Images/ProfilePicture/" + (reader["profilepicture"].ToString());
                         }
-                       
+
                     }
                     else
                     {
@@ -85,7 +90,7 @@ namespace KlubNaCitateli.Sites
                     reader.Close();
 
                     //Jcarousel User Books
-                    command.CommandText = "select distinct thumbnail, name, ub.idbook from userbooks as ub, books as b where iduser=?iduser and b.idbook=ub.idbook";
+                    command.CommandText = "select distinct thumbnail, name, ub.idbook, b.ISBN from userbooks as ub, books as b where iduser=?iduser and b.idbook=ub.idbook";
 
                     command.Parameters.Clear();
                     command.Parameters.AddWithValue("?iduser", UserId);
@@ -97,7 +102,10 @@ namespace KlubNaCitateli.Sites
                         sb2.Append("<div class='jcarousel' data-jcarousel='true'><ul>");
                         while (reader.Read())
                         {
-                            sb2.Append("<li><a href='book.aspx?id=" + reader["IDBook"] + "'><img src='" + reader["thumbnail"].ToString() + "' /></a></li>");
+                            if (reader["thumbnail"].ToString().StartsWith(reader["ISBN"].ToString()))
+                                sb2.Append("<li><a href='book.aspx?id=" + reader["IDBook"] + "'><img src='/Images/BookPicture/" + reader["thumbnail"].ToString() + "' /></a></li>");
+                            else
+                                sb2.Append("<li><a href='book.aspx?id=" + reader["IDBook"] + "'><img src='" + reader["thumbnail"].ToString() + "' /></a></li>");
                         }
                         sb2.Append("</ul></div>");
                         sb2.Append("<a href='#' class='jcarousel-control-prev'>&lsaquo;</a>");
@@ -113,7 +121,7 @@ namespace KlubNaCitateli.Sites
                     StringBuilder innerHTML = new StringBuilder();
                     if (reader.HasRows)
                     {
-                        
+
                         while (reader.Read())
                         {
                             innerHTML.Append("<div class='example-commentheading'><div style='display:none;' class='idthread'>" + reader["idthread"] + "</div><div class='threadname'>" + reader["threadname"].ToString() + "</div></div>");
@@ -122,13 +130,16 @@ namespace KlubNaCitateli.Sites
                     reader.Close();
                     threads.InnerHtml = innerHTML.ToString();
                     innerHTML.Clear();
-                    command.CommandText = "Select distinct books.idbook, name, thumbnail from books, bookcomments where iduser=?iduser and books.idbook=bookcomments.idbook";
+                    command.CommandText = "Select distinct books.idbook, name, thumbnail, books.ISBN from books, bookcomments where iduser=?iduser and books.idbook=bookcomments.idbook";
                     reader = command.ExecuteReader();
                     if (reader.HasRows)
                     {
                         while (reader.Read())
                         {
-                            innerHTML.Append("<div class='books'><div style='display:none;' class='idbook'>" + reader["idbook"] + "</div> <img src='" + reader["thumbnail"] + " alt='' class='bookthumbnail'/><span class='bookname'>" + reader["name"] + "</span></div>");
+                            if (reader["thumbnail"].ToString().StartsWith(reader["ISBN"].ToString()))
+                                innerHTML.Append("<div class='books'><div style='display:none;' class='idbook'>" + reader["idbook"] + "</div> <img src='/Images/BookPicture/" + reader["thumbnail"] + "' alt='' class='bookthumbnail'/><span class='bookname'>" + reader["name"] + "</span></div>");
+                            else
+                                innerHTML.Append("<div class='books'><div style='display:none;' class='idbook'>" + reader["idbook"] + "</div> <img src='" + reader["thumbnail"] + " alt='' class='bookthumbnail'/><span class='bookname'>" + reader["name"] + "</span></div>");
                         }
                     }
                     reader.Close();
@@ -198,8 +209,8 @@ namespace KlubNaCitateli.Sites
                 }
             }
         }
-       
-        
+
+
         public void ChangePicture(Object sender, EventArgs e)
         {
             if (changePicBtn.Text == "Change Picture")

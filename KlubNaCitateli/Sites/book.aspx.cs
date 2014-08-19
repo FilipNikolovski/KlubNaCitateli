@@ -17,7 +17,7 @@ namespace KlubNaCitateli.Sites
         public int IDBook { get; set; }
         public int IDUser { get; set; }
         public bool HasVoted { get; set; }
-
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -220,7 +220,7 @@ namespace KlubNaCitateli.Sites
                     reader.Close();
 
                     //Jcarousel Recommendation Books
-                    command.CommandText = "SELECT b.IDBook, b.Thumbnail FROM Books as b, BelongsTo as bt, Categories as c WHERE b.IDBook = bt.IDBook AND bt.IDCategory = c.IDCategory AND c.Name = ?CategoryName ORDER BY rand() LIMIT 10";
+                    command.CommandText = "SELECT b.IDBook, b.Thumbnail, b.ISBN FROM Books as b, BelongsTo as bt, Categories as c WHERE b.IDBook = bt.IDBook AND bt.IDCategory = c.IDCategory AND c.Name = ?CategoryName ORDER BY rand() LIMIT 10";
                     command.Connection = connection;
                     foreach (string category in book.Categories)
                     {
@@ -235,7 +235,10 @@ namespace KlubNaCitateli.Sites
                             sb2.Append("<div class='jcarousel' data-jcarousel='true'><ul>");
                             while (reader.Read())
                             {
-                                sb2.Append("<li><a href='book.aspx?id=" + reader["IDBook"] + "'><img src='" + reader["thumbnail"].ToString() + "' /></a></li>");
+                                if(reader["thumbnail"].ToString().StartsWith(reader["ISBN"].ToString()))
+                                    sb2.Append("<li><a href='book.aspx?id=" + reader["IDBook"] + "'><img src='/Images/BookPicture/" + reader["thumbnail"].ToString() + "' /></a></li>");
+                                else
+                                    sb2.Append("<li><a href='book.aspx?id=" + reader["IDBook"] + "'><img src='" + reader["thumbnail"].ToString() + "' /></a></li>");
                             }
                             sb2.Append("</ul></div>");
                             sb2.Append("<a href='#' class='jcarousel-control-prev'>&lsaquo;</a>");
@@ -257,6 +260,8 @@ namespace KlubNaCitateli.Sites
                     //popolnuvanje na komponentite
                     if (book.ImageSrc == "defaultImage.png")
                         imgBook.ImageUrl = "~/Images/defaultImage.png";
+                    else if (book.ImageSrc.StartsWith(book.ISBN))
+                        imgBook.ImageUrl = "~/Images/BookPicture/" + book.ImageSrc;
                     else
                         imgBook.ImageUrl = book.ImageSrc;
 
@@ -321,9 +326,11 @@ namespace KlubNaCitateli.Sites
                         StringBuilder sb = new StringBuilder();
                         while (reader.Read())
                         {
-                            sb.Append("<div class='bubble-list'><div class='bubble clearfix'>");
+                            sb.Append("<div class='bubble-list' id='comment_" + reader["IDUser"] + "_" + reader["IDBook"] + "_" + reader["Date"] + "'><div class='bubble clearfix'>");
                             sb.Append("<a class='bubble-username' href='profile.aspx?id=" + reader["IDUser"].ToString() + "'>" + reader["Username"] + "</a>");
-                            sb.Append("<div class='bubble-content'><div class='point'></div><p class='bubble-user-comment'>" + reader["Comment"] + "</p></div></div></div>");
+                            if (Session["Type"] != null && Session["Type"].ToString().Equals("administrator"))
+                                sb.Append("<a id='removeComment_" + reader["IDUser"] + "_" + reader["IDBook"] + "_" + reader["Date"] + "' href='#'>[X]</a>");
+                            sb.Append("<div class='bubble-content'><div class='point'></div><p class='bubble-user-comment' alt='" + reader["Date"] + "'>" + reader["Comment"] + "</p></div></div></div>");
                         }
                         comments.InnerHtml = sb.ToString();
                     }

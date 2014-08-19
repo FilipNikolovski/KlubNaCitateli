@@ -86,7 +86,6 @@ namespace KlubNaCitateli.Sites
                 }
                 catch (Exception ex)
                 {
-                    lblError.Text = ex.Message;
                 }
                 finally
                 {

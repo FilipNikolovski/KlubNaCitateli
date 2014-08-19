@@ -13,6 +13,9 @@ using MySql.Data.MySqlClient;
 using System.Configuration;
 using System.Data;
 using System.Web.Services;
+using System.Drawing;
+using System.IO;
+using System.Drawing.Drawing2D;
 
 namespace KlubNaCitateli.Sites
 {
@@ -25,6 +28,7 @@ namespace KlubNaCitateli.Sites
             if (!IsPostBack)
             {
                 FillCategoriesGrid();
+                FillTagsGrid();
                 FillUsersGrid();
 
                 if (Session["Type"] == null || Session["Type"].ToString() != "administrator")
@@ -62,6 +66,20 @@ namespace KlubNaCitateli.Sites
                     cblCategories.DataSource = ds.Tables["Categories"];
                     cblCategories.DataTextField = "Name";
                     cblCategories.DataBind();
+
+                    MySqlDataReader reader = command.ExecuteReader();
+
+                    if (reader.HasRows)
+                    {
+                        reader.Read();
+                        categories.Value += reader["Name"].ToString();
+
+                        while (reader.Read())
+                        {
+                            categories.Value += "," + reader["Name"].ToString();
+                        }
+                        reader.Close();
+                    }
 
                     ViewState["Categories"] = ds;
                 }
@@ -104,6 +122,44 @@ namespace KlubNaCitateli.Sites
                 catch (Exception e)
                 {
                     lblError.Text = e.Message;
+                    lblError.Visible = true;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+        }
+
+        private void FillTagsGrid()
+        {
+            using (MySqlConnection connection = new MySqlConnection())
+            {
+                connection.ConnectionString = ConfigurationManager.ConnectionStrings["BooksConn"].ConnectionString;
+
+                try
+                {
+                    connection.Open();
+
+                    string query = "SELECT * FROM Tags";
+
+                    MySqlCommand command = new MySqlCommand(query, connection);
+
+                    MySqlDataAdapter dataAdapter = new MySqlDataAdapter();
+                    dataAdapter.SelectCommand = command;
+
+                    DataSet ds = new DataSet();
+
+                    dataAdapter.Fill(ds, "Tags");
+
+                    gvTags.DataSource = ds.Tables["Tags"];
+                    gvTags.DataBind();
+
+                    ViewState["Tags"] = ds;
+                }
+                catch (Exception ex)
+                {
+                    lblError.Text = ex.Message;
                     lblError.Visible = true;
                 }
                 finally
@@ -395,6 +451,149 @@ namespace KlubNaCitateli.Sites
             }
         }
 
+        protected void gvTags_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        {
+            gvTags.EditIndex = -1;
+
+            DataSet ds = (DataSet)ViewState["Tags"];
+
+            gvTags.DataSource = ds.Tables["Tags"];
+            gvTags.DataBind();
+        }
+
+        protected void gvTags_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            using (MySqlConnection connection = new MySqlConnection())
+            {
+                connection.ConnectionString = ConfigurationManager.ConnectionStrings["BooksConn"].ConnectionString;
+
+                try
+                {
+                    connection.Open();
+
+                    string query = "DELETE FROM Tagged WHERE IDTag=?IDTag";
+
+                    MySqlCommand command = new MySqlCommand(query, connection);
+                    command.Parameters.AddWithValue("?IDTag", gvTags.DataKeys[e.RowIndex].Value);
+                    command.ExecuteNonQuery();
+
+                    query = "DELETE FROM Tags WHERE IDTag=?IDTag";
+                    command.CommandText = query;
+                    command.ExecuteNonQuery();
+
+                }
+                catch (Exception ex)
+                {
+                    lblError.Text = ex.Message;
+                    lblError.Visible = true;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+
+            FillTagsGrid();
+        }
+
+        protected void gvTags_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+            gvTags.EditIndex = e.NewEditIndex;
+
+            DataSet ds = (DataSet)ViewState["Tags"];
+
+            gvTags.DataSource = ds.Tables["Tags"];
+            gvTags.DataBind();
+        }
+
+        protected void gvTags_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        {
+            using (MySqlConnection connection = new MySqlConnection())
+            {
+                connection.ConnectionString = ConfigurationManager.ConnectionStrings["BooksConn"].ConnectionString;
+
+                try
+                {
+                    connection.Open();
+
+                    GridViewRow row = (GridViewRow)gvTags.Rows[e.RowIndex];
+                    TextBox tbName = (TextBox)row.Cells[3].Controls[0];
+
+                    string query = "UPDATE Tags SET Name=?Name WHERE IDTag=?IDTag";
+
+                    MySqlCommand command = new MySqlCommand(query, connection);
+                    command.Parameters.AddWithValue("?Name", tbName.Text);
+                    command.Parameters.AddWithValue("?IDTag", gvTags.DataKeys[e.RowIndex].Value);
+                    command.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    lblError.Text = ex.Message;
+                    lblError.Visible = true;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+
+                gvTags.EditIndex = -1;
+                FillTagsGrid();
+            }
+        }
+
+        protected void gvTags_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            gvTags.PageIndex = e.NewPageIndex;
+
+            DataSet ds = (DataSet)ViewState["Tags"];
+
+            gvTags.DataSource = ds.Tables["Tags"];
+            gvTags.DataBind();
+        }
+
+        protected void btnAddTag_Click(object sender, EventArgs e)
+        {
+            using (MySqlConnection connection = new MySqlConnection())
+            {
+                connection.ConnectionString = ConfigurationManager.ConnectionStrings["BooksConn"].ConnectionString;
+
+                try
+                {
+                    connection.Open();
+
+                    string query = "SELECT * FROM Tags WHERE Name=?Name";
+
+                    MySqlCommand command = new MySqlCommand(query, connection);
+                    command.Parameters.AddWithValue("?Name", tbCategory.Text);
+
+                    MySqlDataReader reader = command.ExecuteReader();
+
+                    if (!reader.HasRows)
+                    {
+                        reader.Close();
+                        query = "INSERT INTO Tags (Name) VALUES (?Name)";
+                        command.CommandText = query;
+                        command.ExecuteNonQuery();
+                    }
+                    else
+                    {
+                        ClientScript.RegisterStartupScript(this.GetType(), "Alert", "$(document).ready(function(){alert('That tag already exists');});", true);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    lblError.Text = ex.Message;
+                    lblError.Visible = true;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+
+            FillCategoriesGrid();
+        }
+
         protected void gvBooks_SelectedIndexChanged(object sender, EventArgs e)
         {
             bookField.Value = "";
@@ -666,6 +865,283 @@ namespace KlubNaCitateli.Sites
             gvUsers.DataSource = ds.Tables["Users"];
             gvUsers.DataBind();
         }
+
+        protected void btnSubmit_Click(object sender, EventArgs e)
+        {
+            string ISBN = tbISBN.Text;
+            string BookName = tbBookName.Text;
+            string Language = tbLanguage.Text;
+            string YearPublished = tbYearPublished.Text;
+            string Authors = tbAuthors.Text;
+            string Tags = tbAddTags.Text;
+            string Categories = tbAddCategories.Text;
+            string Description = tbDescription.Text;
+
+            using (MySqlConnection conn = new MySqlConnection())
+            {
+                conn.ConnectionString = ConfigurationManager.ConnectionStrings["BooksConn"].ConnectionString;
+                try
+                {
+                    conn.Open();
+                    string query = "SELECT * FROM Books WHERE ISBN = ?ISBN";
+                    MySqlCommand command = new MySqlCommand(query, conn);
+
+                    command.Parameters.AddWithValue("?ISBN", ISBN);
+                    MySqlDataReader reader = command.ExecuteReader();
+
+                    if (reader.HasRows)
+                    {
+                        string script = "<script>$(document).ready(function(){alert('The book already exists.');});</script>";
+                        Page.ClientScript.RegisterStartupScript(this.GetType(), "openDialog", script);
+                        return;
+                    }
+                    else if (imageUpload.HasFile) //Add the book to the database and upload the image
+                    {
+                        reader.Close();
+                        string ext = Path.GetExtension(this.imageUpload.FileName);
+                        if (ext == ".jpg" || ext == ".png" || ext == ".JPG" || ext == ".PNG")
+                        {
+                            Bitmap originalBMP = new Bitmap(imageUpload.FileContent);
+
+                            // Calculate the new image dimensions
+                            float origWidth = originalBMP.Width;
+                            float origHeight = originalBMP.Height;
+                            float sngRatio = origWidth / origHeight;
+                            float newWidth = 300;
+                            float newHeight = newWidth / sngRatio;
+
+                            Bitmap newBMP = new Bitmap(originalBMP, (int)newWidth, (int)newHeight);
+
+                            Graphics oGraphics = Graphics.FromImage(newBMP);
+                            oGraphics.SmoothingMode = SmoothingMode.AntiAlias;
+                            oGraphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                            oGraphics.DrawImage(originalBMP, 0, 0, newWidth, newHeight);
+
+                            newBMP.Save(Server.MapPath("~/Images/BookPicture/") + (ISBN + ext));
+
+                            newWidth = 128;
+                            newHeight = newWidth / sngRatio;
+
+                            newBMP = new Bitmap(originalBMP, (int)newWidth, (int)newHeight);
+
+                            oGraphics = Graphics.FromImage(newBMP);
+                            oGraphics.SmoothingMode = SmoothingMode.AntiAlias;
+                            oGraphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                            oGraphics.DrawImage(originalBMP, 0, 0, newWidth, newHeight);
+
+                            newBMP.Save(Server.MapPath("~/Images/BookPicture/") + (ISBN + "-thumbnail" + ext));
+
+                            originalBMP.Dispose();
+                            newBMP.Dispose();
+                            oGraphics.Dispose();
+
+                            //Add the book in the db
+                            query = "INSERT INTO books (Name, Description, CoverLink, Thumbnail, YearPublished, Language, SumRating, NumVotes, DateAdded, ISBN) VALUES (?Name, ?Description, ?CoverLink, ?Thumbnail, ?YearPublished, ?Language, ?SumRating, ?NumVotes, ?DateAdded, ?ISBN)";
+                            command.CommandText = query;
+                            command.Parameters.Clear();
+                            command.Parameters.AddWithValue("?ISBN", ISBN);
+                            command.Parameters.AddWithValue("?Name", BookName);
+                            command.Parameters.AddWithValue("?Description", Description);
+                            command.Parameters.AddWithValue("?CoverLink", ISBN + ext);
+                            command.Parameters.AddWithValue("?Thumbnail", ISBN + "-thumbnail" + ext);
+                            command.Parameters.AddWithValue("?DateAdded", new DateTime().ToShortDateString());
+                            command.Parameters.AddWithValue("?YearPublished", YearPublished);
+                            command.Parameters.AddWithValue("?Language", Language);
+                            command.Parameters.AddWithValue("?SumRating", 0);
+                            command.Parameters.AddWithValue("?NumVotes", 0);
+
+                            command.ExecuteNonQuery();
+
+                            query = "INSERT INTO authors (Name) VALUES (?Name)";
+                            command.CommandText = query;
+                            string[] authorsList = Authors.Split(new char[] { ',' });
+                            foreach (string author in authorsList)
+                            {
+                                if (author.Trim() != "")
+                                {
+                                    command.CommandText = "select IDAuthor from authors where name=?name";
+                                    command.Parameters.Clear();
+                                    command.Parameters.AddWithValue("?name", author);
+                                    
+                                    reader = command.ExecuteReader();
+                                    if (!reader.HasRows)
+                                    {
+                                        command.Parameters.Clear();
+                                        command.Parameters.AddWithValue("?Name", author);
+                                        command.ExecuteNonQuery();
+                                    }
+                                    reader.Close();
+                                }
+                            }
+
+                            query = "SELECT IDBook FROM books WHERE Name=?Name AND isbn=?isbn";
+                            command.CommandText = query;
+                            command.Parameters.Clear();
+                            command.Parameters.AddWithValue("?Name", BookName);
+                            command.Parameters.AddWithValue("?isbn", ISBN);
+
+                            reader = command.ExecuteReader();
+
+                            int idBook = -1;
+                            if (reader.Read())
+                            {
+                                idBook = Int32.Parse(reader["IDBook"].ToString());
+
+                                reader.Close();
+                                foreach (string author in authorsList)
+                                {
+                                    if (author.Trim() != "")
+                                    {
+                                        query = "SELECT IDAuthor FROM authors WHERE Name=?Name";
+                                        command.CommandText = query;
+                                        command.Parameters.Clear();
+                                        command.Parameters.AddWithValue("?Name", author);
+
+                                        reader = command.ExecuteReader();
+                                        int idAuthor = -1;
+
+                                        if (reader.Read())
+                                        {
+                                            idAuthor = Int32.Parse(reader["IDAuthor"].ToString());
+                                            reader.Close();
+                                            query = "INSERT INTO wrote (IDAuthor, IDBook) VALUES (?IDAuthor, ?IDBook)";
+                                            command.CommandText = query;
+                                            command.Parameters.Clear();
+                                            command.Parameters.AddWithValue("?IDAuthor", idAuthor);
+                                            command.Parameters.AddWithValue("?IDBook", idBook);
+                                            command.ExecuteNonQuery();
+                                        }
+                                    }
+                                }
+                            }
+
+                            string[] categoriesList = Categories.Split(new char[] { ',' });
+                            foreach (string category in categoriesList)
+                            {
+                                if (category.Trim() != "")
+                                {
+                                    query = "SELECT IDCategory FROM categories WHERE Name=?CategoryName";
+                                    command.CommandText = query;
+                                    command.Parameters.Clear();
+                                    command.Parameters.AddWithValue("?CategoryName", category);
+
+                                    reader = command.ExecuteReader();
+                                    
+                                    if (!reader.HasRows)
+                                    {
+                                        reader.Close();
+                                        query = "INSERT INTO Categories (Name) VALUES (?Name)";
+                                        command.CommandText = query;
+                                        command.Parameters.Clear();
+                                        command.Parameters.AddWithValue("?Name", category);
+                                        command.ExecuteNonQuery();
+                                    }
+                                    else reader.Close();
+                                }
+                            }
+
+                            foreach (string category in categoriesList)
+                            {
+                                if (category.Trim() != "")
+                                {
+                                    query = "SELECT IDCategory FROM categories WHERE Name=?CategoryName";
+                                    command.CommandText = query;
+                                    command.Parameters.Clear();
+                                    command.Parameters.AddWithValue("?CategoryName", category);
+
+                                    reader = command.ExecuteReader();
+                                    int idCategory = -1;
+
+                                    if (reader.Read())
+                                    {
+                                        idCategory = Int32.Parse(reader["IDCategory"].ToString());
+                                        reader.Close();
+                                        query = "INSERT INTO belongsto (IDCategory, IDBook) VALUES (?IDCategory, ?IDBook)";
+                                        command.CommandText = query;
+                                        command.Parameters.Clear();
+                                        command.Parameters.AddWithValue("?IDCategory", idCategory);
+                                        command.Parameters.AddWithValue("?IDBook", idBook);
+                                        command.ExecuteNonQuery();
+                                    }
+                                }
+                            }
+
+                            string[] tagsList = Tags.Split(new char[] { ',' });
+                            foreach (string tag in tagsList)
+                            {
+                                if (tag.Trim() != "")
+                                {
+                                    query = "SELECT IDTag FROM tags WHERE Name=?TagName";
+                                    command.CommandText = query;
+                                    command.Parameters.Clear();
+                                    command.Parameters.AddWithValue("?TagName", tag);
+
+                                    reader = command.ExecuteReader();
+
+                                    if (!reader.HasRows)
+                                    {
+                                        reader.Close();
+                                        query = "INSERT INTO tags (Name) VALUES (?Name)";
+                                        command.CommandText = query;
+                                        command.Parameters.Clear();
+                                        command.Parameters.AddWithValue("?Name", tag);
+                                        command.ExecuteNonQuery();
+                                    }
+                                    else reader.Close();
+                                }
+                            }
+
+                            foreach (string tag in tagsList)
+                            {
+                                if (tag.Trim() != "")
+                                {
+                                    query = "SELECT IDTag FROM tags WHERE Name=?TagName";
+                                    command.CommandText = query;
+                                    command.Parameters.Clear();
+                                    command.Parameters.AddWithValue("?TagName", tag);
+
+                                    reader = command.ExecuteReader();
+                                    int idTag = -1;
+
+                                    if (reader.Read())
+                                    {
+                                        idTag = Int32.Parse(reader["IDTag"].ToString());
+                                        reader.Close();
+                                        query = "INSERT INTO tagged (IDTag, IDBook) VALUES (?IDTag, ?IDBook)";
+                                        command.CommandText = query;
+                                        command.Parameters.Clear();
+                                        command.Parameters.AddWithValue("?IDTag", idTag);
+                                        command.Parameters.AddWithValue("?IDBook", idBook);
+                                        command.ExecuteNonQuery();
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            string script = "<script>$(document).ready(function(){alert('The image file is not valid. Valid extensions are .jpg and .png! Try again.');});</script>";
+                            Page.ClientScript.RegisterStartupScript(this.GetType(), "openDialog", script);
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        string script = "<script>$(document).ready(function(){alert('Please choose a cover for the book.');});</script>";
+                        Page.ClientScript.RegisterStartupScript(this.GetType(), "openDialog", script);
+                        return;
+                    }
+                }
+                catch (Exception ex)
+                {
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+
+        }
+
 
     }
 }

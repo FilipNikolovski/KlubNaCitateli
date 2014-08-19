@@ -241,7 +241,10 @@ namespace KlubNaCitateli.Sites
                         foreach (Book book in books)
                         {
                             innerHTML.Append("<tr>");
-                            innerHTML.Append("<td><img src=" + book.ThumbnailSrc + " /></td>");
+                            if (book.ThumbnailSrc.StartsWith(book.ISBN))
+                                innerHTML.Append("<td><img src=/Images/BookPicture/" + book.ThumbnailSrc + " /></td>");
+                            else
+                                innerHTML.Append("<td><img src=" + book.ThumbnailSrc + " /></td>");
                             innerHTML.Append("<td>" + book.Name + "</td>");
                             innerHTML.Append("<td>" + book.YearPublished + "</td>");
                             if (book.NumVotes == 0)

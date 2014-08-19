@@ -1,0 +1,96 @@
+ul.tokens-token-list {
+  height: auto;
+  width: 300px;
+  border: 1px solid #aaaaaa;
+  border-radius: 3px;
+  cursor: text;
+  z-index: 100;
+  margin: 0;
+  padding: 0;
+  background: #ffffff;
+  list-style-type: none;
+  clear: both;
+  overflow: auto;
+}
+ul.tokens-token-list,
+div.tokens-suggestion-selector {
+  color: #e5e5e5;
+  font-size: 12px;
+  overflow: hidden;
+}
+ul.tokens-token-list > li {
+  list-style-type: none;
+  line-height: 1.5;
+  float: left;
+}
+ul.tokens-token-list .tokens-input-text {
+  outline: none;
+  border: 0;
+  padding: 3px 8px;
+  background-color: #ffffff;
+}
+ul.tokens-token-list .tokens-input-text:focus {
+  outline: 0;
+}
+ul.tokens-token-list .tokens-list-token-holder {
+  overflow: hidden;
+  height: auto;
+  margin: 3px 0 3px 3px;
+  padding: 1px 3px;
+  background: #989898;
+  cursor: default;
+  border-radius: 3px;
+  font-size: 11px;
+  white-space: nowrap;
+}
+ul.tokens-token-list .tokens-list-token-holder p,
+ul.tokens-token-list .tokens-list-token-holder .tokens-delete-token {
+  display: inline;
+  padding: 0;
+}
+ul.tokens-token-list .tokens-list-token-holder p {
+  margin: 0;
+}
+ul.tokens-token-list .tokens-delete-token {
+  cursor: pointer;
+  margin: 0 2px 0 5px;
+  font-weight: bold;
+}
+div.tokens-suggestion-selector {
+  border: 1px solid #aaaaaa;
+  border-radius: 3px;
+  background: #555555;
+  -moz-box-shadow: 0 0 5px #888888;
+  -webkit-box-shadow: 0 0 5px #888888;
+  box-shadow: 0 0 5px #888888;
+}
+div.tokens-suggestion-selector p {
+  margin: 0;
+  padding: 5px;
+  font-weight: bold;
+}
+div.tokens-suggestion-selector p.tokens-invalid-format,
+div.tokens-suggestion-selector p.tokens-existing-item {
+  color: #ff0000;
+}
+div.tokens-suggestion-selector ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  max-height: 300px;
+  overflow-y: auto;
+}
+div.tokens-suggestion-selector ul li {
+  border-top: 1px solid #ffffff;
+  border-bottom: 1px solid #ffffff;
+  padding: 5px;
+}
+div.tokens-suggestion-selector ul li.tokens-highlighted-suggestion {
+  background: #444444;
+}
+div.tokens-suggestion-selector ul li:first-child {
+  border-top: none;
+}
+div.tokens-suggestion-selector ul li:last-child {
+  border-bottom: none;
+}

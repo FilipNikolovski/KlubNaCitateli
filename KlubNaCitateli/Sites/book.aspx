@@ -162,7 +162,28 @@
                 }
             });
 
-            
+            $("[id^='removeComment_']").on("click", function() {
+                var list = $(this).attr("id").split("_");
+                var obj = {
+                    bookId : list[1],
+                    userId : list[2],
+                    date : list[3]
+                };
+                var service = new KlubNaCitateli.BookService();
+
+                service.RemoveBookComment(JSON.stringify(obj), function(result){
+                    var res = JSON.parse(result);
+                    if(res.status == "success") {
+                        alert(res.message);
+                        alert(res.commentId);
+                        $("#comments").remove(res.commentId);
+                    }
+                    else {
+                        alert(res.message);
+                    }
+                });
+
+            });
 
         }); 
     </script>
@@ -284,7 +305,8 @@
     </div>
     <div class="commentsSection">
         <div id="comments" runat="server">
-            <label>Comments:</label>
+            <label>
+                Comments:</label>
         </div>
         <div class="commentArea">
             <textarea id="commentText" rows="6" cols="50" style="resize: none;">

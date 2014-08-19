@@ -31,6 +31,15 @@ namespace KlubNaCitateli.Sites {
         protected global::System.Web.UI.WebControls.HiddenField selectedTab;
         
         /// <summary>
+        /// categories control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField categories;
+        
+        /// <summary>
         /// scriptManager control.
         /// </summary>
         /// <remarks>
@@ -112,6 +121,60 @@ namespace KlubNaCitateli.Sites {
         protected global::System.Web.UI.WebControls.GridView gvCategories;
         
         /// <summary>
+        /// tbTag control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbTag;
+        
+        /// <summary>
+        /// btnAddTag control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAddTag;
+        
+        /// <summary>
+        /// revTags control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revTags;
+        
+        /// <summary>
+        /// rfvTag control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvTag;
+        
+        /// <summary>
+        /// vSummary2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ValidationSummary vSummary2;
+        
+        /// <summary>
+        /// gvTags control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvTags;
+        
+        /// <summary>
         /// gvUsers control.
         /// </summary>
         /// <remarks>
@@ -130,6 +193,15 @@ namespace KlubNaCitateli.Sites {
         protected global::System.Web.UI.WebControls.TextBox tbISBN;
         
         /// <summary>
+        /// revISBN control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revISBN;
+        
+        /// <summary>
         /// tbBookName control.
         /// </summary>
         /// <remarks>
@@ -137,6 +209,15 @@ namespace KlubNaCitateli.Sites {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox tbBookName;
+        
+        /// <summary>
+        /// rfvBookName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvBookName;
         
         /// <summary>
         /// tbLanguage control.
@@ -148,6 +229,15 @@ namespace KlubNaCitateli.Sites {
         protected global::System.Web.UI.WebControls.TextBox tbLanguage;
         
         /// <summary>
+        /// revLanguage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revLanguage;
+        
+        /// <summary>
         /// tbYearPublished control.
         /// </summary>
         /// <remarks>
@@ -155,6 +245,15 @@ namespace KlubNaCitateli.Sites {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox tbYearPublished;
+        
+        /// <summary>
+        /// revYearPublished control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revYearPublished;
         
         /// <summary>
         /// imageUpload control.
@@ -175,6 +274,51 @@ namespace KlubNaCitateli.Sites {
         protected global::System.Web.UI.WebControls.TextBox tbAuthors;
         
         /// <summary>
+        /// rfvAuthors control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvAuthors;
+        
+        /// <summary>
+        /// tbAddTags control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbAddTags;
+        
+        /// <summary>
+        /// rfvAddTags control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvAddTags;
+        
+        /// <summary>
+        /// tbAddCategories control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbAddCategories;
+        
+        /// <summary>
+        /// rfvAddCategories control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvAddCategories;
+        
+        /// <summary>
         /// tbDescription control.
         /// </summary>
         /// <remarks>
@@ -182,6 +326,15 @@ namespace KlubNaCitateli.Sites {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox tbDescription;
+        
+        /// <summary>
+        /// rfvDescription control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvDescription;
         
         /// <summary>
         /// btnSubmit control.
@@ -256,13 +409,13 @@ namespace KlubNaCitateli.Sites {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvSearchBooks;
         
         /// <summary>
-        /// vSummary2 control.
+        /// vSummary3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ValidationSummary vSummary2;
+        protected global::System.Web.UI.WebControls.ValidationSummary vSummary3;
         
         /// <summary>
         /// addAllBooks control.

@@ -125,6 +125,7 @@
     <Content Include="Scripts\jquery.raty.js" />
     <Content Include="Scripts\jquery.tokeninput.js" />
     <Content Include="Scripts\tabs-script.js" />
+    <Content Include="Scripts\tokens.min.js" />
     <Content Include="Services\BookService.svc" />
     <Content Include="Services\ForumService.svc" />
     <Content Include="Services\ProfileService.svc" />
@@ -154,6 +155,7 @@
     <Content Include="Styles\style.css" />
     <Content Include="Styles\threads.css" />
     <Content Include="Styles\token-input.css" />
+    <Content Include="Styles\tokens.css" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -295,7 +297,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>51818</DevelopmentServerPort>
+          <DevelopmentServerPort>20417</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

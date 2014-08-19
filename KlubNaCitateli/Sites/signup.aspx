@@ -37,9 +37,7 @@
                         <asp:TableRow ID="TableRow2" runat="server">
                             <asp:TableCell ID="TableCell3" runat="server" CssClass="table-first"><label>Password:</label></asp:TableCell>
                             <asp:TableCell ID="TableCell4" runat="server">
-
-                                <asp:TextBox ID="password"  runat="server" CssClass="table-second" TextMode="Password"></asp:TextBox>
-
+                                <asp:TextBox ID="password" runat="server" CssClass="table-second" TextMode="Password"></asp:TextBox>
                                 <br />
                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="You must enter a password!"
                                     ControlToValidate="password">
@@ -47,43 +45,48 @@
                         </asp:TableRow>
                         <asp:TableRow ID="TableRow3" runat="server">
                             <asp:TableCell ID="TableCell5" runat="server" CssClass="table-first"><label>Retype password:</label></asp:TableCell>
-                            <asp:TableCell ID="TableCell6" runat="server">                            
+                            <asp:TableCell ID="TableCell6" runat="server">
                                 <asp:TextBox ID="repassword" runat="server" CssClass="table-second" TextMode="Password"></asp:TextBox>
-                                 <br /> <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ErrorMessage="You must repeat password!" ControlToValidate="repassword">
-                            </asp:RequiredFieldValidator>
+                                <br />
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ErrorMessage="You must repeat password!"
+                                    ControlToValidate="repassword">
+                                </asp:RequiredFieldValidator>
                                 <br />
                                 <asp:CompareValidator ID="CompareValidator1" runat="server" ErrorMessage="Password doesn't match!"
                                     ControlToCompare="password" ControlToValidate="repassword"></asp:CompareValidator>
-                                  
                             </asp:TableCell>
                         </asp:TableRow>
                         <asp:TableRow ID="TableRow4" runat="server">
                             <asp:TableCell ID="TableCell7" CssClass="table-first" runat="server"><label>Name:</label></asp:TableCell>
                             <asp:TableCell ID="TableCell8" runat="server">
                                 <asp:TextBox ID="name" runat="server" CssClass="table-second"></asp:TextBox>
-                               <br /> <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="You must enter a name!" ControlToValidate="name">
-                            </asp:RequiredFieldValidator></asp:TableCell>
-                            
+                                <br />
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ErrorMessage="You must enter a name!"
+                                    ControlToValidate="name">
+                                </asp:RequiredFieldValidator></asp:TableCell>
                         </asp:TableRow>
                         <asp:TableRow ID="TableRow5" runat="server">
                             <asp:TableCell ID="TableCell9" CssClass="table-first" runat="server"><label>Surname:</label></asp:TableCell>
                             <asp:TableCell ID="TableCell10" runat="server">
                                 <asp:TextBox ID="surname" runat="server" CssClass="table-second"></asp:TextBox>
-                               <br /> <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="You must enter a surname!" ControlToValidate="surname">
-                            </asp:RequiredFieldValidator>
-                                </asp:TableCell>
-
+                                <br />
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="You must enter a surname!"
+                                    ControlToValidate="surname">
+                                </asp:RequiredFieldValidator>
+                            </asp:TableCell>
                         </asp:TableRow>
                         <asp:TableRow ID="TableRow6" runat="server">
                             <asp:TableCell ID="TableCell11" CssClass="table-first" runat="server"><label>Email:</label></asp:TableCell>
                             <asp:TableCell ID="TableCell12" runat="server">
                                 <asp:TextBox ID="email" runat="server" CssClass="table-second"></asp:TextBox>
                                 <br />
-                                 <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ErrorMessage="You must enter email!" ControlToValidate="email">
-                                </asp:RequiredFieldValidator> <br /><asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="email"
+                                <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ErrorMessage="You must enter email!"
+                                    ControlToValidate="email">
+                                </asp:RequiredFieldValidator>
+                                <br />
+                                <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ControlToValidate="email"
                                     ErrorMessage="Incorrect format!" ValidationExpression="^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$"></asp:RegularExpressionValidator>
-                          
-                           </asp:TableCell>
+                            </asp:TableCell>
                         </asp:TableRow>
                     </asp:Table>
                     <asp:ScriptManager ID="ScriptManager1" runat="server">

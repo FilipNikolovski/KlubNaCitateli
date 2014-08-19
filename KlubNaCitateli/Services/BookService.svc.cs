@@ -135,8 +135,6 @@ namespace KlubNaCitateli.Services
                                     command.Parameters.AddWithValue("?IDBook", idBook);
                                     command.ExecuteNonQuery();
                                 }
-
-
                             }
                         }
                     }
@@ -599,6 +597,50 @@ namespace KlubNaCitateli.Services
                 }
             }
 
+        }
+
+        [OperationContract]
+        public string RemoveBookComment(string jsonData)
+        {
+            Dictionary<string, string> json = new JavaScriptSerializer().Deserialize<Dictionary<string, string>>(jsonData);
+            Dictionary<string, string> result = new Dictionary<string, string>();
+
+            using (MySqlConnection conn = new MySqlConnection())
+            {
+                conn.ConnectionString = ConfigurationManager.ConnectionStrings["BooksConn"].ConnectionString;
+                try
+                {
+                    conn.Open();
+
+                    string query = "DELETE FROM BookComments WHERE IDUser = ?IDUser AND IDBook = ?IDBook AND Date = ?Date";
+                    MySqlCommand command = new MySqlCommand(query, conn);
+                    command.Parameters.AddWithValue("?IDUser", json["bookId"]);
+                    command.Parameters.AddWithValue("?IDBook", json["userId"]);
+                    command.Parameters.AddWithValue("?Date", json["date"]);
+
+                    command.ExecuteNonQuery();
+
+                    result["status"] = "success";
+                    result["commentId"] = "#comment_" + json["bookId"] + "_" + json["userId"] + "_" + json["date"];
+                    result["message"] = "The comment is deleted.";
+
+                    JavaScriptSerializer serializer = new JavaScriptSerializer();
+
+                    return serializer.Serialize((object)result);
+                }
+                catch (Exception e)
+                {
+                    JavaScriptSerializer serializer = new JavaScriptSerializer();
+
+                    result["status"] = "error";
+                    result["message"] = e.Message;
+                    return serializer.Serialize((object)result);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
         }
 
     }

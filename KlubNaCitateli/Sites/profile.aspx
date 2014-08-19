@@ -5,7 +5,6 @@
     <script src="../Scripts/jquery-1.10.2.js" type="text/javascript"></script>
     <script src="../Scripts/jquery.jcarousel.min.js" type="text/javascript"></script>
     <link href="../Styles/jcarousel.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
     <script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
@@ -264,7 +263,6 @@
          
     </script>
     <style type="text/css">
-       
         #mainContent_lblAbout
         {
             -webkit-box-shadow: 8px 8px 6px -6px black;
@@ -351,8 +349,7 @@
         }
         .saveCategories
         {
-            float: left;
-            clear: both;
+            float:left;
             margin-right: 10px;
         }
         .fieldsetContainer
@@ -362,7 +359,6 @@
         }
         #profileCategories
         {
-            width: 41%;
             float: left;
             margin: 0px;
             margin-right: 20px;
@@ -373,7 +369,7 @@
         {
             float: left;
             width: 23%;
-            margin-top:0px !important;
+            margin-top: 0px !important;
             margin-right: 10px;
         }
         .profile
@@ -399,41 +395,70 @@
         }
         .threadname
         {
-            margin-left:10px;
-            color:#4169E1;
-            font-weight:bold;
+            margin-left: 10px;
+            color: #4169E1;
+            font-weight: bold;
         }
         .threadname:hover
         {
-            cursor:pointer;
+            cursor: pointer;
         }
         .bookthumbnail
         {
-            width:50px;
-            height:70px;
+            width: 50px;
+            height: 70px;
         }
         .bookname
         {
-            height:100%;
-            margin-top:-100px;
-            font-weight:bold;
+            height: 100%;
+            margin-top: -100px;
+            font-weight: bold;
         }
         #mainContent_comments
         {
-            
-            height:300px;
-            overflow-y:auto;
-            
+            height: 300px;
+            overflow-y: auto;
         }
         .books
         {
-            min-height:80px;
-            height:auto;
-            margin-bottom:5px;
-        } 
+            min-height: 80px;
+            height: auto;
+            margin-bottom: 5px;
+        }
         .bookname:hover
         {
-            cursor:pointer;
+            cursor: pointer;
+        }
+        .connectedSortable
+        {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+        .connectedSortable li
+        {
+            border-bottom: 1px solid #ccc;
+        }
+        .connectedSortable li:last-child
+        {
+            border: none;
+        }
+        .connectedSortable li a
+        {
+            text-decoration: none;
+            color: #000;
+            display: block;
+            width: 200px;
+            -webkit-transition: font-size 0.3s ease, background-color 0.3s ease;
+            -moz-transition: font-size 0.3s ease, background-color 0.3s ease;
+            -o-transition: font-size 0.3s ease, background-color 0.3s ease;
+            -ms-transition: font-size 0.3s ease, background-color 0.3s ease;
+            transition: font-size 0.3s ease, background-color 0.3s ease;
+        }
+        .connectedSortable li a:hover
+        {
+            font-size: 30px;
+            background: #f6f6f6;
         }
     </style>
 </asp:Content>
@@ -451,13 +476,13 @@
             <asp:TableCell VerticalAlign="Top">
                 <asp:Table ID="Table2" runat="server">
                     <asp:TableRow Width="200px">
-                        <asp:TableCell >
-                        <div class="profile">
-                            <img runat="server" id="profileImg" src="/Images/user-icon.png" alt="" /></div>
+                        <asp:TableCell>
+                            <div class="profile">
+                                <img runat="server" id="profileImg" src="/Images/user-icon.png" alt="" /></div>
                         </asp:TableCell>
                     </asp:TableRow>
                     <asp:TableRow>
-                        <asp:TableCell >
+                        <asp:TableCell>
                             <asp:FileUpload ID="profilePicture" CssClass="profilepic" runat="server" Visible="false" />
                             <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Always">
                                 <Triggers>
@@ -480,7 +505,7 @@
                         </asp:TableCell>
                     </asp:TableRow>
                     <asp:TableRow Width="100%">
-                        <asp:TableCell >
+                        <asp:TableCell>
                             <asp:Table ID="Table4" runat="server">
                                 <asp:TableRow Width="319px">
                                     <asp:TableCell Width="150px">
@@ -522,7 +547,7 @@
                     <asp:TableRow Width="319px">
                         <asp:TableCell>
                             <asp:Label ID="lblAbout" runat="server" Text="About" Width="568px" Height="200px"></asp:Label>
-                            <textarea id="tbAbout" rows="12" cols="70" style="resize:none;"></textarea><br />
+                            <textarea id="tbAbout" rows="12" cols="70" style="resize: none;"></textarea><br />
                             <input type="button" id="changeAboutBtn" value="Edit about" />
                             <input type="button" id="confirmChangeAboutBtn" value="Confirm edit" />
                             <input type="button" id="cancelEditA" value="Cancel" />
@@ -550,10 +575,20 @@
                 <div class='nodiv'>
                 </div>
             </div>
-            <ul id="myCategories" class="connectedSortable" runat="server">
-            </ul>
-            <ul id="allCategories" class="connectedSortable" runat="server" visible="false">
-            </ul>
+            <div class="categoriesContainer">
+                <div style="float:left;clear:left;">
+                    <h3>
+                        My Categories</h3>
+                    <ul id="myCategories" class="connectedSortable" runat="server">
+                    </ul>
+                </div>
+                <div id="showAll" style="float:left;" visible="false" runat="server">
+                    <h3>
+                        All Categories</h3>
+                    <ul id="allCategories" class="connectedSortable" runat="server" visible="false">
+                    </ul>
+                </div>
+            </div>
             <div class='nodiv'>
             </div>
         </fieldset>
