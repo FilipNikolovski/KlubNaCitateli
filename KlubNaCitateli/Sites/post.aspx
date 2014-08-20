@@ -9,16 +9,19 @@
     <script src="../Scripts/jquery.easing.1.3.js" type="text/javascript" language="JavaScript">
     </script>
     <script src="../Scripts/jquery.jBreadCrumb.1.1.js" type="text/javascript" language="JavaScript"></script>
+    <script src="../Scripts/ckeditor/ckeditor.js" type="text/javascript" language="javascript"></script>
     <script type="text/javascript">
         $(document).ready(function () {
+            CKEDITOR.replace("newPostText");
 
             $(".submitPost").click(function () {
                 var userId = $("#<%=userId.ClientID %>").val();
-                var postcomment = $(this).parent().parent().find(".newPostText").val();
+                var postcomment = CKEDITOR.instances.newPostText.getData();
                 var threadId = $("#<%=threadId.ClientID %>").val();
                 var service = new KlubNaCitateli.ForumService();
                 service.AddComment(threadId, userId, postcomment, quoteUser, onSuccess);
             });
+
             var quoteUser;
             $(".replyQuote").click(function () {
                 var stringQuote = "[quote]";
@@ -26,8 +29,8 @@
                 quoteUser = $(this).parent().parent().parent().find('.usernameLink').html();
                 stringQuote += text;
                 stringQuote += "[/quote]";
-                $(".newPostText").val(stringQuote);
-                $(".newPostText").focus();
+                CKEDITOR.instances.newPostText.setData(stringQuote);
+                CKEDITOR.instances.newPostText.focus();
             });
 
 
@@ -137,7 +140,7 @@
             <div class="help2">
                 <div id="newpost" class="newpostarea" runat="server">
                     <div class="text">
-                        <textarea rows="10" cols="100" style="resize: none;" class="newPostText"></textarea>
+                        <textarea id="newPostText" rows="10" cols="100" style="resize: none;" class="newPostText"></textarea>
                     </div>
                     <div class="btnDiv">
                         <input type="button" value="Post comment" class="submitPost" /></div>
